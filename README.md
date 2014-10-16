@@ -1,4 +1,4 @@
 Webino
 ======
 
-Webino, the website's platform
+The website's platform
