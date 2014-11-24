@@ -15,6 +15,7 @@ The main goal of Webino™ is to be a platform for high quality, modular and sca
 - Flexibility
 - Testability
 - Scalability
+- Minify-ability
 
 ## Technologies
 
