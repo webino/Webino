@@ -8,7 +8,7 @@ install:
 - composer update
 
 script:
-- vendor/bin/tester tests/
+- vendor/bin/tester -p php -c tests/php.ini --coverage build/logs/clover.xml --coverage-src library tests/
 
 after_success:
 - composer require satooshi/php-coveralls:0.*

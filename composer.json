@@ -28,7 +28,8 @@
     "zendframework/zendframework": "dev-develop",
     "tracy/tracy": "2.*",
     "nette/tester": "1.*",
-    "mikey179/vfsStream": "1.*"
+    "mikey179/vfsStream": "1.*",
+    "satooshi/php-coveralls": "0.*"
   },
   "autoload": {
     "psr-0": {
