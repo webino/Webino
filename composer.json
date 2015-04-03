@@ -1,0 +1,41 @@
+{
+  "name": "webino/webino",
+  "description": "Webino™ - The Web Application Platform",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "webino",
+    "platform",
+    "zf2"
+  ],
+  "homepage": "https://github.com/webino/webino",
+  "authors": [
+    {
+      "name": "Webino, s. r. o.",
+      "email": "info@webino.sk",
+      "homepage": "http://webino.sk",
+      "role": "Developer"
+    },
+    {
+      "name": "Peter Bacinsky",
+      "email": "peter@bacinsky.sk",
+      "homepage": "http://bacinsky.sk",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5.1",
+    "zendframework/zendframework": "dev-develop",
+    "tracy/tracy": "2.*",
+    "nette/tester": "1.*",
+    "mikey179/vfsStream": "1.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "WebinoExceptionLib\\": "library/",
+      "WebinoConfigLib\\": "library/",
+      "WebinoEventLib\\": "library/",
+      "WebinoAppLib\\": "library/"
+    }
+  }
+}
