@@ -11,10 +11,10 @@ commands.
 
 - `vendor/bin/tester` tests/
 
-**Specific namespace, e.g. *WebinoAppLib*** 
+**Specific namespace** e.g. *WebinoAppLib*
 
 - `vendor/bin/tester` tests/WebinoAppLib/
 
-**Specific test, e.g. *Application.create.phpt***
+**Specific test** e.g. *Application.create.phpt*
 
 - `vendor/bin/tester` tests/WebinoAppLib/Application.create.phpt
