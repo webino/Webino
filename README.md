@@ -1,6 +1,6 @@
-
 # Webino 
 
+[![Build Status](https://travis-ci.org/webino/Webino.svg?branch=prototype)](https://travis-ci.org/webino/Webino)
 
 Webino™ is a platform for creating quality and modular web applications.
 
