@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/webino/Webino.svg?branch=prototype)](https://travis-ci.org/webino/Webino)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webino/Webino/badges/quality-score.png?b=prototype)](https://scrutinizer-ci.com/g/webino/Webino/?branch=prototype)
-[![Coverage Status](https://coveralls.io/repos/webino/Webino/badge.svg)](https://coveralls.io/r/webino/Webino)
+[![Coverage Status](https://coveralls.io/repos/webino/Webino/badge.svg?branch=prototype)](https://coveralls.io/r/webino/Webino?branch=prototype)
 
 Webino™ is a platform for creating quality and modular web applications.
 
