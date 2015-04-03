@@ -30,6 +30,9 @@
     "nette/tester": "1.*",
     "mikey179/vfsStream": "1.*"
   },
+  "require-dev": {
+    "satooshi/php-coveralls": "0.*"
+  }
   "autoload": {
     "psr-0": {
       "WebinoExceptionLib\\": "library/",

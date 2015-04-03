@@ -1,0 +1,11 @@
+language: php
+
+php:
+- 5.6
+
+script:
+- vendor/bin/tester /tests
+
+after_success:
+- composer require satooshi/php-coveralls:0.*
+- vendor/bin/coveralls -v
