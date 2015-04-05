@@ -4,12 +4,30 @@ php:
   - 5.6
   - hhvm
 
+env:
+  - TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
+  - TESTER_PHP_BIN=hhvm TESTER_ARGS=""
+
+matrix:
+  exclude:
+    - php: 5.6
+      env: TESTER_PHP_BIN=hhvm
+
+    - php: hhvm
+      env: TESTER_PHP_BIN=php-cgi
+
+  allow_failures:
+      - php: hhvm
+
+before_install:
+  - composer self-update
+
 install:
   - composer self-update
   - composer update
 
 script:
-  - vendor/bin/tester -p php -c tests/php.ini --coverage build/logs/clover.xml --coverage-src library tests/
+  - vendor/bin/tester -p $TESTER_PHP_BIN $TESTER_ARGS tests/
 
 after_success:
   - composer require satooshi/php-coveralls:0.*
