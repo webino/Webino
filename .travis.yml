@@ -14,7 +14,7 @@ after_success:
   - composer require satooshi/php-coveralls:0.*
   - vendor/bin/coveralls -v
   - sudo pip install --upgrade pip
-  - pip install -q sphinx
+  - sudo pip install -q sphinx
   - cd docs/
   - make html
   - git config --global user.email "worker@travis-ci.org"
