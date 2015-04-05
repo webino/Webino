@@ -35,10 +35,10 @@ matrix:
     - php: hhvm
   exclude:
     - php: 5.6
-      env: TESTER_PHP_BIN=hhvm
+      env: TESTER_PHP_BIN=hhvm TESTER_ARGS=""
 
     - php: hhvm
-      env: TESTER_PHP_BIN=php-cgi
+      env: TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
 
 env:
   matrix:
