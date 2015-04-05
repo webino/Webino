@@ -13,10 +13,10 @@ $app->set()
 .. code-block:: php
 
     // registering an invokable
-    $app->set('MyInvokableService');
+    $app->set(MyInvokableService::class);
 
     // registering a factory
-    $app->set('MyService', 'MyServiceFactory');
+    $app->set('MyService', MyServiceFactory::class);
 
     // registering a factory object
     $app->set('MyService', new MyServiceFactory);
