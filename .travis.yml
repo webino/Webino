@@ -5,8 +5,8 @@ php:
   - hhvm
 
 env:
-  - TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
-  - TESTER_PHP_BIN=hhvm TESTER_ARGS=""
+  - TESTER_PHP_BIN=php-cgi
+  - TESTER_PHP_BIN=hhvm
 
 matrix:
   allow_failures:
