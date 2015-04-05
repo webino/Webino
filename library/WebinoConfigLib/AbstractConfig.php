@@ -2,7 +2,7 @@
 
 namespace WebinoConfigLib;
 
-use ArrayObject;
+use WebinoConfigLib\Stdlib\ArrayData;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -11,21 +11,21 @@ use Zend\Stdlib\ArrayUtils;
 class AbstractConfig
 {
     /**
-     * @var ArrayObject
+     * @var ArrayData
      */
     private $data;
 
     /**
      * @param array $data
-     * @return ArrayObject
+     * @return ArrayData
      */
     protected function createData(array $data = [])
     {
-        return new ArrayObject($data, ArrayObject::ARRAY_AS_PROPS);
+        return new ArrayData($data);
     }
 
     /**
-     * @return ArrayObject
+     * @return ArrayData
      */
     protected function getData()
     {
