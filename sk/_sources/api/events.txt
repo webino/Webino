@@ -31,7 +31,7 @@ $app->bind()
     $app->bind(AppEvent::DISPATCH, $handler);
 
     // attaching an invokable class
-    $app->bind(AppEvent::DISPATCH, 'MyListener');
+    $app->bind(AppEvent::DISPATCH, MyListener::class);
 
     // specifying a priority
     $app->bind(AppEvent::DISPATCH, $handler, AppEvent::BEGIN);
