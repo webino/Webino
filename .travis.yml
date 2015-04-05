@@ -13,7 +13,7 @@ script:
 after_success:
   - composer require satooshi/php-coveralls:0.*
   - vendor/bin/coveralls -v
-  - apt-get install -y pip
+  - pip install --upgrade pip
   - pip install -q sphinx
   - cd docs/
   - make html
