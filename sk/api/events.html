@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Events API &mdash; Webino 0.1.0alpha dokumentácia</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
+    <link rel="next" title="Application Logging API" href="logging.html" />
+    <link rel="prev" title="Application Services API" href="services.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../_static/common.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
+  </head>
+  <body role="document">
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="services.html" title="Previous document">Application Services API</a>
+        </li>
+        <li>
+          <a href="logging.html" title="Next document">Application Logging API</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="monospace section" id="application-events-api">
+<h1>Application Events API<a class="headerlink" href="#application-events-api" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#event-emitter-methods" id="id1">Event Emitter Methods</a></li>
+<li><a class="reference internal" href="#application-core-events" id="id2">Application Core Events</a></li>
+</ul>
+</div>
+<div class="section" id="event-emitter-methods">
+<h2><a class="toc-backref" href="#id1">Event Emitter Methods</a><a class="headerlink" href="#event-emitter-methods" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Application can emit events and bind listeners to them.</p>
+<div class="section" id="app-bind">
+<h3>$app-&gt;bind()<a class="headerlink" href="#app-bind" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Binding a listener to an event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// creating a closure listener</span>
+<span class="nv">$handler</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">AppEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">};</span>
+
+<span class="c1">// attaching a closure listener to a custom event</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">);</span>
+
+<span class="c1">// attaching a closure listener to a dispatch event</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">DISPATCH</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">);</span>
+
+<span class="c1">// attaching an invokable class</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">DISPATCH</span><span class="p">,</span> <span class="s1">&#39;MyListener&#39;</span><span class="p">);</span>
+
+<span class="c1">// specifying a priority</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">DISPATCH</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">,</span> <span class="nx">AppEvent</span><span class="o">::</span><span class="na">BEGIN</span><span class="p">);</span>
+
+<span class="c1">// attaching a listener aggregate</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;MyListenerAggregate&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-unbind">
+<h3>$app-&gt;unbind()<a class="headerlink" href="#app-unbind" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Unbinding a listener from an event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// for all events and priorities</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">unbind</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
+
+<span class="c1">// for a specific event</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">unbind</span><span class="p">(</span><span class="s1">&#39;someEvent&#39;</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">);</span>
+
+<span class="c1">// for a specific priority too</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">unbind</span><span class="p">(</span><span class="s1">&#39;someEvent&#39;</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">,</span> <span class="nv">$priority</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-emit">
+<h3>$app-&gt;emit()<a class="headerlink" href="#app-emit" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Emitting an event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// just emit an event</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">);</span>
+
+<span class="c1">// event with custom arguments</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">);</span>
+
+<span class="c1">// creating an event callback</span>
+<span class="nv">$callback</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">}</span>
+
+<span class="c1">// event with callback</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>
+
+<span class="c1">// event with custom arguments and callback</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>
+
+<span class="c1">// custom event object</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="k">new</span> <span class="nx">MyEvent</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="application-core-events">
+<h2><a class="toc-backref" href="#id2">Application Core Events</a><a class="headerlink" href="#application-core-events" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Following events are emitted during an application core lifecycle.</p>
+<div class="section" id="appevent-configure">
+<h3>AppEvent::CONFIGURE<a class="headerlink" href="#appevent-configure" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Application configure event.</em></p>
+<p>This event is emitted in the middle of the two pass bootstrap event, allowing
+you to merge an application configuration. Only core listeners can bind to this event.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">CONFIGURE</span><span class="p">,</span> <span class="s1">&#39;MyListener&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="appevent-bootstrap">
+<h3>AppEvent::BOOTSTRAP<a class="headerlink" href="#appevent-bootstrap" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Application bootstrap event.</em></p>
+<p>After this two pass event all the services should be ready. The core listeners
+binds to the first pass and a remaining can listen to the second pass bootstrap event.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">BOOTSTRAP</span><span class="p">,</span> <span class="s1">&#39;MyListener&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="appevent-dispatch">
+<h3>AppEvent::DISPATCH<a class="headerlink" href="#appevent-dispatch" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Application dispatch event.</em></p>
+<p>This event is triggered to handle a server client request. It does nothing,
+because is dedicated to extension.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">DISPATCH</span><span class="p">,</span> <span class="s1">&#39;MyListener&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/webino.png" alt="Logo"/>
+            </a></p><menu>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>
+            <a href="../introduction.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../installation.html">Installation</a>
+        </li>
+        <li>
+            <a href="../basic-usage.html">Basic Usage</a>
+        </li>
+    </ul>
+    <h2>Architecture</h2>
+    <ul>
+        <li>
+            <a href="../architecture/core.html">Application Core</a>
+        </li>
+        <li>
+            <a href="../architecture/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../architecture/event-system.html">Event System</a>
+        </li>
+        <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../architecture/console.html">Console</a>
+        </li>
+    </ul>
+    <h2>API</h2>
+    <ul>
+        <li>
+            <a href="accessors.html">Accessors</a>
+        </li>
+        <li>
+            <a href="services.html">Services</a>
+        </li>
+        <li>
+            <a href="#">Events</a>
+        </li>
+        <li>
+            <a href="logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="logging.html">Caching</a>
+        </li>
+        <li>
+            <a href="files.html">Filesystem</a>
+        </li>
+    </ul>
+    <h2>Services</h2>
+    <ul>
+        <li>
+            <a href="../services/config.html">Config</a>
+        </li>
+        <li>
+            <a href="../services/events.html">Events</a>
+        </li>
+        <li>
+            <a href="../services/request.html">Request</a>
+        </li>
+        <li>
+            <a href="../services/response.html">Response</a>
+        </li>
+        <li>
+            <a href="../services/debugger.html">Debugger</a>
+        </li>
+        <li>
+            <a href="../services/logger.html">Logger</a>
+        </li>
+        <li>
+            <a href="../services/cache.html">Cache</a>
+        </li>
+        <li>
+            <a href="../services/files.html">Files</a>
+        </li>
+    </ul>
+    <h2>Cookbook</h2>
+    <ul>
+        <li>
+            <a href="../cookbook/configuration.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../cookbook/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../cookbook/events.html">Events</a>
+        </li>
+        <li>
+            <a href="../cookbook/request.html">Request</a>
+        </li>
+        <li>
+            <a href="../cookbook/response.html">Response</a>
+        </li>
+        <li>
+            <a href="../cookbook/caching.html">Caching</a>
+        </li>
+        <li>
+            <a href="../cookbook/logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="../cookbook/debugging.html">Debugging</a>
+        </li>
+        <li>
+            <a href="../cookbook/filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="../cookbook/console.html">Console</a>
+        </li>
+        <li>
+            <a href="../cookbook/testing.html">Testing</a>
+        </li>
+    </ul>
+</menu>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="services.html" title="Previous document">Application Services API</a>
+        </li>
+        <li>
+          <a href="logging.html" title="Next document">Application Logging API</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2015, Webino, s. r. o. All rights reserved.
+
+  </footer>
+
+  
+  </body>
+</html>

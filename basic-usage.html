@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Learn Webino &mdash; Webino 0.1.0alpha documentation</title>
+    <title>Basic Usage &mdash; Webino 0.1.0alpha documentation</title>
     
     <link rel="stylesheet" href="_static/better.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,8 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Webino 0.1.0alpha documentation" href="#" />
-    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="index.html" />
+    <link rel="next" title="Application Services" href="architecture/services.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -34,14 +35,18 @@
   <nav id="rellinks">
     <ul>
         <li>
-          <a href="introduction.html" title="Next document">Introduction</a>
+          &larr;
+          <a href="installation.html" title="Previous document">Installation</a>
+        </li>
+        <li>
+          <a href="architecture/services.html" title="Next document">Application Services</a>
           &rarr;
         </li>
     </ul>
   </nav>
   <nav id="breadcrumbs">
     <ul>
-      <li><a href="#">Webino 0.1.0alpha documentation</a></li> 
+      <li><a href="index.html">Webino 0.1.0alpha documentation</a></li> 
     </ul>
   </nav>
   </div>  
@@ -51,18 +56,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-title">
-<h1>Learn Webino<a class="headerlink" href="#welcome-title" title="Permalink to this headline">¶</a></h1>
-<p>Webino™ is a <strong>web applications platform</strong> for professional web developers.
-<br />
-It&#8217;s built in the <a class="reference external" href="http://php.net">PHP</a> with a <a class="reference external" href="http://framework.zend.com/">Zend Framework 2</a> and other useful open-source libraries.</p>
-<p><div class="vspace"></div></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">We are still working on the content of this documentation ...</p>
-</div>
-<p><div class="vspace"></div></p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="basic-usage">
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// index.php</span>
+
+<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">boostrap</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
+</pre></div>
 </div>
 </div>
 
@@ -72,7 +74,7 @@ It&#8217;s built in the <a class="reference external" href="http://php.net">PHP<
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="#">
+            <p class="logo"><a href="index.html">
               <img class="logo" src="_static/webino.png" alt="Logo"/>
             </a></p><menu>
     <h2>Getting Started</h2>
@@ -84,7 +86,7 @@ It&#8217;s built in the <a class="reference external" href="http://php.net">PHP<
             <a href="installation.html">Installation</a>
         </li>
         <li>
-            <a href="basic-usage.html">Basic Usage</a>
+            <a href="#">Basic Usage</a>
         </li>
     </ul>
     <h2>Architecture</h2>
@@ -198,14 +200,18 @@ It&#8217;s built in the <a class="reference external" href="http://php.net">PHP<
   <nav id="rellinks">
     <ul>
         <li>
-          <a href="introduction.html" title="Next document">Introduction</a>
+          &larr;
+          <a href="installation.html" title="Previous document">Installation</a>
+        </li>
+        <li>
+          <a href="architecture/services.html" title="Next document">Application Services</a>
           &rarr;
         </li>
     </ul>
   </nav>
   <nav id="breadcrumbs">
     <ul>
-      <li><a href="#">Webino 0.1.0alpha documentation</a></li> 
+      <li><a href="index.html">Webino 0.1.0alpha documentation</a></li> 
     </ul>
   </nav>
   </div>

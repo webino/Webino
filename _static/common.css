@@ -1,0 +1,167 @@
+html {
+    height: 100% !important;
+}
+body {
+    position: relative;
+    min-height: 100% !important;
+    font-family: 'Open Sans', sans-serif;
+}
+header#pageheader,
+footer#pagefooter,
+div.related,
+div.document {
+    position: relative;
+    left: -5%;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+div.document {
+    padding-bottom: 60px;
+}
+a {
+    color: #159 !important;
+}
+.centered {
+    display: block;
+    margin: 40px auto;
+}
+.vspace {
+    position: relative;
+    overflow: hidden;
+    clear: both;
+    width: 100%;
+    height: 4px;
+}
+footer {
+    text-align: left !important;
+    font-size: 12px;
+    border-top: 2px solid lightgray;
+}
+div.documentwrapper {
+    padding-top: 10px;
+}
+div.bodywrapper {
+    margin: 0 0 0 17rem;
+}
+div.bodywrapper h2 {
+    margin-top: 3rem !important;
+}
+.sphinxsidebarwrapper {
+    border-right: 2px solid lightgray;
+}
+.sphinxsidebarwrapper menu {
+    padding: 0 0 0 10px;
+}
+
+/** Lists **/
+ol,
+ul {
+    margin: 20px 0 0;
+    padding: 0 0 0 24px;
+}
+ol li,
+ul li {
+    padding-bottom: 10px;
+}
+ol ul,
+ol ol,
+ul ul,
+ul ol {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+ol p,
+ul p {
+    margin: 0;
+    padding: 0;
+}
+/** /Lists **/
+
+dl.docutils {
+    margin-top: 30px
+}
+dl.docutils dd {
+    margin-bottom: 30px
+}
+dl.docutils dt {
+    margin-bottom: 10px;
+}
+dl.docutils.monospace dt {
+    font-family: monospace;
+    font-size: large;
+}
+
+.monospace h2,
+.monospace h3 {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.monospace h3 {
+    margin-top: 30px;
+}
+
+/* Code highlight */
+tt,
+code {
+    padding: 2px 4px;
+    font-size: 14px !important;
+    white-space: nowrap;
+    color: #333;
+    background: #f0f2f1;
+}
+pre {
+    line-height: 150%;
+    border: none !important;
+}
+.highlight pre {
+    margin: 0 1px;
+    padding: 12px 8px;
+    font-size: 14px !important;
+    color: #a9b7c6;
+    background: #2b2b2b;
+    border-radius: 3px;
+}
+.highlight .nv {
+    color: #9673a1;
+}
+.highlight .o,
+.highlight .nc {
+    color: inherit;
+    font-weight: normal;
+}
+.highlight .c1,
+.highlight .sd {
+    color: #7f7f7d;
+}
+.highlight .s1 {
+    color: #6a8759;
+}
+.highlight .k {
+    color: #cc7832;
+}
+.highlight .na,
+.highlight .nf {
+    color: #fdc56c;
+}
+.highlight-bash pre {
+    color: #fff;
+    background: #18171b;
+}
+/* /Code highlight */
+
+/* Local ToC */
+.contents.local.topic {
+    background: transparent;
+    border: none;
+}
+.contents.local.topic ul {
+    margin: 20px 0 50px;
+    padding: 0 0 0 20px;
+}
+.contents.local.topic li {
+    list-style: circle;
+}
+/* /Local ToC */

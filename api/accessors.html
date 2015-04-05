@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Accessors &mdash; Webino 0.1.0alpha documentation</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="next" title="Application Services API" href="services.html" />
+    <link rel="prev" title="Application Command Line Interface" href="../architecture/console.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../_static/common.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
+  </head>
+  <body role="document">
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../architecture/console.html" title="Previous document">Application Command Line Interface</a>
+        </li>
+        <li>
+          <a href="services.html" title="Next document">Application Services API</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha documentation</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="monospace section" id="application-accessors">
+<h1>Application Accessors<a class="headerlink" href="#application-accessors" title="Permalink to this headline">¶</a></h1>
+<p>Used to retrieve core services from an application.</p>
+<div class="section" id="app-getservices">
+<h2>$app-&gt;getServices()<a class="headerlink" href="#app-getservices" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a service manager.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\ServiceManager\ServiceManager $services */</span>
+<span class="nv">$services</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getServices</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getconfig">
+<h2>$app-&gt;getConfig()<a class="headerlink" href="#app-getconfig" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting an application configuration.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Config\Config $config */</span>
+<span class="nv">$config</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getevents">
+<h2>$app-&gt;getEvents()<a class="headerlink" href="#app-getevents" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting an event manager service.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoEventLib\EventManager $events */</span>
+<span class="nv">$events</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getEvents</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getrequest">
+<h2>$app-&gt;getRequest()<a class="headerlink" href="#app-getrequest" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a request.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Stdlib\RequestInterface $request */</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-setrequest">
+<h2>$app-&gt;setRequest()<a class="headerlink" href="#app-setrequest" title="Permalink to this headline">¶</a></h2>
+<p><em>Setting a request.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Zend\Http\Request</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setRequest</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getresponse">
+<h2>$app-&gt;getResponse()<a class="headerlink" href="#app-getresponse" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a response.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Stdlib\ResponseInterface $response */</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-setresponse">
+<h2>$app-&gt;setResponse()<a class="headerlink" href="#app-setresponse" title="Permalink to this headline">¶</a></h2>
+<p><em>Setting a response.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Zend\Http\Response</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getdebugger">
+<h2>$app-&gt;getDebugger()<a class="headerlink" href="#app-getdebugger" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a debugger service.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Service\DebuggerInterface $debugger */</span>
+<span class="nv">$debugger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getDebugger</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getlogger">
+<h2>$app-&gt;getLogger()<a class="headerlink" href="#app-getlogger" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a logger service.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Service\LoggerInterface $logger */</span>
+<span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getcache">
+<h2>$app-&gt;getCache()<a class="headerlink" href="#app-getcache" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a cache service.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Cache\Storage\StorageInterface $logger */</span>
+<span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getfiles">
+<h2>$app-&gt;getFiles()<a class="headerlink" href="#app-getfiles" title="Permalink to this headline">¶</a></h2>
+<p><em>Getting a filesystem manager service [TODO].</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Service\FilesInterface $files */</span>
+<span class="nv">$files</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getFiles</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/webino.png" alt="Logo"/>
+            </a></p><menu>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>
+            <a href="../introduction.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../installation.html">Installation</a>
+        </li>
+        <li>
+            <a href="../basic-usage.html">Basic Usage</a>
+        </li>
+    </ul>
+    <h2>Architecture</h2>
+    <ul>
+        <li>
+            <a href="../architecture/core.html">Application Core</a>
+        </li>
+        <li>
+            <a href="../architecture/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../architecture/event-system.html">Event System</a>
+        </li>
+        <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../architecture/console.html">Console</a>
+        </li>
+    </ul>
+    <h2>API</h2>
+    <ul>
+        <li>
+            <a href="#">Accessors</a>
+        </li>
+        <li>
+            <a href="services.html">Services</a>
+        </li>
+        <li>
+            <a href="events.html">Events</a>
+        </li>
+        <li>
+            <a href="logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="logging.html">Caching</a>
+        </li>
+        <li>
+            <a href="files.html">Filesystem</a>
+        </li>
+    </ul>
+    <h2>Services</h2>
+    <ul>
+        <li>
+            <a href="../services/config.html">Config</a>
+        </li>
+        <li>
+            <a href="../services/events.html">Events</a>
+        </li>
+        <li>
+            <a href="../services/request.html">Request</a>
+        </li>
+        <li>
+            <a href="../services/response.html">Response</a>
+        </li>
+        <li>
+            <a href="../services/debugger.html">Debugger</a>
+        </li>
+        <li>
+            <a href="../services/logger.html">Logger</a>
+        </li>
+        <li>
+            <a href="../services/cache.html">Cache</a>
+        </li>
+        <li>
+            <a href="../services/files.html">Files</a>
+        </li>
+    </ul>
+    <h2>Cookbook</h2>
+    <ul>
+        <li>
+            <a href="../cookbook/configuration.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../cookbook/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../cookbook/events.html">Events</a>
+        </li>
+        <li>
+            <a href="../cookbook/request.html">Request</a>
+        </li>
+        <li>
+            <a href="../cookbook/response.html">Response</a>
+        </li>
+        <li>
+            <a href="../cookbook/caching.html">Caching</a>
+        </li>
+        <li>
+            <a href="../cookbook/logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="../cookbook/debugging.html">Debugging</a>
+        </li>
+        <li>
+            <a href="../cookbook/filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="../cookbook/console.html">Console</a>
+        </li>
+        <li>
+            <a href="../cookbook/testing.html">Testing</a>
+        </li>
+    </ul>
+</menu>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../architecture/console.html" title="Previous document">Application Command Line Interface</a>
+        </li>
+        <li>
+          <a href="services.html" title="Next document">Application Services API</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha documentation</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2015, Webino, s. r. o. All rights reserved.
+
+  </footer>
+
+  
+  </body>
+</html>
