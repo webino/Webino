@@ -9,12 +9,12 @@ commands.
 
 **All tests**
 
-- `vendor/bin/tester` tests/
+- `vendor/bin/tester tests/`
 
 **Specific namespace** e.g. *WebinoAppLib*
 
-- `vendor/bin/tester` tests/WebinoAppLib/
+- `vendor/bin/tester tests/WebinoAppLib/`
 
 **Specific test** e.g. *Application.create.phpt*
 
-- `vendor/bin/tester` tests/WebinoAppLib/Application.create.phpt
+- `vendor/bin/tester tests/WebinoAppLib/Application.create.phpt`
