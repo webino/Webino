@@ -25,6 +25,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
+    <link rel="next" title="Application Services API" href="services.html" />
+    <link rel="prev" title="Application Command Line Interface" href="../architecture/console.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -33,6 +35,14 @@
   <div class="related top">
   <nav id="rellinks">
     <ul>
+        <li>
+          &larr;
+          <a href="../architecture/console.html" title="Previous document">Application Command Line Interface</a>
+        </li>
+        <li>
+          <a href="services.html" title="Next document">Application Services API</a>
+          &rarr;
+        </li>
     </ul>
   </nav>
   <nav id="breadcrumbs">
@@ -71,38 +81,6 @@
 <p><em>Getting an event manager service.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoEventLib\EventManager $events */</span>
 <span class="nv">$events</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getEvents</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="app-getrequest">
-<h2>$app-&gt;getRequest()<a class="headerlink" href="#app-getrequest" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p><em>Getting a request.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Stdlib\RequestInterface $request */</span>
-<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="app-setrequest">
-<h2>$app-&gt;setRequest()<a class="headerlink" href="#app-setrequest" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p><em>Setting a request.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Zend\Http\Request</span><span class="p">;</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setRequest</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="app-getresponse">
-<h2>$app-&gt;getResponse()<a class="headerlink" href="#app-getresponse" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p><em>Getting a response.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Stdlib\ResponseInterface $response */</span>
-<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="app-setresponse">
-<h2>$app-&gt;setResponse()<a class="headerlink" href="#app-setresponse" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p><em>Setting a response.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Zend\Http\Response</span><span class="p">;</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -271,6 +249,14 @@
   <div class="related bottom">
   <nav id="rellinks">
     <ul>
+        <li>
+          &larr;
+          <a href="../architecture/console.html" title="Previous document">Application Command Line Interface</a>
+        </li>
+        <li>
+          <a href="services.html" title="Next document">Application Services API</a>
+          &rarr;
+        </li>
     </ul>
   </nav>
   <nav id="breadcrumbs">

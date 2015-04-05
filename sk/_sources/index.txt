@@ -12,13 +12,13 @@
     installation
     basic-usage
 
-    architecture/application-core
+    architecture/core
     architecture/services
-    architecture/listeners
+    architecture/event-system
     architecture/configuration
     architecture/console
 
-    api/accessors
+    api/core
     api/services
     api/events
     api/logging
@@ -27,8 +27,6 @@
 
     services/config
     services/events
-    services/request
-    services/response
     services/debugger
     services/logger
     services/cache
