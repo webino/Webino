@@ -15,6 +15,7 @@ after_success:
   - vendor/bin/coveralls -v
   - sudo pip install --upgrade pip
   - sudo pip install -q sphinx
+  - sudo pip install sphinx-better-theme
   - cd docs/
   - make html
   - git config --global user.email "worker@travis-ci.org"
