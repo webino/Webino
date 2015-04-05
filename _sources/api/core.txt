@@ -1,9 +1,9 @@
 .. rst-class:: monospace
 
-Application Accessors
-=====================
+Application Core API
+====================
 
-Used to retrieve core services from an application.
+Use application core API to access core services.
 
 $app->getServices()
 -------------------
