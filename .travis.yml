@@ -29,6 +29,10 @@ install:
 script:
   - vendor/bin/tester -p $TESTER_PHP_BIN $TESTER_ARGS tests/
 
+after_failure:
+  # Prints *.actual files content
+  - for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+
 after_success:
   - composer require satooshi/php-coveralls:0.*
   - vendor/bin/coveralls -v
