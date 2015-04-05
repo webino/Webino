@@ -77,7 +77,7 @@ Listener Aggregate
             });
 
             // handle an event by invokable
-            $this->listen('someEvent', 'SomeInvokableListener');
+            $this->listen('someEvent', SomeInvokableListener::class);
 
             // handle an event by its collaborator
             $eventProcessor = new \MyEventProcessor;
