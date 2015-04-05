@@ -131,10 +131,10 @@ on which we can call standard logging methods.</p>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emergency</span><span class="p">(</span><span class="s1">&#39;Something really bad happened.&#39;</span><span class="p">);</span>
 
 <span class="c1">// text with argument placeholders</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emergency</span><span class="p">(</span><span class="s1">&#39;Message text example with variables {0} {1}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">]);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Message text example with variables: {0} {1}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">]);</span>
 
 <span class="c1">// text with context variables</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emergency</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;extra&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">]);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">&#39;Some debug information...&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;extra&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">]);</span>
 </pre></div>
 </div>
 <p><div class="vspace"></div></p>
