@@ -4,10 +4,6 @@ php:
   - 5.6
   - hhvm
 
-matrix:
-  allow_failures:
-    - php: hhvm
-
 before_install:
   - composer self-update
 
@@ -33,6 +29,16 @@ after_success:
   - git config --global user.email "worker@travis-ci.org"
   - git config --global user.name "Travis Ci Worker"
   - make ghpages
+
+matrix:
+  allow_failures:
+    - php: hhvm
+  exclude:
+    - php: 5.6
+      env: TESTER_PHP_BIN=hhvm
+
+    - php: hhvm
+      env: TESTER_PHP_BIN=php-cgi
 
 env:
   matrix:
