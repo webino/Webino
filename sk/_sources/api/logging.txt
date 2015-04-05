@@ -1,92 +1,142 @@
-=======================
+.. rst-class:: monospace
+
 Application Logging API
 =======================
+
+.. contents::
+    :depth: 1
+    :local:
+
 
 Logs are important for monitoring the security of your application and to track events if problems occur,
 as well as for auditing the correct usage of the system. The PSR-Logger interface standard is supported.
 
-|vspace|
+Application Logger Service
+--------------------------
 
-.. rst-class:: monospace
+The best practice is to log a messaage via class.
 
-**$app->log(** *\\WebinoLogLib\\Log\\MessageInterface* **)**
+$app->log()
+^^^^^^^^^^^
 
-*Writing a class message to a log.*
+*Writing a message to a log.*
 
-|vspace|
+.. code-block:: php
 
-.. rst-class:: monospace
+    // creating a debug message class
+    use WebinoAppLib\Log\AbstractDebugMessage;
 
-**$app->log(** *$level, ...$args* **)**
+    class MyDebugMessage extends AbstractDebugMessage
+    {
+        public function getMessage(...$args)
+        {
+            // do something...
 
-*Writing a string message to a log.*
+            // return a log message
+            return 'My log message text with arguments {0} {1}';
+        }
+    }
 
-----------------------
+    // logging a message
+    $app->log(MyDebugMessage::class);
+
+    // logging a message with custom arguments
+    $app->log(MyDebugMessage::class, $argOne, $argTwo);
+
+    // possible but not the best practice
+    $app->log($app::DEBUG, 'My log message text', $argOne, $argTwo);
+
+
+Available Log Message Classes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use following log message classes in the ``WebinoAppLib\Log`` namespace to extend your custom
+message classes.
+
+**AbstractEmergencyMessage**
+    *Emergency, the system is unusable.*
+
+**AbstractAlertMessage**
+    *Alert, immediate action is required.*
+
+**AbstractCriticalMessage**
+    *Critical, critical conditions.*
+
+**AbstractErrorMessage**
+    *Error, errors that do not require immediate attention but should be monitored.*
+
+**AbstractWarningMessage**
+    *Warning, unusual or undesirable occurrences that are not errors.*
+
+**AbstractNoticeMessage**
+    *Notice, normal but significant events.*
+
+**AbstractInfoMessage**
+    *Info, interesting events.*
+
+**AbstractDebugMessage**
+    *Debug, detailed information for debugging purposes.*
+
+
 PSR-3-Logger Interface
 ----------------------
 
-|vspace|
+Calling the ``$app->log()`` method without arguments returns the standard PSR-3 logger object,
+on which we can call standard logging methods.
 
-.. rst-class:: monospace
+**Example:**
 
-**$app->log()->emergency(** *$message, array $context = []* **)**
+.. code-block:: php
 
-*Writing a warning message to a log.*
+    // just text
+    $app->log()->emergency('Something really bad happened.');
 
-|vspace|
+    // text with argument placeholders
+    $app->log()->emergency('Message text example with variables {0} {1}', [$argOne, $argTwo]);
 
-.. rst-class:: monospace
-
-**$app->log()->alert(** *$message, array $context = []* **)**
-
-*Writing an alert message to a log.*
-
-|vspace|
-
-.. rst-class:: monospace
-
-**$app->log()->critical(** *$message, array $context = []* **)**
-
-*Writing a critical message to a log.*
+    // text with context variables
+    $app->log()->emergency('', ['extra' => 'foo']);
 
 |vspace|
 
-.. rst-class:: monospace
+Available methods:
 
-**$app->log()->error(** *$message, array $context = []* **)**
+$app->log()->emergency()
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-*Writing an error message to a log.*
+*Emergency, the system is unusable.*
 
-|vspace|
+$app->log()->alert()
+^^^^^^^^^^^^^^^^^^^^
 
-.. rst-class:: monospace
+*Alert, immediate action is required.*
 
-**$app->log()->warning(** *$message, array $context = []* **)**
+$app->log()->critical()
+^^^^^^^^^^^^^^^^^^^^^^^
 
-*Writing a warning message to a log.*
+*Critical, critical conditions.*
 
-|vspace|
+$app->log()->error()
+^^^^^^^^^^^^^^^^^^^^
 
-.. rst-class:: monospace
+*Error, errors that do not require immediate attention but should be monitored.*
 
-**$app->log()->notice(** *$message, array $context = []* **)**
+$app->log()->warning()
+^^^^^^^^^^^^^^^^^^^^^^
 
-*Writing a notice message to a log.*
+*Warning, unusual or undesirable occurrences that are not errors.*
 
-|vspace|
+$app->log()->notice()
+^^^^^^^^^^^^^^^^^^^^^
 
-.. rst-class:: monospace
+*Notice, normal but significant events.*
 
-**$app->log()->info(** *$message, array $context = []* **)**
+$app->log()->info()
+^^^^^^^^^^^^^^^^^^^
 
-*Writing an info message to a log.*
+*Info, interesting events.*
 
-|vspace|
+$app->log()->debug()
+^^^^^^^^^^^^^^^^^^^^
 
-.. rst-class:: monospace
-
-**$app->log()->debug(** *$message, array $context = []* **)**
-
-*Writing a debug message to a log.*
-
-|vspace|
+*Debug, detailed information for debugging purposes.*

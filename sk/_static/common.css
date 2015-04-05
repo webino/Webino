@@ -12,7 +12,7 @@ div.related,
 div.document {
     position: relative;
     left: -5%;
-    max-width: 64rem;
+    max-width: 66rem;
     margin: 0 auto;
 }
 div.document {
@@ -110,7 +110,7 @@ code {
     font-size: 14px !important;
     white-space: nowrap;
     color: #333;
-    background: #efefef;
+    background: #f0f2f1;
 }
 pre {
     line-height: 150%;
@@ -125,7 +125,7 @@ pre {
     border-radius: 3px;
 }
 .highlight .nv {
-    color: #9673a1;
+    color: #b9a6c4;
 }
 .highlight .o,
 .highlight .nc {
@@ -134,10 +134,10 @@ pre {
 }
 .highlight .c1,
 .highlight .sd {
-    color: #7f7f7d;
+    color: #9f9f9d;
 }
 .highlight .s1 {
-    color: #6a8759;
+    color: #8aa779;
 }
 .highlight .k {
     color: #cc7832;
