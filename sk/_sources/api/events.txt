@@ -101,7 +101,7 @@ you to merge an application configuration. Only core listeners can bind to this 
 
 .. code-block:: php
 
-    $app->bind(AppEvent::CONFIGURE, 'MyListener');
+    $app->bind(AppEvent::CONFIGURE, MyListener::class);
 
 AppEvent::BOOTSTRAP
 ^^^^^^^^^^^^^^^^^^^
@@ -113,7 +113,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 
 .. code-block:: php
 
-    $app->bind(AppEvent::BOOTSTRAP, 'MyListener');
+    $app->bind(AppEvent::BOOTSTRAP, MyListener::class);
 
 
 AppEvent::DISPATCH
@@ -126,5 +126,5 @@ because is dedicated to extension.
 
 .. code-block:: php
 
-    $app->bind(AppEvent::DISPATCH, 'MyListener');
+    $app->bind(AppEvent::DISPATCH, MyListener::class);
 
