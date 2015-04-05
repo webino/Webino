@@ -80,7 +80,7 @@ $app->emit()
     $app->emit('myEvent', $callback);
 
     // event with custom arguments and callback
-    $app->emit('myEvent', [$argOne, $argTwo, $callback);
+    $app->emit('myEvent', [$argOne, $argTwo]g, $callback);
 
     // custom event object
     $app->emit(new MyEvent);
