@@ -37,7 +37,7 @@ $app->bind()
     $app->bind(AppEvent::DISPATCH, $handler, AppEvent::BEGIN);
 
     // attaching a listener aggregate
-    $app->bind('MyListenerAggregate');
+    $app->bind(MyListenerAggregate::class);
 
 
 $app->unbind()
