@@ -35,8 +35,9 @@ after_success:
   - make ghpages
 
 env:
-  - TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
-  - TESTER_PHP_BIN=hhvm TESTER_ARGS=""
+  matrix:
+    - TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
+    - TESTER_PHP_BIN=hhvm TESTER_ARGS=""
   global:
     - GH_REF=github.com/webino/Webino
     - secure: Jzh/BiLKUvPNvubiQtMyjuCoofu+I3n5DeeXTMlkG7rcd8Kq3T3izdt25PFX8nJ+eJZev1HsiXWlPludGWyYXniQ+k7EqI8BxlyZdervt1ElofsuKskvo1/4yYw9ZetNDLWV8fWNKDuNvoEuiJXI5Xq2np8nlarsYLiNAJVKv9M=
