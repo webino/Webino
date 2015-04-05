@@ -1,0 +1,16 @@
+AddType text/x-component .htc
+Options -Indexes
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\#system
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+<IfModule mod_php5.c>
+    php_value session.save_path tmp
+</IfModule>
+

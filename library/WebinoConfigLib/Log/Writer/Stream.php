@@ -10,7 +10,9 @@ use WebinoConfigLib\Log\Writer as BaseWriter;
 class Stream extends BaseWriter
 {
     /**
-     * @param string $stream Url or filepath
+     * Create a stream log writer
+     *
+     * @param string $stream Url or file path
      * @param string|null $mode File mode
      * @param string|null $separator Log message separator
      */

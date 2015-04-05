@@ -5,23 +5,25 @@ use WebinoAppLib\Application;
 use WebinoAppLib\Application\ConfiguredApplication;
 use WebinoAppLib\Factory;
 use WebinoAppLib\Service\DebuggerInterface;
+use WebinoAppLib\Service\LoggerInterface;
 use WebinoEventLib\EventManager;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\Config\Config;
-use Zend\Log\LoggerInterface;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
 
 require __DIR__ . '/../bootstrap.php';
 
 
-$app = (new Factory)->create();
+$appCore = (new Factory)->create();
 
-$configured = $app->bootstrap();
+$app = $appCore->bootstrap();
+
+$app->dispatch();
 
 
-Assert::type(Application::class, $app);
-Assert::type(ConfiguredApplication::class, $configured);
+Assert::type(Application::class, $appCore);
+Assert::type(ConfiguredApplication::class, $app);
 Assert::type(Config::class, $app->getConfig());
 Assert::type(EventManager::class, $app->getEvents());
 Assert::type(RequestInterface::class, $app->getRequest());

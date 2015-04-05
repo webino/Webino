@@ -1,0 +1,20 @@
+language: python
+
+python:
+  - 2.7
+
+install:
+  - pip install -q sphinx
+
+script:
+  - make html
+
+after_success:
+  - git config --global user.email "worker@travis-ci.org"
+  - git config --global user.name "Travis Ci Worker"
+  - make ghpages
+
+env:
+  global:
+    - GH_REF=github.com/webino/webino
+    - secure: RavvaWXJodgGSsFmE5sR417h9nRh0l4wJiaYCgg80zstHNufIlq5PLx57wwg4cH6nAdqTdDu3bBT7V5f5hgiP+4wFSYX+Swb+yRm6dwT8zlxgTDiXJV9uLxpofoFuC/kRglGHd5dNPFrVimbVyTHklsAXoQ7NfhYSz2sIYsHsgs=

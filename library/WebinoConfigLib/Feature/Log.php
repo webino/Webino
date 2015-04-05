@@ -2,20 +2,22 @@
 
 namespace WebinoConfigLib\Feature;
 
-use WebinoConfigLib\Cache\Filesystem;
+use WebinoConfigLib\Log\Writer;
 
 /**
  * Class Log
  */
-class Log extends AbstractCache
+class Log extends AbstractLog
 {
     /**
-     * @param string|null $namespace
-     * @param string|null $dir
+     * @param string $filePath
      */
-    public function __construct($namespace = null, $dir = null)
+    public function __construct($filePath)
     {
-        $cache = new Filesystem(is_null($namespace) ? 'application' : $namespace, $dir);
-        $this->mergeArray([$this::KEY => $cache->toArray()]);
+        $this->mergeArray([
+            $this::KEY => (new Writer([
+                (new Writer\Stream($filePath))->toArray(),
+            ]))->toArray(),
+        ]);
     }
 }

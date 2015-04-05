@@ -5,14 +5,14 @@ namespace WebinoAppLib\Application;
 /**
  * Interface BaseApplicationInterface
  */
-interface BaseApplicationInterface extends ApplicationInterface
+interface BaseApplicationInterface
 {
     /**
      * Bootstrap the application
      *
      * Returns configured application ready to dispatch.
      *
-     * @return ConfiguredApplicationInterface
+     * @return AbstractConfiguredApplication
      */
     public function bootstrap();
 }

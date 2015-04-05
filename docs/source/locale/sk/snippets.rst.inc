@@ -1,0 +1,3 @@
+.. |Incomplete| replace:: Na obsahu tejto dokumentácie sa stále pracuje ...
+
+.. |Result| replace:: Výsledok

@@ -1,0 +1,3 @@
+.. |Incomplete| replace:: We are still working on the content of this documentation ...
+
+.. |Result| replace:: Result

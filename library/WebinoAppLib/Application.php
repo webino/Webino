@@ -5,7 +5,7 @@ namespace WebinoAppLib;
 /**
  * Class Application
  */
-class Application extends Application\BaseApplication
+final class Application extends Application\AbstractBaseApplication
 {
 
 }

@@ -2,10 +2,12 @@
 
 namespace WebinoAppLib\Application;
 
+use WebinoAppLib\Application;
+
 /**
  * Class ConfiguredApplication
  */
-class ConfiguredApplication extends AbstractConfiguredApplication
+final class ConfiguredApplication extends AbstractConfiguredApplication
 {
 
 }

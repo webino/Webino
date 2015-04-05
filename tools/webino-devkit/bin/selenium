@@ -1,0 +1,109 @@
+#!/bin/bash
+
+# Options
+
+selenium='java -jar -Xms256m -Xmx256m'
+screen='1680x1050x24+32'
+jar=/var/lib/webino/selenium-server.jar
+lock=/tmp/selenium/port-*.lock
+log=/tmp/selenium/port-*.log
+port=${PORT-'4444'}
+no_xvfb=${X-''}
+
+# Functions
+
+help () {
+    echo ''
+    echo ' Usage:'
+    echo ''
+    echo ' X=0 '$BASH_SOURCE' port|start|stop|kill'
+    echo ''
+    echo ' X=0        Disable Virtual Frame Buffer'
+    echo ''
+}
+
+lock_file () {
+    echo $(echo "$lock" | sed 's/\*/'$port'/g')
+}
+
+log_file () {
+    echo $(echo "$log" | sed 's/\*/'$port'/g')
+}
+
+get_group () {
+    [ "$(groups | grep selenium)" ] && echo 'selenium' || echo "$(id -gn)"
+}
+
+stop_selenium () {
+    # Kills selenium on a specified port
+    kill $(ps aux | grep '[s]elenium-server.jar -port '$port | awk '{print $2}') 2> /dev/null
+}
+
+kill_xvfb () {
+    local pid=$(ps aux | grep '[X]vfb' | awk '{print $2}')
+    [[ -n $pid ]] && echo 'Stopping Xvfb' && kill $pid 2> /dev/null
+}
+
+# Commands
+
+umask 002
+sg "$(get_group)" -c "mkdir -p /tmp/selenium"
+
+case "${1:-''}" in
+    'port')
+        # Returns available port for selenium webdriver
+        while [[ -f $(lock_file) ]]; do
+            port='44'$((RANDOM % 10))''$((RANDOM % 10))
+        done
+        sg "$(get_group)" -c "touch $(lock_file)"
+        echo $port
+        exit 0
+    ;;
+    'start')
+        echo "Starting Selenium on port $port..."
+        stop_selenium
+
+        selenium=$selenium" $jar -host 127.0.0.1 -port $port"
+        sg "$(get_group)" -c "touch $(log_file)"
+        if [[ -z $no_xvfb ]]; then
+            display=':'$port
+            echo 'With Xvfb '$display
+            DISPLAY=$display xvfb-run --auto-servernum --server-num=$port --server-args='-screen 0 '$screen $selenium &> "$(log_file)" &
+        else
+            $selenium &> "$(log_file)" &
+            display=:0
+        fi
+
+        sleep 3
+
+        error=$?
+        if test $error -gt 0
+        then
+            echo "${bon}Error $error! Couldn't start Selenium!${boff}"
+            sh "$BASH_SOURCE" stop
+            exit 1
+        fi
+        exit 0
+    ;;
+    'stop')
+        # Stops selenium & Xvfb for specified port
+        echo "Stopping Selenium on port $port..."
+        stop_selenium
+        rm -f $(lock_file)
+        # Stops Xvfb when no selenium is running
+        [[ -z $(ls $lock 2> /dev/null) ]] && kill_xvfb
+        exit 0
+    ;;
+    'kill')
+        # Kill all selenium instances & xvfb
+        kill $(ps aux | grep '[s]elenium-server.jar' | awk '{print $2}') 2> /dev/null
+        kill_xvfb
+        rm -f $lock
+        rm -f $log
+        exit 0
+    ;;
+    *)
+        help
+        exit 1
+    shift
+esac

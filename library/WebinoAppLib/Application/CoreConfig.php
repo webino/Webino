@@ -6,11 +6,10 @@ use WebinoAppLib\Application;
 use WebinoAppLib\Factory\ApplicationFactory;
 use WebinoAppLib\Factory\BootstrapFactory;
 use WebinoAppLib\Factory\EventsFactory;
+use WebinoAppLib\Factory\LoggerFactory;
 use WebinoAppLib\Feature;
 use WebinoConfigLib\DefaultConfigInterface;
-use WebinoConfigLib\Log\Writer\Noop;
 use WebinoEventLib\EventManager;
-use Zend\Log\LoggerServiceFactory;
 use Zend\Mvc\Service\RequestFactory;
 use Zend\Mvc\Service\ResponseFactory;
 use Zend\Stdlib\ArrayUtils;
@@ -26,8 +25,6 @@ class CoreConfig extends Feature\Config implements
      */
     public function getDefaultConfig()
     {
-        $this->addFeature(new \WebinoConfigLib\Feature\NoopLog);
-
         return [
             $this::CORE => [
                 $this::SERVICES => [
@@ -40,7 +37,7 @@ class CoreConfig extends Feature\Config implements
                         Application::REQUEST => RequestFactory::class,
                         Application::RESPONSE => ResponseFactory::class,
                         Application::BOOTSTRAP => BootstrapFactory::class,
-                        Application::LOGGER => LoggerServiceFactory::class,
+                        Application::LOGGER => LoggerFactory::class,
                     ],
                 ],
             ],

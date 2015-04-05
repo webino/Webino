@@ -30,13 +30,15 @@
     "tracy/tracy": "2.*",
     "nette/tester": "1.*",
     "mikey179/vfsStream": "1.*",
-    "satooshi/php-coveralls": "0.*"
+    "psr/log": "1.0.*",
+    "firephp/firephp-core": "0.*"
   },
   "autoload": {
     "psr-0": {
       "WebinoExceptionLib\\": "library/",
       "WebinoConfigLib\\": "library/",
       "WebinoEventLib\\": "library/",
+      "WebinoLogLib\\": "library/",
       "WebinoAppLib\\": "library/"
     }
   }

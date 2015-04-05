@@ -5,11 +5,12 @@ namespace WebinoAppLib\Application;
 /**
  * Interface ConfiguredApplicationInterface
  */
-interface ConfiguredApplicationInterface extends ApplicationInterface
+interface ConfiguredApplicationInterface
 {
     /**
-     * Dispatch an application
+     * Dispatch the application
      *
+     * @triggers dispatch
      * @return void
      */
     public function dispatch();

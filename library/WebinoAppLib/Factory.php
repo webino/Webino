@@ -2,8 +2,9 @@
 
 namespace WebinoAppLib;
 
-use WebinoAppLib\Application\BaseApplicationInterface;
-use WebinoAppLib\Application\CoreConfig;;
+use WebinoAppLib\Application;
+use WebinoAppLib\Application\AbstractApplication;
+use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Exception\DomainException;
 use WebinoAppLib\Exception\InvalidArgumentException;
 use WebinoAppLib\Service\DebuggerInterface;
@@ -28,7 +29,7 @@ class Factory
     /**
      * @param array|object $config
      * @param DebuggerInterface $debugger
-     * @return BaseApplicationInterface
+     * @return Application\AbstractBaseApplication
      */
     public function create($config = null, DebuggerInterface $debugger = null)
     {
@@ -39,9 +40,9 @@ class Factory
         $services->setService(Application::DEBUGGER, $_debugger);
 
         $app = $services->get(Application::SERVICE);
-        if (!($app instanceof BaseApplicationInterface)) {
+        if (!($app instanceof AbstractApplication)) {
             throw (new DomainException('Expected application type %s but got %s'))
-                ->format(BaseApplicationInterface::class, get_class($app));
+                ->format(AbstractApplication::class, get_class($app));
         }
 
         return $app;
@@ -49,7 +50,7 @@ class Factory
 
     /**
      * @param DebuggerInterface $debugger
-     * @return mixed|DebuggerInterface|\Webino\Service\NullDebugger
+     * @return mixed|DebuggerInterface|\WebinoAppLib\Service\NullDebugger
      */
     protected function createDebugger(DebuggerInterface $debugger = null)
     {

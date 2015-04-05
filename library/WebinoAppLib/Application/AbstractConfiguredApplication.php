@@ -8,7 +8,7 @@ use WebinoAppLib\Event\AppEvent;
 /**
  * Class AbstractConfiguredApplication
  */
-abstract class AbstractConfiguredApplication extends AbstractBaseApplication implements
+class AbstractConfiguredApplication extends AbstractApplication implements
     ConfiguredApplicationInterface
 {
     /**

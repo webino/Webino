@@ -2,25 +2,33 @@
 
 namespace WebinoAppLib\Application;
 
+use WebinoAppLib\Contract;
 use WebinoAppLib\Exception\DomainException;
 use WebinoAppLib\Service\DebuggerInterface;
+use WebinoAppLib\Service\LoggerInterface;
 use WebinoAppLib\Service\NullDebugger;
 use WebinoAppLib\Service\Bootstrap;
 use Zend\Cache\Storage\Adapter\BlackHole;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\Config\Config;
 use Zend\EventManager\EventManager;
-use Zend\Log\LoggerInterface;
-use Zend\ServiceManager;
-use Zend\ServiceManager\ServiceLocatorInterface as Services;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
 
 /**
  * Class AbstractApplication
  */
-abstract class AbstractApplication implements AbstractApplicationInterface
+abstract class AbstractApplication implements
+    AbstractApplicationInterface,
+    Contract\ServiceProviderInterface,
+    Contract\EventEmitterInterface,
+    Contract\LoggerInterface
 {
+    use Traits\ServiceProviderTrait;
+    use Traits\EventEmitterTrait;
+    use Traits\LoggerTrait;
+
     /**
      * Application bootstrap service name
      */
@@ -50,7 +58,7 @@ abstract class AbstractApplication implements AbstractApplicationInterface
     ];
 
     /**
-     * @var Services
+     * @var ServiceManager
      */
     private $services;
 
@@ -95,9 +103,9 @@ abstract class AbstractApplication implements AbstractApplicationInterface
     private $cache;
 
     /**
-     * @param Services $services
+     * @param ServiceManager $services
      */
-    public function __construct(Services $services)
+    public function __construct(ServiceManager $services)
     {
         $this->services = $services;
         foreach ($this->requiredServices as $service) {
@@ -156,7 +164,7 @@ abstract class AbstractApplication implements AbstractApplicationInterface
     }
 
     /**
-     * @return Services
+     * @return ServiceManager
      */
     public function getServices()
     {
@@ -176,7 +184,7 @@ abstract class AbstractApplication implements AbstractApplicationInterface
      * @param bool $setService
      * @throws DomainException Disallowed config modifications
      */
-    public function setConfig(Config $config, $setService = true)
+    protected function setConfig(Config $config, $setService = true)
     {
         if ($this->config && $this->config->isReadOnly()) {
             throw new DomainException(
@@ -239,7 +247,7 @@ abstract class AbstractApplication implements AbstractApplicationInterface
     /**
      * @return Bootstrap
      */
-    public function getBootstrap()
+    protected function getBootstrap()
     {
         return $this->bootstrap;
     }
@@ -247,7 +255,7 @@ abstract class AbstractApplication implements AbstractApplicationInterface
     /**
      * @param Bootstrap $bootstrap
      */
-    public function setBootstrap(Bootstrap $bootstrap)
+    protected function setBootstrap(Bootstrap $bootstrap)
     {
         $this->bootstrap = $bootstrap;
     }
@@ -284,7 +292,7 @@ abstract class AbstractApplication implements AbstractApplicationInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(LoggerInterface $logger)
+    protected function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

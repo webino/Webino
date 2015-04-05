@@ -1,0 +1,8 @@
+msgid "sidebar.options.title"
+msgstr "Options"
+
+msgid "page.source.label"
+msgstr "Edit source"
+
+msgid "page.translate.label"
+msgstr "Translate"
