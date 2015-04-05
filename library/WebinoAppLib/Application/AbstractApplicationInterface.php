@@ -2,16 +2,6 @@
 
 namespace WebinoAppLib\Application;
 
-use WebinoAppLib\Service\DebuggerInterface;
-use WebinoAppLib\Service\LoggerInterface;
-use Zend\Cache\Storage\StorageInterface;
-use Zend\Config\Config;
-use Zend\EventManager\EventManager;
-use Zend\ServiceManager;
-use Zend\ServiceManager\ServiceManager as Services;
-use Zend\Stdlib\RequestInterface;
-use Zend\Stdlib\ResponseInterface;
-
 /**
  * Interface AbstractApplicationInterface
  */

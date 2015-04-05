@@ -13,8 +13,6 @@ use Zend\Cache\Storage\StorageInterface;
 use Zend\Config\Config;
 use Zend\EventManager\EventManager;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\RequestInterface;
-use Zend\Stdlib\ResponseInterface;
 
 /**
  * Class AbstractApplication
@@ -42,8 +40,6 @@ abstract class AbstractApplication implements
     private $requiredServices = [
         self::CONFIG,
         self::EVENTS,
-        self::REQUEST,
-        self::RESPONSE,
     ];
 
     /**
@@ -71,16 +67,6 @@ abstract class AbstractApplication implements
      * @var EventManager
      */
     private $events;
-
-    /**
-     * @var RequestInterface
-     */
-    private $request;
-
-    /**
-     * @var ResponseInterface
-     */
-    private $response;
 
     /**
      * @var Bootstrap
@@ -210,38 +196,6 @@ abstract class AbstractApplication implements
     protected function setEvents(EventManager $events)
     {
         $this->events = $events;
-    }
-
-    /**
-     * @return RequestInterface
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
-
-    /**
-     * @param object|RequestInterface $request
-     */
-    public function setRequest(RequestInterface $request)
-    {
-        $this->request = $request;
-    }
-
-    /**
-     * @return ResponseInterface
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
-     * @param object|ResponseInterface $response
-     */
-    public function setResponse(ResponseInterface $response)
-    {
-        $this->response = $response;
     }
 
     /**

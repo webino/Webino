@@ -62,12 +62,12 @@ configure event.
 
 **3)** *Handling the client request and sending a response.*
 
-- Calling a ``dispatch()`` method just triggers the dispatch event, if there are not dispatch listeners,
-  nothing will happen.
-
 .. code-block:: php
 
     $app->dispatch();
+
+- Calling a ``dispatch()`` method just triggers the dispatch event, if there are not dispatch listeners,
+  nothing will happen.
 
 
 Application Core Events

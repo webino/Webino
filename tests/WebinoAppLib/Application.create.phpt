@@ -26,8 +26,6 @@ Assert::type(Application::class, $appCore);
 Assert::type(ConfiguredApplication::class, $app);
 Assert::type(Config::class, $app->getConfig());
 Assert::type(EventManager::class, $app->getEvents());
-Assert::type(RequestInterface::class, $app->getRequest());
-Assert::type(ResponseInterface::class, $app->getResponse());
 Assert::type(DebuggerInterface::class, $app->getDebugger());
 Assert::type(LoggerInterface::class, $app->getLogger());
 Assert::type(StorageInterface::class, $app->getCache());

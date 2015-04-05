@@ -38,50 +38,6 @@ $app->getEvents()
     $events = $app->getEvents();
 
 
-$app->getRequest()
-------------------
-
-*Getting a request.*
-
-.. code-block:: php
-
-    /** @var \Zend\Stdlib\RequestInterface $request */
-    $request = $app->getRequest();
-
-
-$app->setRequest()
-------------------
-
-*Setting a request.*
-
-.. code-block:: php
-
-    $request = new \Zend\Http\Request;
-    $app->setRequest();
-
-$app->getResponse()
--------------------
-
-*Getting a response.*
-
-.. code-block:: php
-
-    /** @var \Zend\Stdlib\ResponseInterface $response */
-    $response = $app->getResponse($request);
-
-
-$app->setResponse()
--------------------
-
-*Setting a response.*
-
-
-.. code-block:: php
-
-    $request = new \Zend\Http\Response;
-    $app->setResponse($response);
-
-
 $app->getDebugger()
 -------------------
 
