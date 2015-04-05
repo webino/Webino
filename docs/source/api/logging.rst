@@ -92,10 +92,10 @@ on which we can call standard logging methods.
     $app->log()->emergency('Something really bad happened.');
 
     // text with argument placeholders
-    $app->log()->emergency('Message text example with variables {0} {1}', [$argOne, $argTwo]);
+    $app->log()->info('Message text example with variables: {0} {1}', [$argOne, $argTwo]);
 
     // text with context variables
-    $app->log()->emergency('', ['extra' => 'foo']);
+    $app->log()->debug('Some debug information...', ['extra' => 'foo']);
 
 |vspace|
 
