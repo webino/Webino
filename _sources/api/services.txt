@@ -3,7 +3,19 @@
 Application Services API
 ========================
 
-Use services to handle your business logic.
+The application object behaves as a service container, that means we can register and retrieve services
+directly from it.
+
+$app->get()
+-----------
+
+*Getting a service from an application.*
+
+.. code-block:: php
+
+    /** @var \MyService $service */
+    $service = $app->get('MyService');
+
 
 $app->set()
 -----------
@@ -29,12 +41,13 @@ $app->set()
     // setting an object
     $app->set('MyService', new MyService);
 
-$app->get()
+
+$app->has()
 -----------
 
-*Getting a service from an application.*
+*Checking wheater a service is available to the application.*
 
 .. code-block:: php
 
-    /** @var \MyService $service */
-    $service = $app->get('MyService');
+    /** @var bool $hasService */
+    $hasService = $app->has('MyService');

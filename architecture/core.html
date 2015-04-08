@@ -62,7 +62,7 @@
 <ul class="simple">
 <li><a class="reference internal" href="#application-core-lifecycle" id="id1">Application Core Lifecycle</a></li>
 <li><a class="reference internal" href="#application-core-events" id="id2">Application Core Events</a></li>
-<li><a class="reference internal" href="#class-diagram-for-an-application-object" id="id3">Class Diagram for an Application Object</a></li>
+<li><a class="reference internal" href="#the-application-object-class-diagram" id="id3">The Application Object Class Diagram</a></li>
 </ul>
 </div>
 <p>The Webino™ application architecture is based around the Zend Frameowrk 2 but simplified and enhanced.
@@ -131,13 +131,12 @@ nothing will happen.</li>
 <dd><em>Responding to the client request</em></dd>
 </dl>
 </div>
-<div class="section" id="class-diagram-for-an-application-object">
-<h2><a class="toc-backref" href="#id3">Class Diagram for an Application Object</a><a class="headerlink" href="#class-diagram-for-an-application-object" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-application-object-class-diagram">
+<h2><a class="toc-backref" href="#id3">The Application Object Class Diagram</a><a class="headerlink" href="#the-application-object-class-diagram" title="Permalink to this headline">¶</a></h2>
 <p>The application is divided into two types, the basic type and the configured one. While all general application
 methods are available throughout whole life cycle, the <code class="docutils literal"><span class="pre">bootstrap()</span></code> method can be called only on a basic type and
 the <code class="docutils literal"><span class="pre">dispatch()</span></code> on a cofigured type.</p>
 <img alt="../_images/WebinoAppLib.Application.ClassDiagram_w720.png" class="centered" src="../_images/WebinoAppLib.Application.ClassDiagram_w720.png" />
-<p>TODO...</p>
 </div>
 </div>
 
@@ -175,9 +174,6 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
         </li>
         <li>
             <a href="configuration.html">Configuration</a>
-        </li>
-        <li>
-            <a href="console.html">Console</a>
         </li>
     </ul>
     <h2>API</h2>

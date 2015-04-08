@@ -16,7 +16,6 @@
     architecture/services
     architecture/event-system
     architecture/configuration
-    architecture/console
 
     api/core
     api/services

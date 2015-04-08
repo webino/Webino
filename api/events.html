@@ -138,7 +138,7 @@
 <p>Following events are emitted during an application core lifecycle.</p>
 <div class="section" id="appevent-configure">
 <h3>AppEvent::CONFIGURE<a class="headerlink" href="#appevent-configure" title="Permalink to this headline">¶</a></h3>
-<p><em>Application configure event.</em></p>
+<p><em>Configuring an application, merging modules configurations.</em></p>
 <p>This event is emitted in the middle of the two pass bootstrap event, allowing
 you to merge an application configuration. Only core listeners can bind to this event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">CONFIGURE</span><span class="p">,</span> <span class="nx">MyListener</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
@@ -147,7 +147,7 @@ you to merge an application configuration. Only core listeners can bind to this 
 </div>
 <div class="section" id="appevent-bootstrap">
 <h3>AppEvent::BOOTSTRAP<a class="headerlink" href="#appevent-bootstrap" title="Permalink to this headline">¶</a></h3>
-<p><em>Application bootstrap event.</em></p>
+<p><em>Initializing an application, all the services will be ready.</em></p>
 <p>After this two pass event all the services should be ready. The core listeners
 binds to the first pass and a remaining can listen to the second pass bootstrap event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">BOOTSTRAP</span><span class="p">,</span> <span class="nx">MyListener</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
@@ -156,7 +156,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="appevent-dispatch">
 <h3>AppEvent::DISPATCH<a class="headerlink" href="#appevent-dispatch" title="Permalink to this headline">¶</a></h3>
-<p><em>Application dispatch event.</em></p>
+<p><em>Handling the client request and sending a response.</em></p>
 <p>This event is triggered to handle a server client request. It does nothing,
 because is dedicated to extension.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">DISPATCH</span><span class="p">,</span> <span class="nx">MyListener</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
@@ -200,9 +200,6 @@ because is dedicated to extension.</p>
         </li>
         <li>
             <a href="../architecture/configuration.html">Configuration</a>
-        </li>
-        <li>
-            <a href="../architecture/console.html">Console</a>
         </li>
     </ul>
     <h2>API</h2>
