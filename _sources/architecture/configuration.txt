@@ -41,7 +41,7 @@ At first, create your new config feature:
     }
 
 
-then creating configuration like this:
+then when you create a configuration like this:
 
 .. code-block:: php
 
@@ -54,7 +54,7 @@ then creating configuration like this:
     ]))->toArray();
 
 
-produces an array:
+it will produce an array:
 
 .. code-block:: php
 

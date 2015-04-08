@@ -93,7 +93,7 @@ of a pluggable configuration.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>then creating configuration like this:</p>
+<p>then when you create a configuration like this:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoConfigLib\Config</span><span class="p">;</span>
 
 <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
@@ -103,7 +103,7 @@ of a pluggable configuration.</p>
 <span class="p">]))</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>produces an array:</p>
+<p>it will produce an array:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="p">[</span>
     <span class="s1">&#39;some_settings&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
         <span class="s1">&#39;anything&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;OPTION_ONE&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;OPTION_TWO&#39;</span><span class="p">],</span>
