@@ -94,7 +94,7 @@ Following events are emitted during an application core lifecycle.
 AppEvent::CONFIGURE
 ^^^^^^^^^^^^^^^^^^^
 
-*Application configure event.*
+*Configuring an application, merging modules configurations.*
 
 This event is emitted in the middle of the two pass bootstrap event, allowing
 you to merge an application configuration. Only core listeners can bind to this event.
@@ -106,7 +106,7 @@ you to merge an application configuration. Only core listeners can bind to this 
 AppEvent::BOOTSTRAP
 ^^^^^^^^^^^^^^^^^^^
 
-*Application bootstrap event.*
+*Initializing an application, all the services will be ready.*
 
 After this two pass event all the services should be ready. The core listeners
 binds to the first pass and a remaining can listen to the second pass bootstrap event.
@@ -119,7 +119,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 AppEvent::DISPATCH
 ^^^^^^^^^^^^^^^^^^
 
-*Application dispatch event.*
+*Handling the client request and sending a response.*
 
 This event is triggered to handle a server client request. It does nothing,
 because is dedicated to extension.

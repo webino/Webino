@@ -10,7 +10,7 @@ class AttachAggregateListener implements MessageInterface
     /**
      * {@inheritdoc}
      */
-    public static function getMessage(...$args)
+    public function getMessage(...$args)
     {
         return sprintf(
             'Attaching aggregate listener `%s`',

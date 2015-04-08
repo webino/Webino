@@ -10,7 +10,7 @@ class AttachListener extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public static function getMessage(...$args)
+    public function getMessage(...$args)
     {
         /** @noinspection PhpParamsInspection */
         return sprintf(

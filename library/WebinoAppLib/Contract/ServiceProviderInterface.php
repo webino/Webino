@@ -25,4 +25,12 @@ interface ServiceProviderInterface
      * @return self
      */
     public function set($service, $factory = null);
+
+    /**
+     * Determine if a service exists
+     *
+     * @param  string $service Service name
+     * @return bool
+     */
+    public function has($service);
 }

@@ -5,7 +5,7 @@ namespace WebinoAppLib\Application\Traits;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Logger
+ * Trait Logger
  */
 trait LoggerTrait
 {

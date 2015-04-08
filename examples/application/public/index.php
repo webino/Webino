@@ -1,5 +1,7 @@
 <?php
 
+use WebinoAppLib\Event\AppEvent;
+
 chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
@@ -9,6 +11,19 @@ $app = (new \WebinoAppLib\Factory)->create()->bootstrap();
 //$app->log()->info('test log message z');
 //$app->log()->info('test log message y');
 //$app->log()->debug(new stdClass);
+
+class MyListener
+{
+    public function __invoke()
+    {
+        echo 'Ahoj!';
+    }
+}
+
+$app->bind(AppEvent::DISPATCH, MyListener::class, AppEvent::BEGIN);
+$app->bind(AppEvent::DISPATCH, function () {
+    echo 'Svet';
+}, AppEvent::BEGIN + 100);
 
 
 $app->dispatch();

@@ -10,7 +10,7 @@ class DetachAggregateListener extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public static function getMessage(...$args)
+    public function getMessage(...$args)
     {
         return sprintf(
             'Detaching aggregate listener `%s`',

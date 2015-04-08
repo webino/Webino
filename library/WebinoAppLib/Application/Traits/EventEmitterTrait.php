@@ -9,6 +9,9 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Stdlib\CallbackHandler;
 
+/**
+ * Trait EventEmitterTrait
+ */
 trait EventEmitterTrait
 {
     /**
@@ -22,6 +25,25 @@ trait EventEmitterTrait
     abstract public function getEvents();
 
     /**
+     * @param string $service
+     * @return mixed
+     */
+    abstract public function get($service);
+
+    /**
+     * @param mixed $service
+     * @param null $factory
+     * @return self
+     */
+    abstract public function set($service, $factory = null);
+
+    /**
+     * @param $service
+     * @return bool
+     */
+    abstract public function has($service);
+
+    /**
      * @param mixed|\WebinoAppLib\Log\MessageInterface $level
      * @param mixed ...$args
      * @return LoggerInterface
@@ -33,13 +55,15 @@ trait EventEmitterTrait
      */
     public function bind($event, $callback = null, $priority = 1)
     {
+        $normalized = $this->normalizeCallback($callback);
+
         if ($event instanceof ListenerAggregateInterface) {
             $this->log(Log\AttachAggregateListener::class, $event);
-            $event->attach($this->getEvents(), (int) $callback);
+            $event->attach($this->getEvents(), (int) $normalized);
             return $this;
         }
 
-        $this->log(Log\AttachListener::class, $event, $callback, $priority);
+        $this->log(Log\AttachListener::class, $event, $normalized, $priority);
 
         if ($event instanceof CallbackHandler) {
             $mData = $event->getMetadata();
@@ -50,7 +74,7 @@ trait EventEmitterTrait
             );
         }
 
-        $this->listeners[] = $this->getEvents()->attach($event, $callback, $priority);
+        $this->listeners[] = $this->getEvents()->attach($event, $normalized, $priority);
         return $this;
     }
 
@@ -104,5 +128,22 @@ trait EventEmitterTrait
         }
         $this->log(Log\TriggerEvent::class, $event);
         return $this->getEvents()->trigger($event, $target, $argv, $callback);
+    }
+
+    /**
+     * Normalize the callback argument
+     *
+     * If the callback is a string, register it to the services then return it.
+     *
+     * @param mixed $callback
+     * @return mixed
+     */
+    private function normalizeCallback($callback)
+    {
+        if (is_string($callback)) {
+            $this->has($callback) || $this->set($callback);
+            return $this->get($callback);
+        }
+        return $callback;
     }
 }

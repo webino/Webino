@@ -8,7 +8,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceManager;
 
 /**
- * Class ServiceProviderTrait
+ * Trait ServiceProviderTrait
  */
 trait ServiceProviderTrait
 {
@@ -54,9 +54,17 @@ trait ServiceProviderTrait
 
         // invokable
         is_array($service)
-        and $services->setInvokableClass(key($service), current($service))
-        or  $services->setInvokableClass($service, $service);
+            and $services->setInvokableClass(key($service), current($service))
+            or  $services->setInvokableClass($service, $service);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($service)
+    {
+        return $this->getServices()->has((string) $service);
     }
 }
