@@ -22,7 +22,7 @@ Configurators are used to generate an array configurations for large PHP applica
 an array configuration in the OOP way. Everything is config and config can contain features. Feature is a fragment
 of a pluggable configuration.
 
-At first, create your new config feature:
+You can create your config features like this:
 
 .. code-block:: php
 
@@ -41,7 +41,7 @@ At first, create your new config feature:
     }
 
 
-then when you create a configuration like this:
+then when you create a configuration:
 
 .. code-block:: php
 
@@ -63,6 +63,8 @@ it will produce an array:
             'anything' => ['foo' => 'OPTION_ONE', 'bar' => 'OPTION_TWO'],
         ],
     ];
+
+Now you should get the main idea what the configuration feature is.
 
 
 Application Configuration
