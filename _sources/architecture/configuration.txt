@@ -9,7 +9,7 @@ The configuration is an efficient way how to prepare your application for a disp
 and almost everything will be configured in a lazy style, on demand.
 
 Configuration is basically a multidimensional array. Writing arrays in PHP is a little hell, because without
-a documentation we doesn't know what to type, so configurators are introduced.
+a documentation we don't know what to type, so configurators are introduced.
 
 .. image:: ../_static/media/WebinoConfigLib_h400.png
     :class: centered
