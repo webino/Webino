@@ -106,8 +106,8 @@ Calling a method on a configuration feature is easy:
 
     new Config([
 
-        (new ExampleFeatureFoo('ANY_OPTION')
-            ->setSomething('anything')),
+        (new ExampleFeatureFoo('ANY_OPTION'))
+            ->setSomething('anything'),
 
     ]);
 
