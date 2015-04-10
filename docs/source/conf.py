@@ -148,7 +148,8 @@ html_theme_options = {
     'textcolor': '#333',
     'cssfiles': [
         '_static/common.css',
-        '//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext'
+        '//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext',
+        '//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext'
     ],
 }
 
