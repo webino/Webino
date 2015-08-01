@@ -42,5 +42,4 @@ Cache Config
     :depth: 1
     :local:
 
-.. todo::
-    Write cache config features list (different types of cache storage).
+.. include:: /api/config/cache.rst.inc

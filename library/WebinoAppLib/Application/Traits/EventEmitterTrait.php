@@ -55,26 +55,31 @@ trait EventEmitterTrait
      */
     public function bind($event, $callback = null, $priority = 1)
     {
-        $normalized = $this->normalizeCallback($callback);
+        $aggregate = $this->resolveListenerAggregate($event);
 
-        if ($event instanceof ListenerAggregateInterface) {
-            $this->log(Log\AttachAggregateListener::class, $event);
-            $event->attach($this->getEvents(), (int) $normalized);
+        if ($aggregate instanceof ListenerAggregateInterface) {
+            $this->log(Log\AttachAggregateListener::class, $aggregate);
+            $aggregate->attach($this->getEvents());
             return $this;
         }
 
-        $this->log(Log\AttachListener::class, $event, $normalized, $priority);
+        unset($aggregate);
 
         if ($event instanceof CallbackHandler) {
+            $callback = $event->getCallback();
             $mData = $event->getMetadata();
+            $this->log(Log\AttachListener::class, $mData['event'], $callback, $mData['priority']);
             return $this->listeners[] = $this->getEvents()->attach(
                 $mData['event'],
-                $event->getCallback(),
+                $callback,
                 $mData['priority']
             );
         }
 
+        $normalized = $this->normalizeCallback($callback);
+        $this->log(Log\AttachListener::class, $event, $normalized, $priority);
         $this->listeners[] = $this->getEvents()->attach($event, $normalized, $priority);
+
         return $this;
     }
 
@@ -83,11 +88,15 @@ trait EventEmitterTrait
      */
     public function unbind($event = null, $callback = null, $priority = null)
     {
-        if ($event instanceof ListenerAggregateInterface) {
-            $this->log(Log\DetachAggregateListener::class, $event);
-            $event->detach($this->getEvents());
+        $aggregate = $this->resolveListenerAggregate($event);
+
+        if ($aggregate instanceof ListenerAggregateInterface) {
+            $this->log(Log\DetachAggregateListener::class, $aggregate);
+            $aggregate->detach($this->getEvents());
             return $this;
         }
+
+        unset($aggregate);
 
         if (is_callable($event)) {
             $_callback = $event;
@@ -97,7 +106,7 @@ trait EventEmitterTrait
             $_callback = $callback->getCallback();
 
         } else {
-            $_callback = $callback;
+            $_callback = $this->normalizeCallback($callback);
         }
 
         /** @var \Zend\Stdlib\CallbackHandler $listener */
@@ -127,6 +136,11 @@ trait EventEmitterTrait
             $event->getTarget() or $event->setTarget($this) && $target = $callback;
         }
         $this->log(Log\TriggerEvent::class, $event);
+
+        if (is_callable($argv)) {
+            return $this->getEvents()->trigger($event, $target, [], $argv);
+        }
+
         return $this->getEvents()->trigger($event, $target, $argv, $callback);
     }
 
@@ -145,5 +159,16 @@ trait EventEmitterTrait
             return $this->get($callback);
         }
         return $callback;
+    }
+
+    /**
+     * @param mixed $event
+     * @return mixed|string
+     */
+    private function resolveListenerAggregate($event)
+    {
+        return (is_string($event) && class_exists($event))
+            ? $this->normalizeCallback($event)
+            : $event;
     }
 }

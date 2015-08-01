@@ -10,9 +10,8 @@ interface EventEmitterInterface
     /**
      * Attach a listener to an event
      *
-     * @param string $event
-     * @param string|callable|int $callback callable|int $callback If string $event provided, expects PHP callback;
-     *                                          for a ListenerAggregateInterface $event, this will be the priority
+     * @param string|\Zend\EventManager\ListenerAggregateInterface $event
+     * @param string|callable|int $callback If string $event provided, expects PHP callback;
      * @param int $priority Invocation priority
      * @return \Zend\Stdlib\CallbackHandler|mixed CallbackHandler if attaching callable
      *                          (to allow later unsubscribe); mixed if attaching aggregate

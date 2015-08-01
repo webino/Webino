@@ -114,8 +114,6 @@ on a cofigured type.
 
 - **Config** - Application configuration
 - **Events** - Event manager
-- **Request** - Client request
-- **Response** - Server response
 - **Debugger** - Debugging
 - **Logger** - Logging
 - **Cache** - Caching
@@ -131,14 +129,10 @@ Application provides some basic functionality via methods and by core services.
 - `getServices()` - Getting a service manager
 - `getConfig()` - Getting an application configuration
 - `getEvents()` - Getting an event manager service
-- `getRequest()` - Getting a request
-- `setRequest()` - Setting a request
-- `getResponse()` - Getting a response
-- `setResponse()` - Setting a response
 - `getDebugger()` - Getting a debugger service
 - `getLogger()` - Getting a logger service
 - `getCache()` - Getting a cache service
-- `getFiles()` - Getting a filesystem manager service [TODO]
+- `getFile()` - Getting a filesystem manager service [TODO]
 
 ### Application Operations
 
@@ -175,6 +169,11 @@ After an application was created, following methods are available
 *Triggering an event:*
     
 - `$app->emit('myEvent');`
+
+
+**Caching**
+
+TODO examples...
 
 
 **Logging**

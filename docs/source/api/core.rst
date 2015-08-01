@@ -9,6 +9,7 @@ Use application core API to access core services.
     :depth: 1
     :local:
 
+
 $app->getServices()
 -------------------
 
@@ -75,8 +76,8 @@ $app->getCache()
     $cache = $app->getCache();
 
 
-$app->getFiles()
-----------------
+$app->getFile()
+---------------
 
 *Getting a filesystem manager service [TODO].*
 

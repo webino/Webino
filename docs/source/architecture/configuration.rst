@@ -141,7 +141,7 @@ With services configuration we can register invokables and factories to the appl
     use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Service;
 
-    return new Config([
+    new Config([
 
         // registering an invokable
         new Service(MyInvokableService::class),
@@ -168,7 +168,7 @@ We can configure an application listeners bindings.
     use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Listener;
 
-    return new Config([
+    new Config([
 
         // registering an invokable listener
         new Listener(MyInvokableListener::class),
@@ -193,11 +193,11 @@ registered into the core section of the configuration.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\CoreListener;
     use WebinoAppLib\Feature\CoreService;
 
-    return new Config([
+    new CoreConfig([
 
         // registering a core service
         new CoreService(MyInvokableService::class),

@@ -5,7 +5,7 @@ namespace WebinoAppLib\Log;
 /**
  * Class AttachAggregateListener
  */
-class AttachAggregateListener implements MessageInterface
+class AttachAggregateListener extends AbstractInfoMessage
 {
     /**
      * {@inheritdoc}

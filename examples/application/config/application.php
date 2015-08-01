@@ -8,13 +8,31 @@ use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Feature as AppFeature;
 use WebinoConfigLib\Feature as ConfigFeature;
 
+class MyCoreListener extends \WebinoEventLib\AbstractListener
+{
+    /**
+     * Initialize listener
+     */
+    public function init()
+    {
+        $this->listen(\WebinoAppLib\Event\AppEvent::BOOTSTRAP, 'onBootstrap');
+    }
+
+    public function onBootstrap()
+    {
+//        die('HELLO');
+    }
+}
+
 return new CoreConfig([
     new ConfigFeature\Log,
     new ConfigFeature\FirePhpLog,
-    new ConfigFeature\ConfigCacheEnabled,
+    //new ConfigFeature\ConfigCacheEnabled,
     new AppFeature\FilesystemCache,
 
     ['responseText' => 'Random: ' . rand(9, 9999)],
+
+    new AppFeature\CoreListener(MyCoreListener::class),
 ]);
 
 //return new Config([

@@ -37,6 +37,7 @@ class EventManager extends BaseEventManager
         $params = array_values((array) $event->getParams());
 
         foreach ($listeners as $key => $listener) {
+            /** @var \Zend\Stdlib\CallbackHandler $listener */
             $listenerCallback = $listener->getCallback();
 
             // (added argument unpacking)

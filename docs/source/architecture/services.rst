@@ -17,13 +17,6 @@ is to use only invokables and factories. Using a magic to resolve services depen
 isn't implemented, because with large projects it becomes messy and slow.
 
 
-Core services
--------------
-
-Core services are available even before application bootstrap, but the configuration is not fully initialized
-and write enabled. They are registered into the core section of the application configuration.
-
-
 Invokables
 ----------
 
@@ -45,6 +38,7 @@ but for a sake we call them all invokables, if they doesn't have a constructor d
         }
     }
 
+
 Adding and accessing an invokable service via application.
 
 .. code-block:: php
@@ -60,16 +54,12 @@ Registering an invokable service via application config.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature\InvokableService;
+    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\Service;
 
-    return new CoreConfig([
+    new Config([
 
         new Service(MyInvokableService::class), // <--
-
-        // or
-
-        new CoreService(MyInvokableService::class), // <--
 
     ]);
 
@@ -91,6 +81,7 @@ In case when we want to create a complex service with dependencies, it is requir
         }
     }
 
+
 Adding and accessing a service created by factory via application.
 
 .. code-block:: php
@@ -106,15 +97,34 @@ Registering a service created by factory via application config.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature\ServiceFactory;
+    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\Service;
 
-    return new CoreConfig([
+    new Config([
 
         new Service(MyService::class, MyServiceFactory::class), // <--
 
-        // or
+    ]);
 
+
+Core services
+-------------
+
+Core services are available even before an application bootstrap, but the configuration is not fully initialized
+and write enabled. They are registered into the core section of the application configuration.
+
+.. code-block:: php
+
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\CoreService;
+
+    new CoreConfig([
+
+        // invokable
+        new CoreService(MyInvokableService::class), // <--
+
+        // factory
         new CoreService(MyService::class, MyServiceFactory::class), // <--
 
     ]);
+

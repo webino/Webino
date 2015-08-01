@@ -13,7 +13,7 @@ class Listener extends AbstractFeature
      * Configure an application listener
      *
      * @param string|array $listener Listener class name or an array like [ListenerAlias => ListenerClass]
-      * @param string $factoryClass Listener factory class name
+     * @param string $factoryClass Listener factory class name
      */
     public function __construct($listener, $factoryClass = null)
     {

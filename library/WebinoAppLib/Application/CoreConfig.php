@@ -33,8 +33,6 @@ class CoreConfig extends Feature\Config implements
                     $this::SERVICES_FACTORIES => [
                         Application::SERVICE   => ApplicationFactory::class,
                         Application::EVENTS    => EventsFactory::class,
-                        Application::REQUEST   => RequestFactory::class,
-                        Application::RESPONSE  => ResponseFactory::class,
                         Application::BOOTSTRAP => BootstrapFactory::class,
                         Application::LOGGER    => LoggerFactory::class,
                     ],
