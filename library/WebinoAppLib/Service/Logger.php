@@ -28,7 +28,7 @@ class Logger implements LoggerInterface
     /**
      * {@inheritdoc}
      */
-    public function log($level, ...$args)
+    public function log($level = null, ...$args)
     {
         if (null === $level) {
             return $this->engine;

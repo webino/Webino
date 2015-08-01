@@ -16,5 +16,5 @@ interface LoggerInterface extends SeverityInterface
      * @param mixed ...$args Message parameters, if $level is a string the first argument is a message text.
      * @return LoggerInterface
      */
-    public function log($level, ...$args);
+    public function log($level = null, ...$args);
 }
