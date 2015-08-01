@@ -38,11 +38,17 @@ $app->bind()
     // attaching an invokable class
     $app->bind(AppEvent::DISPATCH, MyListener::class);
 
+    // attaching an invokable object
+    $app->bind(AppEvent::DISPATCH, new MyListener);
+
     // specifying a priority
     $app->bind(AppEvent::DISPATCH, $handler, AppEvent::BEGIN);
 
-    // attaching a listener aggregate
+    // attaching a listener aggregate class
     $app->bind(MyListenerAggregate::class);
+
+    // attaching a listener aggregate object
+    $app->bind(new MyListenerAggregate);
 
 
 $app->unbind()
@@ -73,7 +79,7 @@ $app->emit()
     $app->emit('myEvent');
 
     // event with custom arguments
-    $app->emit('myEvent', [$argOne, $argTwo);
+    $app->emit('myEvent', [$argOne, $argTwo]);
 
     // creating an event callback
     $callback = function ($result)
@@ -107,7 +113,10 @@ AppEvent::CONFIGURE
 *Configuring an application, merging modules configurations.*
 
 This event is emitted in the middle of the two pass bootstrap event, allowing
-you to merge an application configuration. Only core listeners can bind to this event.
+you to merge an application configuration.
+
+.. note::
+    Only core listeners can bind to this event.
 
 .. code-block:: php
 

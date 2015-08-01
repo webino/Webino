@@ -54,9 +54,6 @@ $app->getCoreConfig()
 Config Features
 ---------------
 
-.. todo::
-    Write a list of application config features.
-
 .. contents::
     :depth: 1
     :local:
@@ -67,104 +64,126 @@ Config features are registered into the config like this:
 
     use WebinoAppLib\Feature\Config;
 
-    return new Config([
+    new Config([
 
         new SomeConfigFeature, // <--
 
     ]);
 
 
-WebinoAppLib\\Feature\\Listener
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Listener
+^^^^^^^^
+
+- namespace: **WebinoAppLib\\Feature**
 
 Application listener config feature.
 
 .. code-block:: php
 
     use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\Listener;
 
-    return new Config([
+    new Config([
 
-        // TODO, // <--
+        new Listener(MyExampleListener::class), // <--
 
     ]);
 
 
-WebinoAppLib\\Feature\\CoreListener
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CoreListener
+^^^^^^^^^^^^
+
+- namespace: **WebinoAppLib\\Feature**
 
 Application core listener config feature.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\CoreListener;
 
-    return new Config([
+    new CoreConfig([
 
-        // TODO, // <--
+        new CoreListener(MyExampleCoreListener::class), // <--
 
     ]);
 
 
-WebinoAppLib\\Feature\\Service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Service
+^^^^^^^
+
+- namespace: **WebinoAppLib\\Feature**
 
 Application service config feature.
 
 .. code-block:: php
 
     use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\Service;
 
-    return new Config([
+    new Config([
 
-        // TODO, // <--
+        new Service(MyExampleService::class), // <--
 
     ]);
 
 
-WebinoAppLib\\Feature\\CoreService
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CoreService
+^^^^^^^^^^^
+
+- namespace: **WebinoAppLib\\Feature**
 
 Application core service config feature.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\CoreService;
 
-    return new Config([
+    new CoreConfig([
 
-        // TODO, // <--
-
-    ]);
-
-
-WebinoAppLib\\Feature\\FilesystemCache
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Application filesystem cache config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Feature\Config;
-
-    return new Config([
-
-        // TODO, // <--
+        new CoreService(MyExampleCoreService::class), // <--
 
     ]);
 
-WebinoAppLib\\Feature\\MemoryCache
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Application memory cache config feature.
+.. include:: /api/config/cache.rst.inc
+
+
+Log
+^^^
+
+- namespace: **WebinoAppLib\\Feature**
+
+Logging config feature.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\Log;
 
-    return new Config([
+    new CoreConfig([
 
-        // TODO, // <--
+        new Log, // <--
+
+    ]);
+
+FirePhpLog
+^^^^^^^^^^
+
+- namespace: **WebinoAppLib\\Feature**
+
+FirePHP logging config feature.
+
+.. code-block:: php
+
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature as AppFeature;
+
+    new CoreConfig([
+
+        new AppFeature\Log,
+        new AppFeature\FirePhpLog, // <--
 
     ]);
 

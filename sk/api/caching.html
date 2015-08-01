@@ -91,9 +91,63 @@
 </div>
 <div class="section" id="cache-config">
 <h2><a class="toc-backref" href="#id4">Cache Config</a><a class="headerlink" href="#cache-config" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">Write cache config features list (different types of cache storage).</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#configcacheenabled" id="id7">ConfigCacheEnabled</a></li>
+<li><a class="reference internal" href="#filesystemcache" id="id8">FilesystemCache</a></li>
+<li><a class="reference internal" href="#memorycache" id="id9">MemoryCache</a></li>
+</ul>
+</div>
+<div class="section" id="configcacheenabled">
+<h3><a class="toc-backref" href="#id7">ConfigCacheEnabled</a><a class="headerlink" href="#configcacheenabled" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<ul class="simple">
+<li>namespace: <strong>WebinoConfigLib\Feature</strong></li>
+</ul>
+<p>Application config cache enabled config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filesystemcache">
+<h3><a class="toc-backref" href="#id8">FilesystemCache</a><a class="headerlink" href="#filesystemcache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<ul class="simple">
+<li>namespace: <strong>WebinoAppLib\Feature</strong></li>
+</ul>
+<p>Application filesystem cache config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\FilesystemCache</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="memorycache">
+<h3><a class="toc-backref" href="#id9">MemoryCache</a><a class="headerlink" href="#memorycache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<ul class="simple">
+<li>namespace: <strong>WebinoAppLib\Feature</strong></li>
+</ul>
+<p>Application memory cache config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryCache</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">MemoryCache</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

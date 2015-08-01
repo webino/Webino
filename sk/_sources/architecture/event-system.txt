@@ -67,10 +67,10 @@ Invokable Listener
     }
 
     // lazy loading
-    $app->bind('someEvent', MyInvokableListenner::class);
+    $app->bind('someEvent', MyInvokableListener::class);
 
     // as an object
-    $app->bind('someEvent', new MyInvokableListenner);
+    $app->bind('someEvent', new MyInvokableListener);
 
 
 Listener Aggregate
@@ -116,7 +116,45 @@ Listener Aggregate
     $app->bind('someEvent', new MyListenerAggregate);
 
 
+Registering a listener aggregate via application config.
+
+.. code-block:: php
+
+    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\Listener;
+
+    new Config([
+
+        // invokable
+        new Listener(MyListenerAggregate::class), // <--
+
+        // factory
+        new Listener(MyListenerAggregate::class, MyListenerAggregateFactory::class), // <--
+
+    ]);
+
 Core Listeners
 --------------
 
-TODO...
+Core listeners can even listen to the application bootstrap first pass and configure events. They are registered into
+the core section of the application configuration and they can modify an application configuration.
+
+.. note::
+    Only core services are available to core listeners before an application is fully bootstrapped.
+
+Registering a core listener aggregate via application config.
+
+.. code-block:: php
+
+    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\CoreListener;
+
+    new Config([
+
+        // invokable
+        new CoreListener(MyListenerAggregate::class), // <--
+
+        // factory
+        new CoreListener(MyListenerAggregate::class, MyListenerAggregateFactory::class), // <--
+
+    ]);
