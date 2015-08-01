@@ -61,16 +61,23 @@
 <h1>Application Events API<a class="headerlink" href="#application-events-api" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#event-emitter-methods" id="id1">Event Emitter Methods</a></li>
-<li><a class="reference internal" href="#application-core-events" id="id2">Application Core Events</a></li>
-<li><a class="reference internal" href="#event-listener-priority" id="id3">Event Listener Priority</a></li>
+<li><a class="reference internal" href="#event-emitter-methods" id="id4">Event Emitter Methods</a></li>
+<li><a class="reference internal" href="#application-core-events" id="id5">Application Core Events</a></li>
+<li><a class="reference internal" href="#event-listener-priority" id="id6">Event Listener Priority</a></li>
 </ul>
 </div>
 <div class="section" id="event-emitter-methods">
-<h2><a class="toc-backref" href="#id1">Event Emitter Methods</a><a class="headerlink" href="#event-emitter-methods" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Event Emitter Methods</a><a class="headerlink" href="#event-emitter-methods" title="Permalink to this headline">¶</a></h2>
 <p>Application can emit events and bind listeners to them.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#app-bind" id="id7">$app-&gt;bind()</a></li>
+<li><a class="reference internal" href="#app-unbind" id="id8">$app-&gt;unbind()</a></li>
+<li><a class="reference internal" href="#app-emit" id="id9">$app-&gt;emit()</a></li>
+</ul>
+</div>
 <div class="section" id="app-bind">
-<h3>$app-&gt;bind()<a class="headerlink" href="#app-bind" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">$app-&gt;bind()</a><a class="headerlink" href="#app-bind" title="Permalink to this headline">¶</a></h3>
 <p><em>Binding a listener to an event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// creating a closure listener</span>
 <span class="nv">$handler</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">AppEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
@@ -95,7 +102,7 @@
 </div>
 </div>
 <div class="section" id="app-unbind">
-<h3>$app-&gt;unbind()<a class="headerlink" href="#app-unbind" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">$app-&gt;unbind()</a><a class="headerlink" href="#app-unbind" title="Permalink to this headline">¶</a></h3>
 <p><em>Unbinding a listener from an event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// for all events and priorities</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">unbind</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
@@ -109,7 +116,7 @@
 </div>
 </div>
 <div class="section" id="app-emit">
-<h3>$app-&gt;emit()<a class="headerlink" href="#app-emit" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id9">$app-&gt;emit()</a><a class="headerlink" href="#app-emit" title="Permalink to this headline">¶</a></h3>
 <p><em>Emitting an event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// just emit an event</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">);</span>
@@ -136,10 +143,17 @@
 </div>
 </div>
 <div class="section" id="application-core-events">
-<h2><a class="toc-backref" href="#id2">Application Core Events</a><a class="headerlink" href="#application-core-events" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Application Core Events</a><a class="headerlink" href="#application-core-events" title="Permalink to this headline">¶</a></h2>
 <p>Following events are emitted during an application core lifecycle.</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#appevent-configure" id="id10">AppEvent::CONFIGURE</a></li>
+<li><a class="reference internal" href="#appevent-bootstrap" id="id11">AppEvent::BOOTSTRAP</a></li>
+<li><a class="reference internal" href="#appevent-dispatch" id="id12">AppEvent::DISPATCH</a></li>
+</ul>
+</div>
 <div class="section" id="appevent-configure">
-<h3>AppEvent::CONFIGURE<a class="headerlink" href="#appevent-configure" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">AppEvent::CONFIGURE</a><a class="headerlink" href="#appevent-configure" title="Permalink to this headline">¶</a></h3>
 <p><em>Configuring an application, merging modules configurations.</em></p>
 <p>This event is emitted in the middle of the two pass bootstrap event, allowing
 you to merge an application configuration. Only core listeners can bind to this event.</p>
@@ -148,7 +162,7 @@ you to merge an application configuration. Only core listeners can bind to this 
 </div>
 </div>
 <div class="section" id="appevent-bootstrap">
-<h3>AppEvent::BOOTSTRAP<a class="headerlink" href="#appevent-bootstrap" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">AppEvent::BOOTSTRAP</a><a class="headerlink" href="#appevent-bootstrap" title="Permalink to this headline">¶</a></h3>
 <p><em>Initializing an application, all the services will be ready.</em></p>
 <p>After this two pass event all the services should be ready. The core listeners
 binds to the first pass and a remaining can listen to the second pass bootstrap event.</p>
@@ -157,7 +171,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 </div>
 <div class="section" id="appevent-dispatch">
-<h3>AppEvent::DISPATCH<a class="headerlink" href="#appevent-dispatch" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">AppEvent::DISPATCH</a><a class="headerlink" href="#appevent-dispatch" title="Permalink to this headline">¶</a></h3>
 <p><em>Handling the client request and sending a response.</em></p>
 <p>This event is triggered to handle a server client request. It does nothing,
 because it is dedicated to extension.</p>
@@ -167,41 +181,50 @@ because it is dedicated to extension.</p>
 </div>
 </div>
 <div class="section" id="event-listener-priority">
-<span id="api-events-priority"></span><h2><a class="toc-backref" href="#id3">Event Listener Priority</a><a class="headerlink" href="#event-listener-priority" title="Permalink to this headline">¶</a></h2>
+<span id="api-events-priority"></span><h2><a class="toc-backref" href="#id6">Event Listener Priority</a><a class="headerlink" href="#event-listener-priority" title="Permalink to this headline">¶</a></h2>
 <p>When attaching a listener to an event the priority integer could be specified. Positive number
 is a higher priority than a negative one. If you do not provide any priority to a listener, it will be invoked
 as soon after the main action triggers.</p>
 <p>To standardize that, an event provides some constants of priorities using the <code class="docutils literal"><span class="pre">WebinoEventLib\Event</span></code>.</p>
+<div class="contents local topic" id="id3">
+<ul class="simple">
+<li><a class="reference internal" href="#event-begin" id="id13">Event::BEGIN</a></li>
+<li><a class="reference internal" href="#event-before" id="id14">Event::BEFORE</a></li>
+<li><a class="reference internal" href="#event-after" id="id15">Event::AFTER</a></li>
+<li><a class="reference internal" href="#event-finish" id="id16">Event::FINISH</a></li>
+<li><a class="reference internal" href="#fine-tuning-the-priority" id="id17">Fine-tuning the priority</a></li>
+</ul>
+</div>
 <div class="section" id="event-begin">
-<h3>Event::BEGIN<a class="headerlink" href="#event-begin" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">Event::BEGIN</a><a class="headerlink" href="#event-begin" title="Permalink to this headline">¶</a></h3>
 <p><em>Handled at the beginning of an event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEGIN</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="event-before">
-<h3>Event::BEFORE<a class="headerlink" href="#event-before" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">Event::BEFORE</a><a class="headerlink" href="#event-before" title="Permalink to this headline">¶</a></h3>
 <p><em>Handled before main event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEFORE</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="event-after">
-<h3>Event::AFTER<a class="headerlink" href="#event-after" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id15">Event::AFTER</a><a class="headerlink" href="#event-after" title="Permalink to this headline">¶</a></h3>
 <p><em>Handled after main event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">AFTER</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="event-finish">
-<h3>Event::FINISH<a class="headerlink" href="#event-finish" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id16">Event::FINISH</a><a class="headerlink" href="#event-finish" title="Permalink to this headline">¶</a></h3>
 <p><em>Handled at the end of an event.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">FINISH</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="fine-tuning-the-priority">
-<h3>Fine-tuning the priority<a class="headerlink" href="#fine-tuning-the-priority" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">Fine-tuning the priority</a><a class="headerlink" href="#fine-tuning-the-priority" title="Permalink to this headline">¶</a></h3>
 <p>You can always fine-tune your listener priority by adding <em>(earlier)</em> or substracting <em>(later)</em> an integer.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// earlier</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEGIN</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
@@ -241,13 +264,16 @@ as soon after the main action triggers.</p>
             <a href="../architecture/core.html">Application Core</a>
         </li>
         <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
             <a href="../architecture/services.html">Services</a>
         </li>
         <li>
             <a href="../architecture/event-system.html">Event System</a>
         </li>
         <li>
-            <a href="../architecture/configuration.html">Configuration</a>
+            <a href="../architecture/modules.html">Modules</a>
         </li>
     </ul>
     <h2>API</h2>

@@ -6,6 +6,11 @@ Application Services API
 The application object behaves as a service container, that means we can register and retrieve services
 directly from it.
 
+.. contents::
+    :depth: 1
+    :local:
+
+
 $app->get()
 -----------
 

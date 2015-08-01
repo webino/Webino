@@ -14,7 +14,8 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 Application Logger Service
 --------------------------
 
-The best practice is to log a messaage via class.
+The best practice is to log a message via class.
+
 
 $app->log()
 ^^^^^^^^^^^
@@ -48,7 +49,7 @@ $app->log()
 
 
 Available Log Message Classes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 Use following log message classes in the ``WebinoAppLib\Log`` namespace to extend your custom
 message classes.
@@ -101,40 +102,52 @@ on which we can call standard logging methods.
 
 Available methods:
 
+.. contents::
+    :depth: 1
+    :local:
+
+
 $app->log()->emergency()
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Emergency, the system is unusable.*
+
 
 $app->log()->alert()
 ^^^^^^^^^^^^^^^^^^^^
 
 *Alert, immediate action is required.*
 
+
 $app->log()->critical()
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 *Critical, critical conditions.*
+
 
 $app->log()->error()
 ^^^^^^^^^^^^^^^^^^^^
 
 *Error, errors that do not require immediate attention but should be monitored.*
 
+
 $app->log()->warning()
 ^^^^^^^^^^^^^^^^^^^^^^
 
 *Warning, unusual or undesirable occurrences that are not errors.*
+
 
 $app->log()->notice()
 ^^^^^^^^^^^^^^^^^^^^^
 
 *Notice, normal but significant events.*
 
+
 $app->log()->info()
 ^^^^^^^^^^^^^^^^^^^
 
 *Info, interesting events.*
+
 
 $app->log()->debug()
 ^^^^^^^^^^^^^^^^^^^^

@@ -61,15 +61,16 @@
 <h1>Application Logging API<a class="headerlink" href="#application-logging-api" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#application-logger-service" id="id1">Application Logger Service</a></li>
-<li><a class="reference internal" href="#psr-3-logger-interface" id="id2">PSR-3-Logger Interface</a></li>
+<li><a class="reference internal" href="#application-logger-service" id="id2">Application Logger Service</a></li>
+<li><a class="reference internal" href="#available-log-message-classes" id="id3">Available Log Message Classes</a></li>
+<li><a class="reference internal" href="#psr-3-logger-interface" id="id4">PSR-3-Logger Interface</a></li>
 </ul>
 </div>
 <p>Logs are important for monitoring the security of your application and to track events if problems occur,
 as well as for auditing the correct usage of the system. The PSR-Logger interface standard is supported.</p>
 <div class="section" id="application-logger-service">
-<h2><a class="toc-backref" href="#id1">Application Logger Service</a><a class="headerlink" href="#application-logger-service" title="Permalink to this headline">¶</a></h2>
-<p>The best practice is to log a messaage via class.</p>
+<h2><a class="toc-backref" href="#id2">Application Logger Service</a><a class="headerlink" href="#application-logger-service" title="Permalink to this headline">¶</a></h2>
+<p>The best practice is to log a message via class.</p>
 <div class="section" id="app-log">
 <h3>$app-&gt;log()<a class="headerlink" href="#app-log" title="Permalink to this headline">¶</a></h3>
 <p><em>Writing a message to a log.</em></p>
@@ -98,8 +99,9 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="available-log-message-classes">
-<h3>Available Log Message Classes<a class="headerlink" href="#available-log-message-classes" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id3">Available Log Message Classes</a><a class="headerlink" href="#available-log-message-classes" title="Permalink to this headline">¶</a></h2>
 <p>Use following log message classes in the <code class="docutils literal"><span class="pre">WebinoAppLib\Log</span></code> namespace to extend your custom
 message classes.</p>
 <dl class="docutils">
@@ -121,9 +123,8 @@ message classes.</p>
 <dd><em>Debug, detailed information for debugging purposes.</em></dd>
 </dl>
 </div>
-</div>
 <div class="section" id="psr-3-logger-interface">
-<h2><a class="toc-backref" href="#id2">PSR-3-Logger Interface</a><a class="headerlink" href="#psr-3-logger-interface" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">PSR-3-Logger Interface</a><a class="headerlink" href="#psr-3-logger-interface" title="Permalink to this headline">¶</a></h2>
 <p>Calling the <code class="docutils literal"><span class="pre">$app-&gt;log()</span></code> method without arguments returns the standard PSR-3 logger object,
 on which we can call standard logging methods.</p>
 <p><strong>Example:</strong></p>
@@ -139,36 +140,48 @@ on which we can call standard logging methods.</p>
 </div>
 <p><div class="vspace"></div></p>
 <p>Available methods:</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#app-log-emergency" id="id5">$app-&gt;log()-&gt;emergency()</a></li>
+<li><a class="reference internal" href="#app-log-alert" id="id6">$app-&gt;log()-&gt;alert()</a></li>
+<li><a class="reference internal" href="#app-log-critical" id="id7">$app-&gt;log()-&gt;critical()</a></li>
+<li><a class="reference internal" href="#app-log-error" id="id8">$app-&gt;log()-&gt;error()</a></li>
+<li><a class="reference internal" href="#app-log-warning" id="id9">$app-&gt;log()-&gt;warning()</a></li>
+<li><a class="reference internal" href="#app-log-notice" id="id10">$app-&gt;log()-&gt;notice()</a></li>
+<li><a class="reference internal" href="#app-log-info" id="id11">$app-&gt;log()-&gt;info()</a></li>
+<li><a class="reference internal" href="#app-log-debug" id="id12">$app-&gt;log()-&gt;debug()</a></li>
+</ul>
+</div>
 <div class="section" id="app-log-emergency">
-<h3>$app-&gt;log()-&gt;emergency()<a class="headerlink" href="#app-log-emergency" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">$app-&gt;log()-&gt;emergency()</a><a class="headerlink" href="#app-log-emergency" title="Permalink to this headline">¶</a></h3>
 <p><em>Emergency, the system is unusable.</em></p>
 </div>
 <div class="section" id="app-log-alert">
-<h3>$app-&gt;log()-&gt;alert()<a class="headerlink" href="#app-log-alert" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">$app-&gt;log()-&gt;alert()</a><a class="headerlink" href="#app-log-alert" title="Permalink to this headline">¶</a></h3>
 <p><em>Alert, immediate action is required.</em></p>
 </div>
 <div class="section" id="app-log-critical">
-<h3>$app-&gt;log()-&gt;critical()<a class="headerlink" href="#app-log-critical" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">$app-&gt;log()-&gt;critical()</a><a class="headerlink" href="#app-log-critical" title="Permalink to this headline">¶</a></h3>
 <p><em>Critical, critical conditions.</em></p>
 </div>
 <div class="section" id="app-log-error">
-<h3>$app-&gt;log()-&gt;error()<a class="headerlink" href="#app-log-error" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">$app-&gt;log()-&gt;error()</a><a class="headerlink" href="#app-log-error" title="Permalink to this headline">¶</a></h3>
 <p><em>Error, errors that do not require immediate attention but should be monitored.</em></p>
 </div>
 <div class="section" id="app-log-warning">
-<h3>$app-&gt;log()-&gt;warning()<a class="headerlink" href="#app-log-warning" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id9">$app-&gt;log()-&gt;warning()</a><a class="headerlink" href="#app-log-warning" title="Permalink to this headline">¶</a></h3>
 <p><em>Warning, unusual or undesirable occurrences that are not errors.</em></p>
 </div>
 <div class="section" id="app-log-notice">
-<h3>$app-&gt;log()-&gt;notice()<a class="headerlink" href="#app-log-notice" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">$app-&gt;log()-&gt;notice()</a><a class="headerlink" href="#app-log-notice" title="Permalink to this headline">¶</a></h3>
 <p><em>Notice, normal but significant events.</em></p>
 </div>
 <div class="section" id="app-log-info">
-<h3>$app-&gt;log()-&gt;info()<a class="headerlink" href="#app-log-info" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">$app-&gt;log()-&gt;info()</a><a class="headerlink" href="#app-log-info" title="Permalink to this headline">¶</a></h3>
 <p><em>Info, interesting events.</em></p>
 </div>
 <div class="section" id="app-log-debug">
-<h3>$app-&gt;log()-&gt;debug()<a class="headerlink" href="#app-log-debug" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">$app-&gt;log()-&gt;debug()</a><a class="headerlink" href="#app-log-debug" title="Permalink to this headline">¶</a></h3>
 <p><em>Debug, detailed information for debugging purposes.</em></p>
 </div>
 </div>
@@ -201,13 +214,16 @@ on which we can call standard logging methods.</p>
             <a href="../architecture/core.html">Application Core</a>
         </li>
         <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
             <a href="../architecture/services.html">Services</a>
         </li>
         <li>
             <a href="../architecture/event-system.html">Event System</a>
         </li>
         <li>
-            <a href="../architecture/configuration.html">Configuration</a>
+            <a href="../architecture/modules.html">Modules</a>
         </li>
     </ul>
     <h2>API</h2>

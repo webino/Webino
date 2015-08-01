@@ -31,6 +31,11 @@ Event Listeners
 The event listener is a callable peiece of code that can perform actions when event is emitted.
 It is allowed to register an event listeners in some different ways.
 
+.. contents::
+    :depth: 1
+    :local:
+
+
 Closure Listener
 ^^^^^^^^^^^^^^^^
 
@@ -109,3 +114,9 @@ Listener Aggregate
 
     // as an object
     $app->bind('someEvent', new MyListenerAggregate);
+
+
+Core Listeners
+--------------
+
+TODO...

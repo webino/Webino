@@ -62,15 +62,22 @@
 <h1>Application Config API<a class="headerlink" href="#application-config-api" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#config-methods" id="id1">Config Methods</a></li>
-<li><a class="reference internal" href="#config-features" id="id2">Config Features</a></li>
+<li><a class="reference internal" href="#config-methods" id="id3">Config Methods</a></li>
+<li><a class="reference internal" href="#config-features" id="id4">Config Features</a></li>
 </ul>
 </div>
+<p>Use application config API to set and get the application configuration.</p>
 <div class="section" id="config-methods">
-<h2><a class="toc-backref" href="#id1">Config Methods</a><a class="headerlink" href="#config-methods" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>After application bootstrap the configuration is read only.</p>
+<h2><a class="toc-backref" href="#id3">Config Methods</a><a class="headerlink" href="#config-methods" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The configuration is read only after application bootstrap.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#app-getconfig" id="id5">$app-&gt;getConfig()</a></li>
+<li><a class="reference internal" href="#app-getcoreconfig" id="id6">$app-&gt;getCoreConfig()</a></li>
+</ul>
+</div>
 <div class="section" id="app-getconfig">
-<h3>$app-&gt;getConfig()<a class="headerlink" href="#app-getconfig" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">$app-&gt;getConfig()</a><a class="headerlink" href="#app-getconfig" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p>It is possible to set configuration values before an application bootstrap.</p>
 <p><em>Setting a configuration value.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">myConfigKey</span> <span class="o">=</span> <span class="s1">&#39;myConfigValue&#39;</span><span class="p">;</span>
@@ -83,7 +90,7 @@
 </div>
 </div>
 <div class="section" id="app-getcoreconfig">
-<h3>$app-&gt;getCoreConfig()<a class="headerlink" href="#app-getcoreconfig" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">$app-&gt;getCoreConfig()</a><a class="headerlink" href="#app-getcoreconfig" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Getting a core configuration value.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Config\Config|mixed $myCoreConfig */</span>
 <span class="nv">$myCoreConfig</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCoreConfig</span><span class="p">(</span><span class="s1">&#39;myCoreConfigKey&#39;</span><span class="p">,</span> <span class="nv">$default</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
@@ -92,10 +99,108 @@
 </div>
 </div>
 <div class="section" id="config-features">
-<h2><a class="toc-backref" href="#id2">Config Features</a><a class="headerlink" href="#config-features" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Config Features</a><a class="headerlink" href="#config-features" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
 <p class="last">Write a list of application config features.</p>
+</div>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#webinoapplib-feature-listener" id="id7">WebinoAppLib\Feature\Listener</a></li>
+<li><a class="reference internal" href="#webinoapplib-feature-corelistener" id="id8">WebinoAppLib\Feature\CoreListener</a></li>
+<li><a class="reference internal" href="#webinoapplib-feature-service" id="id9">WebinoAppLib\Feature\Service</a></li>
+<li><a class="reference internal" href="#webinoapplib-feature-coreservice" id="id10">WebinoAppLib\Feature\CoreService</a></li>
+<li><a class="reference internal" href="#webinoapplib-feature-filesystemcache" id="id11">WebinoAppLib\Feature\FilesystemCache</a></li>
+<li><a class="reference internal" href="#webinoapplib-feature-memorycache" id="id12">WebinoAppLib\Feature\MemoryCache</a></li>
+</ul>
+</div>
+<p>Config features are registered into the config like this:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">SomeConfigFeature</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="section" id="webinoapplib-feature-listener">
+<h3><a class="toc-backref" href="#id7">WebinoAppLib\Feature\Listener</a><a class="headerlink" href="#webinoapplib-feature-listener" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Application listener config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// TODO, // &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="webinoapplib-feature-corelistener">
+<h3><a class="toc-backref" href="#id8">WebinoAppLib\Feature\CoreListener</a><a class="headerlink" href="#webinoapplib-feature-corelistener" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Application core listener config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// TODO, // &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="webinoapplib-feature-service">
+<h3><a class="toc-backref" href="#id9">WebinoAppLib\Feature\Service</a><a class="headerlink" href="#webinoapplib-feature-service" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Application service config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// TODO, // &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="webinoapplib-feature-coreservice">
+<h3><a class="toc-backref" href="#id10">WebinoAppLib\Feature\CoreService</a><a class="headerlink" href="#webinoapplib-feature-coreservice" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Application core service config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// TODO, // &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="webinoapplib-feature-filesystemcache">
+<h3><a class="toc-backref" href="#id11">WebinoAppLib\Feature\FilesystemCache</a><a class="headerlink" href="#webinoapplib-feature-filesystemcache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Application filesystem cache config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// TODO, // &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="webinoapplib-feature-memorycache">
+<h3><a class="toc-backref" href="#id12">WebinoAppLib\Feature\MemoryCache</a><a class="headerlink" href="#webinoapplib-feature-memorycache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Application memory cache config feature.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// TODO, // &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -127,13 +232,16 @@
             <a href="../architecture/core.html">Application Core</a>
         </li>
         <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
             <a href="../architecture/services.html">Services</a>
         </li>
         <li>
             <a href="../architecture/event-system.html">Event System</a>
         </li>
         <li>
-            <a href="../architecture/configuration.html">Configuration</a>
+            <a href="../architecture/modules.html">Modules</a>
         </li>
     </ul>
     <h2>API</h2>

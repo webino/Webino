@@ -13,9 +13,9 @@
     basic-usage
 
     architecture/core
+    architecture/configuration
     architecture/services
     architecture/event-system
-    architecture/configuration
 
     api/core
     api/config

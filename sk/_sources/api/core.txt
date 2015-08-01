@@ -5,6 +5,10 @@ Application Core API
 
 Use application core API to access core services.
 
+.. contents::
+    :depth: 1
+    :local:
+
 $app->getServices()
 -------------------
 

@@ -12,6 +12,11 @@ Event Emitter Methods
 
 Application can emit events and bind listeners to them.
 
+.. contents::
+    :depth: 1
+    :local:
+
+
 $app->bind()
 ^^^^^^^^^^^^
 
@@ -91,6 +96,11 @@ Application Core Events
 
 Following events are emitted during an application core lifecycle.
 
+.. contents::
+    :depth: 1
+    :local:
+
+
 AppEvent::CONFIGURE
 ^^^^^^^^^^^^^^^^^^^
 
@@ -102,6 +112,7 @@ you to merge an application configuration. Only core listeners can bind to this 
 .. code-block:: php
 
     $app->bind(AppEvent::CONFIGURE, MyListener::class);
+
 
 AppEvent::BOOTSTRAP
 ^^^^^^^^^^^^^^^^^^^
@@ -139,6 +150,11 @@ is a higher priority than a negative one. If you do not provide any priority to 
 as soon after the main action triggers.
 
 To standardize that, an event provides some constants of priorities using the ``WebinoEventLib\Event``.
+
+.. contents::
+    :depth: 1
+    :local:
+
 
 Event::BEGIN
 ^^^^^^^^^^^^
@@ -178,6 +194,7 @@ Event::FINISH
 .. code-block:: php
 
     $app->bind($event, $listener, $event::FINISH);
+
 
 Fine-tuning the priority
 ^^^^^^^^^^^^^^^^^^^^^^^^

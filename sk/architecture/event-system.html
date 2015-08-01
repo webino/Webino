@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
-    <link rel="next" title="Application Configuration" href="configuration.html" />
+    <link rel="next" title="Application Core API" href="../api/core.html" />
     <link rel="prev" title="Application Services" href="services.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
@@ -41,7 +41,7 @@
           <a href="services.html" title="Previous document">Application Services</a>
         </li>
         <li>
-          <a href="configuration.html" title="Next document">Application Configuration</a>
+          <a href="../api/core.html" title="Next document">Application Core API</a>
           &rarr;
         </li>
     </ul>
@@ -62,14 +62,15 @@
 <h1>Application Event System<a class="headerlink" href="#application-event-system" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#event-lifecycle" id="id1">Event Lifecycle</a></li>
-<li><a class="reference internal" href="#event-listeners" id="id2">Event Listeners</a></li>
+<li><a class="reference internal" href="#event-lifecycle" id="id2">Event Lifecycle</a></li>
+<li><a class="reference internal" href="#event-listeners" id="id3">Event Listeners</a></li>
+<li><a class="reference internal" href="#core-listeners" id="id4">Core Listeners</a></li>
 </ul>
 </div>
 <p>The Webino™ architecture is event driven, thus extensible. We can attach listeners to events,
 performing other operations as they trigger.</p>
 <div class="section" id="event-lifecycle">
-<h2><a class="toc-backref" href="#id1">Event Lifecycle</a><a class="headerlink" href="#event-lifecycle" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Event Lifecycle</a><a class="headerlink" href="#event-lifecycle" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <p>The basic idea around events is that we just trigger an event and every action happens in listeners,
 even the main action. Then we can listen to that event using priorities, if we want to act like a middleware.
 The event propagation could be stopped at any time.</p>
@@ -79,11 +80,18 @@ is messy and not recommended, don&#8217;t do that. Give an event a unique name t
 Convenient way to do that is to use the event <a class="reference internal" href="../api/events.html#api-events-priority"><span>priority constants</span></a>.</p>
 </div>
 <div class="section" id="event-listeners">
-<h2><a class="toc-backref" href="#id2">Event Listeners</a><a class="headerlink" href="#event-listeners" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Event Listeners</a><a class="headerlink" href="#event-listeners" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <p>The event listener is a callable peiece of code that can perform actions when event is emitted.
 It is allowed to register an event listeners in some different ways.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#closure-listener" id="id5">Closure Listener</a></li>
+<li><a class="reference internal" href="#invokable-listener" id="id6">Invokable Listener</a></li>
+<li><a class="reference internal" href="#listener-aggregate" id="id7">Listener Aggregate</a></li>
+</ul>
+</div>
 <div class="section" id="closure-listener">
-<h3>Closure Listener<a class="headerlink" href="#closure-listener" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">Closure Listener</a><a class="headerlink" href="#closure-listener" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>The closure listener is the fastest created listener, but not a best practice at all.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
@@ -94,7 +102,7 @@ It is allowed to register an event listeners in some different ways.</p>
 </div>
 </div>
 <div class="section" id="invokable-listener">
-<h3>Invokable Listener<a class="headerlink" href="#invokable-listener" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">Invokable Listener</a><a class="headerlink" href="#invokable-listener" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>The invokable listener is a class that its object can be called like a function</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
@@ -115,7 +123,7 @@ It is allowed to register an event listeners in some different ways.</p>
 </div>
 </div>
 <div class="section" id="listener-aggregate">
-<h3>Listener Aggregate<a class="headerlink" href="#listener-aggregate" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">Listener Aggregate</a><a class="headerlink" href="#listener-aggregate" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>The listener aggregate is a class that register other listeners in a batch.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoEventLib\Listener\AbstractListener</span><span class="p">;</span>
@@ -155,6 +163,10 @@ It is allowed to register an event listeners in some different ways.</p>
 </div>
 </div>
 </div>
+<div class="section" id="core-listeners">
+<h2><a class="toc-backref" href="#id4">Core Listeners</a><a class="headerlink" href="#core-listeners" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>TODO...</p>
+</div>
 </div>
 
 
@@ -184,13 +196,16 @@ It is allowed to register an event listeners in some different ways.</p>
             <a href="core.html">Application Core</a>
         </li>
         <li>
+            <a href="configuration.html">Configuration</a>
+        </li>
+        <li>
             <a href="services.html">Services</a>
         </li>
         <li>
             <a href="#">Event System</a>
         </li>
         <li>
-            <a href="configuration.html">Configuration</a>
+            <a href="modules.html">Modules</a>
         </li>
     </ul>
     <h2>API</h2>
@@ -287,7 +302,7 @@ It is allowed to register an event listeners in some different ways.</p>
           <a href="services.html" title="Previous document">Application Services</a>
         </li>
         <li>
-          <a href="configuration.html" title="Next document">Application Configuration</a>
+          <a href="../api/core.html" title="Next document">Application Core API</a>
           &rarr;
         </li>
     </ul>
