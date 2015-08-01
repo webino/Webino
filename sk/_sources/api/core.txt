@@ -67,8 +67,8 @@ $app->getCache()
 
 .. code-block:: php
 
-    /** @var \Zend\Cache\Storage\StorageInterface $logger */
-    $logger = $app->getCache();
+    /** @var \Zend\Cache\Storage\StorageInterface $cache */
+    $cache = $app->getCache();
 
 
 $app->getFiles()

@@ -63,6 +63,7 @@
 <ul class="simple">
 <li><a class="reference internal" href="#event-emitter-methods" id="id1">Event Emitter Methods</a></li>
 <li><a class="reference internal" href="#application-core-events" id="id2">Application Core Events</a></li>
+<li><a class="reference internal" href="#event-listener-priority" id="id3">Event Listener Priority</a></li>
 </ul>
 </div>
 <div class="section" id="event-emitter-methods">
@@ -126,7 +127,7 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>
 
 <span class="c1">// event with custom arguments and callback</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">]</span><span class="nx">g</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">],</span> <span class="nv">$callback</span><span class="p">);</span>
 
 <span class="c1">// custom event object</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="k">new</span> <span class="nx">MyEvent</span><span class="p">);</span>
@@ -159,8 +160,54 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 <h3>AppEvent::DISPATCH<a class="headerlink" href="#appevent-dispatch" title="Permalink to this headline">¶</a></h3>
 <p><em>Handling the client request and sending a response.</em></p>
 <p>This event is triggered to handle a server client request. It does nothing,
-because is dedicated to extension.</p>
+because it is dedicated to extension.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">AppEvent</span><span class="o">::</span><span class="na">DISPATCH</span><span class="p">,</span> <span class="nx">MyListener</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="event-listener-priority">
+<span id="api-events-priority"></span><h2><a class="toc-backref" href="#id3">Event Listener Priority</a><a class="headerlink" href="#event-listener-priority" title="Permalink to this headline">¶</a></h2>
+<p>When attaching a listener to an event the priority integer could be specified. Positive number
+is a higher priority than a negative one. If you do not provide any priority to a listener, it will be invoked
+as soon after the main action triggers.</p>
+<p>To standardize that, an event provides some constants of priorities using the <code class="docutils literal"><span class="pre">WebinoEventLib\Event</span></code>.</p>
+<div class="section" id="event-begin">
+<h3>Event::BEGIN<a class="headerlink" href="#event-begin" title="Permalink to this headline">¶</a></h3>
+<p><em>Handled at the beginning of an event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEGIN</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="event-before">
+<h3>Event::BEFORE<a class="headerlink" href="#event-before" title="Permalink to this headline">¶</a></h3>
+<p><em>Handled before main event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEFORE</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="event-after">
+<h3>Event::AFTER<a class="headerlink" href="#event-after" title="Permalink to this headline">¶</a></h3>
+<p><em>Handled after main event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">AFTER</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="event-finish">
+<h3>Event::FINISH<a class="headerlink" href="#event-finish" title="Permalink to this headline">¶</a></h3>
+<p><em>Handled at the end of an event.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">FINISH</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fine-tuning-the-priority">
+<h3>Fine-tuning the priority<a class="headerlink" href="#fine-tuning-the-priority" title="Permalink to this headline">¶</a></h3>
+<p>You can always fine-tune your listener priority by adding <em>(earlier)</em> or substracting <em>(later)</em> an integer.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// earlier</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEGIN</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+
+<span class="c1">// later</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="nv">$event</span><span class="o">::</span><span class="na">BEGIN</span> <span class="o">-</span> <span class="mi">100</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -207,6 +254,9 @@ because is dedicated to extension.</p>
     <ul>
         <li>
             <a href="core.html">Core</a>
+        </li>
+        <li>
+            <a href="config.html">Config</a>
         </li>
         <li>
             <a href="services.html">Services</a>

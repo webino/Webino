@@ -14,6 +14,20 @@ a documentation we don't know what to type, so configurators are introduced.
 .. image:: ../_static/media/WebinoConfigLib_h400.png
     :class: centered
 
+.. note::
+    Do not forget to enable the configuration cache, it will speed up your application.
+
+.. code-block:: php
+
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoConfigLib\Feature\ConfigCacheEnabled;
+
+    return new CoreConfig([
+
+        new ConfigCacheEnabled, // <--
+
+    ]);
+
 
 Configuration Features
 ----------------------

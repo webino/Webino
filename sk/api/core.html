@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
-    <link rel="next" title="Application Services API" href="services.html" />
+    <link rel="next" title="Application Config API" href="config.html" />
     <link rel="prev" title="Application Configuration" href="../architecture/configuration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
@@ -41,7 +41,7 @@
           <a href="../architecture/configuration.html" title="Previous document">Application Configuration</a>
         </li>
         <li>
-          <a href="services.html" title="Next document">Application Services API</a>
+          <a href="config.html" title="Next document">Application Config API</a>
           &rarr;
         </li>
     </ul>
@@ -104,8 +104,8 @@
 <div class="section" id="app-getcache">
 <h2>$app-&gt;getCache()<a class="headerlink" href="#app-getcache" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <p><em>Getting a cache service.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Cache\Storage\StorageInterface $logger */</span>
-<span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Cache\Storage\StorageInterface $cache */</span>
+<span class="nv">$cache</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -159,6 +159,9 @@
     <ul>
         <li>
             <a href="#">Core</a>
+        </li>
+        <li>
+            <a href="config.html">Config</a>
         </li>
         <li>
             <a href="services.html">Services</a>
@@ -246,7 +249,7 @@
           <a href="../architecture/configuration.html" title="Previous document">Application Configuration</a>
         </li>
         <li>
-          <a href="services.html" title="Next document">Application Services API</a>
+          <a href="config.html" title="Next document">Application Config API</a>
           &rarr;
         </li>
     </ul>

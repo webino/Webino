@@ -73,6 +73,20 @@ and almost everything will be configured in a lazy style, on demand.</p>
 <p>Configuration is basically a multidimensional array. Writing arrays in PHP is a little hell, because without
 a documentation we don&#8217;t know what to type, so configurators are introduced.</p>
 <img alt="../_images/WebinoConfigLib_h400.png" class="centered" src="../_images/WebinoConfigLib_h400.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not forget to enable the configuration cache, it will speed up your application.</p>
+</div>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
 <div class="section" id="configuration-features">
 <h2><a class="toc-backref" href="#id2">Configuration Features</a><a class="headerlink" href="#configuration-features" title="Permalink to this headline">¶</a></h2>
 <p>Configurators are used to generate an array configurations for large PHP applications. With them, you can generate
@@ -263,6 +277,9 @@ registered into the core section of the configuration.</p>
     <ul>
         <li>
             <a href="../api/core.html">Core</a>
+        </li>
+        <li>
+            <a href="../api/config.html">Config</a>
         </li>
         <li>
             <a href="../api/services.html">Services</a>

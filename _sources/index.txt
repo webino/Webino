@@ -18,6 +18,7 @@
     architecture/configuration
 
     api/core
+    api/config
     api/services
     api/events
     api/logging
