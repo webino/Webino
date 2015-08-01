@@ -2,9 +2,10 @@
 
 use Tester\Assert;
 use WebinoAppLib\Application\CoreConfig;
+use WebinoAppLib\Exception\UnknownServiceException;
 use WebinoAppLib\Factory;
-use WebinoAppLib\Feature\InvokableService;
-use WebinoAppLib\Feature\ServiceFactory;
+use WebinoAppLib\Feature\Service;
+use WebinoAppLib\Feature\CoreService;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -27,6 +28,27 @@ class MyServiceFactory extends Factory\AbstractFactory
     protected function create()
     {
         return new MyService(null);
+    }
+}
+
+class MyCoreInvokableService
+{
+
+}
+
+class MyCoreService
+{
+    public function __construct($someDependency)
+    {
+
+    }
+}
+
+class MyCoreServiceFactory extends Factory\AbstractFactory
+{
+    protected function create()
+    {
+        return new MyCoreService(null);
     }
 }
 
@@ -54,14 +76,21 @@ class MyRuntimeServiceFactory extends Factory\AbstractFactory
 
 $config = new CoreConfig([
 
-    new InvokableService(MyInvokableService::class),
+    new Service(MyInvokableService::class),
 
-    new ServiceFactory(MyService::class, MyServiceFactory::class),
+    new CoreService(MyCoreInvokableService::class),
+
+    new Service(MyService::class, MyServiceFactory::class),
+
+    new CoreService(MyCoreService::class, MyCoreServiceFactory::class),
 
 ]);
 
 
-$app = (new Factory)->create($config)->bootstrap();
+$appCore = (new Factory)->create($config);
+
+
+$app = $appCore;
 
 
 $app->set(MyRuntimeInvokableService::class);
@@ -69,10 +98,26 @@ $app->set(MyRuntimeInvokableService::class);
 $app->set(MyRuntimeService::class, MyRuntimeServiceFactory::class);
 
 
-Assert::type(MyInvokableService::class, $app->get(MyInvokableService::class));
+Assert::exception(function () use ($app) {
+    $app->get(MyInvokableService::class);
+}, UnknownServiceException::class);
+
+Assert::exception(function () use ($app) {
+    $app->get(MyService::class);
+}, UnknownServiceException::class);
+
+Assert::type(MyCoreInvokableService::class, $app->get(MyCoreInvokableService::class));
 
 Assert::type(MyRuntimeInvokableService::class, $app->get(MyRuntimeInvokableService::class));
 
-Assert::type(MyService::class, $app->get(MyService::class));
+Assert::type(MyCoreService::class, $app->get(MyCoreService::class));
 
 Assert::type(MyRuntimeService::class, $app->get(MyRuntimeService::class));
+
+
+$app = $appCore->bootstrap();
+
+
+Assert::type(MyInvokableService::class, $app->get(MyInvokableService::class));
+
+Assert::type(MyService::class, $app->get(MyService::class));

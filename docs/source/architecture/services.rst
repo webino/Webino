@@ -17,6 +17,13 @@ is to use only invokables and factories. Using a magic to resolve services depen
 isn't implemented, because with large projects it becomes messy and slow.
 
 
+Core services
+-------------
+
+Core services are available even before application bootstrap, but the configuration is not fully initialized
+and write enabled. They are registered into the core section of the application configuration.
+
+
 Invokables
 ----------
 
@@ -58,7 +65,11 @@ Registering an invokable service via application config.
 
     return new CoreConfig([
 
-        new InvokableService(MyInvokableService::class), // <--
+        new Service(MyInvokableService::class), // <--
+
+        // or
+
+        new CoreService(MyInvokableService::class), // <--
 
     ]);
 
@@ -100,6 +111,10 @@ Registering a service created by factory via application config.
 
     return new CoreConfig([
 
-        new ServiceFactory(MyService::class, MyServiceFactory::class), // <--
+        new Service(MyService::class, MyServiceFactory::class), // <--
+
+        // or
+
+        new CoreService(MyService::class, MyServiceFactory::class), // <--
 
     ]);

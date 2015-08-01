@@ -6,26 +6,52 @@
 
 Webino™ is a platform for creating quality and modular web applications.
 
-It's built on [PHP](http://php.net/) with [Zend Framework 2](http://framework.zend.com/).
+It is built on [PHP](http://php.net/) with [Zend Framework 2](http://framework.zend.com/)
+and other useful open-source packages.
+
 
 ## Goals
 
-The main goal of Webino™ is to be a platform for high quality, modular and scalable web applications. Providing tools for easing development, testing and building processes. Including documentation about continuous integration and continuous delivery.
+The main goal of Webino™ is to be a platform for high quality, modular and scalable web applications. Providing tools
+for easing development, testing and building processes. Including documentation about continuous integration
+and continuous delivery.
 
 - High quality code
-- True modularity
-- Configurability
-- Flexibility
-- Testability
-- Scalability
-- Minify-ability
+
+  - Classes must be short, prefer composition over inheritance. Use PSR-2, OOP, design-patterns and refactoring.
+
+- Modular
+
+  - Modules can override each others configuration thus it influences the resulting effect.
+
+- Configurable
+
+  - Everything must be configurable, even the templates rendering.
+
+- Low coupling
+
+  - The computing code must be separated to a routines emitting events and listeners.
+
+- Testable
+
+  - Testing is so easy that it is the first place you want to start typing.
+
+- Scalable
+
+  - It is built on PHP.
+
+- Deliverable
+
+  - Continuous integration development and continuous delivery of minimized code.   
+
 
 ## Technologies
 
 - Inversion of Control
 - Dependency Injection
 - Object-Oriented Programming
-- Event Listening
+- Event Emitting \ Listening
+
 
 ## Developer's manual
 

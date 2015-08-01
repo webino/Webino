@@ -4,18 +4,15 @@
 //use Webino\Feature;
 //use Webino\Feature\ThrowEmptyResponseException;
 //use Webino\Markdown\Feature\Markdown;
-use WebinoAppLib\Feature\FilesystemCache;
-use WebinoConfigLib\Feature\ConfigCacheEnabled;
-
 use WebinoAppLib\Application\CoreConfig;
-use WebinoConfigLib\Feature\FirePhpLog;
-use WebinoConfigLib\Feature\Log;
+use WebinoAppLib\Feature as AppFeature;
+use WebinoConfigLib\Feature as ConfigFeature;
 
 return new CoreConfig([
-    new ConfigCacheEnabled,
-    new FilesystemCache,
-    new Log,
-    new FirePhpLog,
+    new ConfigFeature\Log,
+    new ConfigFeature\FirePhpLog,
+    new ConfigFeature\ConfigCacheEnabled,
+    new AppFeature\FilesystemCache,
 
     ['responseText' => 'Random: ' . rand(9, 9999)],
 ]);

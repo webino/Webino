@@ -10,6 +10,11 @@ Application Caching API
 Cache Methods
 -------------
 
+.. contents::
+    :depth: 1
+    :local:
+
+
 $app->getCache()
 ^^^^^^^^^^^^^^^^
 
@@ -32,6 +37,10 @@ $app->setCache()
 
 Cache Config
 ------------
+
+.. contents::
+    :depth: 1
+    :local:
 
 .. todo::
     Write cache config features list (different types of cache storage).

@@ -2,8 +2,6 @@
 
 namespace WebinoAppLib\Feature;
 
-use WebinoConfigLib\Feature\AbstractFeature;
-
 /**
  * Class CoreService
  */
