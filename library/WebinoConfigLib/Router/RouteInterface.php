@@ -37,7 +37,7 @@ interface RouteInterface
      * @param self[] $routes
      * @return self
      */
-    public function setChilds(array $routes);
+    public function setChildren(array $routes);
 
     /**
      * @param self[] $routes

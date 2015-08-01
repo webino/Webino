@@ -138,7 +138,7 @@ abstract class AbstractRoute extends AbstractConfig implements
     /**
      * {@inheritdoc}
      */
-    public function setChilds(array $routes)
+    public function setChildren(array $routes)
     {
         foreach ($routes as $route) {
             $this->setChild($route);
@@ -177,10 +177,17 @@ abstract class AbstractRoute extends AbstractConfig implements
      */
     protected function appendRoute($section, self $route)
     {
-        $route->hasName()
-            and $this->getData()->{$section}[$route->getName()] = $route->toArray()
-            or  $this->getData()->{$section}[] = $route->toArray();
+        if ($route->hasName()) {
+            $this->mergeArray([$section => [$route->getName() => $route->toArray()]]);
+            return $this;
+        }
 
+        if ($this->getData()->offsetExists($section)) {
+            $this->getData()->{$section}[] = $route->toArray();
+            return $this;
+        }
+
+        $this->mergeArray([$section => [$route->toArray()]]);
         return $this;
     }
 }

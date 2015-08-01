@@ -2,6 +2,7 @@
 
 namespace WebinoConfigLib\Feature;
 
+use WebinoConfigLib\Exception\InvalidArgumentException;
 use WebinoConfigLib\Router\Route as RouteConfig;
 use WebinoConfigLib\Router\RouteInterface;
 use WebinoConfigLib\Router\RouteConstructorInterface;
@@ -13,6 +14,16 @@ class Route extends AbstractFeature implements
     RouteInterface,
     RouteConstructorInterface
 {
+    /**
+     * Router config key
+     */
+    const ROUTER = 'router';
+
+    /**
+     * Routes config key
+     */
+    const ROUTES = 'routes';
+
     /**
      * @var RouteConfig
      */
@@ -62,15 +73,20 @@ class Route extends AbstractFeature implements
      */
     public function setChild(RouteInterface $route)
     {
+        if (!($route instanceof self)) {
+            throw (new InvalidArgumentException('Expected route as %s but got %s'))
+                ->format(RouteInterface::class, $route);
+        }
+
         $this->getRoute()->setChild($route->getRoute());
         return $this;
     }
 
     /**
-     * @param self[] $routes
+     * @param RouteInterface[] $routes
      * @return self
      */
-    public function setChilds(array $routes)
+    public function setChildren(array $routes)
     {
         foreach ($routes as $route) {
             $this->setChild($route);
@@ -79,7 +95,7 @@ class Route extends AbstractFeature implements
     }
 
     /**
-     * @param self[] $routes
+     * @param RouteInterface[] $routes
      * @return self
      */
     public function chain(array $routes)
@@ -91,7 +107,7 @@ class Route extends AbstractFeature implements
     /**
      * @return RouteConfig
      */
-    protected function getRoute()
+    public function getRoute()
     {
         return $this->route;
     }
@@ -117,14 +133,16 @@ class Route extends AbstractFeature implements
     }
 
     /**
-     * @param array $routes
+     * @param RouteInterface[] $routes
      * @return array
      */
     protected function resolveRoutes(array $routes)
     {
         $resolved = [];
         foreach ($routes as $route) {
-            $resolved[] = $route->getRoute();
+            if ($route instanceof self) {
+                $resolved[] = $route->getRoute();
+            }
         }
         return $resolved;
     }
@@ -134,7 +152,7 @@ class Route extends AbstractFeature implements
      */
     public function toArray()
     {
-        $this->getData()->router['routes'] = $this->createRoutes();
+        $this->mergeArray([self::ROUTER => [self::ROUTES => $this->createRoutes()]]);
         return parent::toArray();
     }
 }

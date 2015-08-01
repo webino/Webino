@@ -11,7 +11,7 @@ $route = (new Route('/', 'ExampleHandler'))
     ->setMayTerminate()
     ->setDefaults(['exampleKey' => 'exampleValue'])
     ->setChild(new Route('/child-one', 'ExampleChildOneHandler'))
-    ->setChilds([
+    ->setChildren([
         new Route('/child-two', 'ExampleChildTwoHandler'),
         new Route('/child-three', 'ExampleChildThreeHandler'),
     ])
