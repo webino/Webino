@@ -49,10 +49,24 @@ Adding and accessing an invokable service via application.
     $service = $app->get(MyInvokableService::class);
 
 
+Registering an invokable service via application config.
+
+.. code-block:: php
+
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\InvokableService;
+
+    return new CoreConfig([
+
+        new InvokableService(MyInvokableService::class), // <--
+
+    ]);
+
+
 Service Factory
 ---------------
 
-In a case when we want to create a complex service with dependencies, it's required to create a factory.
+In case when we want to create a complex service with dependencies, it is required to create a factory.
 
 .. code-block:: php
 
@@ -66,7 +80,7 @@ In a case when we want to create a complex service with dependencies, it's requi
         }
     }
 
-Adding and accessing a service created by a factory via application.
+Adding and accessing a service created by factory via application.
 
 .. code-block:: php
 
@@ -76,3 +90,16 @@ Adding and accessing a service created by a factory via application.
     /** @var MyService $service */
     $service = $app->get(MyService::class);
 
+
+Registering a service created by factory via application config.
+
+.. code-block:: php
+
+    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\ServiceFactory;
+
+    return new CoreConfig([
+
+        new ServiceFactory(MyService::class, MyServiceFactory::class), // <--
+
+    ]);

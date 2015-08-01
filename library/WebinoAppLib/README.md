@@ -133,7 +133,7 @@ Application provides some basic functionality via methods and by core services.
 - `getEvents()` - Getting an event manager service
 - `getRequest()` - Getting a request
 - `setRequest()` - Setting a request
-- `getReqsponse()` - Getting a response
+- `getResponse()` - Getting a response
 - `setResponse()` - Setting a response
 - `getDebugger()` - Getting a debugger service
 - `getLogger()` - Getting a logger service
@@ -154,6 +154,17 @@ After an application was created, following methods are available
 
 - `$service = $app->get($serviceName);`
     
+
+**Configuration**
+
+*Getting a configuration value:*
+
+- `$myConfig = $app->getConfig('myConfigKey', $default = null);`
+
+*Getting a core configuration value:*
+
+- `$myCoreConfig = $app->getCoreConfig('myCoreConfigKey', $default = null);`
+
 
 **Events** 
 

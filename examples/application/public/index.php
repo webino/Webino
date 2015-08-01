@@ -5,7 +5,7 @@ use WebinoAppLib\Event\AppEvent;
 chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
-$app = (new \WebinoAppLib\Factory)->create()->bootstrap();
+$coreApp = (new \WebinoAppLib\Factory)->create();
 
 //$app->log()->info('test log message');
 //$app->log()->info('test log message z');
@@ -20,9 +20,19 @@ class MyListener
     }
 }
 
-$app->bind(AppEvent::DISPATCH, MyListener::class, AppEvent::BEGIN);
-$app->bind(AppEvent::DISPATCH, function () {
-    echo 'Svet';
+//$coreApp->getConfig()->responseText = 'Ahoj svet!!';
+
+
+$app = $coreApp->bootstrap();
+
+//$app->bind(AppEvent::DISPATCH, MyListener::class, AppEvent::BEGIN);
+
+$app->bind(AppEvent::DISPATCH, function () use ($app) {
+//    undefined();
+//    echo 'Svet';
+
+    echo $app->getConfig('responseText');
+
 }, AppEvent::BEGIN + 100);
 
 

@@ -2,7 +2,7 @@
 
 use Tester\Assert;
 use WebinoConfigLib\Config;
-use WebinoConfigLib\Feature\Cache;
+use WebinoConfigLib\Feature\FilesystemCache;
 use WebinoConfigLib\Feature\Route;
 
 require __DIR__ . '/../bootstrap.php';
@@ -18,7 +18,7 @@ $config = new Config([
     /**
      * Config feature example
      */
-    new Cache,
+    new FilesystemCache,
 
     /**
      * Route config feature example

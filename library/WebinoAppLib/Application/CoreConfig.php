@@ -12,7 +12,6 @@ use WebinoConfigLib\DefaultConfigInterface;
 use WebinoEventLib\EventManager;
 use Zend\Mvc\Service\RequestFactory;
 use Zend\Mvc\Service\ResponseFactory;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class CoreConfig
@@ -32,12 +31,12 @@ class CoreConfig extends Feature\Config implements
                         EventsFactory::ENGINE => EventManager::class,
                     ],
                     $this::SERVICES_FACTORIES => [
-                        Application::SERVICE => ApplicationFactory::class,
-                        Application::EVENTS => EventsFactory::class,
-                        Application::REQUEST => RequestFactory::class,
-                        Application::RESPONSE => ResponseFactory::class,
+                        Application::SERVICE   => ApplicationFactory::class,
+                        Application::EVENTS    => EventsFactory::class,
+                        Application::REQUEST   => RequestFactory::class,
+                        Application::RESPONSE  => ResponseFactory::class,
                         Application::BOOTSTRAP => BootstrapFactory::class,
-                        Application::LOGGER => LoggerFactory::class,
+                        Application::LOGGER    => LoggerFactory::class,
                     ],
                 ],
             ],

@@ -20,10 +20,12 @@ use Zend\ServiceManager\ServiceManager;
 abstract class AbstractApplication implements
     AbstractApplicationInterface,
     Contract\ServiceProviderInterface,
+    Contract\ConfigInterface,
     Contract\EventEmitterInterface,
     Contract\LoggerInterface
 {
     use Traits\ServiceProviderTrait;
+    use Traits\ConfigTrait;
     use Traits\EventEmitterTrait;
     use Traits\LoggerTrait;
 
@@ -158,11 +160,13 @@ abstract class AbstractApplication implements
     }
 
     /**
-     * @return Config
+     * @param string|null $name
+     * @param mixed|null $default
+     * @return Config|mixed
      */
-    public function getConfig()
+    public function getConfig($name = null, $default = null)
     {
-        return $this->config;
+        return $name ? $this->config->get($name, $default) : $this->config;
     }
 
     /**
@@ -170,7 +174,7 @@ abstract class AbstractApplication implements
      * @param bool $setService
      * @throws DomainException Disallowed config modifications
      */
-    protected function setConfig(Config $config, $setService = true)
+    public function setConfig(Config $config, $setService = true)
     {
         if ($this->config && $this->config->isReadOnly()) {
             throw new DomainException(
@@ -252,23 +256,44 @@ abstract class AbstractApplication implements
     }
 
     /**
-     * @return StorageInterface
+     * Return cache service or cached value
+     *
+     * @param string|null $key
+     * @return StorageInterface|mixed
      */
-    public function getCache()
+    public function getCache($key = null)
     {
         if (null === $this->cache) {
             $this->setCache(new BlackHole);
         }
+
+        if ($key) {
+            return $this->cache->getItem($key);
+        }
+
         return $this->cache;
     }
 
     /**
-     * @param object|StorageInterface $cache
-     * @param bool $setService
+     * Set cached value or cache service
+     *
+     * @param object|StorageInterface|string $cacheOrKey
+     * @param bool|mixed|null $setServiceOrValue
      */
-    protected function setCache(StorageInterface $cache, $setService = true)
+    public function setCache($cacheOrKey, $setServiceOrValue = null)
     {
-        $this->cache = $cache;
-        $setService and $this->setServicesService($this::CACHE, $cache);
+        if ($cacheOrKey instanceof StorageInterface) {
+            if (null !== $this->cache) {
+                throw (new DomainException('Unable to set cache; already set'));
+            }
+
+            $this->cache = $cacheOrKey;
+
+            (null === $setServiceOrValue) ? true : (bool) $setServiceOrValue
+                and $this->setServicesService($this::CACHE, $cacheOrKey);
+
+        } else {
+            $this->getCache()->setItem($cacheOrKey, $setServiceOrValue);
+        }
     }
 }

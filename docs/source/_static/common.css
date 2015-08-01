@@ -65,6 +65,64 @@ div.bodywrapper h2 {
     padding: 0 0 0 10px;
 }
 
+.container {
+    margin-top: 60px;
+}
+
+
+.pull-left {
+    float: left;
+}
+dl.pull-left {
+    max-width: 40rem;
+    margin-top: 0 !important;
+}
+img.pull-left {
+    float: left;
+    margin-right: 30px;
+}
+img.border {
+    border: 1px solid lightgray;
+}
+
+.body-font {
+    font-family: 'Open Sans', sans-serif;
+}
+.zero-top-space {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+.small-vspace {
+    margin-top: 10px;
+    margin-bottom: 10px !important;
+}
+.medium-vspace {
+    margin-top: 20px;
+    margin-bottom: 20px !important;
+}
+.small-top-space {
+    margin-top: 10px !important;
+}
+.medium-top-space {
+    margin-top: 20px !important;
+}
+.small-bottom-space {
+    margin-bottom: 10px !important;
+}
+.medium-bottom-space {
+    margin-bottom: 20px !important;
+}
+.top-space {
+    margin-top: 30px !important;
+}
+.bottom-space {
+    margin-bottom: 30px !important;
+}
+
+.valign-bottom {
+    vertical-align: bottom;
+}
+
 /** Lists **/
 ol,
 ul {
@@ -88,6 +146,14 @@ ol p,
 ul p {
     margin: 0;
     padding: 0;
+}
+
+.float-list > li {
+    float: left;
+    width: 33%;
+}
+.float-list {
+    clear: both;
 }
 /** /Lists **/
 
@@ -113,6 +179,10 @@ dl.docutils.monospace dt {
 
 .monospace h3 {
     margin-top: 30px;
+}
+
+blockquote {
+    margin-right: 0;
 }
 
 /* Code highlight */
@@ -177,7 +247,42 @@ pre {
     margin: 20px 0 50px;
     padding: 0 0 0 20px;
 }
+.contents.local.topic ul ul {
+    margin-bottom: 0;
+}
 .contents.local.topic li {
     list-style: circle;
 }
 /* /Local ToC */
+
+.component-api li > strong:first-child,
+.component-api li > p > strong:first-child {
+    font-family: 'Source Code Pro', monospace;
+}
+
+/* Admonition */
+.admonition.note {
+    padding: 14px 14px 14px 60px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f7f4e8 url("note.gif") no-repeat 1.5% 10px;
+}
+.admonition.note .admonition-title {
+    display: none;
+}
+/* /Admonition */
+
+/* Clear-fix */
+.content-group:before,
+.content-group:after {
+    content: "";
+    display: table;
+}
+.content-group:after {
+    clear: both;
+}
+/* (IE 6/7) */
+.content-group {
+    zoom: 1;
+}
+/* /Clear-fix */

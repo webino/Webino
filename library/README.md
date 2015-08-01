@@ -8,7 +8,7 @@
 
 - **WebinoEventLib** - Event system boilerplate
 
-- **WebinoLogLib** - Logging boilerplate [TODO]
+- **WebinoLogLib** - Logging boilerplate
 
 - **WebinoFileLib** - Filesystem boilerplate [TODO]
 

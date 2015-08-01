@@ -4,6 +4,9 @@ use Tester\Assert;
 use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Factory;
 
+require __DIR__ . '/../bootstrap.php';
+
+
 class MyTestEventListener
 {
     public static $invoked = false;
@@ -14,15 +17,24 @@ class MyTestEventListener
     }
 }
 
+class MyTestCustomEventListener extends MyTestEventListener
+{
+    public static $invoked = false;
+}
 
-require __DIR__ . '/../bootstrap.php';
 
 $app = (new Factory)->create()->bootstrap();
 
 
 $app->bind(AppEvent::DISPATCH, MyTestEventListener::class);
 
+$app->bind('myEvent', MyTestCustomEventListener::class);
+
+$app->emit('myEvent');
+
 $app->dispatch();
 
 
 Assert::true(MyTestEventListener::$invoked);
+
+Assert::true(MyTestCustomEventListener::$invoked);

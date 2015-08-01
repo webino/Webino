@@ -3,8 +3,9 @@
 namespace WebinoAppLib\Service;
 
 use WebinoAppLib\Application;
-use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Event\AppEvent;
+use WebinoAppLib\Feature\Config;
+use WebinoAppLib\Log;
 use WebinoConfigLib\Feature\ConfigCacheEnabled;
 use Zend\ServiceManager\Config as ServicesConfig;
 
@@ -16,7 +17,7 @@ class Bootstrap
     /**
      * Application configuration cache key
      */
-    const CACHE_KEY = 'application';
+    const CACHE_KEY = 'config';
 
     /**
      * @var Application
@@ -36,9 +37,12 @@ class Bootstrap
         $this->app = $app;
     }
 
+    /**
+     * @return string
+     */
     private function getCacheKey()
     {
-        return $this::CACHE_KEY . '_' . md5($this->cacheKey);
+        return $this::CACHE_KEY . '_' . $this->cacheKey;
     }
 
     /**
@@ -47,7 +51,7 @@ class Bootstrap
      */
     public function setCacheKey($key)
     {
-        $this->cacheKey.= (string) $key;
+        $this->cacheKey .= md5($key);
         return $this;
     }
 
@@ -61,25 +65,23 @@ class Bootstrap
      */
     public function configure()
     {
-        $cfg    = $this->app->getConfig();
-        // TODO use $this->app->getCache($key);
-        $cache  = $cfg->get(ConfigCacheEnabled::KEY) ? $this->app->getCache() : null;
-        $key    = $this->getCacheKey();
-        $cached = $cache ? $cache->getItem($key) : null;
+        $config   = $this->app->getConfig();
+        $useCache = $this->app->getConfig(ConfigCacheEnabled::KEY);
 
-        if ($cached) {
-            $this->app->setConfig($cached);
-            // TODO
-//            $this->log(Message\LoadCachedAppConfig::class);
-            return $this;
+        if ($useCache) {
+            $cached = $this->app->getCache($this->getCacheKey());
+            if ($cached) {
+                $this->app->setConfig($cached);
+                $this->app->log(Log\LoadCachedAppConfig::class);
+                return $this;
+            }
         }
 
         $this->app->emit(AppEvent::CONFIGURE, [], [$this->app, 'mergeConfig']);
-        // TODO
-//        $this->log(Message\ConfigureApp::class);
+        $this->app->log(Log\ConfigureApp::class);
 
-        // TODO use $this->app->setCache($key, $cfg);
-        $cache and $cache->setItem($key, $cfg);
+        $useCache and $this->app->setCache($this->getCacheKey(), $config);
+
         $this->configureServices();
         return $this;
     }
@@ -91,8 +93,7 @@ class Bootstrap
      */
     protected function configureServices()
     {
-        // TODO use $this->app->getConfig(Config::SERVICES);
-        $services = $this->app->getConfig()->get(CoreConfig::SERVICES);
+        $services = $this->app->getConfig(Config::SERVICES);
         if (null === $services) {
             return $this;
         }
@@ -158,10 +159,7 @@ class Bootstrap
      */
     protected function eachCoreListener(callable $callback)
     {
-        // TODO $this->app->getCoreConfig(Config::LISTENERS);
-        $config = $this->app->get(Application::CORE_CONFIG);
-        $listeners = $config->get(CoreConfig::LISTENERS);
-
+        $listeners = $this->app->getCoreConfig(Config::LISTENERS);
         if (empty($listeners)) {
             return;
         }
@@ -176,8 +174,7 @@ class Bootstrap
      */
     protected function eachListener(callable $callback)
     {
-        // TODO use $this->app->getConfig(Config::LISTENERS);
-        $listeners = $this->app->getConfig()->get(CoreConfig::LISTENERS);
+        $listeners = $this->app->getConfig(Config::LISTENERS);
         if (empty($listeners)) {
             return;
         }
