@@ -39,15 +39,25 @@ matrix:
     - php: 5.6
       env: TESTER_PHP_BIN=hhvm TESTER_ARGS=""
 
+    - php: 5.6
+      env: TESTER_PHP_BIN=php-cgi TESTER_ARGS=""
+
     - php: 7.0
       env: TESTER_PHP_BIN=hhvm TESTER_ARGS=""
+
+    - php: 7.0
+      env: TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
 
     - php: hhvm
       env: TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
 
+    - php: hhvm
+      env: TESTER_PHP_BIN=php-cgi TESTER_ARGS=""
+
 env:
   matrix:
     - TESTER_PHP_BIN=php-cgi TESTER_ARGS="-c tests/php.ini --coverage build/logs/clover.xml --coverage-src library/"
+    - TESTER_PHP_BIN=php-cgi TESTER_ARGS=""
     - TESTER_PHP_BIN=hhvm TESTER_ARGS=""
   global:
     - GH_REF=github.com/webino/Webino
