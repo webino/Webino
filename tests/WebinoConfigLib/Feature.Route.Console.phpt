@@ -6,7 +6,8 @@ use WebinoConfigLib\Feature\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-$route = (new Route\Console('example command', 'ExampleConsoleHandler'));
+$route[0] = (new Route\Console)
+    ->setRoute('example command');
 
 
 Assert::equal([
@@ -17,12 +18,9 @@ Assert::equal([
                     'type' => 'simple',
                     'options' => [
                         'route' => 'example command',
-                        'defaults' => [
-                            'handlers' => ['ExampleConsoleHandler'],
-                        ],
                     ],
                 ]
             ],
         ],
     ],
-], $route->toArray());
+], $route[0]->toArray());

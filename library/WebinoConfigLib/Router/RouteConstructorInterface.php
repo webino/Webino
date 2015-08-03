@@ -8,15 +8,8 @@ namespace WebinoConfigLib\Router;
 interface RouteConstructorInterface
 {
     /**
-     * @param string|array $route String for unnamed routes.
-     *      Two in array [name, route] for named routes.
-     *      One in array [name] for overrides.
-     *
-     * @param string|array|null $handlers String for single handler.
-     *      Array ['HandlerOne', 'HandlerTwo'] for multiple handlers.
-     *      Array ['one' => 'HandlerOne'] for named handlers, required for overrides.
-     *
+     * @param string $route Route path.
      * @throws \WebinoConfigLib\Exception\InvalidArgumentException
      */
-    public function __construct($route, $handlers = null);
+    public function __construct($route);
 }

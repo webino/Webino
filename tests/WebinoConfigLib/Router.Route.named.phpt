@@ -6,17 +6,15 @@ use WebinoConfigLib\Router\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-$route = new Route(['home', '/'], 'ExampleHandler');
+$route[0] = (new Route('/'))
+    ->setName('home');
 
 
-Assert::same('home', $route->getName());
+Assert::same('home', $route[0]->getName());
 
 Assert::equal([
     'type' => 'literal',
     'options' => [
         'route' => '/',
-        'defaults' => [
-            'handlers' => ['ExampleHandler'],
-        ],
     ],
-], $route->toArray());
+], $route[0]->toArray());

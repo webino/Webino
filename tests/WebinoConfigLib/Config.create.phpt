@@ -23,30 +23,30 @@ $config = new Config([
     /**
      * Route config feature example
      */
-    new Route('/', 'ExampleHandler'),
+    (new Route)->setRoute('/'),
 
     /**
      * Named route example
      */
-    new Route(['home', '/home'], ['default' => 'ExampleHandler']),
+    (new Route('home'))->setRoute('/home'),
 
     /**
      * Override named route example
      */
-    (new Route(['home', '/home2'], ['default' => 'ExampleHandler2'])),
+    (new Route('home'))->setRoute('/home2'),
 
     /**
      * Override named route example 2
      */
-    (new Route(['home']))
+    (new Route('home'))
         ->setType('segment')
         ->setDefaults(['testParam' => 'testParamValue']),
 
     /**
      * Route childs example
      */
-    (new Route(['home']))
-        ->setChild(new Route(['about']))
+    (new Route('home'))
+        ->setChild([new Route('about')])
 
 ]);
 

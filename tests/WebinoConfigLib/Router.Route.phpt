@@ -6,40 +6,33 @@ use WebinoConfigLib\Router\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-// Basic
+$route[0] = new Route('/');
 
-$route = new Route('/', 'ExampleHandler');
+$route[1] = (new Route('/example-route'))
+    ->setName('example-route')
+    ->setType(Route::SEGMENT)
+    ->setMayTerminate()
+    ->setDefaults(['testParam' => 'testParamValue']);
 
-Assert::same('', $route->getName());
+
+Assert::null($route[0]->getName());
+
+Assert::same('example-route', $route[1]->getName());
 
 Assert::equal([
     'type' => 'literal',
     'options' => [
         'route' => '/',
-        'defaults' => [
-            'handlers' => ['ExampleHandler'],
-        ],
     ],
-], $route->toArray());
-
-
-// Advanced
-
-$route = (new Route('/', 'ExampleHandler'))
-    ->setType('segment')
-    ->setMayTerminate()
-    ->setDefaults(['testParam' => 'testParamValue']);
-
-Assert::same('', $route->getName());
+], $route[0]->toArray());
 
 Assert::equal([
     'type' => 'segment',
     'options' => [
-        'route' => '/',
+        'route' => '/example-route',
         'defaults' => [
             'testParam' => 'testParamValue',
-            'handlers' => ['ExampleHandler'],
         ],
     ],
     'may_terminate' => true,
-], $route->toArray());
+], $route[1]->toArray());

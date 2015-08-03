@@ -6,30 +6,27 @@ return [
             [
                 'type'          => 'segment',
                 'options'       => [
-                    'defaults' => ['handlers' => ['ExampleHandler'], 'exampleKey' => 'exampleValue'],
+                    'defaults' => ['exampleKey' => 'exampleValue'],
                     'route'    => '/',
                 ],
                 'may_terminate' => true,
                 'child_routes'  => [
-                    [
+                    'child-one' => [
                         'type'    => 'literal',
                         'options' => [
-                            'defaults' => ['handlers' => ['ExampleChildOneHandler']],
-                            'route'    => '/child-one',
+                            'route' => '/child-one',
                         ],
                     ],
                     [
                         'type'    => 'literal',
                         'options' => [
-                            'defaults' => ['handlers' => ['ExampleChildTwoHandler']],
-                            'route'    => '/child-two',
+                            'route' => '/child-two',
                         ],
                     ],
                     [
                         'type'    => 'literal',
                         'options' => [
-                            'defaults' => ['handlers' => ['ExampleChildThreeHandler']],
-                            'route'    => '/child-three',
+                            'route' => '/child-three',
                         ],
                     ],
                 ],
@@ -37,15 +34,13 @@ return [
                     [
                         'type'    => 'literal',
                         'options' => [
-                            'defaults' => ['handlers' => ['ExamplePartOneHandler']],
-                            'route'    => '/part-one',
+                            'route' => '/part-one',
                         ],
                     ],
                     [
                         'type'    => 'literal',
                         'options' => [
-                            'defaults' => ['handlers' => ['ExamplePartTwoHandler']],
-                            'route'    => '/part-two',
+                            'route' => '/part-two',
                         ],
                     ],
                 ],

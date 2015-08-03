@@ -39,10 +39,9 @@ abstract class AbstractRoute extends AbstractConfig implements
     }
 
     /**
-     * @param string $name
-     * @return self
+     * {@inheritdoc}
      */
-    protected function setName($name)
+    public function setName($name)
     {
         $this->name = (string) $name;
         return $this;
@@ -65,12 +64,12 @@ abstract class AbstractRoute extends AbstractConfig implements
     }
 
     /**
-     * @param string $route
-     * @return self
+     * {@inheritdoc}
      */
-    protected function setRoute($route)
+    public function setRoute($route)
     {
         $this->route = (string) $route;
+        $route and $this->setRouteOption($route);
         return $this;
     }
 
@@ -87,7 +86,7 @@ abstract class AbstractRoute extends AbstractConfig implements
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
+    public function setType($type = self::LITERAL)
     {
         $this->getData()->type = (string) $type;
         return $this;
@@ -125,23 +124,10 @@ abstract class AbstractRoute extends AbstractConfig implements
     /**
      * {@inheritdoc}
      */
-    public function setChild(RouteInterface $route)
-    {
-        if (!($route instanceof self)) {
-            throw (new InvalidArgumentException('Expected route of type %s but got %s'))
-                ->format(self::class, get_class($route));
-        }
-        $this->appendRoute('child_routes', $route);
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setChildren(array $routes)
+    public function setChild(array $routes)
     {
         foreach ($routes as $route) {
-            $this->setChild($route);
+            $this->appendChildRoute($route);
         }
         return $this;
     }
@@ -188,6 +174,20 @@ abstract class AbstractRoute extends AbstractConfig implements
         }
 
         $this->mergeArray([$section => [$route->toArray()]]);
+        return $this;
+    }
+
+    /**
+     * @param RouteInterface $route
+     * @return self
+     */
+    protected function appendChildRoute(RouteInterface $route)
+    {
+        if (!($route instanceof self)) {
+            throw (new InvalidArgumentException('Expected route of type %s but got %s'))
+                ->format(self::class, get_class($route));
+        }
+        $this->appendRoute('child_routes', $route);
         return $this;
     }
 }

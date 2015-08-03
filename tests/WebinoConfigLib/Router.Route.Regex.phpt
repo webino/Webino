@@ -6,18 +6,15 @@ use WebinoConfigLib\Router\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-$route = new Route\Regex('<example>/.*', '%example%', 'ExampleHandler');
+$route = new Route\Regex('<example>/.*', '%example%');
 
 
-Assert::same('', $route->getName());
+Assert::null($route->getName());
 
 Assert::equal([
     'type' => 'regex',
     'options' => [
         'regex' => '<example>/.*',
-        'spec' => '%example%',
-        'defaults' => [
-            'handlers' => ['ExampleHandler'],
-        ],
+        'spec'  => '%example%',
     ],
 ], $route->toArray());

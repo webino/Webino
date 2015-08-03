@@ -9,11 +9,43 @@ use Zend\Stdlib\ArrayUtils;
  */
 interface RouteInterface
 {
-     /**
-     * @param string $type
+    /**
+     * Literal route type
+     */
+    const LITERAL = 'literal';
+
+    /**
+     * Simple route type
+     */
+    const SIMPLE = 'simple';
+
+    /**
+     * Segment route type
+     */
+    const SEGMENT = 'segment';
+
+    /**
+     * Regular expression route type
+     */
+    const REGEX = 'regex';
+
+    /**
+     * @param string $type Route type.
      * @return self
      */
-    public function setType($type);
+    public function setType($type = self::LITERAL);
+
+    /**
+     * @param string $name Route name.
+     * @return self
+     */
+    public function setName($name);
+
+    /**
+     * @param string $route Route path.
+     * @return self
+     */
+    public function setRoute($route);
 
     /**
      * @param bool $mayTerminate
@@ -28,16 +60,10 @@ interface RouteInterface
     public function setDefaults(array $defaults);
 
     /**
-     * @param self $route
-     * @return self
-     */
-    public function setChild(self $route);
-
-    /**
      * @param self[] $routes
      * @return self
      */
-    public function setChildren(array $routes);
+    public function setChild(array $routes);
 
     /**
      * @param self[] $routes

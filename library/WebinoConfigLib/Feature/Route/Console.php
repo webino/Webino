@@ -12,10 +12,10 @@ class Console extends Route
     /**
      * {@inheritdoc}
      */
-    public function __construct($route, $handlers = null)
+    public function __construct($name = null)
     {
-        parent::__construct($route, $handlers);
-        $this->setType('simple');
+        parent::__construct($name);
+        $this->setType($this::SIMPLE);
     }
 
     /**

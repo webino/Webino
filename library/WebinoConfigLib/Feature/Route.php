@@ -2,17 +2,14 @@
 
 namespace WebinoConfigLib\Feature;
 
-use WebinoConfigLib\Exception\InvalidArgumentException;
 use WebinoConfigLib\Router\Route as RouteConfig;
 use WebinoConfigLib\Router\RouteInterface;
-use WebinoConfigLib\Router\RouteConstructorInterface;
 
 /**
  * Class Route
  */
 class Route extends AbstractFeature implements
-    RouteInterface,
-    RouteConstructorInterface
+    RouteInterface
 {
     /**
      * Router config key
@@ -32,18 +29,29 @@ class Route extends AbstractFeature implements
     /**
      * {@inheritdoc}
      */
-    public function __construct($route, $handlers = null)
+    public function __construct($name = null)
     {
-        $this->setRoute(new RouteConfig($route, $handlers));
+        $this->route = (new RouteConfig)
+            ->setName($name);
     }
 
     /**
-     * @param string $type
+     * @param string $type Route type.
      * @return self
      */
-    public function setType($type)
+    public function setType($type = RouteInterface::LITERAL)
     {
         $this->getRoute()->setType($type);
+        return $this;
+    }
+
+    /**
+     * @param string $name Route name.
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->getRoute()->setName($name);
         return $this;
     }
 
@@ -68,28 +76,15 @@ class Route extends AbstractFeature implements
     }
 
     /**
-     * @param RouteInterface $route
+     * @param self[] $routes
      * @return self
      */
-    public function setChild(RouteInterface $route)
-    {
-        if (!($route instanceof self)) {
-            throw (new InvalidArgumentException('Expected route as %s but got %s'))
-                ->format(RouteInterface::class, $route);
-        }
-
-        $this->getRoute()->setChild($route->getRoute());
-        return $this;
-    }
-
-    /**
-     * @param RouteInterface[] $routes
-     * @return self
-     */
-    public function setChildren(array $routes)
+    public function setChild(array $routes)
     {
         foreach ($routes as $route) {
-            $this->setChild($route);
+            if ($route instanceof self) {
+                $this->getRoute()->setChild([$route->getRoute()]);
+            }
         }
         return $this;
     }
@@ -113,12 +108,12 @@ class Route extends AbstractFeature implements
     }
 
     /**
-     * @param RouteConfig $route
+     * @param string $route Route path
      * @return self
      */
-    protected function setRoute(RouteConfig $route)
+    public function setRoute($route)
     {
-        $this->route = $route;
+        $this->route->setRoute($route);
         return $this;
     }
 

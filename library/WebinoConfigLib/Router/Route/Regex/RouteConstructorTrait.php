@@ -2,16 +2,17 @@
 
 namespace WebinoConfigLib\Router\Route\Regex;
 
-use WebinoConfigLib\Router\RouteConstructorTrait as BaseRouteConstructorTrait;
+use WebinoConfigLib\Router\RouteInterface;
 
 /**
  * Trait RouteConstructorTrait
  */
 trait RouteConstructorTrait
 {
-    use BaseRouteConstructorTrait {
-        __construct as __internalConstruct;
-    }
+    /**
+     * @var string
+     */
+    private $route;
 
     /**
      * @var string
@@ -22,12 +23,54 @@ trait RouteConstructorTrait
      * {@inheritdoc}
      * @see \WebinoConfigLib\Router\Route\Regex\RouteConstructorInterface
      */
-    public function __construct($route, $spec = null, $handlers = null)
+    public function __construct($route, $spec = null)
     {
-        $this->setSpec($spec);
-        $this->__internalConstruct($route, $handlers);
+        $this
+            ->setRoute($route)
+            ->setSpec($spec)
+            ->setType(RouteInterface::REGEX)
+            ->init();
     }
 
+    /**
+     * @param string $type Route type.
+     * @return $this
+     */
+    abstract public function setType($type = RouteInterface::LITERAL);
+
+    /**
+     * Initialize route
+     *
+     * @return void
+     */
+    abstract protected function init();
+
+    /**
+     * @return bool
+     */
+    protected function hasRoute()
+    {
+        return !empty($this->route);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRoute()
+    {
+        return $this->route;
+    }
+
+    /**
+     * @param string|null $route
+     * @return $this
+     */
+    public function setRoute($route = null)
+    {
+        $this->route = (string) $route;
+        return $this;
+    }
+    
     /**
      * @return bool
      */

@@ -20,21 +20,19 @@ return [
             [
                 'type'    => 'literal',
                 'options' => [
-                    'defaults' => ['handlers' => ['ExampleHandler']],
-                    'route'    => '/',
+                    'route' => '/',
                 ],
             ],
             'home' => [
                 'type'         => 'literal',
                 'options'      => [
                     'defaults' => [
-                        'handlers'  => ['default' => 'ExampleHandler2'],
                         'testParam' => 'testParamValue',
                     ],
                     'route'    => '/home2',
                 ],
                 'child_routes' => [
-                    'about' => ['type' => 'literal', 'options' => ['defaults' => []]],
+                    'about' => ['type' => 'literal'],
                 ],
             ],
         ],

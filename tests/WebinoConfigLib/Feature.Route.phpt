@@ -6,19 +6,28 @@ use WebinoConfigLib\Feature\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-$route = (new Route('/', 'ExampleHandler'))
-    ->setType('segment')
+$route[0] = (new Route)
+    ->setType(Route::SEGMENT)
+    ->setRoute('/')
     ->setMayTerminate()
     ->setDefaults(['exampleKey' => 'exampleValue'])
-    ->setChild(new Route('/child-one', 'ExampleChildOneHandler'))
-    ->setChildren([
-        new Route('/child-two', 'ExampleChildTwoHandler'),
-        new Route('/child-three', 'ExampleChildThreeHandler'),
+    ->setChild([
+        (new Route('child-one'))
+            ->setRoute('/child-one'),
+
+        (new Route)
+            ->setRoute('/child-two'),
+
+        (new Route)
+            ->setRoute('/child-three'),
     ])
     ->chain([
-        new Route('/part-one', 'ExamplePartOneHandler'),
-        new Route('/part-two', 'ExamplePartTwoHandler'),
+        (new Route)
+            ->setRoute('/part-one'),
+
+        (new Route)
+            ->setRoute('/part-two'),
     ]);
 
 
-Assert::equal(require __DIR__ . '/files/feature.route.expectedConfig.php', $route->toArray());
+Assert::equal(require __DIR__ . '/files/feature.route.expectedConfig.php', $route[0]->toArray());
