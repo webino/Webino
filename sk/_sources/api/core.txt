@@ -1,5 +1,6 @@
-.. rst-class:: monospace
+.. rst-class:: monospace monospace-topic
 
+====================
 Application Core API
 ====================
 
@@ -11,9 +12,9 @@ Use application core API to access core services.
 
 
 $app->getServices()
--------------------
+^^^^^^^^^^^^^^^^^^^
 
-*Getting a service manager.*
+*Accessing service manager.*
 
 .. code-block:: php
 
@@ -22,9 +23,9 @@ $app->getServices()
 
 
 $app->getConfig()
------------------
+^^^^^^^^^^^^^^^^^
 
-*Getting an application configuration.*
+*Accessing application configuration.*
 
 .. code-block:: php
 
@@ -33,9 +34,9 @@ $app->getConfig()
 
 
 $app->getEvents()
------------------
+^^^^^^^^^^^^^^^^^
 
-*Getting an event manager service.*
+*Accessing event manager service.*
 
 .. code-block:: php
 
@@ -44,9 +45,9 @@ $app->getEvents()
 
 
 $app->getDebugger()
--------------------
+^^^^^^^^^^^^^^^^^^^
 
-*Getting a debugger service.*
+*Accessing debugger service.*
 
 .. code-block:: php
 
@@ -55,9 +56,9 @@ $app->getDebugger()
 
 
 $app->getLogger()
------------------
+^^^^^^^^^^^^^^^^^
 
-*Getting a logger service.*
+*Accessing logger service.*
 
 .. code-block:: php
 
@@ -66,9 +67,9 @@ $app->getLogger()
 
 
 $app->getCache()
-----------------
+^^^^^^^^^^^^^^^^
 
-*Getting a cache service.*
+*Accessing cache service.*
 
 .. code-block:: php
 
@@ -76,13 +77,13 @@ $app->getCache()
     $cache = $app->getCache();
 
 
-$app->getFile()
----------------
+$app->getFilesystems()
+^^^^^^^^^^^^^^^^^^^^^^
 
-*Getting a filesystem manager service [TODO].*
+*Accessing filesystem manager service.*
 
 .. code-block:: php
 
-    /** @var \WebinoAppLib\Service\FilesInterface $files */
-    $files = $app->getFiles();
+    /** @var \Zend\ServiceManager\ServiceLocatorInterface $filesystems */
+    $filesystems = $app->getFilesystems();
 

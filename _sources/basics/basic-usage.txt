@@ -1,3 +1,4 @@
+===========
 Basic Usage
 ===========
 
@@ -5,17 +6,23 @@ Basic Usage
     :depth: 1
     :local:
 
-The application is basically a configuration and an execution code. The configuration is cached if enabled and could
-be modified until bootstrap.
+The application is basically a configuration and an execution code. The configuration is cached, if enabled so,
+and could be modified until application is fully bootstrapped.
 
-Application entry point
------------------------
+|vspace|
+
+.. note::
+    See ``examples/basic-usage/`` directory.
+
+
+Application Entry Point
+=======================
 
 The application object is created, bootstrapped and dispatched in the index file.
 
 .. code-block:: php
 
-    <?php // public/index.php
+    <?php // index.php
 
     require 'vendor/autoload.php';
 
@@ -24,8 +31,8 @@ The application object is created, bootstrapped and dispatched in the index file
 
 
 
-Application configuration
--------------------------
+Application Configuration
+=========================
 
 Application is configured in the OOP style, so instead of writing an array we are using config features.
 
@@ -45,3 +52,4 @@ Application is configured in the OOP style, so instead of writing an array we ar
         (new MyCustomFeature)
             ->setAnything(),
     ]);
+

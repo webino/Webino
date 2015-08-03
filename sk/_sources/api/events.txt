@@ -1,5 +1,6 @@
-.. rst-class:: monospace
+.. rst-class:: sub-monospace
 
+======================
 Application Events API
 ======================
 
@@ -7,8 +8,10 @@ Application Events API
     :depth: 1
     :local:
 
+.. rst-class:: monospace-topic
+
 Event Emitter Methods
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 Application can emit events and bind listeners to them.
 
@@ -18,7 +21,7 @@ Application can emit events and bind listeners to them.
 
 
 $app->bind()
-^^^^^^^^^^^^
+------------
 
 *Binding a listener to an event.*
 
@@ -52,7 +55,7 @@ $app->bind()
 
 
 $app->unbind()
-^^^^^^^^^^^^^^
+--------------
 
 *Unbinding a listener from an event.*
 
@@ -69,7 +72,7 @@ $app->unbind()
 
 
 $app->emit()
-^^^^^^^^^^^^
+------------
 
 *Emitting an event.*
 
@@ -97,8 +100,20 @@ $app->emit()
     $app->emit(new MyEvent);
 
 
+Events Config
+^^^^^^^^^^^^^
+
+.. contents::
+    :depth: 1
+    :local:
+
+.. include:: /api/config/events.rst.inc
+
+
+.. rst-class:: monospace-topic
+
 Application Core Events
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Following events are emitted during an application core lifecycle.
 
@@ -108,7 +123,7 @@ Following events are emitted during an application core lifecycle.
 
 
 AppEvent::CONFIGURE
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 *Configuring an application, merging modules configurations.*
 
@@ -124,7 +139,7 @@ you to merge an application configuration.
 
 
 AppEvent::BOOTSTRAP
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 *Initializing an application, all the services will be ready.*
 
@@ -137,7 +152,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 
 
 AppEvent::DISPATCH
-^^^^^^^^^^^^^^^^^^
+------------------
 
 *Handling the client request and sending a response.*
 
@@ -151,8 +166,10 @@ because it is dedicated to extension.
 
 .. _api-events-priority:
 
+.. rst-class:: monospace-topic
+
 Event Listener Priority
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 When attaching a listener to an event the priority integer could be specified. Positive number
 is a higher priority than a negative one. If you do not provide any priority to a listener, it will be invoked
@@ -166,7 +183,7 @@ To standardize that, an event provides some constants of priorities using the ``
 
 
 Event::BEGIN
-^^^^^^^^^^^^
+------------
 
 *Handled at the beginning of an event.*
 
@@ -176,7 +193,7 @@ Event::BEGIN
 
 
 Event::BEFORE
-^^^^^^^^^^^^^
+-------------
 
 *Handled before main event.*
 
@@ -186,7 +203,7 @@ Event::BEFORE
 
 
 Event::AFTER
-^^^^^^^^^^^^
+------------
 
 *Handled after main event.*
 
@@ -196,7 +213,7 @@ Event::AFTER
 
 
 Event::FINISH
-^^^^^^^^^^^^^
+-------------
 
 *Handled at the end of an event.*
 
@@ -205,7 +222,7 @@ Event::FINISH
     $app->bind($event, $listener, $event::FINISH);
 
 
-Fine-tuning the priority
+Fine Tuning The Priority
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can always fine-tune your listener priority by adding *(earlier)* or substracting *(later)* an integer.

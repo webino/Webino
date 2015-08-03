@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Webino Skeleton Application &mdash; Webino 0.1.0alpha documentation</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="next" title="Webino Skeleton Module" href="skeleton-module.html" />
+    <link rel="prev" title="Advanced Usage" href="advanced-usage.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../_static/common.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
+  </head>
+  <body role="document">
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="advanced-usage.html" title="Previous document">Advanced Usage</a>
+        </li>
+        <li>
+          <a href="skeleton-module.html" title="Next document">Webino Skeleton Module</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha documentation</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="webino-skeleton-application">
+<h1>Webino Skeleton Application<a class="headerlink" href="#webino-skeleton-application" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#directory-structure" id="id1">Directory Structure</a></li>
+<li><a class="reference internal" href="#dispatch-lock-todo" id="id2">Dispatch Lock [<strong>TODO</strong>]</a></li>
+</ul>
+</div>
+<p>For standard applications it&#8217;s best to use the Webino™ Skeleton Application.</p>
+<p><div class="vspace"></div></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See <code class="docutils literal"><span class="pre">examples/skeleton-application/</span></code> directory.</p>
+</div>
+<div class="section" id="directory-structure">
+<h2><a class="toc-backref" href="#id1">Directory Structure</a><a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">&lt;application-name&gt;/</span></code> <em>The application root directory.</em><ul>
+<li><code class="docutils literal"><span class="pre">config/</span></code> <em>Configuration files directory.</em><ul>
+<li><code class="docutils literal"><span class="pre">autoload/</span></code> <em>Autoloaded configuration files directory. VCS ignore local configs.</em><ul>
+<li><code class="docutils literal"><span class="pre">local.php.dist</span></code> <em>Predefined local config, handy for a package development.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">data/</span></code> <em>Data files directory, archives.</em><ul>
+<li><code class="docutils literal"><span class="pre">cache/</span></code> <em>Cached files directory.</em></li>
+<li><code class="docutils literal"><span class="pre">export/</span></code> <em>Exported files directory.</em></li>
+<li><code class="docutils literal"><span class="pre">extra/</span></code> <em>Extra files directory.</em></li>
+<li><code class="docutils literal"><span class="pre">import/</span></code> <em>Imported files directory.</em></li>
+<li><code class="docutils literal"><span class="pre">log/</span></code> <em>Logger files directory, requires scheduled rotate.</em></li>
+<li><code class="docutils literal"><span class="pre">private/</span></code> <em>Private files directory, private uploaded files.</em></li>
+<li><code class="docutils literal"><span class="pre">release/</span></code> <em>Release specific files directory.</em></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">public/</span></code> <em>Public files directory, web server root.</em><ul>
+<li><code class="docutils literal"><span class="pre">index.php</span></code> <em>Public entry point.</em></li>
+<li><code class="docutils literal"><span class="pre">pipe.php</span></code> <em>Asynchronous entry point.</em></li>
+<li><code class="docutils literal"><span class="pre">robots.txt</span></code> <em>Search engine crawler configuration file</em></li>
+<li><code class="docutils literal"><span class="pre">assets/</span></code> <em>Public assets directory.</em></li>
+<li><code class="docutils literal"><span class="pre">data/</span></code> <em>Public data directory. PHP engine is off.</em><ul>
+<li><code class="docutils literal"><span class="pre">tmp/</span></code> <em>Public temporary data directory, public uploaded files.</em></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">image/</span></code> <em>Public images directory. PHP engine is off.</em><ul>
+<li><code class="docutils literal"><span class="pre">tmp/</span></code> <em>Public temporary images directory, public uploaded images.</em></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">media/</span></code> <em>Public media directory. PHP engine is off.</em></li>
+<li><code class="docutils literal"><span class="pre">resized/</span></code> <em>Public resized images directory. PHP engine is off.</em></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">tests/</span></code> <em>Tests files directory.</em><ul>
+<li><code class="docutils literal"><span class="pre">resources/</span></code> <em>Tests resources directory.</em></li>
+<li><code class="docutils literal"><span class="pre">selenium/</span></code> <em>Selenium tests directory.</em></li>
+<li><code class="docutils literal"><span class="pre">tester/</span></code> <em>Nette Tester tests directory.</em></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">tmp/</span></code> <em>Temporary files directory, requires scheduled cleanup.</em><ul>
+<li><code class="docutils literal"><span class="pre">cache/</span></code> <em>Temporary cached files directory, session specific cache.</em><ul>
+<li><code class="docutils literal"><span class="pre">common/</span></code> <em>Common temporary cached files directory.</em></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">common/</span></code> <em>Common temporary files directory.</em></li>
+<li><code class="docutils literal"><span class="pre">data/</span></code> <em>Private temporary data directory, private uploaded files.</em></li>
+<li><code class="docutils literal"><span class="pre">exported/</span></code> <em>Temporary exported files directory.</em></li>
+<li><code class="docutils literal"><span class="pre">mail/</span></code> <em>Temporary mail inbox.</em></li>
+<li><code class="docutils literal"><span class="pre">resized/</span></code> <em>Private resized images directory.</em></li>
+<li><code class="docutils literal"><span class="pre">sessions/</span></code> <em>Sessions directory.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dispatch-lock-todo">
+<h2><a class="toc-backref" href="#id2">Dispatch Lock [<strong>TODO</strong>]</a><a class="headerlink" href="#dispatch-lock-todo" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to lock / unlock the application from a server dispatch. That means after locking application dispatch
+it will wait to unlock for continue to finish the request.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">unlock</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/webino.png" alt="Logo"/>
+            </a></p><menu>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>
+            <a href="../index.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../demo-application.html">Demo Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../installation.html">Installation [TODO]</a>
+        </li>
+        <li>
+            <a href="../available-modules.html">Available Modules [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>The Basics</h2>
+    <ul>
+        <li>
+            <a href="basic-usage.html">Basic Usage</a>
+        </li>
+        <li>
+            <a href="advanced-usage.html">Advanced Usage</a>
+        </li>
+        <li>
+            <a href="#">Skeleton Application [TODO]</a>
+        </li>
+        <li>
+            <a href="skeleton-module.html">Skeleton Module [TODO]</a>
+        </li>
+        <li>
+            <a href="application-config.html">Application Config [TODO]</a>
+        </li>
+        <li>
+            <a href="module-config.html">Module Config [TODO]</a>
+        </li>
+        <li>
+            <a href="request-responding.html">Request Responding [TODO]</a>
+        </li>
+        <li>
+            <a href="command-line-interface.html">Command Line Interface [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <ul>
+        <li>
+            <a href="../architecture/application.html">Application</a>
+        </li>
+        <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../architecture/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../architecture/event-system.html">Event System</a>
+        </li>
+        <li>
+            <a href="../architecture/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../architecture/modules.html">Modules [TODO]</a>
+        </li>
+        <li>
+            <a href="../architecture/public-assets.html">Public Assets [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>API</h2>
+    <ul>
+        <li>
+            <a href="../api/core.html">Core</a>
+        </li>
+        <li>
+            <a href="../api/config.html">Config</a>
+        </li>
+        <li>
+            <a href="../api/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../api/events.html">Events</a>
+        </li>
+        <li>
+            <a href="../api/logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="../api/caching.html">Caching [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="../api/sessions.html">Sessions [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/mail.html">Mail [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/data.html">Data [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/assets.html">Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/localization.html">Localization [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/console.html">Console [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Cookbook</h2>
+    <ul>
+        <li>
+            <a href="../cookbook/configuration.html">Configuration [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/services.html">Services [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/events.html">Events [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/caching.html">Caching [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/debugging.html">Debugging [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/logging.html">Logging [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/filesystem.html">Filesystem [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/console.html">Console [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/testing.html">Testing [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Delivery</h2>
+    <ul>
+        <li>
+            <a href="../delivery/application-build.html">Application Build [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-integration.html">Continuous Integration [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-delivery.html">Continuous Delivery [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Development</h2>
+    <ul>
+        <li>
+            <a href="../development/api-docs.html">API Docs [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/roadmap.html">Roadmap [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/release-notes.html">Release Notes [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/upgrade-guide.html">Upgrade Guide [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/contribution-guide.html">Contribution guide [TODO]</a>
+        </li>
+    </ul>
+</menu>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="advanced-usage.html" title="Previous document">Advanced Usage</a>
+        </li>
+        <li>
+          <a href="skeleton-module.html" title="Next document">Webino Skeleton Module</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha documentation</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2015, Webino, s. r. o. All rights reserved.
+
+  </footer>
+
+  
+  </body>
+</html>

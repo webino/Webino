@@ -1,5 +1,6 @@
-.. rst-class:: monospace
+.. rst-class:: sub-monospace
 
+=======================
 Application Caching API
 =======================
 
@@ -7,8 +8,10 @@ Application Caching API
     :depth: 1
     :local:
 
+.. rst-class:: monospace-topic
+
 Cache Methods
--------------
+=============
 
 .. contents::
     :depth: 1
@@ -35,8 +38,10 @@ $app->setCache()
     $app->setCache('myCacheKey', $myValue);
 
 
+.. rst-class:: body-font
+
 Cache Config
-------------
+============
 
 .. contents::
     :depth: 1

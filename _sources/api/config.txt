@@ -1,5 +1,6 @@
-.. rst-class:: monospace
+.. rst-class:: sub-monospace
 
+======================
 Application Config API
 ======================
 
@@ -7,13 +8,16 @@ Application Config API
     :depth: 1
     :local:
 
-Use application config API to set and get the application configuration.
+Use application config API to modify and access the application configuration.
 
+
+.. rst-class:: monospace-topic
 
 Config Methods
---------------
+==============
 
-The configuration is read only after application bootstrap.
+.. note::
+    The configuration is read-only after an application is fully bootstrapped.
 
 .. contents::
     :depth: 1
@@ -51,12 +55,10 @@ $app->getCoreConfig()
     $myCoreConfig = $app->getCoreConfig('myCoreConfigKey', $default = null);
 
 
-Config Features
----------------
+.. rst-class:: body-font sub-monospace
 
-.. contents::
-    :depth: 1
-    :local:
+Config Features
+===============
 
 Config features are registered into the config like this:
 
@@ -71,119 +73,50 @@ Config features are registered into the config like this:
     ]);
 
 
-Listener
+|vspace|
+
+Available features:
+
+.. contents::
+    :depth: 2
+    :local:
+
+
+Events
+^^^^^^
+
+Use event system config features to configure listeners.
+
+.. include:: /api/config/events.rst.inc
+
+
+Services
 ^^^^^^^^
 
-- namespace: **WebinoAppLib\\Feature**
+Use services config features to configure invokable services and service factories.
 
-Application listener config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Feature\Config;
-    use WebinoAppLib\Feature\Listener;
-
-    new Config([
-
-        new Listener(MyExampleListener::class), // <--
-
-    ]);
+.. include:: /api/config/services.rst.inc
 
 
-CoreListener
-^^^^^^^^^^^^
-
-- namespace: **WebinoAppLib\\Feature**
-
-Application core listener config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature\CoreListener;
-
-    new CoreConfig([
-
-        new CoreListener(MyExampleCoreListener::class), // <--
-
-    ]);
-
-
-Service
+Logging
 ^^^^^^^
 
-- namespace: **WebinoAppLib\\Feature**
+Use logging config features to configure logging.
 
-Application service config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Feature\Config;
-    use WebinoAppLib\Feature\Service;
-
-    new Config([
-
-        new Service(MyExampleService::class), // <--
-
-    ]);
+.. include:: /api/config/logging.rst.inc
 
 
-CoreService
-^^^^^^^^^^^
+Cache
+^^^^^
 
-- namespace: **WebinoAppLib\\Feature**
-
-Application core service config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature\CoreService;
-
-    new CoreConfig([
-
-        new CoreService(MyExampleCoreService::class), // <--
-
-    ]);
-
+Use cache config features to configure caching.
 
 .. include:: /api/config/cache.rst.inc
 
 
-Log
-^^^
-
-- namespace: **WebinoAppLib\\Feature**
-
-Logging config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature\Log;
-
-    new CoreConfig([
-
-        new Log, // <--
-
-    ]);
-
-FirePhpLog
+Filesystem
 ^^^^^^^^^^
 
-- namespace: **WebinoAppLib\\Feature**
+Use filesystem config features to configure filesystems.
 
-FirePHP logging config feature.
-
-.. code-block:: php
-
-    use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature as AppFeature;
-
-    new CoreConfig([
-
-        new AppFeature\Log,
-        new AppFeature\FirePhpLog, // <--
-
-    ]);
-
+.. include:: /api/config/filesystem.rst.inc

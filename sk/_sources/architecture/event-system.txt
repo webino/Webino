@@ -1,3 +1,4 @@
+========================
 Application Event System
 ========================
 
@@ -10,7 +11,7 @@ performing other operations as they trigger.
 
 
 Event Lifecycle
----------------
+===============
 
 The basic idea around events is that we just trigger an event and every action happens in listeners,
 even the main action. Then we can listen to that event using priorities, if we want to act like a middleware.
@@ -26,7 +27,7 @@ Convenient way to do that is to use the event :ref:`priority constants <api-even
 
 
 Event Listeners
----------------
+===============
 
 The event listener is a callable peiece of code that can perform actions when event is emitted.
 It is allowed to register an event listeners in some different ways.
@@ -39,7 +40,7 @@ It is allowed to register an event listeners in some different ways.
 Closure Listener
 ^^^^^^^^^^^^^^^^
 
-*The closure listener is the fastest created listener, but not a best practice at all.*
+The closure listener is the fastest created listener, but not a best practice at all.
 
 .. code-block:: php
 
@@ -49,10 +50,11 @@ Closure Listener
         // do something...
     });
 
+
 Invokable Listener
 ^^^^^^^^^^^^^^^^^^
 
-*The invokable listener is a class that its object can be called like a function*
+The invokable listener is a class that its object can be called like a function.
 
 .. code-block:: php
 
@@ -76,7 +78,7 @@ Invokable Listener
 Listener Aggregate
 ^^^^^^^^^^^^^^^^^^
 
-*The listener aggregate is a class that register other listeners in a batch.*
+The listener aggregate is a class that register other listeners in a batch.
 
 .. code-block:: php
 
@@ -133,14 +135,15 @@ Registering a listener aggregate via application config.
 
     ]);
 
+
 Core Listeners
---------------
+==============
 
 Core listeners can even listen to the application bootstrap first pass and configure events. They are registered into
 the core section of the application configuration and they can modify an application configuration.
 
 .. note::
-    Only core services are available to core listeners before an application is fully bootstrapped.
+    Only core services are available to the core listeners before an application is fully bootstrapped.
 
 Registering a core listener aggregate via application config.
 

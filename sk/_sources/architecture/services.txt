@@ -1,3 +1,4 @@
+====================
 Application Services
 ====================
 
@@ -18,7 +19,7 @@ isn't implemented, because with large projects it becomes messy and slow.
 
 
 Invokables
-----------
+==========
 
 An invokable service is a class that may be called like an ordinary function, or may not. It depends on its interface,
 but for a sake we call them all invokables, if they doesn't have a constructor dependencies.
@@ -65,7 +66,7 @@ Registering an invokable service via application config.
 
 
 Service Factory
----------------
+===============
 
 In case when we want to create a complex service with dependencies, it is required to create a factory.
 
@@ -107,8 +108,8 @@ Registering a service created by factory via application config.
     ]);
 
 
-Core services
--------------
+Core Services
+=============
 
 Core services are available even before an application bootstrap, but the configuration is not fully initialized
 and write enabled. They are registered into the core section of the application configuration.

@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
     <link rel="next" title="Application Services" href="services.html" />
-    <link rel="prev" title="Application Core" href="core.html" />
+    <link rel="prev" title="Application Architecture" href="application.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -37,7 +37,7 @@
     <ul>
         <li>
           &larr;
-          <a href="core.html" title="Previous document">Application Core</a>
+          <a href="application.html" title="Previous document">Application Architecture</a>
         </li>
         <li>
           <a href="services.html" title="Next document">Application Services</a>
@@ -111,11 +111,11 @@ of a pluggable configuration.</p>
 <p>then when you create a configuration:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoConfigLib\Config</span><span class="p">;</span>
 
-<span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+<span class="nb">var_dump</span><span class="p">((</span><span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
 
     <span class="k">new</span> <span class="nx">MyFeature</span><span class="p">(</span><span class="s1">&#39;OPTION_ONE&#39;</span><span class="p">,</span> <span class="s1">&#39;OPTION_TWO&#39;</span><span class="p">),</span>
 
-<span class="p">]))</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+<span class="p">]))</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">());</span>
 </pre></div>
 </div>
 <p>it will produce an array:</p>
@@ -249,19 +249,51 @@ registered into the core section of the configuration.</p>
     <h2>Getting Started</h2>
     <ul>
         <li>
-            <a href="../introduction.html">Introduction</a>
+            <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../installation.html">Installation</a>
+            <a href="../demo-application.html">Demo Application [TODO]</a>
         </li>
         <li>
-            <a href="../basic-usage.html">Basic Usage</a>
+            <a href="../installation.html">Installation [TODO]</a>
+        </li>
+        <li>
+            <a href="../available-modules.html">Available Modules [TODO]</a>
         </li>
     </ul>
+
+    <h2>The Basics</h2>
+    <ul>
+        <li>
+            <a href="../basics/basic-usage.html">Basic Usage</a>
+        </li>
+        <li>
+            <a href="../basics/advanced-usage.html">Advanced Usage</a>
+        </li>
+        <li>
+            <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/skeleton-module.html">Skeleton Module [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/application-config.html">Application Config [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/module-config.html">Module Config [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/request-responding.html">Request Responding [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/command-line-interface.html">Command Line Interface [TODO]</a>
+        </li>
+    </ul>
+
     <h2>Architecture</h2>
     <ul>
         <li>
-            <a href="core.html">Application Core</a>
+            <a href="application.html">Application</a>
         </li>
         <li>
             <a href="#">Configuration</a>
@@ -273,9 +305,16 @@ registered into the core section of the configuration.</p>
             <a href="event-system.html">Event System</a>
         </li>
         <li>
-            <a href="modules.html">Modules</a>
+            <a href="templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="modules.html">Modules [TODO]</a>
+        </li>
+        <li>
+            <a href="public-assets.html">Public Assets [TODO]</a>
         </li>
     </ul>
+
     <h2>API</h2>
     <ul>
         <li>
@@ -294,67 +333,94 @@ registered into the core section of the configuration.</p>
             <a href="../api/logging.html">Logging</a>
         </li>
         <li>
-            <a href="../api/caching.html">Caching</a>
+            <a href="../api/caching.html">Caching [TODO]</a>
         </li>
         <li>
-            <a href="../api/files.html">Filesystem</a>
+            <a href="../api/filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="../api/sessions.html">Sessions [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/mail.html">Mail [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/data.html">Data [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/assets.html">Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/localization.html">Localization [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/console.html">Console [TODO]</a>
         </li>
     </ul>
-    <h2>Services</h2>
-    <ul>
-        <li>
-            <a href="../services/config.html">Config</a>
-        </li>
-        <li>
-            <a href="../services/events.html">Events</a>
-        </li>
-        <li>
-            <a href="../services/debugger.html">Debugger</a>
-        </li>
-        <li>
-            <a href="../services/logger.html">Logger</a>
-        </li>
-        <li>
-            <a href="../services/cache.html">Cache</a>
-        </li>
-        <li>
-            <a href="../services/files.html">Files</a>
-        </li>
-    </ul>
+
     <h2>Cookbook</h2>
     <ul>
         <li>
-            <a href="../cookbook/configuration.html">Configuration</a>
+            <a href="../cookbook/configuration.html">Configuration [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/services.html">Services</a>
+            <a href="../cookbook/services.html">Services [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/events.html">Events</a>
+            <a href="../cookbook/events.html">Events [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/request.html">Request</a>
+            <a href="../cookbook/caching.html">Caching [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/response.html">Response</a>
+            <a href="../cookbook/debugging.html">Debugging [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/caching.html">Caching</a>
+            <a href="../cookbook/logging.html">Logging [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/logging.html">Logging</a>
+            <a href="../cookbook/filesystem.html">Filesystem [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/debugging.html">Debugging</a>
+            <a href="../cookbook/console.html">Console [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/filesystem.html">Filesystem</a>
+            <a href="../cookbook/testing.html">Testing [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Delivery</h2>
+    <ul>
+        <li>
+            <a href="../delivery/application-build.html">Application Build [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/console.html">Console</a>
+            <a href="../delivery/continuous-integration.html">Continuous Integration [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/testing.html">Testing</a>
+            <a href="../delivery/continuous-delivery.html">Continuous Delivery [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Development</h2>
+    <ul>
+        <li>
+            <a href="../development/api-docs.html">API Docs [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/roadmap.html">Roadmap [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/release-notes.html">Release Notes [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/upgrade-guide.html">Upgrade Guide [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/contribution-guide.html">Contribution guide [TODO]</a>
         </li>
     </ul>
 </menu>
@@ -367,7 +433,7 @@ registered into the core section of the configuration.</p>
     <ul>
         <li>
           &larr;
-          <a href="core.html" title="Previous document">Application Core</a>
+          <a href="application.html" title="Previous document">Application Architecture</a>
         </li>
         <li>
           <a href="services.html" title="Next document">Application Services</a>

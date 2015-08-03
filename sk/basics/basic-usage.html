@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Usage &mdash; Webino 0.1.0alpha dokumentácia</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
+    <link rel="next" title="Advanced Usage" href="advanced-usage.html" />
+    <link rel="prev" title="Installation" href="../installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../_static/common.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
+  </head>
+  <body role="document">
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../installation.html" title="Previous document">Installation</a>
+        </li>
+        <li>
+          <a href="advanced-usage.html" title="Next document">Advanced Usage</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-usage">
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#application-entry-point" id="id1">Application Entry Point</a></li>
+<li><a class="reference internal" href="#application-configuration" id="id2">Application Configuration</a></li>
+</ul>
+</div>
+<p>The application is basically a configuration and an execution code. The configuration is cached, if enabled so,
+and could be modified until application is fully bootstrapped.</p>
+<p><div class="vspace"></div></p>
+<div class="admonition note">
+<p class="first admonition-title">Poznámka</p>
+<p class="last">See <code class="docutils literal"><span class="pre">examples/basic-usage/</span></code> directory.</p>
+</div>
+<div class="section" id="application-entry-point">
+<h2><a class="toc-backref" href="#id1">Application Entry Point</a><a class="headerlink" href="#application-entry-point" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The application object is created, bootstrapped and dispatched in the index file.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// index.php</span>
+
+<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="application-configuration">
+<h2><a class="toc-backref" href="#id2">Application Configuration</a><a class="headerlink" href="#application-configuration" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Application is configured in the OOP style, so instead of writing an array we are using config features.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// config/application.php</span>
+
+<span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature</span> <span class="k">as</span> <span class="nx">AppFeature</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature</span> <span class="k">as</span> <span class="nx">ConfigFeature</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">ConfigFeature\Log</span><span class="p">,</span>
+    <span class="k">new</span> <span class="nx">ConfigFeature\ConfigCacheEnabled</span><span class="p">,</span>
+    <span class="k">new</span> <span class="nx">AppFeature\FilesystemCache</span><span class="p">,</span>
+
+    <span class="p">(</span><span class="k">new</span> <span class="nx">MyCustomFeature</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setAnything</span><span class="p">(),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/webino.png" alt="Logo"/>
+            </a></p><menu>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>
+            <a href="../index.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../demo-application.html">Demo Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../installation.html">Installation [TODO]</a>
+        </li>
+        <li>
+            <a href="../available-modules.html">Available Modules [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>The Basics</h2>
+    <ul>
+        <li>
+            <a href="#">Basic Usage</a>
+        </li>
+        <li>
+            <a href="advanced-usage.html">Advanced Usage</a>
+        </li>
+        <li>
+            <a href="skeleton-application.html">Skeleton Application [TODO]</a>
+        </li>
+        <li>
+            <a href="skeleton-module.html">Skeleton Module [TODO]</a>
+        </li>
+        <li>
+            <a href="application-config.html">Application Config [TODO]</a>
+        </li>
+        <li>
+            <a href="module-config.html">Module Config [TODO]</a>
+        </li>
+        <li>
+            <a href="request-responding.html">Request Responding [TODO]</a>
+        </li>
+        <li>
+            <a href="command-line-interface.html">Command Line Interface [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <ul>
+        <li>
+            <a href="../architecture/application.html">Application</a>
+        </li>
+        <li>
+            <a href="../architecture/configuration.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../architecture/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../architecture/event-system.html">Event System</a>
+        </li>
+        <li>
+            <a href="../architecture/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../architecture/modules.html">Modules [TODO]</a>
+        </li>
+        <li>
+            <a href="../architecture/public-assets.html">Public Assets [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>API</h2>
+    <ul>
+        <li>
+            <a href="../api/core.html">Core</a>
+        </li>
+        <li>
+            <a href="../api/config.html">Config</a>
+        </li>
+        <li>
+            <a href="../api/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../api/events.html">Events</a>
+        </li>
+        <li>
+            <a href="../api/logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="../api/caching.html">Caching [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="../api/sessions.html">Sessions [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/mail.html">Mail [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/data.html">Data [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/assets.html">Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/localization.html">Localization [TODO]</a>
+        </li>
+        <li>
+            <a href="../api/console.html">Console [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Cookbook</h2>
+    <ul>
+        <li>
+            <a href="../cookbook/configuration.html">Configuration [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/services.html">Services [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/events.html">Events [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/caching.html">Caching [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/debugging.html">Debugging [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/logging.html">Logging [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/filesystem.html">Filesystem [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/console.html">Console [TODO]</a>
+        </li>
+        <li>
+            <a href="../cookbook/testing.html">Testing [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Delivery</h2>
+    <ul>
+        <li>
+            <a href="../delivery/application-build.html">Application Build [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-integration.html">Continuous Integration [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-delivery.html">Continuous Delivery [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Development</h2>
+    <ul>
+        <li>
+            <a href="../development/api-docs.html">API Docs [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/roadmap.html">Roadmap [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/release-notes.html">Release Notes [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/upgrade-guide.html">Upgrade Guide [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/contribution-guide.html">Contribution guide [TODO]</a>
+        </li>
+    </ul>
+</menu>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../installation.html" title="Previous document">Installation</a>
+        </li>
+        <li>
+          <a href="advanced-usage.html" title="Next document">Advanced Usage</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2015, Webino, s. r. o. All rights reserved.
+
+  </footer>
+
+  
+  </body>
+</html>

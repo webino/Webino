@@ -1,5 +1,6 @@
-Application Core
-================
+========================
+Application Architecture
+========================
 
 .. contents::
     :depth: 1
@@ -8,8 +9,9 @@ Application Core
 The Webino™ application architecture is based around the Zend Frameowrk 2 but simplified and enhanced.
 It also brings some other useful open-source packages to make a web application devstack.
 
-Application Core Lifecycle
---------------------------
+
+Core Lifecycle
+==============
 
 The application core lifecycle is very simple and straightforward. It just bootstrap the application
 and then it dispatches. Anything that should be performed on a dispatch has to be in the listeners
@@ -70,8 +72,8 @@ configure event.
   nothing will happen.
 
 
-Application Core Events
------------------------
+Core Events
+===========
 
 Events emitted during an application dispatch lifecycle.
 
@@ -88,8 +90,8 @@ Events emitted during an application dispatch lifecycle.
     *Responding to the client request*
 
 
-The Application Object Class Diagram
-------------------------------------
+Object Class Diagram
+====================
 
 The application is divided into two types, the basic type and the configured one. While all general application
 methods are available throughout whole life cycle, the ``bootstrap()`` method can be called only on a basic type and
@@ -97,4 +99,3 @@ the ``dispatch()`` on a cofigured type.
 
 .. image:: ../_static/media/WebinoAppLib.Application.ClassDiagram_w720.png
     :class: centered
-

@@ -1,3 +1,4 @@
+=========================
 Application Configuration
 =========================
 
@@ -30,7 +31,7 @@ a documentation we don't know what to type, so configurators are introduced.
 
 
 Configuration Features
-----------------------
+======================
 
 Configurators are used to generate an array configurations for large PHP applications. With them, you can generate
 an array configuration in the OOP way. Everything is config and config can contain features. Feature is a fragment
@@ -61,11 +62,11 @@ then when you create a configuration:
 
     use WebinoConfigLib\Config;
 
-    return (new Config([
+    var_dump((new Config([
 
         new MyFeature('OPTION_ONE', 'OPTION_TWO'),
 
-    ]))->toArray();
+    ]))->toArray());
 
 
 it will produce an array:
@@ -82,7 +83,7 @@ Now you should get the main idea what the configuration feature is.
 
 
 Application Configuration
--------------------------
+=========================
 
 Configuration features can be cascaded deeply if required, but plugged shallowly. That means we can add or remove
 a feature from the config easily:
@@ -132,7 +133,7 @@ So we can produce a very complex configuration on a couple of lines.
 
 
 Services Configuration
-----------------------
+======================
 
 With services configuration we can register invokables and factories to the application service manager.
 
@@ -159,7 +160,7 @@ With services configuration we can register invokables and factories to the appl
 
 
 Listeners Configuration
------------------------
+=======================
 
 We can configure an application listeners bindings.
 
@@ -186,7 +187,7 @@ We can configure an application listeners bindings.
 
 
 Core Configuration
-------------------
+==================
 
 Services and listeners that should be available before an application is fully configured must be
 registered into the core section of the configuration.
