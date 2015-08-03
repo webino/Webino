@@ -1,9 +1,9 @@
 ConfigCacheEnabled
-^^^^^^^^^^^^^^^^^^
+------------------
 
-- namespace: **WebinoConfigLib\\Feature**
+- namespace: ``WebinoConfigLib\Feature``
 
-Application config cache enabled config feature.
+*Application config cache enabled config feature, it toggles application config caching.*
 
 .. code-block:: php
 
@@ -12,17 +12,30 @@ Application config cache enabled config feature.
 
     new Config([
 
+        // enable
         new ConfigCacheEnabled, // <--
+
+        // disable
+        new ConfigCacheEnabled(false), // <--
 
     ]);
 
 
+*Obtaining cache storage instance.* [**TODO**]
+
+.. code-block:: php
+
+    $app->cache();
+    // or
+    $app->cache(DefaultCache:::class);
+
+
 FilesystemCache
-^^^^^^^^^^^^^^^
+---------------
 
-- namespace: **WebinoAppLib\\Feature**
+- namespace: ``WebinoAppLib\Feature``
 
-Application filesystem cache config feature.
+*Application filesystem cache config feature.*
 
 .. code-block:: php
 
@@ -37,11 +50,11 @@ Application filesystem cache config feature.
 
 
 MemoryCache
-^^^^^^^^^^^
+-----------
 
-- namespace: **WebinoAppLib\\Feature**
+- namespace: ``WebinoAppLib\Feature``
 
-Application memory cache config feature.
+*Application memory cache config feature.*
 
 .. code-block:: php
 

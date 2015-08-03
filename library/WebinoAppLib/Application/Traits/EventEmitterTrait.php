@@ -15,14 +15,14 @@ use Zend\Stdlib\CallbackHandler;
 trait EventEmitterTrait
 {
     /**
+     * @var EventManagerInterface
+     */
+    private $events;
+
+    /**
      * @var \Zend\EventManager\ListenerAggregateInterface[]
      */
     protected $listeners = [];
-
-    /**
-     * @return EventManagerInterface
-     */
-    abstract public function getEvents();
 
     /**
      * @param string $service
@@ -49,6 +49,22 @@ trait EventEmitterTrait
      * @return LoggerInterface
      */
     abstract public function log($level = null, ...$args);
+
+    /**
+     * @return EventManagerInterface
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param object|EventManagerInterface $events
+     */
+    protected function setEvents(EventManagerInterface $events)
+    {
+        $this->events = $events;
+    }
 
     /**
      * {@inheritdoc}

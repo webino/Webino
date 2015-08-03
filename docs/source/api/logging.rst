@@ -1,5 +1,6 @@
-.. rst-class:: monospace
+.. rst-class:: sub-monospace
 
+=======================
 Application Logging API
 =======================
 
@@ -12,13 +13,13 @@ Logs are important for monitoring the security of your application and to track 
 as well as for auditing the correct usage of the system. The PSR-Logger interface standard is supported.
 
 Application Logger Service
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The best practice is to log a message via class.
 
 
 $app->log()
-^^^^^^^^^^^
+-----------
 
 *Writing a message to a log.*
 
@@ -48,8 +49,18 @@ $app->log()
     $app->log($app::DEBUG, 'My log message text', $argOne, $argTwo);
 
 
+Logging Config
+^^^^^^^^^^^^^^
+
+.. contents::
+    :depth: 1
+    :local:
+
+.. include:: /api/config/logging.rst.inc
+
+
 Available Log Message Classes
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use following log message classes in the ``WebinoAppLib\Log`` namespace to extend your custom
 message classes.
@@ -79,8 +90,10 @@ message classes.
     *Debug, detailed information for debugging purposes.*
 
 
+.. rst-class:: monospace-topic
+
 PSR-3-Logger Interface
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 Calling the ``$app->log()`` method without arguments returns the standard PSR-3 logger object,
 on which we can call standard logging methods.
@@ -108,48 +121,48 @@ Available methods:
 
 
 $app->log()->emergency()
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 *Emergency, the system is unusable.*
 
 
 $app->log()->alert()
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 *Alert, immediate action is required.*
 
 
 $app->log()->critical()
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 *Critical, critical conditions.*
 
 
 $app->log()->error()
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 *Error, errors that do not require immediate attention but should be monitored.*
 
 
 $app->log()->warning()
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 *Warning, unusual or undesirable occurrences that are not errors.*
 
 
 $app->log()->notice()
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 *Notice, normal but significant events.*
 
 
 $app->log()->info()
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 *Info, interesting events.*
 
 
 $app->log()->debug()
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 *Debug, detailed information for debugging purposes.*

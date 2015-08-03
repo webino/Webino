@@ -72,17 +72,18 @@ class Bootstrap
             $cached = $this->app->getCache($this->getCacheKey());
             if ($cached) {
                 $this->app->setConfig($cached);
+                $this->configureServices();
                 $this->app->log(Log\LoadCachedAppConfig::class);
                 return $this;
             }
         }
 
         $this->app->emit(AppEvent::CONFIGURE, [], [$this->app, 'mergeConfig']);
+        $this->configureServices();
         $this->app->log(Log\ConfigureApp::class);
 
         $useCache and $this->app->setCache($this->getCacheKey(), $config);
 
-        $this->configureServices();
         return $this;
     }
 

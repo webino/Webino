@@ -1,10 +1,21 @@
-.. rst-class:: monospace
+.. rst-class:: sub-monospace
 
+========================
 Application Services API
 ========================
 
 The application object behaves as a service container, that means we can register and retrieve services
 directly from it.
+
+.. contents::
+    :depth: 1
+    :local:
+
+
+.. rst-class:: monospace-topic
+
+Services Methods
+^^^^^^^^^^^^^^^^
 
 .. contents::
     :depth: 1
@@ -56,3 +67,13 @@ $app->has()
 
     /** @var bool $hasService */
     $hasService = $app->has('MyService');
+
+
+Services Config
+^^^^^^^^^^^^^^^
+
+.. contents::
+    :depth: 1
+    :local:
+
+.. include:: /api/config/services.rst.inc

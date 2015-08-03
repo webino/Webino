@@ -9,8 +9,6 @@ use WebinoAppLib\Service\LoggerInterface;
 use WebinoEventLib\EventManager;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\Config\Config;
-use Zend\Stdlib\RequestInterface;
-use Zend\Stdlib\ResponseInterface;
 
 require __DIR__ . '/../bootstrap.php';
 

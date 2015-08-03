@@ -85,7 +85,8 @@ img.border {
     border: 1px solid lightgray;
 }
 
-.body-font {
+.body-font,
+.body-font.sub-monospace h3 {
     font-family: 'Open Sans', sans-serif;
 }
 .zero-top-space {
@@ -172,13 +173,22 @@ dl.docutils.monospace dt {
 }
 
 .monospace h2,
-.monospace h3 {
+.monospace h3,
+.sub-monospace h3,
+.sub-monospace h4,
+.monospace-topic .topic a {
     font-family: 'Source Code Pro', monospace;
     font-weight: bold;
 }
 
-.monospace h3 {
+.monospace h3,
+.sub-monospace h3 {
     margin-top: 30px;
+}
+
+.monospace-topic .topic a,
+.body-font.sub-monospace h3 {
+    font-weight: normal;
 }
 
 blockquote {

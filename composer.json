@@ -25,8 +25,15 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": ">=5.5.1",
-    "zendframework/zendframework": "dev-develop",
+    "php": ">=5.6",
+    "zendframework/zend-config": "2.*",
+    "zendframework/zend-cache": "2.*",
+    "zendframework/zend-eventmanager": "2.*",
+    "zendframework/zend-log": "2.*",
+    "zendframework/zend-servicemanager": "2.*",
+    "league/flysystem": "1.*",
+    "league/flysystem-memory": "1.*",
+    "bushbaby/flysystem": "1.*",
     "tracy/tracy": "2.*",
     "nette/tester": "1.*",
     "mikey179/vfsStream": "1.*",
@@ -38,8 +45,11 @@
       "WebinoExceptionLib\\": "library/",
       "WebinoConfigLib\\": "library/",
       "WebinoEventLib\\": "library/",
+      "WebinoFilesystemLib\\": "library/",
       "WebinoLogLib\\": "library/",
+      "WebinoBaseLib\\": "library/",
       "WebinoAppLib\\": "library/"
-    }
+    },
+    "files": ["library/Webino.php"]
   }
 }

@@ -132,7 +132,7 @@ Application provides some basic functionality via methods and by core services.
 - `getDebugger()` - Getting a debugger service
 - `getLogger()` - Getting a logger service
 - `getCache()` - Getting a cache service
-- `getFile()` - Getting a filesystem manager service [TODO]
+- `getFiles()` - Getting a filesystem manager service [TODO]
 
 ### Application Operations
 

@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Application\Traits;
 
-use Psr\Log\LoggerInterface;
+use WebinoAppLib\Service\LoggerInterface;
 
 /**
  * Trait Logger
@@ -10,9 +10,25 @@ use Psr\Log\LoggerInterface;
 trait LoggerTrait
 {
     /**
-     * @return LoggerInterface
+     * @var LoggerInterface
      */
-    abstract public function getLogger();
+    private $logger;
+
+    /**
+     * @return object|LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    protected function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * Write a message to a log

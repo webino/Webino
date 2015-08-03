@@ -11,6 +11,10 @@ commands.
 
 - `vendor/bin/tester tests/`
 
+**All tests watching**
+
+- `vendor/bin/tester -w library/ -w tests/ tests/`
+
 **Specific namespace** e.g. *WebinoAppLib*
 
 - `vendor/bin/tester tests/WebinoAppLib/`

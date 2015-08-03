@@ -33,6 +33,11 @@ interface AbstractApplicationInterface
     const CACHE = 'Cache';
 
     /**
+     * Application filesystem service name
+     */
+    const FILESYSTEM = 'Filesystem';
+
+    /**
      * Application core configuration service name
      */
     const CORE_CONFIG = 'CoreConfig';
@@ -41,14 +46,4 @@ interface AbstractApplicationInterface
      * Application configuration service name
      */
     const CONFIG = 'Config';
-
-    /**
-     * Application request service name
-     */
-    const REQUEST = 'Request';
-
-    /**
-     * Application response service name
-     */
-    const RESPONSE = 'Response';
 }

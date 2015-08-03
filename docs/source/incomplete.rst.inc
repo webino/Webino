@@ -1,6 +1,6 @@
 |vspace|
 
-.. warning::
+.. note::
 
     |Incomplete|
 

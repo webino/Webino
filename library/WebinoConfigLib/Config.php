@@ -14,6 +14,7 @@ class Config extends AbstractConfig
      */
     public function __construct(array $config = [])
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         ($this instanceof DefaultConfigInterface)
             and $this->mergeArray($this->getDefaultConfig());
 

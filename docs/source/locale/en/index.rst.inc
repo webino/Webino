@@ -2,6 +2,6 @@
     Learn Webino
 
 .. |welcome.text| replace::
-    Webino™ is a **web applications platform** for professional web developers.
+    Webino™ is a platform for creating quality and modular web applications.
     |br|
-    It's built in the `PHP`_ with a `Zend Framework 2`_ and other useful open-source libraries.
+    It's built on `PHP`_ with `Zend Framework 2`_ and other useful open-source packages.
