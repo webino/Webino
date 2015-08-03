@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Perform action before application dispatch
+ * Perform an action before application dispatch
  */
 
 use WebinoAppLib\Event\AppEvent;

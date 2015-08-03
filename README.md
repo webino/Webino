@@ -16,31 +16,31 @@ The main goal of Webino™ is to be a platform for high quality, modular and sca
 for easing development, testing and building processes. Including documentation about continuous integration
 and continuous delivery.
 
-- High quality code
+- **High quality code**
 
   - Classes must be short, prefer composition over inheritance. Use PSR-2, OOP, design-patterns and refactoring.
 
-- Modular
-
-  - Modules can override each others configuration thus it influences the resulting effect.
-
-- Configurable
+- **Configurable**
 
   - Everything must be configurable, even the templates rendering.
+  
+- **Modular architecture**
 
-- Low coupling
+  - Modules can override each others configuration influencing the resulting effect.
 
-  - The computing code must be separated to a routines emitting events and listeners.
+- **Low coupling**
 
-- Testable
+  - The computing code must be separated to a routines emitting events and to listeners.
 
-  - Testing is so easy that it is the first place you want to start typing.
+- **Testable**
 
-- Scalable
+  - Testing must be so easy that it will be the first place you want to start typing code.
+
+- **Scalable**
 
   - It is built on PHP.
 
-- Deliverable
+- **Deliverable**
 
   - Continuous integration development and continuous delivery of minimized code.   
 

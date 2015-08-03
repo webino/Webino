@@ -1,6 +1,6 @@
 <?php
 /**
- * Perform action before an application is fully configured
+ * Perform an action before application is fully configured
  */
 
 /** @var \WebinoAppLib\Application\AbstractBaseApplication $appCore */

@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Asynchronous entry point
+ * Asynchronous response point
  */
 
 // go to parent directory
@@ -20,6 +19,6 @@ if ('cli' !== PHP_SAPI) {
 require 'autoload.php';
 
 /**
- * Application pipe file
+ * Application response pipe file
  */
 require WebinoAppLib\Includes\Pipe::FILE;

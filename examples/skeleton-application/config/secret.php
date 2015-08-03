@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Application secret code
  */
