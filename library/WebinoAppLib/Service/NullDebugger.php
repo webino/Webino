@@ -20,7 +20,15 @@ class NullDebugger implements DebuggerInterface
     /**
      * {@inheritdoc}
      */
-    public function setBarPanel(IBarPanel $panel)
+    public function setBarPanel(IBarPanel $panel, $id = null)
+    {
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBarInfo($info, $value = null)
     {
         return $this;
     }

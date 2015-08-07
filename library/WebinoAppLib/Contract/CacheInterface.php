@@ -21,7 +21,7 @@ interface CacheInterface
      * Set cached value or cache service
      *
      * @param object|StorageInterface|string $cacheOrKey
-     * @param bool|mixed|null $setServiceOrValue
+     * @param mixed|null $value
      */
-    public function setCache($cacheOrKey, $setServiceOrValue = null);
+    public function setCache($cacheOrKey, $value = null);
 }

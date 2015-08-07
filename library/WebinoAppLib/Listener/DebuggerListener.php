@@ -26,19 +26,19 @@ class DebuggerListener extends AbstractListener
      */
     public function setupInfo(AppEvent $event)
     {
-        $config = $event->getApp()->getConfig(Debugger::DEBUGGER);
-        if (empty($config)) {
+        $app = $event->getApp();
+        $cfg = $app->getConfig(Debugger::DEBUGGER);
+
+        if (empty($cfg)) {
             return;
         }
 
-        $info = $config->{Debugger::INFO};
+        $info = $cfg->{Debugger::INFO};
         if (empty($info)) {
             return;
         }
 
-        /** @var \Tracy\DefaultBarPanel $panel */
-        $panel = $event->getApp()->getDebugger()->getBarPanel('Tracy:info');
-        $panel and $panel->data = $info->toArray();
+        $app->debug()->setBarInfo($info->toArray());
     }
 
     /**
@@ -58,8 +58,8 @@ class DebuggerListener extends AbstractListener
             return;
         }
 
-        foreach ($panels as $panel) {
-            $app->has($panel) and $app->getDebugger()->setBarPanel($app->get($panel));
+        foreach ($panels as $id => $panel) {
+            $app->has($panel) and $app->debug()->setBarPanel($app->get($panel), $id);
         }
     }
 }

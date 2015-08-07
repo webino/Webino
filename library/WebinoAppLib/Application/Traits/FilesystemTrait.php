@@ -18,12 +18,6 @@ trait FilesystemTrait
     private $filesystem;
 
     /**
-     * @param string $name
-     * @param mixed $service
-     */
-    abstract protected function setServicesService($name, $service);
-
-    /**
      * @return FilesystemManager|mixed
      */
     public function getFilesystem()
@@ -38,7 +32,6 @@ trait FilesystemTrait
     protected function setFilesystem(FilesystemManager $filesystem, $setService = true)
     {
         $this->filesystem = $filesystem;
-        $setService and $this->setServicesService(AbstractApplicationInterface::FILESYSTEM, $filesystem);
     }
 
     /**

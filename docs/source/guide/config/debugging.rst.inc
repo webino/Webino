@@ -1,7 +1,7 @@
 DebugBarInfo
 ------------
 
-*Adding debugger bar info.*
+*Configuring debugger bar info.*
 
 .. code-block:: php
 
@@ -24,14 +24,14 @@ DebugBarInfo
 DebugBarPanel
 -------------
 
-*Adding debugger bar panel.*
+*Configuring debugger bar panel.*
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
+    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\DebugBarPanel;
 
-    new CoreConfig([
+    new Config([
 
         // invokable
         new DebugBarPanel('myPanel', MyPanel::class),

@@ -2,6 +2,7 @@
 
 namespace WebinoAppLib\Contract;
 
+use WebinoAppLib\Log\MessageInterface;
 use WebinoLogLib\SeverityInterface;
 
 /**
@@ -12,7 +13,7 @@ interface LoggerInterface extends SeverityInterface
     /**
      * Write a message to a log
      *
-     * @param $level|MessageInterface Message severity or a MessageInterface class name or an object.
+     * @param string|MessageInterface $level Message severity or a MessageInterface class name or an object.
      * @param mixed ...$args Message parameters, if $level is a string the first argument is a message text.
      * @return LoggerInterface
      */

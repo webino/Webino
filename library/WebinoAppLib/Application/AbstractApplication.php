@@ -3,8 +3,6 @@
 namespace WebinoAppLib\Application;
 
 use WebinoAppLib\Contract;
-use WebinoAppLib\Service\DebuggerInterface;
-use WebinoAppLib\Service\NullDebugger;
 use WebinoAppLib\Service\Bootstrap;
 use Zend\ServiceManager\ServiceManager;
 
@@ -13,6 +11,7 @@ use Zend\ServiceManager\ServiceManager;
  */
 abstract class AbstractApplication implements
     AbstractApplicationInterface,
+    Contract\DebuggerInterface,
     Contract\ServiceProviderInterface,
     Contract\ConfigInterface,
     Contract\EventEmitterInterface,
@@ -21,6 +20,7 @@ abstract class AbstractApplication implements
     Contract\FilesystemInterface,
     Contract\RouterInterface
 {
+    use Traits\DebuggerTrait;
     use Traits\ServiceProviderTrait;
     use Traits\ConfigTrait;
     use Traits\EventEmitterTrait;
@@ -63,11 +63,6 @@ abstract class AbstractApplication implements
     private $bootstrap;
 
     /**
-     * @var DebuggerInterface
-     */
-    private $debugger;
-
-    /**
      * @param ServiceManager $services
      */
     public function __construct(ServiceManager $services)
@@ -96,26 +91,5 @@ abstract class AbstractApplication implements
     protected function setBootstrap(Bootstrap $bootstrap)
     {
         $this->bootstrap = $bootstrap;
-    }
-
-    /**
-     * @return object|DebuggerInterface
-     */
-    public function getDebugger()
-    {
-        if (null === $this->debugger) {
-            $this->setDebugger(new NullDebugger);
-        }
-        return $this->debugger;
-    }
-
-    /**
-     * @param object|DebuggerInterface $debugger
-     * @param bool $setService
-     */
-    protected function setDebugger(DebuggerInterface $debugger, $setService = true)
-    {
-        $this->debugger = $debugger;
-        $setService and $this->setServicesService($this::DEBUGGER, $debugger);
     }
 }

@@ -32,7 +32,7 @@ class MyCoreListener extends \WebinoEventLib\AbstractListener
 return new CoreConfig([
 //    new ConfigFeature\Log,
 //    new ConfigFeature\FirePhpLog,
-    //new ConfigFeature\ConfigCacheEnabled,
+//    new ConfigFeature\ConfigCacheEnabled,
     new AppFeature\FilesystemCache,
 
     ['responseText' => 'Random: ' . rand(9, 9999)],

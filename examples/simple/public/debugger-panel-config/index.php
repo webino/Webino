@@ -1,6 +1,6 @@
 <?php
 /**
- * Debugger Panel
+ * Debugger Panel Config
  * Webino example
  */
 
@@ -52,15 +52,17 @@ class MyDebugBarPanel extends AbstractPanel
  */
 $debugger = Webino::debugger(Webino::debuggerOptions()->setBar(true));
 
-$app = Webino::application(null, $debugger)->bootstrap();
-
-$app->bind(DefaultRoute::class, function (RouteEvent $event) {
+$config = Webino::config([
     /**
-     * Adding the Tracy
+     * Configuring the Tracy
      * debugger bar panel.
      */
-    $event->getApp()->debug()->setBarPanel(new MyDebugBarPanel, MyDebugBarPanel::NAME);
+    new DebugBarPanel(MyDebugBarPanel::NAME, MyDebugBarPanel::class),
+]);
 
+$app = Webino::application($config, $debugger)->bootstrap();
+
+$app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
         'Check out right bottom corner > MyPanel!',
         new SourcePreview(__FILE__),

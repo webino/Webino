@@ -1,31 +1,32 @@
 <?php
 /**
- * Debugger Info
+ * Debugger Dump
  * Webino example
  */
 
 use WebinoAppLib\Event\RouteEvent;
-use WebinoAppLib\Feature\DebugBarInfo;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
+use WebinoBaseLib\Html\TitleHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Adding the Tracy
+ * debugger bar.
+ */
 $debugger = Webino::debugger(Webino::debuggerOptions()->setBar(true));
 
 $app = Webino::application(null, $debugger)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    /**
-     * Adding the Tracy
-     * debugger bar info.
-     */
-    $event->getApp()->debug()->setBarInfo('Test Label 01', 'Test Value01');
-    // or as array
-    $event->getApp()->debug()->setBarInfo(['Test Label 02' => 'Test Value02']);
-
     $event->setResponseContent([
-        'Check out right bottom corner > System info!',
+        'Hello Webino!',
+        /**
+         * Debugger returning
+         * a variable dump.
+         */
+        $event->getApp()->debug($event, true),
         new SourcePreview(__FILE__),
     ]);
 });

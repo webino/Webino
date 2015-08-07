@@ -59,11 +59,26 @@ class Debugger implements DebuggerInterface
 
     /**
      * @param object|IBarPanel $panel
-     * @return self
+     * @param string|null $id
+     * @return $this
      */
-    public function setBarPanel(IBarPanel $panel)
+    public function setBarPanel(IBarPanel $panel, $id = null)
     {
-        Tracy::getBar()->addPanel($panel);
+        Tracy::getBar()->addPanel($panel, $id);
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBarInfo($info, $value = null)
+    {
+        $_info = is_string($info) ? $info = [$info => (string) $value] : (array) $info;
+
+        /** @var \Tracy\DefaultBarPanel $panel */
+        $panel = $this->getBarPanel('Tracy:info');
+        $panel and $panel->data = array_replace(is_array($panel->data) ? $panel->data : [], $_info);
+
         return $this;
     }
 

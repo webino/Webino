@@ -21,7 +21,7 @@ trait CacheTrait
      * @param string $name
      * @param mixed $service
      */
-    abstract protected function setServicesService($name, $service);
+//    abstract protected function setServicesService($name, $service);
 
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ trait CacheTrait
     /**
      * {@inheritdoc}
      */
-    public function setCache($cacheOrKey, $setServiceOrValue = null)
+    public function setCache($cacheOrKey, $value = null)
     {
         if ($cacheOrKey instanceof StorageInterface) {
             if (null !== $this->cache) {
@@ -51,11 +51,8 @@ trait CacheTrait
 
             $this->cache = $cacheOrKey;
 
-            (null === $setServiceOrValue) ? true : (bool) $setServiceOrValue
-                and $this->setServicesService(AbstractApplicationInterface::CACHE, $cacheOrKey);
-
         } else {
-            $this->getCache()->setItem($cacheOrKey, $setServiceOrValue);
+            $this->getCache()->setItem($cacheOrKey, $value);
         }
     }
 }

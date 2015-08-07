@@ -3,15 +3,15 @@
 namespace WebinoAppLib\Feature;
 
 use WebinoAppLib\Filesystem\InMemoryFiles;
+use WebinoFilesystemLib\Feature\MemoryFilesystem as BaseMemoryFilesystem;
 
 /**
  * Class MemoryFilesystem
  */
-class MemoryFilesystem extends \WebinoFilesystemLib\Feature\MemoryFilesystem
+class MemoryFilesystem extends BaseMemoryFilesystem
 {
     /**
-     * Configure an application memory filesystem
-     *
+     * Configure application memory filesystem
      */
     public function __construct()
     {

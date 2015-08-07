@@ -94,7 +94,8 @@ Object Class Diagram
 
 The application is divided into two types, the basic type and the configured one. While all general application
 methods are available throughout whole life cycle, the ``bootstrap()`` method can be called only on a basic type and
-the ``dispatch()`` on a cofigured type.
+the ``dispatch()`` on a configured type.
 
 .. image:: ../_static/media/WebinoAppLib.Application.ClassDiagram_w720.png
     :class: centered
+

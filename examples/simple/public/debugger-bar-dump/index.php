@@ -24,8 +24,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      * Debugger bar
      * variable dump.
      */
-    // TODO $event->getApp()->debug()->barDump($event);
-    $event->getApp()->getDebugger()->barDump($event);
+    $event->getApp()->debug()->barDump($event);
 
     $event->setResponseContent([
         'Check out right bottom corner > dumps!',

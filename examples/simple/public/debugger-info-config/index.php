@@ -1,6 +1,6 @@
 <?php
 /**
- * Debugger Info
+ * Debugger Info Config
  * Webino example
  */
 
@@ -11,19 +11,25 @@ use WebinoAppLib\Router\DefaultRoute;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Adding the Tracy
+ * debugger bar.
+ */
 $debugger = Webino::debugger(Webino::debuggerOptions()->setBar(true));
 
-$app = Webino::application(null, $debugger)->bootstrap();
-
-$app->bind(DefaultRoute::class, function (RouteEvent $event) {
+$config = Webino::config([
     /**
-     * Adding the Tracy
+     * Configuring the Tracy
      * debugger bar info.
      */
-    $event->getApp()->debug()->setBarInfo('Test Label 01', 'Test Value01');
+    new DebugBarInfo('Custom Info 01', 'Custom Info Value 01'),
     // or as array
-    $event->getApp()->debug()->setBarInfo(['Test Label 02' => 'Test Value02']);
+    new DebugBarInfo(['Custom Info 02' => 'Custom Info Value 02']),
+]);
 
+$app = Webino::application($config, $debugger)->bootstrap();
+
+$app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
         'Check out right bottom corner > System info!',
         new SourcePreview(__FILE__),
