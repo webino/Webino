@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
-    <link rel="next" title="Application Configuration" href="configuration.html" />
+    <link rel="next" title="Application Configuration" href="config.html" />
     <link rel="prev" title="Webino Skeleton Module" href="../basics/skeleton-module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
@@ -40,7 +40,7 @@
           <a href="../basics/skeleton-module.html" title="Previous document">Webino Skeleton Module</a>
         </li>
         <li>
-          <a href="configuration.html" title="Next document">Application Configuration</a>
+          <a href="config.html" title="Next document">Application Configuration</a>
           &rarr;
         </li>
     </ul>
@@ -74,7 +74,7 @@ It also brings some other useful open-source packages to make a web application 
 and then it dispatches. Anything that should be performed on a dispatch has to be in the listeners
 attached to that event.</p>
 <p>Because of two pass application bootstrap process, the core services and listeners are initialized first.
-So they are ready before first pass bootstrap event occurs. The remaining services and listeners are initialized
+So they are ready before a first pass bootstrap event occurs. The remaining services and listeners are initialized
 after the configure event, right before second pass bootstrap occurs. So only core listeners can listen to the
 configure event.</p>
 <img alt="../_images/WebinoAppLib.Flowchart_h400.png" class="centered" src="../_images/WebinoAppLib.Flowchart_h400.png" />
@@ -85,27 +85,27 @@ configure event.</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li>There are two optional arguments, for the config and the debugger objects.<ul>
+<li>There are two optional arguments, for a config and a debugger objects.<ul>
 <li>If those arguments are not provided, the application factory tries to require them from
 files <code class="docutils literal"><span class="pre">config/application.php</span></code> and <code class="docutils literal"><span class="pre">config/debugger.php</span></code> in your include path,
-if that fails too, the factory creates a default configuration and a null debugger objects.</li>
+if that fails too, the factory creates default configuration and null debugger objects.</li>
 </ul>
 </li>
 <li>Finally an application is created via service manager and registered into services too.</li>
 </ul>
-<p><strong>2)</strong> <em>Initializing an application, all the services will be ready.</em></p>
+<p><strong>2)</strong> <em>Initializing application, all the services will be ready.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Application\AbstractConfiguredApplication $app **/</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nv">$appCore</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>The application config is allowed for modifications during initialization.</li>
-<li>Calling the <code class="docutils literal"><span class="pre">bootstrap()</span></code> method triggers the two pass application bootstrap event.<ul>
+<li>Application config is allowed for modifications during initialization.</li>
+<li>Calling <code class="docutils literal"><span class="pre">bootstrap()</span></code> method triggers the two pass application bootstrap event.<ul>
 <li>First pass is handled by core listeners and it allows them to listen to the configure event and
 to a second pass of the bootstrap.</li>
 <li>Then application configuration event is triggered, but skipped if cached config is available.</li>
 <li>Second pass of the bootstrap is handled by remaining listeners, allowing them to perform actions
-before an application is dispatched.</li>
+before application is dispatched.</li>
 </ul>
 </li>
 </ul>
@@ -114,7 +114,7 @@ before an application is dispatched.</li>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Calling a <code class="docutils literal"><span class="pre">dispatch()</span></code> method just triggers the dispatch event, if there are not dispatch listeners,
+<li>Calling <code class="docutils literal"><span class="pre">dispatch()</span></code> method just triggers a dispatch event. If there are not dispatch listeners,
 nothing will happen.</li>
 </ul>
 </div>
@@ -125,7 +125,7 @@ nothing will happen.</li>
 <dt><strong>bootstrap</strong> <em>(only for core listeners)</em></dt>
 <dd><em>First pass, initializing core services and listeners.</em></dd>
 <dt><strong>configure</strong> <em>(only for core listeners)</em></dt>
-<dd><em>Configuring an application, optional if cache is available.</em></dd>
+<dd><em>Configuring application, optional if cache is available.</em></dd>
 <dt><strong>bootstrap</strong></dt>
 <dd><em>Second pass, initializing remaining services and listeners.</em></dd>
 <dt><strong>dispatch</strong></dt>
@@ -200,13 +200,13 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
             <a href="#">Application</a>
         </li>
         <li>
-            <a href="configuration.html">Configuration</a>
+            <a href="config.html">Configuration</a>
         </li>
         <li>
             <a href="services.html">Services</a>
         </li>
         <li>
-            <a href="event-system.html">Event System</a>
+            <a href="events.html">Event System</a>
         </li>
         <li>
             <a href="templates.html">Templates [TODO]</a>
@@ -219,80 +219,58 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
         </li>
     </ul>
 
-    <h2>API</h2>
+    <h2>Reference Guide</h2>
     <ul>
         <li>
-            <a href="../api/core.html">Core</a>
+            <a href="../guide/config.html">Config</a>
         </li>
         <li>
-            <a href="../api/config.html">Config</a>
+            <a href="../guide/services.html">Services</a>
         </li>
         <li>
-            <a href="../api/services.html">Services</a>
+            <a href="../guide/events.html">Events</a>
         </li>
         <li>
-            <a href="../api/events.html">Events</a>
+            <a href="../guide/debugging.html">Debugging</a>
         </li>
         <li>
-            <a href="../api/logging.html">Logging</a>
+            <a href="../guide/logging.html">Logging</a>
         </li>
         <li>
-            <a href="../api/caching.html">Caching [TODO]</a>
+            <a href="../guide/caching.html">Caching [TODO]</a>
         </li>
         <li>
-            <a href="../api/filesystem.html">Filesystem</a>
+            <a href="../guide/filesystem.html">Filesystem</a>
         </li>
         <li>
-            <a href="../api/sessions.html">Sessions [TODO]</a>
+            <a href="../guide/routing.html">Routing</a>
         </li>
         <li>
-            <a href="../api/mail.html">Mail [TODO]</a>
+            <a href="../guide/requests.html">Requests [TODO]</a>
         </li>
         <li>
-            <a href="../api/data.html">Data [TODO]</a>
+            <a href="../guide/responses.html">Responses [TODO]</a>
         </li>
         <li>
-            <a href="../api/templates.html">Templates [TODO]</a>
+            <a href="../guide/sessions.html">Sessions [TODO]</a>
         </li>
         <li>
-            <a href="../api/assets.html">Assets [TODO]</a>
+            <a href="../guide/mail.html">Mail [TODO]</a>
         </li>
         <li>
-            <a href="../api/localization.html">Localization [TODO]</a>
+            <a href="../guide/data.html">Data [TODO]</a>
         </li>
         <li>
-            <a href="../api/console.html">Console [TODO]</a>
-        </li>
-    </ul>
-
-    <h2>Cookbook</h2>
-    <ul>
-        <li>
-            <a href="../cookbook/configuration.html">Configuration [TODO]</a>
+            <a href="../guide/templates.html">Templates [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/services.html">Services [TODO]</a>
+            <a href="../guide/assets.html">Assets [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/events.html">Events [TODO]</a>
+            <a href="../guide/localization.html">Localization [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/caching.html">Caching [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/debugging.html">Debugging [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/logging.html">Logging [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/filesystem.html">Filesystem [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/console.html">Console [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/testing.html">Testing [TODO]</a>
+            <a href="../guide/console.html">Console [TODO]</a>
         </li>
     </ul>
 
@@ -340,7 +318,7 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
           <a href="../basics/skeleton-module.html" title="Previous document">Webino Skeleton Module</a>
         </li>
         <li>
-          <a href="configuration.html" title="Next document">Application Configuration</a>
+          <a href="config.html" title="Next document">Application Configuration</a>
           &rarr;
         </li>
     </ul>

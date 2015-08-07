@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Caching &mdash; Webino 0.1.0alpha documentation</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="next" title="Application Filesystem" href="filesystem.html" />
+    <link rel="prev" title="Application Logging API" href="logging.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../_static/common.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
+  </head>
+  <body role="document">
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="logging.html" title="Previous document">Application Logging API</a>
+        </li>
+        <li>
+          <a href="filesystem.html" title="Next document">Application Filesystem</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha documentation</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="sub-monospace section" id="application-caching">
+<h1>Application Caching<a class="headerlink" href="#application-caching" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#caching-methods" id="id3">Caching Methods</a></li>
+<li><a class="reference internal" href="#cache-config" id="id4">Cache Config</a></li>
+</ul>
+</div>
+<div class="monospace-topic section" id="caching-methods">
+<span id="api-caching-caching-methods"></span><h2><a class="toc-backref" href="#id3">Caching Methods</a><a class="headerlink" href="#caching-methods" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#app-getcaching" id="id5">$app-&gt;getCaching()</a></li>
+<li><a class="reference internal" href="#app-getcache" id="id6">$app-&gt;getCache()</a></li>
+<li><a class="reference internal" href="#app-setcache" id="id7">$app-&gt;setCache()</a></li>
+</ul>
+</div>
+<div class="section" id="app-getcaching">
+<h3><a class="toc-backref" href="#id5">$app-&gt;getCaching()</a><a class="headerlink" href="#app-getcaching" title="Permalink to this headline">¶</a></h3>
+<p><em>Accessing cache service.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Cache\Storage\StorageInterface $cache */</span>
+<span class="nv">$cache</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-getcache">
+<h3><a class="toc-backref" href="#id6">$app-&gt;getCache()</a><a class="headerlink" href="#app-getcache" title="Permalink to this headline">¶</a></h3>
+<p><em>Getting cached value.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$myValue</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">(</span><span class="s1">&#39;myCacheKey&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-setcache">
+<h3><a class="toc-backref" href="#id7">$app-&gt;setCache()</a><a class="headerlink" href="#app-setcache" title="Permalink to this headline">¶</a></h3>
+<p><em>Setting value to cache.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setCache</span><span class="p">(</span><span class="s1">&#39;myCacheKey&#39;</span><span class="p">,</span> <span class="nv">$myValue</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="body-font section" id="cache-config">
+<h2><a class="toc-backref" href="#id4">Cache Config</a><a class="headerlink" href="#cache-config" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#configcacheenabled" id="id8">ConfigCacheEnabled</a></li>
+<li><a class="reference internal" href="#filesystemcache" id="id9">FilesystemCache</a></li>
+<li><a class="reference internal" href="#memorycache" id="id10">MemoryCache</a></li>
+</ul>
+</div>
+<div class="section" id="configcacheenabled">
+<h3><a class="toc-backref" href="#id8">ConfigCacheEnabled</a><a class="headerlink" href="#configcacheenabled" title="Permalink to this headline">¶</a></h3>
+<p><em>Toggling application config caching.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+
+    <span class="c1">// enable</span>
+    <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">,</span>
+
+    <span class="c1">// disable</span>
+    <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">(</span><span class="k">false</span><span class="p">),</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>see: <a class="reference internal" href="#api-caching-caching-methods"><span>Caching Methods</span></a></li>
+</ul>
+</div>
+<div class="section" id="filesystemcache">
+<h3><a class="toc-backref" href="#id9">FilesystemCache</a><a class="headerlink" href="#filesystemcache" title="Permalink to this headline">¶</a></h3>
+<p><em>Configuring filesystem cache.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\FilesystemCache</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">,</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="memorycache">
+<h3><a class="toc-backref" href="#id10">MemoryCache</a><a class="headerlink" href="#memorycache" title="Permalink to this headline">¶</a></h3>
+<p><em>Configuring in memory cache.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryCache</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="k">new</span> <span class="nx">MemoryCache</span><span class="p">,</span>
+
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/webino.png" alt="Logo"/>
+            </a></p><menu>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>
+            <a href="../index.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../demo-application.html">Demo Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../installation.html">Installation [TODO]</a>
+        </li>
+        <li>
+            <a href="../available-modules.html">Available Modules [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>The Basics</h2>
+    <ul>
+        <li>
+            <a href="../basics/basic-usage.html">Basic Usage</a>
+        </li>
+        <li>
+            <a href="../basics/advanced-usage.html">Advanced Usage</a>
+        </li>
+        <li>
+            <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/skeleton-module.html">Skeleton Module [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/application-config.html">Application Config [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/module-config.html">Module Config [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/request-responding.html">Request Responding [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/command-line-interface.html">Command Line Interface [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <ul>
+        <li>
+            <a href="../architecture/application.html">Application</a>
+        </li>
+        <li>
+            <a href="../architecture/config.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../architecture/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../architecture/events.html">Event System</a>
+        </li>
+        <li>
+            <a href="../architecture/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../architecture/modules.html">Modules [TODO]</a>
+        </li>
+        <li>
+            <a href="../architecture/public-assets.html">Public Assets [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Reference Guide</h2>
+    <ul>
+        <li>
+            <a href="config.html">Config</a>
+        </li>
+        <li>
+            <a href="services.html">Services</a>
+        </li>
+        <li>
+            <a href="events.html">Events</a>
+        </li>
+        <li>
+            <a href="debugging.html">Debugging</a>
+        </li>
+        <li>
+            <a href="logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="#">Caching [TODO]</a>
+        </li>
+        <li>
+            <a href="filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="routing.html">Routing</a>
+        </li>
+        <li>
+            <a href="requests.html">Requests [TODO]</a>
+        </li>
+        <li>
+            <a href="responses.html">Responses [TODO]</a>
+        </li>
+        <li>
+            <a href="sessions.html">Sessions [TODO]</a>
+        </li>
+        <li>
+            <a href="mail.html">Mail [TODO]</a>
+        </li>
+        <li>
+            <a href="data.html">Data [TODO]</a>
+        </li>
+        <li>
+            <a href="templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="assets.html">Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="localization.html">Localization [TODO]</a>
+        </li>
+        <li>
+            <a href="console.html">Console [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Delivery</h2>
+    <ul>
+        <li>
+            <a href="../delivery/application-build.html">Application Build [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-integration.html">Continuous Integration [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-delivery.html">Continuous Delivery [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Development</h2>
+    <ul>
+        <li>
+            <a href="../development/api-docs.html">API Docs [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/roadmap.html">Roadmap [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/release-notes.html">Release Notes [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/upgrade-guide.html">Upgrade Guide [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/contribution-guide.html">Contribution guide [TODO]</a>
+        </li>
+    </ul>
+</menu>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="logging.html" title="Previous document">Application Logging API</a>
+        </li>
+        <li>
+          <a href="filesystem.html" title="Next document">Application Filesystem</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha documentation</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2015, Webino, s. r. o. All rights reserved.
+
+  </footer>
+
+  
+  </body>
+</html>

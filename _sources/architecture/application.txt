@@ -18,7 +18,7 @@ and then it dispatches. Anything that should be performed on a dispatch has to b
 attached to that event.
 
 Because of two pass application bootstrap process, the core services and listeners are initialized first.
-So they are ready before first pass bootstrap event occurs. The remaining services and listeners are initialized
+So they are ready before a first pass bootstrap event occurs. The remaining services and listeners are initialized
 after the configure event, right before second pass bootstrap occurs. So only core listeners can listen to the
 configure event.
 
@@ -34,25 +34,24 @@ configure event.
     /** @var \WebinoAppLib\Application\AbstractBaseApplication $appCore **/
     $appCore = Webino::application($config = null, $debugger = null);
 
-- There are two optional arguments, for the config and the debugger objects.
+- There are two optional arguments, for a config and a debugger objects.
 
   - If those arguments are not provided, the application factory tries to require them from
     files ``config/application.php`` and ``config/debugger.php`` in your include path,
-    if that fails too, the factory creates a default configuration and a null debugger objects.
+    if that fails too, the factory creates default configuration and null debugger objects.
 
 - Finally an application is created via service manager and registered into services too.
 
-
-**2)** *Initializing an application, all the services will be ready.*
+**2)** *Initializing application, all the services will be ready.*
 
 .. code-block:: php
 
     /** @var \WebinoAppLib\Application\AbstractConfiguredApplication $app **/
     $app = $appCore->bootstrap();
 
-- The application config is allowed for modifications during initialization.
+- Application config is allowed for modifications during initialization.
 
-- Calling the ``bootstrap()`` method triggers the two pass application bootstrap event.
+- Calling ``bootstrap()`` method triggers the two pass application bootstrap event.
 
   - First pass is handled by core listeners and it allows them to listen to the configure event and
     to a second pass of the bootstrap.
@@ -60,7 +59,7 @@ configure event.
   - Then application configuration event is triggered, but skipped if cached config is available.
 
   - Second pass of the bootstrap is handled by remaining listeners, allowing them to perform actions
-    before an application is dispatched.
+    before application is dispatched.
 
 **3)** *Handling the client request and sending a response.*
 
@@ -68,7 +67,7 @@ configure event.
 
     $app->dispatch();
 
-- Calling a ``dispatch()`` method just triggers the dispatch event, if there are not dispatch listeners,
+- Calling ``dispatch()`` method just triggers a dispatch event. If there are not dispatch listeners,
   nothing will happen.
 
 
@@ -81,7 +80,7 @@ Events emitted during an application dispatch lifecycle.
     *First pass, initializing core services and listeners.*
 
 **configure** *(only for core listeners)*
-    *Configuring an application, optional if cache is available.*
+    *Configuring application, optional if cache is available.*
 
 **bootstrap**
     *Second pass, initializing remaining services and listeners.*

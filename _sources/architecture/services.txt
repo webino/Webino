@@ -60,7 +60,7 @@ Registering an invokable service via application config.
 
     new Config([
 
-        new Service(MyInvokableService::class), // <--
+        new Service(MyInvokableService::class),
 
     ]);
 
@@ -103,10 +103,12 @@ Registering a service created by factory via application config.
 
     new Config([
 
-        new Service(MyService::class, MyServiceFactory::class), // <--
+        new Service(MyService::class, MyServiceFactory::class),
 
     ]);
 
+
+.. _architecture-services:
 
 Core Services
 =============
@@ -122,10 +124,10 @@ and write enabled. They are registered into the core section of the application 
     new CoreConfig([
 
         // invokable
-        new CoreService(MyInvokableService::class), // <--
+        new CoreService(MyInvokableService::class),
 
         // factory
-        new CoreService(MyService::class, MyServiceFactory::class), // <--
+        new CoreService(MyService::class, MyServiceFactory::class),
 
     ]);
 

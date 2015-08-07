@@ -46,21 +46,15 @@ TODO...
     basics/skeleton-module
 
     architecture/application
-    architecture/configuration
+    architecture/config
     architecture/services
-    architecture/event-system
+    architecture/events
 
-    api/core
-    api/config
-    api/services
-    api/events
-    api/logging
-    api/caching
-    api/filesystem
-
-    services/config
-    services/events
-    services/debugger
-    services/logger
-    services/cache
-    services/files
+    guide/config
+    guide/services
+    guide/events
+    guide/debugging
+    guide/logging
+    guide/caching
+    guide/filesystem
+    guide/routing

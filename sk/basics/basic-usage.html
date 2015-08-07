@@ -62,48 +62,119 @@
 <h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#application-entry-point" id="id1">Application Entry Point</a></li>
-<li><a class="reference internal" href="#application-configuration" id="id2">Application Configuration</a></li>
+<li><a class="reference internal" href="#index-file" id="id2">Index File</a></li>
+<li><a class="reference internal" href="#routing" id="id3">Routing</a></li>
+<li><a class="reference internal" href="#requests" id="id4">Requests</a></li>
+<li><a class="reference internal" href="#responses" id="id5">Responses</a></li>
 </ul>
 </div>
-<p>The application is basically a configuration and an execution code. The configuration is cached, if enabled so,
-and could be modified until application is fully bootstrapped.</p>
+<p>The application is basically a configuration and an execution code.</p>
 <p><div class="vspace"></div></p>
 <div class="admonition note">
 <p class="first admonition-title">Poznámka</p>
 <p class="last">See <code class="docutils literal"><span class="pre">examples/basic-usage/</span></code> directory.</p>
 </div>
-<div class="section" id="application-entry-point">
-<h2><a class="toc-backref" href="#id1">Application Entry Point</a><a class="headerlink" href="#application-entry-point" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>The application object is created, bootstrapped and dispatched in the index file.</p>
+<div class="section" id="index-file">
+<h2><a class="toc-backref" href="#id2">Index File</a><a class="headerlink" href="#index-file" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The application object is configured, created, bootstrapped and dispatched in the index file.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// index.php</span>
-
-<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
-
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="application-configuration">
-<h2><a class="toc-backref" href="#id2">Application Configuration</a><a class="headerlink" href="#application-configuration" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>Application is configured in the OOP style, so instead of writing an array we are using config features.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// config/application.php</span>
 
 <span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature</span> <span class="k">as</span> <span class="nx">AppFeature</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature</span> <span class="k">as</span> <span class="nx">ConfigFeature</span><span class="p">;</span>
 
-<span class="k">return</span> <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Configure and create an application.</span>
+<span class="sd"> * Use configurators instead of writing PHP arrays.</span>
+<span class="sd"> * Create your custom configurators.</span>
+<span class="sd"> */</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
     <span class="k">new</span> <span class="nx">ConfigFeature\Log</span><span class="p">,</span>
-    <span class="k">new</span> <span class="nx">ConfigFeature\ConfigCacheEnabled</span><span class="p">,</span>
+    <span class="k">new</span> <span class="nx">ConfigFeature\FirePhpLog</span><span class="p">,</span>
     <span class="k">new</span> <span class="nx">AppFeature\FilesystemCache</span><span class="p">,</span>
 
     <span class="p">(</span><span class="k">new</span> <span class="nx">MyCustomFeature</span><span class="p">)</span>
         <span class="o">-&gt;</span><span class="na">setAnything</span><span class="p">(),</span>
 <span class="p">]);</span>
+
+<span class="nv">$appCore</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Application $appCore is not fully configured.</span>
+<span class="sd"> * Only core services and listeners are available.</span>
+<span class="sd"> * Configuration is write enabled.</span>
+<span class="sd"> */</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nv">$appCore</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Application $app is configured and ready for a dispatch.</span>
+<span class="sd"> * All services and listeners are available.</span>
+<span class="sd"> * Configuration is read-only.</span>
+<span class="sd"> */</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="routing">
+<h2><a class="toc-backref" href="#id3">Routing</a><a class="headerlink" href="#routing" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>A route is a map from a URL path to an event. When a route gets hit it will trigger an event on which you can bind
+custom code.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#adding-routes" id="id6">Adding routes</a></li>
+<li><a class="reference internal" href="#generating-urls" id="id7">Generating URLs</a></li>
+<li><a class="reference internal" href="#binding-to-routes" id="id8">Binding to routes</a></li>
+</ul>
+</div>
+<div class="section" id="adding-routes">
+<h3><a class="toc-backref" href="#id6">Adding routes</a><a class="headerlink" href="#adding-routes" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Adding routes via configuration.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Route</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Route</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/my/route/path&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p><em>Adding routes runtime.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
+<span class="nv">$route</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/my/route/path&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-urls">
+<h3><a class="toc-backref" href="#id7">Generating URLs</a><a class="headerlink" href="#generating-urls" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Generating URLs to application routes.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoAppLib\Router\UrlInterface $url */</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binding-to-routes">
+<h3><a class="toc-backref" href="#id8">Binding to routes</a><a class="headerlink" href="#binding-to-routes" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Handling route match.</em></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="requests">
+<h2><a class="toc-backref" href="#id4">Requests</a><a class="headerlink" href="#requests" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>TODO...</p>
+</div>
+<div class="section" id="responses">
+<h2><a class="toc-backref" href="#id5">Responses</a><a class="headerlink" href="#responses" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>TODO...</p>
 </div>
 </div>
 
@@ -166,13 +237,13 @@ and could be modified until application is fully bootstrapped.</p>
             <a href="../architecture/application.html">Application</a>
         </li>
         <li>
-            <a href="../architecture/configuration.html">Configuration</a>
+            <a href="../architecture/config.html">Configuration</a>
         </li>
         <li>
             <a href="../architecture/services.html">Services</a>
         </li>
         <li>
-            <a href="../architecture/event-system.html">Event System</a>
+            <a href="../architecture/events.html">Event System</a>
         </li>
         <li>
             <a href="../architecture/templates.html">Templates [TODO]</a>
@@ -185,80 +256,58 @@ and could be modified until application is fully bootstrapped.</p>
         </li>
     </ul>
 
-    <h2>API</h2>
+    <h2>Reference Guide</h2>
     <ul>
         <li>
-            <a href="../api/core.html">Core</a>
+            <a href="../guide/config.html">Config</a>
         </li>
         <li>
-            <a href="../api/config.html">Config</a>
+            <a href="../guide/services.html">Services</a>
         </li>
         <li>
-            <a href="../api/services.html">Services</a>
+            <a href="../guide/events.html">Events</a>
         </li>
         <li>
-            <a href="../api/events.html">Events</a>
+            <a href="../guide/debugging.html">Debugging</a>
         </li>
         <li>
-            <a href="../api/logging.html">Logging</a>
+            <a href="../guide/logging.html">Logging</a>
         </li>
         <li>
-            <a href="../api/caching.html">Caching [TODO]</a>
+            <a href="../guide/caching.html">Caching [TODO]</a>
         </li>
         <li>
-            <a href="../api/filesystem.html">Filesystem</a>
+            <a href="../guide/filesystem.html">Filesystem</a>
         </li>
         <li>
-            <a href="../api/sessions.html">Sessions [TODO]</a>
+            <a href="../guide/routing.html">Routing</a>
         </li>
         <li>
-            <a href="../api/mail.html">Mail [TODO]</a>
+            <a href="../guide/requests.html">Requests [TODO]</a>
         </li>
         <li>
-            <a href="../api/data.html">Data [TODO]</a>
+            <a href="../guide/responses.html">Responses [TODO]</a>
         </li>
         <li>
-            <a href="../api/templates.html">Templates [TODO]</a>
+            <a href="../guide/sessions.html">Sessions [TODO]</a>
         </li>
         <li>
-            <a href="../api/assets.html">Assets [TODO]</a>
+            <a href="../guide/mail.html">Mail [TODO]</a>
         </li>
         <li>
-            <a href="../api/localization.html">Localization [TODO]</a>
+            <a href="../guide/data.html">Data [TODO]</a>
         </li>
         <li>
-            <a href="../api/console.html">Console [TODO]</a>
-        </li>
-    </ul>
-
-    <h2>Cookbook</h2>
-    <ul>
-        <li>
-            <a href="../cookbook/configuration.html">Configuration [TODO]</a>
+            <a href="../guide/templates.html">Templates [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/services.html">Services [TODO]</a>
+            <a href="../guide/assets.html">Assets [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/events.html">Events [TODO]</a>
+            <a href="../guide/localization.html">Localization [TODO]</a>
         </li>
         <li>
-            <a href="../cookbook/caching.html">Caching [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/debugging.html">Debugging [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/logging.html">Logging [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/filesystem.html">Filesystem [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/console.html">Console [TODO]</a>
-        </li>
-        <li>
-            <a href="../cookbook/testing.html">Testing [TODO]</a>
+            <a href="../guide/console.html">Console [TODO]</a>
         </li>
     </ul>
 
