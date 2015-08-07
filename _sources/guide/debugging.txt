@@ -50,7 +50,7 @@ $app->debug()
     $output = $app->debug($var, true);
 
 
-- see: `Debugger Dump Example <http://webino.local/dev/Webino/examples/simple/public/debugger-dump>`_
+- see: `Debugger Dump Example <http://demo.webino.org/debugger-dump>`_
 
 
 $app->debug()->barDump()
@@ -63,7 +63,7 @@ $app->debug()->barDump()
     $app->debug()->barDump($var);
 
 
-- see: `Debugger Bar Dump Example <http://webino.local/dev/Webino/examples/simple/public/debugger-bar-dump>`_
+- see: `Debugger Bar Dump Example <http://demo.webino.org/debugger-bar-dump>`_
 
 
 $app->debug()->timer()
