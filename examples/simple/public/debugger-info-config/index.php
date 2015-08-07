@@ -15,7 +15,7 @@ require __DIR__ . '/../../vendor/autoload.php';
  * Adding the Tracy
  * debugger bar.
  */
-$debugger = Webino::debugger(Webino::debuggerOptions()->setBar(true));
+$debugger = Webino::debugger(Webino::debuggerOptions()->setDevMode()->setBar());
 
 $config = Webino::config([
     /**

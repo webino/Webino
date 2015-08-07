@@ -11,7 +11,7 @@ use WebinoAppLib\Router\DefaultRoute;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-$debugger = Webino::debugger(Webino::debuggerOptions()->setBar(true));
+$debugger = Webino::debugger(Webino::debuggerOptions()->setDevMode()->setBar());
 
 $app = Webino::application(null, $debugger)->bootstrap();
 

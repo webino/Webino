@@ -2,6 +2,7 @@
 
 namespace WebinoAppLib\Options;
 
+use Tracy\Debugger as Tracy;
 use Zend\Stdlib\AbstractOptions;
 
 /**
@@ -142,7 +143,7 @@ class DebuggerOptions extends AbstractOptions
      * Enable debugger
      *
      * @param bool $enabled
-     * @return self
+     * @return $this
      */
     public function setEnabled($enabled)
     {
@@ -154,7 +155,7 @@ class DebuggerOptions extends AbstractOptions
      * Debugger mode, production or development.
      *
      * @param bool|null $mode
-     * @return self
+     * @return $this
      */
     public function setMode($mode)
     {
@@ -163,10 +164,32 @@ class DebuggerOptions extends AbstractOptions
     }
 
     /**
-     * @param bool $bar
-     * @return self
+     * Force development mode
+     *
+     * @return $this
      */
-    public function setBar($bar)
+    public function setDevMode()
+    {
+        $this->setMode(Tracy::DEVELOPMENT);
+        return $this;
+    }
+
+    /**
+     * Force production mode
+     *
+     * @return $this
+     */
+    public function setPubMode()
+    {
+        $this->setMode(Tracy::PRODUCTION);
+        return $this;
+    }
+
+    /**
+     * @param bool|true $bar
+     * @return $this
+     */
+    public function setBar($bar = true)
     {
         $this->bar = (bool) $bar;
         return $this;
@@ -175,10 +198,10 @@ class DebuggerOptions extends AbstractOptions
     /**
      * Strict errors?
      *
-     * @param bool $strict
-     * @return self
+     * @param bool|true $strict
+     * @return $this
      */
-    public function setStrict($strict)
+    public function setStrict($strict = true)
     {
         $this->strict = (bool) $strict;
         return $this;
@@ -188,7 +211,7 @@ class DebuggerOptions extends AbstractOptions
      * Path to log directory
      *
      * @param string $log
-     * @return self
+     * @return $this
      */
     public function setLog($log)
     {
@@ -200,7 +223,7 @@ class DebuggerOptions extends AbstractOptions
      * Configure debugger administrator email
      *
      * @param string $email
-     * @return self
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -212,7 +235,7 @@ class DebuggerOptions extends AbstractOptions
      * Variable dump max depth
      *
      * @param int $maxDepth
-     * @return self
+     * @return $this
      */
     public function setMaxDepth($maxDepth)
     {
@@ -224,7 +247,7 @@ class DebuggerOptions extends AbstractOptions
      * Maximum length of a variable
      *
      * @param int $maxLen
-     * @return self
+     * @return $this
      */
     public function setMaxLen($maxLen)
     {
