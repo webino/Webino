@@ -1,8 +1,8 @@
 .. rst-class:: sub-monospace
 
-=======================
-Application Logging API
-=======================
+===================
+Application Logging
+===================
 
 .. contents::
     :depth: 1
