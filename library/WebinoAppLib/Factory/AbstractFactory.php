@@ -21,6 +21,11 @@ abstract class AbstractFactory implements FactoryInterface
     private $services;
 
     /**
+     * @var Application\AbstractApplication
+     */
+    private $app;
+
+    /**
      * @var Config
      */
     private $config;
@@ -40,6 +45,21 @@ abstract class AbstractFactory implements FactoryInterface
     protected function getServices()
     {
         return $this->services;
+    }
+
+    /**
+     * @return Application\AbstractApplication
+     */
+    protected function getApp()
+    {
+        if (null === $this->app) {
+            $this->app = $this->services->get(Application::SERVICE);
+            if (!($this->app instanceof Application\AbstractApplication)) {
+                throw (new InvalidArgumentException('Expected app as %s but got %s'))
+                    ->format(Application\AbstractApplication::class, $this->app);
+            }
+        }
+        return $this->app;
     }
 
     /**
@@ -81,9 +101,8 @@ abstract class AbstractFactory implements FactoryInterface
      */
     protected function requireService($service)
     {
-        $services = $this->getServices();
-        if ($services->has($service)) {
-            return $services->get($service);
+        if ($this->services->has($service)) {
+            return $this->services->get($service);
         }
 
         throw (new DomainException('Unable require service %s for %s'))
@@ -107,7 +126,8 @@ abstract class AbstractFactory implements FactoryInterface
         }
 
         $this->services = $services;
-        $this->config = $config;
+        $this->config   = $config;
+
         return $this->create();
     }
 }

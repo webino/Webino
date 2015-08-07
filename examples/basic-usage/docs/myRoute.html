@@ -1,0 +1,18 @@
+<p>This route was added via configuration:</p>
+<pre>
+use WebinoAppLib\Application\CoreConfig;
+use WebinoConfigLib\Feature\Route;
+
+return new CoreConfig([
+    (new Route('myRoute'))->setLiteral('/my-route'),
+]);
+</pre>
+
+<p>You can bind to this route like following:</p>
+<pre>
+use WebinoAppLib\Event\RouteEvent;
+
+$app->bindRoute('myRoute', function (RouteEvent $event) {
+    // do something...
+});
+</pre>

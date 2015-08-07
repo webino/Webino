@@ -48,5 +48,5 @@ abstract class AbstractListener implements ListenerAggregateInterface
     /**
      * Initialize listener
      */
-    abstract public function init();
+    abstract protected function init();
 }

@@ -3,7 +3,7 @@
 namespace WebinoAppLib\Application;
 
 use WebinoAppLib\Application;
-use WebinoAppLib\Event\AppEvent;
+use WebinoAppLib\Event\DispatchEvent;
 
 /**
  * Class AbstractConfiguredApplication
@@ -16,6 +16,6 @@ class AbstractConfiguredApplication extends AbstractApplication implements
      */
     public function dispatch()
     {
-        $this->emit(AppEvent::DISPATCH);
+        $this->emit(new DispatchEvent($this));
     }
 }

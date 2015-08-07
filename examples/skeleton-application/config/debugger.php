@@ -1,5 +1,7 @@
 <?php
 
-return null;
-
-//return Webino::debugger();
+return Webino::debugger(
+    Webino::debuggerOptions()
+        ->setBar(true)
+        ->setLog('data/log')
+);

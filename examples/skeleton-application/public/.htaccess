@@ -11,5 +11,5 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 
 <IfModule mod_php5.c>
-    php_value session.save_path tmp/sessions
+    #php_value session.save_path tmp/sessions
 </IfModule>

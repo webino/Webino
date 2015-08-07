@@ -1,0 +1,13 @@
+<p>This route was configured runtime, before an application dispatch:</p>
+<pre>
+$app->route('myRuntimeRoute')->setLiteral('/my-runtime-route');
+</pre>
+
+<p>You can bind to this route like following:</p>
+<pre>
+use WebinoAppLib\Event\RouteEvent;
+    
+$app->bindRoute('myRuntimeRoute', function (RouteEvent $event) {
+    // do something...
+});
+</pre>

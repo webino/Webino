@@ -1,9 +1,7 @@
 <?php
 
 use Tester\Assert;
-use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Event\AppEvent;
-use WebinoAppLib\Factory;
 use WebinoAppLib\Feature\CoreListener;
 use WebinoAppLib\Feature\Listener;
 use WebinoEventLib\AbstractListener;
@@ -118,13 +116,23 @@ class MyInvokableListener
 }
 
 
-$config = new CoreConfig([
+$config = Webino::config([
+
     new CoreListener(MyCoreListener::class),
+
+    // TODO core invokable listener alias test
+
+    // TODO core listener factory alias test
+
     new Listener(MyListener::class),
+
+    // TODO invokable listener alias test
+
+    // TODO listener factory alias test
 ]);
 
 
-$app = (new Factory)->create($config)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 // --- Closure listener
 

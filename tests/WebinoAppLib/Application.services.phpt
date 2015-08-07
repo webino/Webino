@@ -1,9 +1,8 @@
 <?php
 
 use Tester\Assert;
-use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Exception\UnknownServiceException;
-use WebinoAppLib\Factory;
+use WebinoAppLib\Factory\AbstractFactory;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Feature\CoreService;
 
@@ -23,7 +22,7 @@ class MyService
     }
 }
 
-class MyServiceFactory extends Factory\AbstractFactory
+class MyServiceFactory extends AbstractFactory
 {
     protected function create()
     {
@@ -44,7 +43,7 @@ class MyCoreService
     }
 }
 
-class MyCoreServiceFactory extends Factory\AbstractFactory
+class MyCoreServiceFactory extends AbstractFactory
 {
     protected function create()
     {
@@ -65,7 +64,7 @@ class MyRuntimeService
     }
 }
 
-class MyRuntimeServiceFactory extends Factory\AbstractFactory
+class MyRuntimeServiceFactory extends AbstractFactory
 {
     protected function create()
     {
@@ -74,20 +73,28 @@ class MyRuntimeServiceFactory extends Factory\AbstractFactory
 }
 
 
-$config = new CoreConfig([
+$config = Webino::config([
 
     new Service(MyInvokableService::class),
 
+    // TODO test invokable service alias test
+
     new CoreService(MyCoreInvokableService::class),
+
+    // TODO test core invokable service alias test
 
     new Service(MyService::class, MyServiceFactory::class),
 
+    // TODO test service factory alias test
+
     new CoreService(MyCoreService::class, MyCoreServiceFactory::class),
+
+    // TODO test core service factory alias test
 
 ]);
 
 
-$appCore = (new Factory)->create($config);
+$appCore = Webino::application($config);
 
 
 $app = $appCore;

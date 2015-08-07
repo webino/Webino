@@ -18,7 +18,8 @@ abstract class AbstractApplication implements
     Contract\EventEmitterInterface,
     Contract\LoggerInterface,
     Contract\CacheInterface,
-    Contract\FilesystemInterface
+    Contract\FilesystemInterface,
+    Contract\RouterInterface
 {
     use Traits\ServiceProviderTrait;
     use Traits\ConfigTrait;
@@ -26,6 +27,7 @@ abstract class AbstractApplication implements
     use Traits\LoggerTrait;
     use Traits\CacheTrait;
     use Traits\FilesystemTrait;
+    use Traits\RouterTrait;
 
     /**
      * Application bootstrap service name
@@ -52,6 +54,7 @@ abstract class AbstractApplication implements
         self::LOGGER,
         self::CACHE,
         self::FILESYSTEM,
+        self::ROUTER,
     ];
 
     /**

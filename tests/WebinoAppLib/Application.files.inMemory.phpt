@@ -3,8 +3,6 @@
 use BsbFlysystem\Service\FilesystemManager;
 use League\Flysystem\Filesystem;
 use Tester\Assert;
-use WebinoAppLib\Application\CoreConfig;
-use WebinoAppLib\Factory;
 use WebinoAppLib\Feature\MemoryFilesystem;
 use WebinoAppLib\Filesystem\InMemoryFiles;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -12,12 +10,12 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 require __DIR__ . '/../bootstrap.php';
 
 
-$config = new CoreConfig([
+$config = Webino::config([
     new MemoryFilesystem,
 ]);
 
 
-$app = (new Factory)->create($config)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 
 $filesystem = $app->getFilesystem();

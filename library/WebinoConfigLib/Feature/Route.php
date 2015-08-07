@@ -36,6 +36,26 @@ class Route extends AbstractFeature implements
     }
 
     /**
+     * @param string $route Literal route.
+     * @return self
+     */
+    public function setLiteral($route)
+    {
+        $this->setRoute($route)->setType($this::LITERAL);
+        return $this;
+    }
+
+    /**
+     * @param string $route Segment route.
+     * @return self
+     */
+    public function setSegment($route)
+    {
+        $this->setRoute($route)->setType($this::SEGMENT);
+        return $this;
+    }
+
+    /**
      * @param string $type Route type.
      * @return self
      */
@@ -43,6 +63,14 @@ class Route extends AbstractFeature implements
     {
         $this->getRoute()->setType($type);
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getRoute()->getName();
     }
 
     /**

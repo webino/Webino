@@ -3,42 +3,32 @@
 namespace WebinoAppLib\Application;
 
 use WebinoAppLib\Application;
-use WebinoAppLib\Factory\ApplicationFactory;
-use WebinoAppLib\Factory\BootstrapFactory;
-use WebinoAppLib\Factory\EventsFactory;
-use WebinoAppLib\Factory\FilesystemFactory;
-use WebinoAppLib\Factory\LoggerFactory;
+use WebinoAppLib\Factory;
 use WebinoAppLib\Feature;
-use WebinoAppLib\Feature\DefaultFilesystem;
-use WebinoConfigLib\DefaultConfigInterface;
 use WebinoEventLib\EventManager;
 
 /**
  * Class CoreConfig
  */
-class CoreConfig extends Feature\Config implements
-    DefaultConfigInterface
+class CoreConfig extends Feature\Config
 {
     /**
-     * @return array
+     * @param array $config
      */
-    public function getDefaultConfig()
+    public function __construct(array $config = [])
     {
-        return [
-            $this::CORE => [
-                $this::SERVICES => [
-                    $this::SERVICES_INVOKABLES => [
-                        EventsFactory::ENGINE => EventManager::class,
-                    ],
-                    $this::SERVICES_FACTORIES => [
-                        Application::SERVICE    => ApplicationFactory::class,
-                        Application::EVENTS     => EventsFactory::class,
-                        Application::BOOTSTRAP  => BootstrapFactory::class,
-                        Application::LOGGER     => LoggerFactory::class,
-                        Application::FILESYSTEM => FilesystemFactory::class,
-                    ],
-                ],
-            ],
-        ] + (new DefaultFilesystem('.'))->toArray();
+        $this->addFeatures([
+            new Feature\Debugger,
+            new Feature\DefaultFilesystem,
+            new Feature\DefaultRouter,
+            new Feature\CoreService([Factory\EventsFactory::ENGINE => EventManager::class]),
+            new Feature\CoreService(Application::SERVICE, Factory\ApplicationFactory::class),
+            new Feature\CoreService(Application::EVENTS, Factory\EventsFactory::class),
+            new Feature\CoreService(Application::BOOTSTRAP, Factory\BootstrapFactory::class),
+            new Feature\CoreService(Application::LOGGER, Factory\LoggerFactory::class),
+            new Feature\CoreService(Application::FILESYSTEM, Factory\FilesystemFactory::class),
+        ]);
+
+        parent::__construct($config);
     }
 }

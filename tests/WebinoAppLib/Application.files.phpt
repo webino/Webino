@@ -6,8 +6,6 @@ use League\Flysystem\FileNotFoundException;
 use League\Flysystem\FileExistsException;
 use org\bovigo\vfs\vfsStream;
 use Tester\Assert;
-use WebinoAppLib\Application\CoreConfig;
-use WebinoAppLib\Factory;
 use WebinoAppLib\Feature\DefaultFilesystem;
 use WebinoAppLib\Filesystem\LocalFiles;
 
@@ -15,12 +13,12 @@ require __DIR__ . '/../bootstrap.php';
 
 $root = createTmpDir();
 
-$config = new CoreConfig([
+$config = Webino::config([
     new DefaultFilesystem($root),
 ]);
 
 
-$app = (new Factory)->create($config)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 
 $filesystem = $app->getFilesystem();

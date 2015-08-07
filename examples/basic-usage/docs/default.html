@@ -1,0 +1,18 @@
+<p>Links on this page were created like following:</p>
+<pre>
+/** @var WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */
+$urlHtml = $app->url('myRoute')->html('My Route Example');
+
+/** @var WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */
+$urlHtml = $app->url('myRuntimeRoute')->html('My Runtime Route Example');
+</pre>
+
+<p>You can listen to this route like following:</p>
+<pre>
+use WebinoAppLib\Event\RouteEvent;
+use WebinoAppLib\Router\DefaultRoute;
+
+$app->bind(DefaultRoute::class, function (RouteEvent $event) {
+    // do something...
+});
+</pre>

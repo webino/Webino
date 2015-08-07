@@ -1,8 +1,6 @@
 <?php
 
 use Tester\Assert;
-use WebinoAppLib\Application\CoreConfig;
-use WebinoAppLib\Factory;
 use WebinoAppLib\Feature\MemoryCache;
 
 require __DIR__ . '/../bootstrap.php';
@@ -10,12 +8,12 @@ require __DIR__ . '/../bootstrap.php';
 
 $cachedValueExpected = ['myCachedValue'];
 
-$config = new CoreConfig([
+$config = Webino::config([
     new MemoryCache,
 ]);
 
 
-$app = (new Factory)->create($config)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 
 $cached = $app->getCache('myCacheKey');

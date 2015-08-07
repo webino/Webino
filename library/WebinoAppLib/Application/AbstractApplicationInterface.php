@@ -38,6 +38,11 @@ interface AbstractApplicationInterface
     const FILESYSTEM = 'Filesystem';
 
     /**
+     * Application router service name
+     */
+    const ROUTER = 'Router';
+
+    /**
      * Application core configuration service name
      */
     const CORE_CONFIG = 'CoreConfig';

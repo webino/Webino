@@ -98,6 +98,6 @@ it will wait to unlock for continue to finish the request.
 
 .. code-block:: php
 
-  $app->lock();
+  $app->get(DispatchLock::class)->lock();
 
-  $app->unlock();
+  $app->get(DispatchLock::class)->unlock();

@@ -4,9 +4,9 @@ namespace WebinoAppLib\Application;
 
 use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Exception\DomainException;
+use WebinoAppLib\Exception\InvalidArgumentException;
 use WebinoAppLib\Service\Bootstrap;
 use Zend\Config\Config;
-use Zend\Ldap\Exception\InvalidArgumentException;
 use Zend\ServiceManager;
 
 /**

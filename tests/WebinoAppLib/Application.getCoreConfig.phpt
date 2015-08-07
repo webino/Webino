@@ -2,7 +2,6 @@
 
 use Tester\Assert;
 use WebinoAppLib\Application\CoreConfig;
-use WebinoAppLib\Factory;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -11,7 +10,7 @@ $myConfigExpected = ['myConfigValue'];
 
 $defaultExpected = ['myDefaultConfigValue'];
 
-$config = new CoreConfig([
+$config = Webino::config([
     [
         CoreConfig::CORE => [
             'myConfigKey' => $myConfigExpected
@@ -20,7 +19,7 @@ $config = new CoreConfig([
 ]);
 
 
-$appCore = (new Factory)->create($config);
+$appCore = Webino::application($config);
 
 $app = $appCore->bootstrap();
 

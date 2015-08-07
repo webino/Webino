@@ -149,8 +149,10 @@ trait EventEmitterTrait
     {
         $target = $this;
         if (($event instanceof Event)) {
-            $event->getTarget() or $event->setTarget($this) && $target = $callback;
+            $event->getTarget() or $event->setTarget($this);
+            $target = $callback;
         }
+
         $this->log(Log\TriggerEvent::class, $event);
 
         if (is_callable($argv)) {

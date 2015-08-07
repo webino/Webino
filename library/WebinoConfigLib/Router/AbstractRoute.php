@@ -84,6 +84,14 @@ abstract class AbstractRoute extends AbstractConfig implements
     }
 
     /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getData()->type;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setType($type = self::LITERAL)
