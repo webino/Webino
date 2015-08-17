@@ -1,7 +1,7 @@
 ConfigCacheEnabled
 ------------------
 
-*Toggling application config caching.*
+Toggling application config caching.
 
 .. code-block:: php
 
@@ -9,13 +9,10 @@ ConfigCacheEnabled
     use WebinoConfigLib\Feature\ConfigCacheEnabled;
 
     new Config([
-
         // enable
         new ConfigCacheEnabled,
-
         // disable
         new ConfigCacheEnabled(false),
-
     ]);
 
 
@@ -25,7 +22,7 @@ ConfigCacheEnabled
 FilesystemCache
 ---------------
 
-*Configuring filesystem cache.*
+Configuring filesystem cache.
 
 .. code-block:: php
 
@@ -33,16 +30,14 @@ FilesystemCache
     use WebinoAppLib\Feature\FilesystemCache;
 
     new CoreConfig([
-
         new FilesystemCache,
-
     ]);
 
 
 MemoryCache
 -----------
 
-*Configuring in memory cache.*
+Configuring in memory cache.
 
 .. code-block:: php
 
@@ -50,8 +45,6 @@ MemoryCache
     use WebinoAppLib\Feature\MemoryCache;
 
     new CoreConfig([
-
         new MemoryCache,
-
     ]);
 

@@ -1,6 +1,6 @@
-======================
-Appliocation Responses
-======================
+=====================
+Application Responses
+=====================
 
 .. contents::
     :depth: 1

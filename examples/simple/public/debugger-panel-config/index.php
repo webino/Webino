@@ -1,6 +1,6 @@
 <?php
 /**
- * Debugger Panel Config
+ * Debugger Panel via Config
  * Webino example
  */
 

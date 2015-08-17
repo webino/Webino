@@ -31,7 +31,7 @@ final class Logger extends AbstractLogger implements
      * @param mixed $level
      * @param string $message
      * @param array $context
-     * @return null
+     * @return void
      * @throws InvalidArgumentException Unknown error level
      */
     public function log($level, $message, array $context = [])
@@ -41,7 +41,6 @@ final class Logger extends AbstractLogger implements
             $this->interpolate($this->normalizeMessage($message), $context),
             $context
         );
-        return null;
     }
 
     /**

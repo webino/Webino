@@ -1,6 +1,6 @@
 <?php
 /**
- * Debugger Info Config
+ * Debugger Info via Config
  * Webino example
  */
 

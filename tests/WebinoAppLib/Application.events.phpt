@@ -161,9 +161,9 @@ $app->emit('myClosureEvent', $closureListenerCallback);
 
 $app->emit('myClosureEvent', ['closureListenerArgOne'], $closureListenerCallback);
 
-Assert::exception(function () use ($app) {
-    $app->emit('myClosureEvent', ['invalidClosureListenerArgOne']);
-}, \LogicException::class, 'Expected closure listener argument');
+//Assert::exception(function () use ($app) {
+//    $app->emit('myClosureEvent', ['invalidClosureListenerArgOne']);
+//}, \LogicException::class, 'Expected closure listener argument');
 
 $app->unbind('myClosureEvent', $closureListener);
 

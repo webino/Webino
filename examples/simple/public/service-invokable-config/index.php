@@ -8,7 +8,6 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoEventLib\AbstractListener;
 
 require __DIR__ . '/../../vendor/autoload.php';
 

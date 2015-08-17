@@ -1,7 +1,7 @@
 Route
 -----
 
-*Adding routes via config.*
+Adding routes via config.
 
 .. code-block:: php
 
@@ -9,10 +9,9 @@ Route
     use WebinoConfigLib\Feature\Route;
 
     new Config([
-
         (new Route('myRoute'))->setLiteral('/my/route/path'),
-
     ]);
 
 
-- see: :ref:`api-routing-app-url` | :ref:`api-routing-app-bindRoute`
+- see: `Route Config Example <http://demo.webino.org/route-config>`_ | :ref:`api-routing-app-url`
+  | :ref:`api-routing-app-bindRoute`

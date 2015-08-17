@@ -32,13 +32,21 @@ abstract class AbstractHtml
     abstract protected function getTagName();
 
     /**
-     * @param string $value
+     * @param string $value New value;current value placeholder is `%s`
      * @return $this
      */
-    protected function setValue($value)
+    public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = sprintf($value, $this->value);
         return $this;
+    }
+
+    /**
+     * @deprecated
+     */
+    protected function addAttribute($name, $value)
+    {
+        return $this->setAttribute($name, $value);
     }
 
     /**
@@ -46,7 +54,7 @@ abstract class AbstractHtml
      * @param string $value
      * @return $this
      */
-    protected function addAttribute($name, $value)
+    protected function setAttribute($name, $value)
     {
         $this->attribs[$name] = $value;
         return $this;
@@ -58,7 +66,7 @@ abstract class AbstractHtml
      */
     public function setTitle($title)
     {
-        $this->addAttribute('title', $title);
+        $this->setAttribute('title', $title);
         return $this;
     }
 
@@ -68,17 +76,42 @@ abstract class AbstractHtml
      */
     public function setClass($class)
     {
-        $this->addAttribute('class', $class);
+        $this->setAttribute('class', $class);
         return $this;
     }
 
     /**
-     * @param string $style
+     * @param array|string $style
+     * @param string|null $value
      * @return $this
      */
-    public function setStyle($style)
+    public function setStyle($style, $value = null)
     {
-        $this->addAttribute('style', $style);
+        $styleData = [];
+
+        if (isset($this->attribs['style'])) {
+            call_user_func(function () use (&$styleData) {
+                foreach (explode(';', $this->attribs['style']) as $pair) {
+                    list($name, $value) = explode(':', $pair);
+                    $styleData[trim($name)] = trim($value);
+                }
+            });
+        }
+
+        if (is_array($style)) {
+            foreach ($style as $name => $value) {
+                $styleData[$name] = $value;
+            }
+        } elseif (null !== $value) {
+            $styleData[$style] = $value;
+        }
+
+        $stylePairs = [];
+        foreach ($styleData as $name => $value) {
+            $stylePairs[] = $name . ': ' . $value;
+        }
+
+        $this->setAttribute('style', join('; ', $stylePairs));
         return $this;
     }
 

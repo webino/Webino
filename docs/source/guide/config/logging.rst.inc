@@ -1,17 +1,15 @@
 Log
 ---
 
-*Configuring logger.*
+Configuring logger.
 
 .. code-block:: php
 
     use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature\Log;
+    use WebinoConfigLib\Feature\Log;
 
     new CoreConfig([
-
         new Log,
-
     ]);
 
 
@@ -21,18 +19,15 @@ Log
 FirePhpLog
 ----------
 
-*Configuring FirePHP logger.*
+Configuring FirePHP logger.
 
 .. code-block:: php
 
     use WebinoAppLib\Application\CoreConfig;
-    use WebinoAppLib\Feature as AppFeature;
+    use WebinoConfigLib\Feature\FirePhpLog;
 
     new CoreConfig([
-
-        new AppFeature\Log,
-        new AppFeature\FirePhpLog,
-
+        new FirePhpLog,
     ]);
 
 

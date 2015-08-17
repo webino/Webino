@@ -14,7 +14,7 @@ class EventManager extends BaseEventManager
     /**
      * {@inheritdoc}
      */
-    protected $eventClass = 'WebinoEventLib\Event';
+    protected $eventClass = Event::class;
 
     /**
      * Trigger listeners

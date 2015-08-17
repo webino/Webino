@@ -47,8 +47,8 @@ trait ServiceProviderTrait
         $services = $this->getServices();
 
         if ($factory instanceof FactoryInterface
-            || $factory instanceof \Closure
-            || is_string($factory)
+            || is_callable($factory)
+            || (is_string($factory) && class_exists($factory))
         ) {
             // factory
             $services->setFactory($service, $factory);

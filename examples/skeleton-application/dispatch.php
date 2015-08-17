@@ -12,6 +12,9 @@ use WebinoConfigLib\Feature\Route;
 /** @var \WebinoAppLib\Application\AbstractConfiguredApplication $app */
 $app;
 
+// TODO
+//eval(\Psy\sh());
+
 // -----------------------------------------------
 // --- Write Your Custom Code Bellow This Line ---
 // -----------------------------------------------

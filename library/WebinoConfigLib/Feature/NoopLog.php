@@ -5,7 +5,7 @@ namespace WebinoConfigLib\Feature;
 use WebinoConfigLib\Log\Writer;
 
 /**
- * Class NullCache
+ * Class NoopLog
  */
 class NoopLog extends AbstractLog
 {

@@ -1,7 +1,7 @@
 Service
 -------
 
-*Configuring services.*
+Configuring services.
 
 .. code-block:: php
 
@@ -9,13 +9,10 @@ Service
     use WebinoAppLib\Feature\Service;
 
     new Config([
-
         // invokable
         new Service(MyExampleService::class),
-
         // factory
         new Service(MyExampleService::class, MyExampleServiceFactory::class),
-
     ]);
 
 
@@ -25,7 +22,7 @@ Service
 CoreService
 -----------
 
-*Application core service config feature.*
+Application core service config feature.
 
 .. code-block:: php
 
@@ -33,9 +30,7 @@ CoreService
     use WebinoAppLib\Feature\CoreService;
 
     new CoreConfig([
-
         new CoreService(MyExampleCoreService::class),
-
     ]);
 
 

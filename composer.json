@@ -44,7 +44,8 @@
     "nette/tester": "1.*",
     "mikey179/vfsStream": "1.*",
     "psr/log": "1.0.*",
-    "firephp/firephp-core": "0.*"
+    "firephp/firephp-core": "0.*",
+    "psy/psysh": "0.*"
   },
   "autoload": {
     "psr-0": {

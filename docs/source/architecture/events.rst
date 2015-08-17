@@ -1,6 +1,6 @@
-========================
-Application Event System
-========================
+=========================
+Event System Architecture
+=========================
 
 .. contents::
     :depth: 1

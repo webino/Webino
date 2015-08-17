@@ -166,6 +166,8 @@ optional segments.*
         ->setDefaults(['optionalParam' => 'defaultValue']);
 
 
+- see: `Segment Route Example <http://demo.webino.org/route-segment>`_
+
 $route->setDefaults()
 +++++++++++++++++++++
 

@@ -125,18 +125,29 @@ trait EventEmitterTrait
             $_callback = $this->normalizeCallback($callback);
         }
 
+        if ($_callback instanceof CallbackHandler) {
+            $_callback = $_callback->getCallback();
+        }
+
         /** @var \Zend\Stdlib\CallbackHandler $listener */
         foreach ($this->listeners as $index => $listener) {
             $mData = $listener->getMetadata();
 
-            if (($event === $mData['event'] || null === $event)
-                && ($_callback === $listener->getCallback() || null === $callback)
-                && ($priority === $mData['priority'] || null === $priority)
-            ) {
-                $this->log(Log\DetachListener::class, $event, $_callback, $priority);
-                $this->getEvents()->detach($listener);
-                unset($this->listeners[$index]);
+            if ($event && $event !== $mData['event']) {
+                continue;
             }
+
+            if ($_callback !== $listener->getCallback()) {
+                continue;
+            }
+
+            if (null !== $priority && $priority !== $mData['priority']) {
+                continue;
+            }
+
+            $this->log(Log\DetachListener::class, $event, $_callback, $priority);
+            $this->getEvents()->detach($listener);
+            unset($this->listeners[$index]);
         }
 
         return $this;
@@ -148,7 +159,7 @@ trait EventEmitterTrait
     public function emit($event, $argv = [], $callback = null)
     {
         $target = $this;
-        if (($event instanceof Event)) {
+        if ($event instanceof Event) {
             $event->getTarget() or $event->setTarget($this);
             $target = $callback;
         }
@@ -185,8 +196,13 @@ trait EventEmitterTrait
      */
     private function resolveListenerAggregate($event)
     {
-        return (is_string($event) && class_exists($event))
-            ? $this->normalizeCallback($event)
-            : $event;
+        if (is_string($event) && class_exists($event)) {
+            if (empty(class_implements($event)[ListenerAggregateInterface::class])) {
+                return $event;
+            }
+            return $this->normalizeCallback($event);
+        }
+
+        return $event;
     }
 }

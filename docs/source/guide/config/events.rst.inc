@@ -1,7 +1,7 @@
 Listener
 --------
 
-*Configuring listeners.*
+Configuring listeners.
 
 .. code-block:: php
 
@@ -9,13 +9,10 @@ Listener
     use WebinoAppLib\Feature\Listener;
 
     new Config([
-
         // invokable
         new Listener(MyExampleListener::class),
-
         // factory
         new Listener(MyExampleListener::class, MyExampleListenerFactory::class),
-
     ]);
 
 
@@ -25,7 +22,7 @@ Listener
 CoreListener
 ------------
 
-*Configuring core listeners.*
+Configuring core listeners.
 
 .. code-block:: php
 
@@ -33,13 +30,10 @@ CoreListener
     use WebinoAppLib\Feature\CoreListener;
 
     new CoreConfig([
-
         // invokable
         new CoreListener(MyExampleCoreListener::class),
-
         // factory
         new CoreListener(MyExampleCoreListener::class, MyExampleCoreListenerFactory::class),
-
     ]);
 
 

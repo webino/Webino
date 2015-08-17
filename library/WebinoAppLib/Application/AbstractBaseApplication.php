@@ -48,19 +48,24 @@ abstract class AbstractBaseApplication extends AbstractApplication
         // lock core config
         $this->getConfig()->get(CoreConfig::CORE)->setReadOnly();
 
-        // trigger bootstrap
         $bootstrap->attachCoreListeners();
+        $listeners = $this->listeners;
+
+        // trigger bootstrap
         call_user_func($trigger);
 
         // configure application
         $bootstrap->configure();
 
-        // trigger bootstrap again
-        $this->detachListeners();
+
+        $detachedListeners = $this->detachListeners($listeners);
         $bootstrap->attachListeners()->detachCoreListeners();
+
+        // trigger bootstrap again
         call_user_func($trigger);
+
         $bootstrap->attachCoreListeners();
-        $this->attachDetachedListeners();
+        $this->attachDetachedListeners($detachedListeners);
 
         // lock config
         $this->getConfig()->setReadOnly();
@@ -71,22 +76,30 @@ abstract class AbstractBaseApplication extends AbstractApplication
 
     /**
      * Detach listeners from application events
+     *
+     * @param \Zend\EventManager\ListenerAggregateInterface[] $listeners
+     * @return \Zend\EventManager\ListenerAggregateInterface[] Detached listeners
      */
-    private function detachListeners()
+    private function detachListeners(array $listeners)
     {
-        $this->detachedListeners = [];
-        foreach ($this->listeners as $listener) {
-            $this->detachedListeners[] = clone $listener;
+        $detachedListeners = [];
+
+        foreach ($listeners as $listener) {
+            $detachedListeners[] = clone $listener;
             $this->unbind($listener);
         }
+
+        return $detachedListeners;
     }
 
     /**
      * Attach previously detached event listeners
+     *
+     * @param \Zend\EventManager\ListenerAggregateInterface[] $listeners
      */
-    private function attachDetachedListeners()
+    private function attachDetachedListeners(array $listeners)
     {
-        foreach ($this->detachedListeners as $listener) {
+        foreach ($listeners as $listener) {
             $this->bind($listener);
         }
     }

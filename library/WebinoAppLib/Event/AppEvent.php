@@ -12,7 +12,7 @@ class AppEvent extends Event implements
     AppEventInterface
 {
     /**
-     * @var AbstractBaseApplication
+     * @var AbstractApplication
      */
     private $app;
 
