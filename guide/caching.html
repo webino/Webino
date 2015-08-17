@@ -108,18 +108,15 @@
 </div>
 <div class="section" id="configcacheenabled">
 <h3><a class="toc-backref" href="#id8">ConfigCacheEnabled</a><a class="headerlink" href="#configcacheenabled" title="Permalink to this headline">¶</a></h3>
-<p><em>Toggling application config caching.</em></p>
+<p>Toggling application config caching.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="c1">// enable</span>
     <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">,</span>
-
     <span class="c1">// disable</span>
     <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">(</span><span class="k">false</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -129,28 +126,24 @@
 </div>
 <div class="section" id="filesystemcache">
 <h3><a class="toc-backref" href="#id9">FilesystemCache</a><a class="headerlink" href="#filesystemcache" title="Permalink to this headline">¶</a></h3>
-<p><em>Configuring filesystem cache.</em></p>
+<p>Configuring filesystem cache.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\FilesystemCache</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">,</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="memorycache">
 <h3><a class="toc-backref" href="#id10">MemoryCache</a><a class="headerlink" href="#memorycache" title="Permalink to this headline">¶</a></h3>
-<p><em>Configuring in memory cache.</em></p>
+<p>Configuring in memory cache.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryCache</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">MemoryCache</span><span class="p">,</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>

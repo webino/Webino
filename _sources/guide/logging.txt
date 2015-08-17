@@ -25,7 +25,7 @@ The best practice is to log a message via class.
 $app->getLogger()
 -----------------
 
-*Accessing logger service.*
+Accessing logger service.
 
 .. code-block:: php
 
@@ -38,7 +38,7 @@ $app->getLogger()
 $app->log()
 -----------
 
-*Writing messages to a log.*
+Writing messages to a log.
 
 .. code-block:: php
 

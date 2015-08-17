@@ -27,7 +27,7 @@ configure event.
 
 **Explanation:**
 
-**1)** *Creating new application object, loading a configuration and a debugger.*
+**1)** Creating new application object, loading a configuration and a debugger.
 
 .. code-block:: php
 
@@ -42,7 +42,7 @@ configure event.
 
 - Finally an application is created via service manager and registered into services too.
 
-**2)** *Initializing application, all the services will be ready.*
+**2)** Initializing an application, all the services will be ready.
 
 .. code-block:: php
 
@@ -61,7 +61,7 @@ configure event.
   - Second pass of the bootstrap is handled by remaining listeners, allowing them to perform actions
     before application is dispatched.
 
-**3)** *Handling the client request and sending a response.*
+**3)** Handling the client request and sending a response.
 
 .. code-block:: php
 
@@ -86,7 +86,7 @@ Events emitted during an application dispatch lifecycle.
     *Second pass, initializing remaining services and listeners.*
 
 **dispatch**
-    *Responding to the client request*
+    *Responding to the client request.*
 
 
 Object Class Diagram

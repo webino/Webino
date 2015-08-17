@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
     <link rel="next" title="Application Services" href="services.html" />
-    <link rel="prev" title="Application Event System" href="../architecture/events.html" />
+    <link rel="prev" title="Event System Architecture" href="../architecture/events.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -37,7 +37,7 @@
     <ul>
         <li>
           &larr;
-          <a href="../architecture/events.html" title="Previous document">Application Event System</a>
+          <a href="../architecture/events.html" title="Previous document">Event System Architecture</a>
         </li>
         <li>
           <a href="services.html" title="Next document">Application Services</a>
@@ -81,7 +81,7 @@
 </div>
 <div class="section" id="app-getconfig">
 <h3><a class="toc-backref" href="#id6">$app-&gt;getConfig()</a><a class="headerlink" href="#app-getconfig" title="Permalink to this headline">¶</a></h3>
-<p><em>Accessing application configuration.</em></p>
+<p>Accessing application configuration.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Config\Config $config */</span>
 <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">();</span>
 </pre></div>
@@ -90,11 +90,11 @@
 <p class="first admonition-title">Note</p>
 <p class="last">It is possible to set configuration values before application is fully bootstrapped.</p>
 </div>
-<p><em>Setting configuration value.</em></p>
+<p>Setting configuration value.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">myConfigKey</span> <span class="o">=</span> <span class="s1">&#39;myConfigValue&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p><em>Getting configuration value.</em></p>
+<p>Getting configuration value.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Config\Config|mixed $myConfig */</span>
 <span class="nv">$myConfig</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="s1">&#39;myConfigKey&#39;</span><span class="p">,</span> <span class="nv">$default</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
 </pre></div>
@@ -102,7 +102,7 @@
 </div>
 <div class="section" id="app-getcoreconfig">
 <h3><a class="toc-backref" href="#id7">$app-&gt;getCoreConfig()</a><a class="headerlink" href="#app-getcoreconfig" title="Permalink to this headline">¶</a></h3>
-<p><em>Getting core configuration value.</em></p>
+<p>Getting core configuration value.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Config\Config|mixed $myCoreConfig */</span>
 <span class="nv">$myCoreConfig</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCoreConfig</span><span class="p">(</span><span class="s1">&#39;myCoreConfigKey&#39;</span><span class="p">,</span> <span class="nv">$default</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
 </pre></div>
@@ -157,18 +157,15 @@
 <p>Use event system config features to configure listeners.</p>
 <div class="section" id="listener">
 <h4><a class="toc-backref" href="#id9">Listener</a><a class="headerlink" href="#listener" title="Permalink to this headline">¶</a></h4>
-<p><em>Configuring listeners.</em></p>
+<p>Configuring listeners.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Listener</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">Listener</span><span class="p">(</span><span class="nx">MyExampleListener</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">Listener</span><span class="p">(</span><span class="nx">MyExampleListener</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyExampleListenerFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -178,18 +175,15 @@
 </div>
 <div class="section" id="corelistener">
 <h4><a class="toc-backref" href="#id10">CoreListener</a><a class="headerlink" href="#corelistener" title="Permalink to this headline">¶</a></h4>
-<p><em>Configuring core listeners.</em></p>
+<p>Configuring core listeners.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\CoreListener</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">CoreListener</span><span class="p">(</span><span class="nx">MyExampleCoreListener</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">CoreListener</span><span class="p">(</span><span class="nx">MyExampleCoreListener</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyExampleCoreListenerFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -203,18 +197,15 @@
 <p>Use services config features to configure invokable services and service factories.</p>
 <div class="section" id="service">
 <h4><a class="toc-backref" href="#id12">Service</a><a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h4>
-<p><em>Configuring services.</em></p>
+<p>Configuring services.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Service</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyExampleService</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyExampleService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyExampleServiceFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -224,14 +215,12 @@
 </div>
 <div class="section" id="coreservice">
 <h4><a class="toc-backref" href="#id13">CoreService</a><a class="headerlink" href="#coreservice" title="Permalink to this headline">¶</a></h4>
-<p><em>Application core service config feature.</em></p>
+<p>Application core service config feature.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\CoreService</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">CoreService</span><span class="p">(</span><span class="nx">MyExampleCoreService</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -245,14 +234,12 @@
 <p>Use logging config features to configure logging.</p>
 <div class="section" id="log">
 <h4><a class="toc-backref" href="#id15">Log</a><a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h4>
-<p><em>Configuring logger.</em></p>
+<p>Configuring logger.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -262,15 +249,12 @@
 </div>
 <div class="section" id="firephplog">
 <h4><a class="toc-backref" href="#id16">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Permalink to this headline">¶</a></h4>
-<p><em>Configuring FirePHP logger.</em></p>
+<p>Configuring FirePHP logger.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature</span> <span class="k">as</span> <span class="nx">AppFeature</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
-    <span class="k">new</span> <span class="nx">AppFeature\Log</span><span class="p">,</span>
-    <span class="k">new</span> <span class="nx">AppFeature\FirePhpLog</span><span class="p">,</span>
-
+    <span class="k">new</span> <span class="nx">FirePhpLog</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -288,15 +272,13 @@
 <p>Use filesystem config features to configure filesystems.</p>
 <div class="section" id="defaultfilesystem">
 <h4><a class="toc-backref" href="#id19">DefaultFilesystem</a><a class="headerlink" href="#defaultfilesystem" title="Permalink to this headline">¶</a></h4>
-<p><em>Overriding default local working dir filesystem.</em></p>
+<p>Overriding default local working dir filesystem.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\DefaultFilesystem</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="c1">// optional</span>
     <span class="k">new</span> <span class="nx">DefaultFilesystem</span><span class="p">(</span><span class="s1">&#39;custom/root&#39;</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -306,14 +288,12 @@
 </div>
 <div class="section" id="memoryfilesystem">
 <h4><a class="toc-backref" href="#id20">MemoryFilesystem</a><a class="headerlink" href="#memoryfilesystem" title="Permalink to this headline">¶</a></h4>
-<p><em>Configuring temporary filesystem in the memory.</em></p>
+<p>Configuring temporary filesystem in the memory.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryFilesystem</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">MemoryFilesystem</span><span class="p">,</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -327,19 +307,18 @@
 <p>Use routing config features to configure routing.</p>
 <div class="section" id="route">
 <h4><a class="toc-backref" href="#id22">Route</a><a class="headerlink" href="#route" title="Permalink to this headline">¶</a></h4>
-<p><em>Adding routes via config.</em></p>
+<p>Adding routes via config.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Route</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="p">(</span><span class="k">new</span> <span class="nx">Route</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/my/route/path&#39;</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>see: <a class="reference internal" href="routing.html#api-routing-app-url"><span>$app-&gt;url()</span></a> | <a class="reference internal" href="routing.html#api-routing-app-bindroute"><span>$app-&gt;bindRoute()</span></a></li>
+<li>see: <a class="reference external" href="http://demo.webino.org/route-config">Route Config Example</a> | <a class="reference internal" href="routing.html#api-routing-app-url"><span>$app-&gt;url()</span></a>
+| <a class="reference internal" href="routing.html#api-routing-app-bindroute"><span>$app-&gt;bindRoute()</span></a></li>
 </ul>
 </div>
 </div>
@@ -524,7 +503,7 @@
     <ul>
         <li>
           &larr;
-          <a href="../architecture/events.html" title="Previous document">Application Event System</a>
+          <a href="../architecture/events.html" title="Previous document">Event System Architecture</a>
         </li>
         <li>
           <a href="services.html" title="Next document">Application Services</a>

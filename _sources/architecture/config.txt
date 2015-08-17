@@ -1,6 +1,6 @@
-=========================
-Application Configuration
-=========================
+==========================
+Configuration Architecture
+==========================
 
 .. contents::
     :depth: 1

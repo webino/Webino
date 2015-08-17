@@ -25,7 +25,7 @@ Debugging Methods
 $app->getDebugger()
 -------------------
 
-*Accessing debugger service.*
+Accessing debugger service.
 
 .. code-block:: php
 
@@ -33,17 +33,20 @@ $app->getDebugger()
     $debugger = $app->getDebugger();
 
 
+- see: `Debugger Example <http://demo.webino.org/debugger>`_
+
+
 $app->debug()
 -------------
 
-*Dumping information about a variable in readable format.*
+Dumping information about a variable in readable format.
 
 .. code-block:: php
 
     $app->debug($var);
 
 
-*Returning output instead of printing it.*
+Returning output instead of printing it.
 
 .. code-block:: php
 
@@ -56,7 +59,7 @@ $app->debug()
 $app->debug()->barDump()
 ------------------------
 
-*Dumping information about a variable into Tracy debugger bar.*
+Dumping information about a variable into Tracy debugger bar.
 
 .. code-block:: php
 
@@ -69,17 +72,20 @@ $app->debug()->barDump()
 $app->debug()->timer()
 ----------------------
 
-*TODO...*
+TODO...
 
 .. code-block:: php
 
     $app->debug()->timer();
 
 
+- see: `Debugger Timer Example <http://demo.webino.org/debugger-timer>`_
+
+
 $app->debug()->setBarInfo()
 ---------------------------
 
-*Setting information into Tracy debugger bar System info panel.*
+Setting information into Tracy debugger bar System info panel.
 
 .. code-block:: php
 
@@ -88,17 +94,23 @@ $app->debug()->setBarInfo()
     $app->debug()->setBarInfo(['Test Label 02' => 'Test Value02']);
 
 
+- see: `Debugger Bar Info Example <http://demo.webino.org/debugger-info>`_
+
+
 $app->debug()->setBarPanel()
 ----------------------------
 
-*Setting custom debugger panel into Tracy bar.*
+Setting custom debugger panel into Tracy bar.
 
 .. code-block:: php
 
     /** @var \WebinoAppLib\Debugger\Bar\AbstractPanel $panel */
     $app->debug()->setBarPanel($panel);
-    // or with name
+    // or with an optional name
     $app->debug()->setBarPanel($panel, 'myDebugBarPanel');
+
+
+- see: `Debugger Bar Panel Example <http://demo.webino.org/debugger-panel>`_
 
 
 Debugger Config

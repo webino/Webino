@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
-    <link rel="next" title="Application Configuration" href="config.html" />
+    <link rel="next" title="Configuration Architecture" href="config.html" />
     <link rel="prev" title="Webino Skeleton Module" href="../basics/skeleton-module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
@@ -40,7 +40,7 @@
           <a href="../basics/skeleton-module.html" title="Previous document">Webino Skeleton Module</a>
         </li>
         <li>
-          <a href="config.html" title="Next document">Application Configuration</a>
+          <a href="config.html" title="Next document">Configuration Architecture</a>
           &rarr;
         </li>
     </ul>
@@ -79,7 +79,7 @@ after the configure event, right before second pass bootstrap occurs. So only co
 configure event.</p>
 <img alt="../_images/WebinoAppLib.Flowchart_h400.png" class="centered" src="../_images/WebinoAppLib.Flowchart_h400.png" />
 <p><strong>Explanation:</strong></p>
-<p><strong>1)</strong> <em>Creating new application object, loading a configuration and a debugger.</em></p>
+<p><strong>1)</strong> Creating new application object, loading a configuration and a debugger.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Application\AbstractBaseApplication $appCore **/</span>
 <span class="nv">$appCore</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">(</span><span class="nv">$config</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$debugger</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
 </pre></div>
@@ -93,7 +93,7 @@ if that fails too, the factory creates default configuration and null debugger o
 </li>
 <li>Finally an application is created via service manager and registered into services too.</li>
 </ul>
-<p><strong>2)</strong> <em>Initializing application, all the services will be ready.</em></p>
+<p><strong>2)</strong> Initializing an application, all the services will be ready.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Application\AbstractConfiguredApplication $app **/</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nv">$appCore</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
 </pre></div>
@@ -109,7 +109,7 @@ before application is dispatched.</li>
 </ul>
 </li>
 </ul>
-<p><strong>3)</strong> <em>Handling the client request and sending a response.</em></p>
+<p><strong>3)</strong> Handling the client request and sending a response.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -129,7 +129,7 @@ nothing will happen.</li>
 <dt><strong>bootstrap</strong></dt>
 <dd><em>Second pass, initializing remaining services and listeners.</em></dd>
 <dt><strong>dispatch</strong></dt>
-<dd><em>Responding to the client request</em></dd>
+<dd><em>Responding to the client request.</em></dd>
 </dl>
 </div>
 <div class="section" id="object-class-diagram">
@@ -318,7 +318,7 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
           <a href="../basics/skeleton-module.html" title="Previous document">Webino Skeleton Module</a>
         </li>
         <li>
-          <a href="config.html" title="Next document">Application Configuration</a>
+          <a href="config.html" title="Next document">Configuration Architecture</a>
           &rarr;
         </li>
     </ul>

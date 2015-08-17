@@ -25,7 +25,7 @@ Services Methods
 $app->getServices()
 -------------------
 
-*Accessing service manager.*
+Accessing a service manager.
 
 .. code-block:: php
 
@@ -38,7 +38,7 @@ $app->getServices()
 $app->get()
 -----------
 
-*Getting a service from an application.*
+Getting a service from application.
 
 .. code-block:: php
 
@@ -49,7 +49,7 @@ $app->get()
 $app->set()
 -----------
 
-*Registering a service into an application.*
+Registering a service into application.
 
 .. code-block:: php
 
@@ -74,7 +74,7 @@ $app->set()
 $app->has()
 -----------
 
-*Checking wheater a service is available to the application.*
+Checking wheater a service is available to application.
 
 .. code-block:: php
 

@@ -109,7 +109,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="app-getfilesystems">
 <h3><a class="toc-backref" href="#id7">$app-&gt;getFilesystems()</a><a class="headerlink" href="#app-getfilesystems" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Accessing filesystem manager service.</em></p>
+<p>Accessing filesystem manager service.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\ServiceManager\ServiceLocatorInterface $filesystems */</span>
 <span class="nv">$filesystems</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getFilesystems</span><span class="p">();</span>
 </pre></div>
@@ -117,7 +117,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="app-file">
 <span id="api-filesystem-app-file"></span><h3><a class="toc-backref" href="#id8">$app-&gt;file()</a><a class="headerlink" href="#app-file" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Obtaining filesystem instance.</em></p>
+<p>Obtaining filesystem instance.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Filesystem\LocalFiles</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Filesystem\InMemoryFiles</span><span class="p">;</span>
 
@@ -133,116 +133,116 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="app-file-write">
 <h3><a class="toc-backref" href="#id9">$app-&gt;file()-&gt;write()</a><a class="headerlink" href="#app-file-write" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Write files. Throws an exception if file already exists.</em></p>
+<p>Write files, throws an exception if the file already exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-update">
 <h3><a class="toc-backref" href="#id10">$app-&gt;file()-&gt;update()</a><a class="headerlink" href="#app-file-update" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Update files. Throws an exception if file does not exists.</em></p>
+<p>Update files, throws an exception if the file does not exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example updated.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-put">
 <h3><a class="toc-backref" href="#id11">$app-&gt;file()-&gt;put()</a><a class="headerlink" href="#app-file-put" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Write or update files.</em></p>
+<p>Write or update files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-read">
 <h3><a class="toc-backref" href="#id12">$app-&gt;file()-&gt;read()</a><a class="headerlink" href="#app-file-read" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Read files.</em></p>
+<p>Read files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-has">
 <h3><a class="toc-backref" href="#id13">$app-&gt;file()-&gt;has()</a><a class="headerlink" href="#app-file-has" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Check if a file exists.</em></p>
+<p>Check if a file exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$exists</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-delete">
 <h3><a class="toc-backref" href="#id14">$app-&gt;file()-&gt;delete()</a><a class="headerlink" href="#app-file-delete" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Delete files.</em></p>
+<p>Delete files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-readanddelete">
 <h3><a class="toc-backref" href="#id15">$app-&gt;file()-&gt;readAndDelete()</a><a class="headerlink" href="#app-file-readanddelete" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Read and delete files.</em></p>
+<p>Read and delete files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">readAndDelete</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-rename">
 <h3><a class="toc-backref" href="#id16">$app-&gt;file()-&gt;rename()</a><a class="headerlink" href="#app-file-rename" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Rename files.</em></p>
+<p>Rename files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">rename</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;path/to/new-file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-copy">
 <h3><a class="toc-backref" href="#id17">$app-&gt;file()-&gt;copy()</a><a class="headerlink" href="#app-file-copy" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Copy files.</em></p>
+<p>Copy files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;path/to/file-copy.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-getmimetype">
 <h3><a class="toc-backref" href="#id18">$app-&gt;file()-&gt;getMimetype()</a><a class="headerlink" href="#app-file-getmimetype" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Get MIME types.</em></p>
+<p>Get MIME types.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$mimetype</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getMimetype</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-gettimestamp">
 <h3><a class="toc-backref" href="#id19">$app-&gt;file()-&gt;getTimestamp()</a><a class="headerlink" href="#app-file-gettimestamp" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Get timestamps.</em></p>
+<p>Get timestamps.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$timestamp</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getTimestamp</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-getsize">
 <h3><a class="toc-backref" href="#id20">$app-&gt;file()-&gt;getSize()</a><a class="headerlink" href="#app-file-getsize" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Get file sizes.</em></p>
+<p>Get file sizes.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$size</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getSize</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-createdir">
 <h3><a class="toc-backref" href="#id21">$app-&gt;file()-&gt;createDir()</a><a class="headerlink" href="#app-file-createdir" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Create directories.</em></p>
+<p>Create directories.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDir</span><span class="p">(</span><span class="s1">&#39;path/to/new/directory&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Directories are also made implicitly when writing to a deeper path.</em></p>
+<p>Directories are also made implicitly when writing to a deeper path.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-deletedir">
 <h3><a class="toc-backref" href="#id22">$app-&gt;file()-&gt;deleteDir()</a><a class="headerlink" href="#app-file-deletedir" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Delete directories.</em></p>
+<p>Delete directories.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">deleteDir</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-emptydir">
 <h3><a class="toc-backref" href="#id23">$app-&gt;file()-&gt;emptyDir()</a><a class="headerlink" href="#app-file-emptydir" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Empty directories.</em></p>
+<p>Empty directories.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emptyDir</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-listcontents">
 <h3><a class="toc-backref" href="#id24">$app-&gt;file()-&gt;listContents()</a><a class="headerlink" href="#app-file-listcontents" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>List contents, returns array of info of the files and folders.</em></p>
+<p>List contents, returns array of info of the files and folders.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">listContents</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">false</span><span class="p">);</span>
 
 <span class="c1">// non-recursive root by default</span>
@@ -252,7 +252,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="app-file-listpaths">
 <h3><a class="toc-backref" href="#id25">$app-&gt;file()-&gt;listPaths()</a><a class="headerlink" href="#app-file-listpaths" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>List paths, returns array of paths of the files and folders.</em></p>
+<p>List paths, returns array of paths of the files and folders.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$paths</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">listPaths</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">false</span><span class="p">);</span>
 
 <span class="c1">// non-recursive root by default</span>
@@ -262,7 +262,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="app-file-listfiles">
 <h3><a class="toc-backref" href="#id26">$app-&gt;file()-&gt;listFiles()</a><a class="headerlink" href="#app-file-listfiles" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>List files, returns array of paths of the files.</em></p>
+<p>List files, returns array of paths of the files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$files</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">listFiles</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">false</span><span class="p">);</span>
 
 <span class="c1">// non-recursive root by default</span>
@@ -272,28 +272,28 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="app-file-writestream">
 <h3><a class="toc-backref" href="#id27">$app-&gt;file()-&gt;writeStream()</a><a class="headerlink" href="#app-file-writestream" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Write files using stream. Throws an exception if file already exists.</em></p>
+<p>Write files using stream, throws an exception if the file already exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">writeStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="nv">$stream</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-updatestream">
 <h3><a class="toc-backref" href="#id28">$app-&gt;file()-&gt;updateStream()</a><a class="headerlink" href="#app-file-updatestream" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Update files using stream. Throws an exception if file does not exists.</em></p>
+<p>Update files using stream, throws an exception if the file does not exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">updateStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="nv">$stream</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-putstream">
 <h3><a class="toc-backref" href="#id29">$app-&gt;file()-&gt;putStream()</a><a class="headerlink" href="#app-file-putstream" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Write or update files using stream.</em></p>
+<p>Write or update files using stream.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">putStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="nv">$stream</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-readstream">
 <h3><a class="toc-backref" href="#id30">$app-&gt;file()-&gt;readStream()</a><a class="headerlink" href="#app-file-readstream" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Read files using stream.</em></p>
+<p>Read files using stream.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$stream</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">readStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -309,15 +309,13 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="defaultfilesystem">
 <h3><a class="toc-backref" href="#id31">DefaultFilesystem</a><a class="headerlink" href="#defaultfilesystem" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Overriding default local working dir filesystem.</em></p>
+<p>Overriding default local working dir filesystem.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\DefaultFilesystem</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="c1">// optional</span>
     <span class="k">new</span> <span class="nx">DefaultFilesystem</span><span class="p">(</span><span class="s1">&#39;custom/root&#39;</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -327,14 +325,12 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 <div class="section" id="memoryfilesystem">
 <h3><a class="toc-backref" href="#id32">MemoryFilesystem</a><a class="headerlink" href="#memoryfilesystem" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Configuring temporary filesystem in the memory.</em></p>
+<p>Configuring temporary filesystem in the memory.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryFilesystem</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">MemoryFilesystem</span><span class="p">,</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>

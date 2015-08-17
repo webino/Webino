@@ -27,7 +27,7 @@ Config Methods
 $app->getConfig()
 ^^^^^^^^^^^^^^^^^
 
-*Accessing application configuration.*
+Accessing application configuration.
 
 .. code-block:: php
 
@@ -38,14 +38,14 @@ $app->getConfig()
 .. note::
     It is possible to set configuration values before application is fully bootstrapped.
 
-*Setting configuration value.*
+Setting configuration value.
 
 .. code-block:: php
 
     $app->getConfig()->myConfigKey = 'myConfigValue';
 
 
-*Getting configuration value.*
+Getting configuration value.
 
 .. code-block:: php
 
@@ -56,7 +56,7 @@ $app->getConfig()
 $app->getCoreConfig()
 ^^^^^^^^^^^^^^^^^^^^^
 
-*Getting core configuration value.*
+Getting core configuration value.
 
 .. code-block:: php
 

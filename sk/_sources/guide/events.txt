@@ -1,8 +1,8 @@
 .. rst-class:: sub-monospace
 
-============
-Event System
-============
+========================
+Application Event System
+========================
 
 .. contents::
     :depth: 1
@@ -23,7 +23,7 @@ Application can emit events and bind listeners to them.
 $app->getEvents()
 -----------------
 
-*Accessing event manager service.*
+Accessing event manager service.
 
 .. code-block:: php
 
@@ -35,7 +35,7 @@ $app->getEvents()
 $app->bind()
 ------------
 
-*Binding a listener to an event.*
+Binding a listener to an event.
 
 .. code-block:: php
 
@@ -69,7 +69,7 @@ $app->bind()
 $app->unbind()
 --------------
 
-*Unbinding a listener from an event.*
+Unbinding a listener from an event.
 
 .. code-block:: php
 
@@ -86,7 +86,7 @@ $app->unbind()
 $app->emit()
 ------------
 
-*Emitting an event.*
+Emitting an event.
 
 .. code-block:: php
 
@@ -195,7 +195,7 @@ Following methods are provided by the dispatch event object.
 $event->getApp()
 ----------------
 
-*Obtaining application instance.*
+Obtaining application instance.
 
 .. code-block:: php
 
@@ -207,7 +207,7 @@ $event->getApp()
 $event->getRequest()
 --------------------
 
-*Obtaining request instance.*
+Obtaining request instance.
 
 .. code-block:: php
 
@@ -219,7 +219,7 @@ $event->getRequest()
 $event->getResponse()
 ---------------------
 
-*Obtaining response instance.*
+Obtaining response instance.
 
 .. code-block:: php
 
@@ -231,7 +231,7 @@ $event->getResponse()
 $event->setResponse()
 ---------------------
 
-*Setting a response instance.*
+Setting a response instance.
 
 .. code-block:: php
 
@@ -243,7 +243,7 @@ $event->setResponse()
 $event->setResponseContent()
 ----------------------------
 
-*Setting a response text, it will appended to the already existing one.*
+Setting a response text, it will appended to the already existing one.
 
 .. code-block:: php
 
@@ -254,7 +254,7 @@ $event->setResponseContent()
 $event->resetResponseContent()
 ------------------------------
 
-*Setting a response text, clearing the already existing one.*
+Setting a response text, clearing the already existing one.
 
 .. code-block:: php
 
@@ -265,7 +265,7 @@ $event->resetResponseContent()
 $event->setResponseStream()
 ---------------------------
 
-*Setting a response stream.*
+Setting a response stream.
 
 .. code-block:: php
 
@@ -296,7 +296,7 @@ Event provides some constants for priorities:
 Event::BEGIN
 ------------
 
-*Handled at the beginning of an event.*
+Handled at the beginning of an event.
 
 .. code-block:: php
 
@@ -308,7 +308,7 @@ Event::BEGIN
 Event::BEFORE
 -------------
 
-*Handled before main event.*
+Handled before main event.
 
 .. code-block:: php
 
@@ -320,7 +320,7 @@ Event::BEFORE
 Event::AFTER
 ------------
 
-*Handled after main event.*
+Handled after main event.
 
 .. code-block:: php
 
@@ -332,7 +332,7 @@ Event::AFTER
 Event::FINISH
 -------------
 
-*Handled at the end of an event.*
+Handled at the end of an event.
 
 .. code-block:: php
 

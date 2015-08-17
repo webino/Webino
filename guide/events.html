@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Event System &mdash; Webino 0.1.0alpha documentation</title>
+    <title>Application Event System &mdash; Webino 0.1.0alpha documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -57,8 +57,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="sub-monospace section" id="event-system">
-<h1>Event System<a class="headerlink" href="#event-system" title="Permalink to this headline">¶</a></h1>
+  <div class="sub-monospace section" id="application-event-system">
+<h1>Application Event System<a class="headerlink" href="#application-event-system" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#event-emitter-methods" id="id6">Event Emitter Methods</a></li>
@@ -86,7 +86,7 @@
 </div>
 <div class="section" id="app-getevents">
 <h3><a class="toc-backref" href="#id16">$app-&gt;getEvents()</a><a class="headerlink" href="#app-getevents" title="Permalink to this headline">¶</a></h3>
-<p><em>Accessing event manager service.</em></p>
+<p>Accessing event manager service.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoEventLib\EventManager $events */</span>
 <span class="nv">$events</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getEvents</span><span class="p">();</span>
 </pre></div>
@@ -94,7 +94,7 @@
 </div>
 <div class="section" id="app-bind">
 <span id="api-events-app-bind"></span><h3><a class="toc-backref" href="#id17">$app-&gt;bind()</a><a class="headerlink" href="#app-bind" title="Permalink to this headline">¶</a></h3>
-<p><em>Binding a listener to an event.</em></p>
+<p>Binding a listener to an event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// creating a closure listener</span>
 <span class="nv">$handler</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">AppEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// do something...</span>
@@ -125,7 +125,7 @@
 </div>
 <div class="section" id="app-unbind">
 <h3><a class="toc-backref" href="#id18">$app-&gt;unbind()</a><a class="headerlink" href="#app-unbind" title="Permalink to this headline">¶</a></h3>
-<p><em>Unbinding a listener from an event.</em></p>
+<p>Unbinding a listener from an event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// for all events and priorities</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">unbind</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
 
@@ -139,7 +139,7 @@
 </div>
 <div class="section" id="app-emit">
 <h3><a class="toc-backref" href="#id19">$app-&gt;emit()</a><a class="headerlink" href="#app-emit" title="Permalink to this headline">¶</a></h3>
-<p><em>Emitting an event.</em></p>
+<p>Emitting an event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// just emit an event</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">);</span>
 
@@ -174,18 +174,15 @@
 </div>
 <div class="section" id="listener">
 <h3><a class="toc-backref" href="#id20">Listener</a><a class="headerlink" href="#listener" title="Permalink to this headline">¶</a></h3>
-<p><em>Configuring listeners.</em></p>
+<p>Configuring listeners.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Listener</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">Listener</span><span class="p">(</span><span class="nx">MyExampleListener</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">Listener</span><span class="p">(</span><span class="nx">MyExampleListener</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyExampleListenerFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -195,18 +192,15 @@
 </div>
 <div class="section" id="corelistener">
 <h3><a class="toc-backref" href="#id21">CoreListener</a><a class="headerlink" href="#corelistener" title="Permalink to this headline">¶</a></h3>
-<p><em>Configuring core listeners.</em></p>
+<p>Configuring core listeners.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\CoreListener</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">CoreListener</span><span class="p">(</span><span class="nx">MyExampleCoreListener</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">CoreListener</span><span class="p">(</span><span class="nx">MyExampleCoreListener</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyExampleCoreListenerFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -279,7 +273,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-getapp">
 <h3><a class="toc-backref" href="#id25">$event-&gt;getApp()</a><a class="headerlink" href="#event-getapp" title="Permalink to this headline">¶</a></h3>
-<p><em>Obtaining application instance.</em></p>
+<p>Obtaining application instance.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="sd">/** @var \WebinoAppLib\Application\AbstractApplication $app */</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getApp</span><span class="p">();</span>
@@ -288,7 +282,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-getrequest">
 <h3><a class="toc-backref" href="#id26">$event-&gt;getRequest()</a><a class="headerlink" href="#event-getrequest" title="Permalink to this headline">¶</a></h3>
-<p><em>Obtaining request instance.</em></p>
+<p>Obtaining request instance.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="sd">/** @var \Zend\Stdlib\RequestInterface $request */</span>
 <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
@@ -297,7 +291,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-getresponse">
 <h3><a class="toc-backref" href="#id27">$event-&gt;getResponse()</a><a class="headerlink" href="#event-getresponse" title="Permalink to this headline">¶</a></h3>
-<p><em>Obtaining response instance.</em></p>
+<p>Obtaining response instance.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="sd">/** @var \Zend\Stdlib\ResponseInterface $response */</span>
 <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
@@ -306,7 +300,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-setresponse">
 <h3><a class="toc-backref" href="#id28">$event-&gt;setResponse()</a><a class="headerlink" href="#event-setresponse" title="Permalink to this headline">¶</a></h3>
-<p><em>Setting a response instance.</em></p>
+<p>Setting a response instance.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="sd">/** @var \Zend\Stdlib\ResponseInterface $response */</span>
 <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
@@ -315,7 +309,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-setresponsecontent">
 <h3><a class="toc-backref" href="#id29">$event-&gt;setResponseContent()</a><a class="headerlink" href="#event-setresponsecontent" title="Permalink to this headline">¶</a></h3>
-<p><em>Setting a response text, it will appended to the already existing one.</em></p>
+<p>Setting a response text, it will appended to the already existing one.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setResponseContent</span><span class="p">(</span><span class="s1">&#39;Example response content.&#39;</span><span class="p">);</span>
 </pre></div>
@@ -323,7 +317,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-resetresponsecontent">
 <h3><a class="toc-backref" href="#id30">$event-&gt;resetResponseContent()</a><a class="headerlink" href="#event-resetresponsecontent" title="Permalink to this headline">¶</a></h3>
-<p><em>Setting a response text, clearing the already existing one.</em></p>
+<p>Setting a response text, clearing the already existing one.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">resetResponseContent</span><span class="p">(</span><span class="s1">&#39;Example response content.&#39;</span><span class="p">);</span>
 </pre></div>
@@ -331,7 +325,7 @@ binds to the first pass and a remaining can listen to the second pass bootstrap 
 </div>
 <div class="section" id="event-setresponsestream">
 <h3><a class="toc-backref" href="#id31">$event-&gt;setResponseStream()</a><a class="headerlink" href="#event-setresponsestream" title="Permalink to this headline">¶</a></h3>
-<p><em>Setting a response stream.</em></p>
+<p>Setting a response stream.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\DispatchEvent $event */</span>
 <span class="sd">/** @var resource $stream */</span>
 <span class="nv">$stream</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getApp</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">readStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
@@ -356,7 +350,7 @@ as soon after the main action triggers.</p>
 </div>
 <div class="section" id="event-begin">
 <h3><a class="toc-backref" href="#id32">Event::BEGIN</a><a class="headerlink" href="#event-begin" title="Permalink to this headline">¶</a></h3>
-<p><em>Handled at the beginning of an event.</em></p>
+<p>Handled at the beginning of an event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">Event</span><span class="o">::</span><span class="na">BEGIN</span><span class="p">);</span>
@@ -365,7 +359,7 @@ as soon after the main action triggers.</p>
 </div>
 <div class="section" id="event-before">
 <h3><a class="toc-backref" href="#id33">Event::BEFORE</a><a class="headerlink" href="#event-before" title="Permalink to this headline">¶</a></h3>
-<p><em>Handled before main event.</em></p>
+<p>Handled before main event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">Event</span><span class="o">::</span><span class="na">BEFORE</span><span class="p">);</span>
@@ -374,7 +368,7 @@ as soon after the main action triggers.</p>
 </div>
 <div class="section" id="event-after">
 <h3><a class="toc-backref" href="#id34">Event::AFTER</a><a class="headerlink" href="#event-after" title="Permalink to this headline">¶</a></h3>
-<p><em>Handled after main event.</em></p>
+<p>Handled after main event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">Event</span><span class="o">::</span><span class="na">AFTER</span><span class="p">);</span>
@@ -383,7 +377,7 @@ as soon after the main action triggers.</p>
 </div>
 <div class="section" id="event-finish">
 <h3><a class="toc-backref" href="#id35">Event::FINISH</a><a class="headerlink" href="#event-finish" title="Permalink to this headline">¶</a></h3>
-<p><em>Handled at the end of an event.</em></p>
+<p>Handled at the end of an event.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;myEvent&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">Event</span><span class="o">::</span><span class="na">FINISH</span><span class="p">);</span>

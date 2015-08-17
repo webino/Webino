@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
     <link rel="next" title="Application Logging" href="logging.html" />
-    <link rel="prev" title="Event System" href="events.html" />
+    <link rel="prev" title="Application Event System" href="events.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -37,7 +37,7 @@
     <ul>
         <li>
           &larr;
-          <a href="events.html" title="Previous document">Event System</a>
+          <a href="events.html" title="Previous document">Application Event System</a>
         </li>
         <li>
           <a href="logging.html" title="Next document">Application Logging</a>
@@ -61,42 +61,45 @@
 <h1>Application Debugging<a class="headerlink" href="#application-debugging" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#debugging-methods" id="id3">Debugging Methods</a></li>
-<li><a class="reference internal" href="#debugger-config" id="id4">Debugger Config</a></li>
-<li><a class="reference internal" href="#adding-debugger-bar-system-info" id="id5">Adding Debugger Bar System Info</a></li>
-<li><a class="reference internal" href="#creating-debugger-bar-panel" id="id6">Creating Debugger Bar Panel</a></li>
+<li><a class="reference internal" href="#debugging-methods" id="id5">Debugging Methods</a></li>
+<li><a class="reference internal" href="#debugger-config" id="id6">Debugger Config</a></li>
+<li><a class="reference internal" href="#adding-debugger-bar-system-info" id="id7">Adding Debugger Bar System Info</a></li>
+<li><a class="reference internal" href="#creating-debugger-bar-panel" id="id8">Creating Debugger Bar Panel</a></li>
 </ul>
 </div>
 <ul class="simple">
 <li>Powered by <a class="reference external" href="http://tracy.nette.org">Tracy</a></li>
 </ul>
 <div class="monospace-topic section" id="debugging-methods">
-<h2><a class="toc-backref" href="#id3">Debugging Methods</a><a class="headerlink" href="#debugging-methods" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Debugging Methods</a><a class="headerlink" href="#debugging-methods" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
-<li><a class="reference internal" href="#app-getdebugger" id="id7">$app-&gt;getDebugger()</a></li>
-<li><a class="reference internal" href="#app-debug" id="id8">$app-&gt;debug()</a></li>
-<li><a class="reference internal" href="#app-debug-bardump" id="id9">$app-&gt;debug()-&gt;barDump()</a></li>
-<li><a class="reference internal" href="#app-debug-timer" id="id10">$app-&gt;debug()-&gt;timer()</a></li>
-<li><a class="reference internal" href="#app-debug-setbarinfo" id="id11">$app-&gt;debug()-&gt;setBarInfo()</a></li>
-<li><a class="reference internal" href="#app-debug-setbarpanel" id="id12">$app-&gt;debug()-&gt;setBarPanel()</a></li>
+<li><a class="reference internal" href="#app-getdebugger" id="id9">$app-&gt;getDebugger()</a></li>
+<li><a class="reference internal" href="#app-debug" id="id10">$app-&gt;debug()</a></li>
+<li><a class="reference internal" href="#app-debug-bardump" id="id11">$app-&gt;debug()-&gt;barDump()</a></li>
+<li><a class="reference internal" href="#app-debug-timer" id="id12">$app-&gt;debug()-&gt;timer()</a></li>
+<li><a class="reference internal" href="#app-debug-setbarinfo" id="id13">$app-&gt;debug()-&gt;setBarInfo()</a></li>
+<li><a class="reference internal" href="#app-debug-setbarpanel" id="id14">$app-&gt;debug()-&gt;setBarPanel()</a></li>
 </ul>
 </div>
 <div class="section" id="app-getdebugger">
-<h3><a class="toc-backref" href="#id7">$app-&gt;getDebugger()</a><a class="headerlink" href="#app-getdebugger" title="Permalink to this headline">¶</a></h3>
-<p><em>Accessing debugger service.</em></p>
+<h3><a class="toc-backref" href="#id9">$app-&gt;getDebugger()</a><a class="headerlink" href="#app-getdebugger" title="Permalink to this headline">¶</a></h3>
+<p>Accessing debugger service.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Service\DebuggerInterface $debugger */</span>
 <span class="nv">$debugger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getDebugger</span><span class="p">();</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li>see: <a class="reference external" href="http://demo.webino.org/debugger">Debugger Example</a></li>
+</ul>
 </div>
 <div class="section" id="app-debug">
-<h3><a class="toc-backref" href="#id8">$app-&gt;debug()</a><a class="headerlink" href="#app-debug" title="Permalink to this headline">¶</a></h3>
-<p><em>Dumping information about a variable in readable format.</em></p>
+<h3><a class="toc-backref" href="#id10">$app-&gt;debug()</a><a class="headerlink" href="#app-debug" title="Permalink to this headline">¶</a></h3>
+<p>Dumping information about a variable in readable format.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$var</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Returning output instead of printing it.</em></p>
+<p>Returning output instead of printing it.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$output</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$var</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -105,8 +108,8 @@
 </ul>
 </div>
 <div class="section" id="app-debug-bardump">
-<h3><a class="toc-backref" href="#id9">$app-&gt;debug()-&gt;barDump()</a><a class="headerlink" href="#app-debug-bardump" title="Permalink to this headline">¶</a></h3>
-<p><em>Dumping information about a variable into Tracy debugger bar.</em></p>
+<h3><a class="toc-backref" href="#id11">$app-&gt;debug()-&gt;barDump()</a><a class="headerlink" href="#app-debug-bardump" title="Permalink to this headline">¶</a></h3>
+<p>Dumping information about a variable into Tracy debugger bar.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">barDump</span><span class="p">(</span><span class="nv">$var</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -115,88 +118,94 @@
 </ul>
 </div>
 <div class="section" id="app-debug-timer">
-<h3><a class="toc-backref" href="#id10">$app-&gt;debug()-&gt;timer()</a><a class="headerlink" href="#app-debug-timer" title="Permalink to this headline">¶</a></h3>
-<p><em>TODO...</em></p>
+<h3><a class="toc-backref" href="#id12">$app-&gt;debug()-&gt;timer()</a><a class="headerlink" href="#app-debug-timer" title="Permalink to this headline">¶</a></h3>
+<p>TODO...</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">timer</span><span class="p">();</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li>see: <a class="reference external" href="http://demo.webino.org/debugger-timer">Debugger Timer Example</a></li>
+</ul>
 </div>
 <div class="section" id="app-debug-setbarinfo">
-<h3><a class="toc-backref" href="#id11">$app-&gt;debug()-&gt;setBarInfo()</a><a class="headerlink" href="#app-debug-setbarinfo" title="Permalink to this headline">¶</a></h3>
-<p><em>Setting information into Tracy debugger bar System info panel.</em></p>
+<h3><a class="toc-backref" href="#id13">$app-&gt;debug()-&gt;setBarInfo()</a><a class="headerlink" href="#app-debug-setbarinfo" title="Permalink to this headline">¶</a></h3>
+<p>Setting information into Tracy debugger bar System info panel.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setBarInfo</span><span class="p">(</span><span class="s1">&#39;Test Label 01&#39;</span><span class="p">,</span> <span class="s1">&#39;Test Value01&#39;</span><span class="p">);</span>
 <span class="c1">// or as array</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setBarInfo</span><span class="p">([</span><span class="s1">&#39;Test Label 02&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Test Value02&#39;</span><span class="p">]);</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li>see: <a class="reference external" href="http://demo.webino.org/debugger-info">Debugger Bar Info Example</a></li>
+</ul>
 </div>
 <div class="section" id="app-debug-setbarpanel">
-<h3><a class="toc-backref" href="#id12">$app-&gt;debug()-&gt;setBarPanel()</a><a class="headerlink" href="#app-debug-setbarpanel" title="Permalink to this headline">¶</a></h3>
-<p><em>Setting custom debugger panel into Tracy bar.</em></p>
+<h3><a class="toc-backref" href="#id14">$app-&gt;debug()-&gt;setBarPanel()</a><a class="headerlink" href="#app-debug-setbarpanel" title="Permalink to this headline">¶</a></h3>
+<p>Setting custom debugger panel into Tracy bar.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Debugger\Bar\AbstractPanel $panel */</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setBarPanel</span><span class="p">(</span><span class="nv">$panel</span><span class="p">);</span>
-<span class="c1">// or with name</span>
+<span class="c1">// or with an optional name</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setBarPanel</span><span class="p">(</span><span class="nv">$panel</span><span class="p">,</span> <span class="s1">&#39;myDebugBarPanel&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li>see: <a class="reference external" href="http://demo.webino.org/debugger-panel">Debugger Bar Panel Example</a></li>
+</ul>
 </div>
 </div>
 <div class="section" id="debugger-config">
-<h2><a class="toc-backref" href="#id4">Debugger Config</a><a class="headerlink" href="#debugger-config" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Debugger Config</a><a class="headerlink" href="#debugger-config" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id2">
 <ul class="simple">
-<li><a class="reference internal" href="#debugbarinfo" id="id13">DebugBarInfo</a></li>
-<li><a class="reference internal" href="#debugbarpanel" id="id14">DebugBarPanel</a></li>
+<li><a class="reference internal" href="#debugbarinfo" id="id15">DebugBarInfo</a></li>
+<li><a class="reference internal" href="#debugbarpanel" id="id16">DebugBarPanel</a></li>
 </ul>
 </div>
 <div class="section" id="debugbarinfo">
-<h3><a class="toc-backref" href="#id13">DebugBarInfo</a><a class="headerlink" href="#debugbarinfo" title="Permalink to this headline">¶</a></h3>
-<p><em>Configuring debugger bar info.</em></p>
+<h3><a class="toc-backref" href="#id15">DebugBarInfo</a><a class="headerlink" href="#debugbarinfo" title="Permalink to this headline">¶</a></h3>
+<p>Configuring debugger bar info.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\DebugBarInfo</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">DebugBarInfo</span><span class="p">([</span>
         <span class="s1">&#39;Custom Info 01&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Custom Info Value 01&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Custom Info 02&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Custom Info Value 02&#39;</span><span class="p">,</span>
     <span class="p">]),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>see: <a class="reference internal" href="#guide-cookbook-debugging-adding-debugger-bar-system-info"><span>Adding Debugger Bar System Info</span></a></li>
+<li>see: <a class="reference external" href="http://demo.webino.org/debugger-info-config">Debugger Bar Info Example</a>
+| <a class="reference internal" href="#guide-cookbook-debugging-adding-debugger-bar-system-info"><span>Adding Debugger Bar System Info</span></a></li>
 </ul>
 </div>
 <div class="section" id="debugbarpanel">
-<h3><a class="toc-backref" href="#id14">DebugBarPanel</a><a class="headerlink" href="#debugbarpanel" title="Permalink to this headline">¶</a></h3>
-<p><em>Configuring debugger bar panel.</em></p>
+<h3><a class="toc-backref" href="#id16">DebugBarPanel</a><a class="headerlink" href="#debugbarpanel" title="Permalink to this headline">¶</a></h3>
+<p>Configuring debugger bar panel.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\DebugBarPanel</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">DebugBarPanel</span><span class="p">(</span><span class="s1">&#39;myPanel&#39;</span><span class="p">,</span> <span class="nx">MyPanel</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// service factory</span>
     <span class="k">new</span> <span class="nx">DebugBarPanel</span><span class="p">(</span><span class="s1">&#39;myPanel&#39;</span><span class="p">,</span> <span class="nx">MyPanel</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyPanelFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>see: <a class="reference internal" href="#guide-cookbook-debugging-creating-debugger-bar-panel"><span>Creating Debugger Bar Panel</span></a></li>
+<li>see: <a class="reference external" href="http://demo.webino.org/debugger-panel-config">Debugger Bar Panel Example</a>
+| <a class="reference internal" href="#guide-cookbook-debugging-creating-debugger-bar-panel"><span>Creating Debugger Bar Panel</span></a></li>
 </ul>
 </div>
 </div>
 <div class="section" id="adding-debugger-bar-system-info">
-<span id="guide-cookbook-debugging-adding-debugger-bar-system-info"></span><h2><a class="toc-backref" href="#id5">Adding Debugger Bar System Info</a><a class="headerlink" href="#adding-debugger-bar-system-info" title="Permalink to this headline">¶</a></h2>
+<span id="guide-cookbook-debugging-adding-debugger-bar-system-info"></span><h2><a class="toc-backref" href="#id7">Adding Debugger Bar System Info</a><a class="headerlink" href="#adding-debugger-bar-system-info" title="Permalink to this headline">¶</a></h2>
 <p>TODO...</p>
 </div>
 <div class="section" id="creating-debugger-bar-panel">
-<span id="guide-cookbook-debugging-creating-debugger-bar-panel"></span><h2><a class="toc-backref" href="#id6">Creating Debugger Bar Panel</a><a class="headerlink" href="#creating-debugger-bar-panel" title="Permalink to this headline">¶</a></h2>
+<span id="guide-cookbook-debugging-creating-debugger-bar-panel"></span><h2><a class="toc-backref" href="#id8">Creating Debugger Bar Panel</a><a class="headerlink" href="#creating-debugger-bar-panel" title="Permalink to this headline">¶</a></h2>
 <p>TODO...</p>
 </div>
 </div>
@@ -375,7 +384,7 @@
     <ul>
         <li>
           &larr;
-          <a href="events.html" title="Previous document">Event System</a>
+          <a href="events.html" title="Previous document">Application Event System</a>
         </li>
         <li>
           <a href="logging.html" title="Next document">Application Logging</a>

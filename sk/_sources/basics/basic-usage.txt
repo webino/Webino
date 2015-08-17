@@ -78,7 +78,7 @@ custom code.
 Adding routes
 ^^^^^^^^^^^^^
 
-*Adding routes via configuration.*
+Adding routes via configuration.
 
 .. code-block:: php
 
@@ -90,7 +90,7 @@ Adding routes
     ]);
 
 
-*Adding routes runtime.*
+Adding routes runtime.
 
 .. code-block:: php
 
@@ -101,7 +101,7 @@ Adding routes
 Generating URLs
 ^^^^^^^^^^^^^^^
 
-*Generating URLs to application routes.*
+Generating URLs to application routes.
 
 .. code-block:: php
 
@@ -112,7 +112,7 @@ Generating URLs
 Binding to routes
 ^^^^^^^^^^^^^^^^^
 
-*Handling route match.*
+Handling a route match.
 
 .. code-block:: php
 

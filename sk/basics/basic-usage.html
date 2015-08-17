@@ -133,7 +133,7 @@ custom code.</p>
 </div>
 <div class="section" id="adding-routes">
 <h3><a class="toc-backref" href="#id6">Adding routes</a><a class="headerlink" href="#adding-routes" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Adding routes via configuration.</em></p>
+<p>Adding routes via configuration.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Route</span><span class="p">;</span>
 
@@ -142,7 +142,7 @@ custom code.</p>
 <span class="p">]);</span>
 </pre></div>
 </div>
-<p><em>Adding routes runtime.</em></p>
+<p>Adding routes runtime.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
 <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/my/route/path&#39;</span><span class="p">);</span>
 </pre></div>
@@ -150,7 +150,7 @@ custom code.</p>
 </div>
 <div class="section" id="generating-urls">
 <h3><a class="toc-backref" href="#id7">Generating URLs</a><a class="headerlink" href="#generating-urls" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Generating URLs to application routes.</em></p>
+<p>Generating URLs to application routes.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoAppLib\Router\UrlInterface $url */</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">);</span>
 </pre></div>
@@ -158,7 +158,7 @@ custom code.</p>
 </div>
 <div class="section" id="binding-to-routes">
 <h3><a class="toc-backref" href="#id8">Binding to routes</a><a class="headerlink" href="#binding-to-routes" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Handling route match.</em></p>
+<p>Handling a route match.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>

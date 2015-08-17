@@ -1,6 +1,6 @@
-====================
-Application Services
-====================
+=====================
+Services Architecture
+=====================
 
 .. contents::
     :depth: 1

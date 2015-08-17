@@ -28,7 +28,7 @@ Filesystem Methods
 $app->getFilesystems()
 ----------------------
 
-*Accessing filesystem manager service.*
+Accessing filesystem manager service.
 
 .. code-block:: php
 
@@ -41,7 +41,7 @@ $app->getFilesystems()
 $app->file()
 ------------
 
-*Obtaining filesystem instance.*
+Obtaining filesystem instance.
 
 .. code-block:: php
 
@@ -60,7 +60,7 @@ $app->file()
 $app->file()->write()
 ---------------------
 
-*Write files. Throws an exception if file already exists.*
+Write files, throws an exception if the file already exists.
 
 .. code-block:: php
 
@@ -70,7 +70,7 @@ $app->file()->write()
 $app->file()->update()
 ----------------------
 
-*Update files. Throws an exception if file does not exists.*
+Update files, throws an exception if the file does not exists.
 
 .. code-block:: php
 
@@ -80,7 +80,7 @@ $app->file()->update()
 $app->file()->put()
 -------------------
 
-*Write or update files.*
+Write or update files.
 
 .. code-block:: php
 
@@ -90,7 +90,7 @@ $app->file()->put()
 $app->file()->read()
 --------------------
 
-*Read files.*
+Read files.
 
 .. code-block:: php
 
@@ -100,7 +100,7 @@ $app->file()->read()
 $app->file()->has()
 -------------------
 
-*Check if a file exists.*
+Check if a file exists.
 
 .. code-block:: php
 
@@ -110,7 +110,7 @@ $app->file()->has()
 $app->file()->delete()
 ----------------------
 
-*Delete files.*
+Delete files.
 
 .. code-block:: php
 
@@ -120,7 +120,7 @@ $app->file()->delete()
 $app->file()->readAndDelete()
 -----------------------------
 
-*Read and delete files.*
+Read and delete files.
 
 .. code-block:: php
 
@@ -130,7 +130,7 @@ $app->file()->readAndDelete()
 $app->file()->rename()
 ----------------------
 
-*Rename files.*
+Rename files.
 
 .. code-block:: php
 
@@ -140,7 +140,7 @@ $app->file()->rename()
 $app->file()->copy()
 --------------------
 
-*Copy files.*
+Copy files.
 
 .. code-block:: php
 
@@ -150,7 +150,7 @@ $app->file()->copy()
 $app->file()->getMimetype()
 ---------------------------
 
-*Get MIME types.*
+Get MIME types.
 
 .. code-block:: php
 
@@ -160,7 +160,7 @@ $app->file()->getMimetype()
 $app->file()->getTimestamp()
 ----------------------------
 
-*Get timestamps.*
+Get timestamps.
 
 .. code-block:: php
 
@@ -170,7 +170,7 @@ $app->file()->getTimestamp()
 $app->file()->getSize()
 -----------------------
 
-*Get file sizes.*
+Get file sizes.
 
 .. code-block:: php
 
@@ -180,14 +180,14 @@ $app->file()->getSize()
 $app->file()->createDir()
 -------------------------
 
-*Create directories.*
+Create directories.
 
 .. code-block:: php
 
     $app->file()->createDir('path/to/new/directory');
 
 
-*Directories are also made implicitly when writing to a deeper path.*
+Directories are also made implicitly when writing to a deeper path.
 
 .. code-block:: php
 
@@ -197,7 +197,7 @@ $app->file()->createDir()
 $app->file()->deleteDir()
 -------------------------
 
-*Delete directories.*
+Delete directories.
 
 .. code-block:: php
 
@@ -207,7 +207,7 @@ $app->file()->deleteDir()
 $app->file()->emptyDir()
 ------------------------
 
-*Empty directories.*
+Empty directories.
 
 .. code-block:: php
 
@@ -217,7 +217,7 @@ $app->file()->emptyDir()
 $app->file()->listContents()
 ----------------------------
 
-*List contents, returns array of info of the files and folders.*
+List contents, returns array of info of the files and folders.
 
 .. code-block:: php
 
@@ -230,7 +230,7 @@ $app->file()->listContents()
 $app->file()->listPaths()
 -------------------------
 
-*List paths, returns array of paths of the files and folders.*
+List paths, returns array of paths of the files and folders.
 
 .. code-block:: php
 
@@ -243,7 +243,7 @@ $app->file()->listPaths()
 $app->file()->listFiles()
 -------------------------
 
-*List files, returns array of paths of the files.*
+List files, returns array of paths of the files.
 
 .. code-block:: php
 
@@ -256,7 +256,7 @@ $app->file()->listFiles()
 $app->file()->writeStream()
 ---------------------------
 
-*Write files using stream. Throws an exception if file already exists.*
+Write files using stream, throws an exception if the file already exists.
 
 .. code-block:: php
 
@@ -266,7 +266,7 @@ $app->file()->writeStream()
 $app->file()->updateStream()
 ----------------------------
 
-*Update files using stream. Throws an exception if file does not exists.*
+Update files using stream, throws an exception if the file does not exists.
 
 .. code-block:: php
 
@@ -276,7 +276,7 @@ $app->file()->updateStream()
 $app->file()->putStream()
 -------------------------
 
-*Write or update files using stream.*
+Write or update files using stream.
 
 .. code-block:: php
 
@@ -286,7 +286,7 @@ $app->file()->putStream()
 $app->file()->readStream()
 --------------------------
 
-*Read files using stream.*
+Read files using stream.
 
 .. code-block:: php
 
