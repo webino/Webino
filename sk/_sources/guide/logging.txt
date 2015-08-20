@@ -60,10 +60,10 @@ Writing messages to a log.
     $app->log(MyDebugMessage::class);
 
     // logging a message with custom arguments
-    $app->log(MyDebugMessage::class, $argOne, $argTwo);
+    $app->log(MyDebugMessage::class, [$argOne, $argTwo]);
 
     // possible but not the best practice
-    $app->log($app::DEBUG, 'My log message text', $argOne, $argTwo);
+    $app->log($app::DEBUG, 'My log message text with arguments {0} {1}', [$argOne, $argTwo]);
 
 
 Logging Config
@@ -79,7 +79,7 @@ Logging Config
 Available Log Message Classes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use following log message classes in the ``WebinoAppLib\Log`` namespace to extend your custom
+Use following log message classes in the ``WebinoLogLib\Message`` namespace to extend your custom
 message classes.
 
 **AbstractEmergencyMessage**
@@ -123,10 +123,10 @@ on which we can call standard logging methods.
     $app->log()->emergency('Something really bad happened.');
 
     // text with argument placeholders
-    $app->log()->info('Message text example with variables: {0} {1}', [$argOne, $argTwo]);
+    $app->log()->info('Message text example with arguments: {0} {1}', [$argOne, $argTwo]);
 
     // text with context variables
-    $app->log()->debug('Some debug information...', ['extra' => 'foo']);
+    $app->log()->debug('Some debug information...', ['extra' => 'foo', 'exception' => $exc]);
 
 |vspace|
 
