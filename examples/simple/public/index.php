@@ -1,11 +1,12 @@
 <?php
 /**
- * Webino examples
+ * Webino Examples
  */
 
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
+use WebinoBaseLib\Html\FieldsetHtml;
 use WebinoBaseLib\Html\LineBreakHtml;
 use WebinoBaseLib\Html\Title3Html;
 use WebinoBaseLib\Html\TitleHtml;
@@ -28,16 +29,18 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
         $examples[ucfirst($section)][] = new UrlHtml($info['filename'], $label) . new LineBreakHtml;
     }
 
-    $content = [];
+    $content = '';
     foreach ($examples as $section => $items) {
-        $content[] = new Title3Html($section);
+        $content .= new Title3Html($section);
         foreach ($items as $item) {
-            $content[] = $item;
+            $content .= $item;
         }
     }
 
     $event->setResponseContent(new TitleHtml('Webino Examples'));
-    $event->setResponseContent($content);
+    $event->setResponseContent(new FieldsetHtml('API', $content));
+    $event->setResponseContent(new FieldsetHtml('Cookbook', 'TODO...'));
+    $event->setResponseContent(new FieldsetHtml('Applications', 'TODO...'));
 });
 
 $app->dispatch();

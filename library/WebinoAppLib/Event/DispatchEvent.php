@@ -50,6 +50,8 @@ class DispatchEvent extends AppEvent
     {
         $response = $this->getParam($this::RESPONSE);
         if (empty($response)) {
+//            e();
+//            d('q');
             $response = (new ResponseFactory)->createService($this->getApp()->getServices());
             $this->setResponse($response);
         }
@@ -104,6 +106,7 @@ class DispatchEvent extends AppEvent
         $stream->setStream($resource);
         $this->setResponse($stream);
 
+        // TODO return Stream response object
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace WebinoAppLib\Log;
 
+use WebinoLogLib\Message\AbstractInfoMessage;
+
 /**
  * Class DetachAggregateListener
  */
@@ -10,11 +12,8 @@ class DetachAggregateListener extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
-        return sprintf(
-            'Detaching aggregate listener `%s`',
-            get_class($args[0])
-        );
+        return 'Detaching aggregate listener {0}';
     }
 }

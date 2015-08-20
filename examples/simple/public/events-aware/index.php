@@ -1,11 +1,12 @@
 <?php
 /**
- * Events Capable
+ * Events Aware
  * Webino example
  */
 
 use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Event\RouteEvent;
+use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoBaseLib\Html\TextHtml;
@@ -45,7 +46,7 @@ class MyServiceEvent extends Event
 }
 
 /**
- * Custom events capable
+ * Custom events aware
  */
 class MyService implements EventManagerAwareInterface
 {
@@ -73,9 +74,18 @@ class MyService implements EventManagerAwareInterface
     }
 }
 
-$app = Webino::application()->bootstrap();
+$config = Webino::config([
+    /**
+     * Configuring
+     * custom service.
+     */
+    new Service(MyService::class),
+]);
 
-$myService = new MyService;
+$app = Webino::application($config)->bootstrap();
+
+/** @var MyService $myService */
+$myService = $app->get(MyService::class);
 
 /**
  * Binding to

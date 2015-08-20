@@ -1,6 +1,6 @@
 <?php
 
-namespace WebinoAppLib\Log;
+namespace WebinoLogLib\Message;
 
 use WebinoLogLib\SeverityInterface;
 
@@ -19,8 +19,8 @@ interface MessageInterface extends SeverityInterface
     /**
      * Return the log message
      *
-     * @param mixed ...$args Message arguments
+     * @param array $args Message arguments
      * @return mixed
      */
-    public function getMessage(...$args);
+    public function getMessage(array $args);
 }

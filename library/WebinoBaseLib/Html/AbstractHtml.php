@@ -145,8 +145,20 @@ abstract class AbstractHtml
                 );
         }
 
-        $tag = $this->getTagName();
+        $tag   = $this->getTagName();
         $value = $this->escape ? $escaper->escapeHtml($this->value) : $this->value;
-        return sprintf('<%s %s>%s</%s>', $tag, join(' ', $attribs), $value, $tag);
+
+        return $this->toStringInternal($tag, join(' ', $attribs), $value);
+    }
+
+    /**
+     * @param string $tag
+     * @param string $attribs
+     * @param string $value
+     * @return string
+     */
+    protected function toStringInternal($tag, $attribs, $value)
+    {
+        return sprintf('<%s %s>%s</%s>', $tag, $attribs, $value, $tag);
     }
 }

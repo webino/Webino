@@ -2,10 +2,12 @@
 
 namespace WebinoFilesystemLib\Filesystem;
 
+use League\Flysystem\FilesystemInterface as BaseFilesystemInterface;
+
 /**
  * Interface FilesystemInterface
  */
-interface FilesystemInterface extends \League\Flysystem\FilesystemInterface
+interface FilesystemInterface extends BaseFilesystemInterface
 {
     /**
      * List all paths.

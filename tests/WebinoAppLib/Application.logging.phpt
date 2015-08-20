@@ -5,15 +5,15 @@ use Psr\Log\LoggerInterface;
 use Tester\Assert;
 use WebinoAppLib\Application;
 use WebinoAppLib\Factory;
-use WebinoAppLib\Log\AbstractInfoMessage;
-use WebinoAppLib\Log\AbstractWarningMessage;
 use WebinoConfigLib\Feature\Log;
+use WebinoLogLib\Message\AbstractInfoMessage;
+use WebinoLogLib\Message\AbstractWarningMessage;
 
 require __DIR__ . '/../bootstrap.php';
 
 class MyLogMessageOne extends AbstractInfoMessage
 {
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
         return __CLASS__ . ' example...';
     }
@@ -21,7 +21,7 @@ class MyLogMessageOne extends AbstractInfoMessage
 
 class MyLogMessageTwo extends AbstractWarningMessage
 {
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
         return __CLASS__ . ' example...';
     }

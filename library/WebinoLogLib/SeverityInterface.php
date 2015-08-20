@@ -2,7 +2,7 @@
 
 namespace WebinoLogLib;
 
-use Zend\Log\Logger as BaseLogger;
+use Zend\Log\Logger as LoggerEngine;
 
 /**
  * Interface SeverityInterface
@@ -14,21 +14,21 @@ interface SeverityInterface
      *
      * The system is unusable.
      */
-    const EMERGENCY = BaseLogger::EMERG;
+    const EMERGENCY = LoggerEngine::EMERG;
 
     /**
      * Alert
      *
      * Immediate action is required.
      */
-    const ALERT = BaseLogger::ALERT;
+    const ALERT = LoggerEngine::ALERT;
 
     /**
      * Critical
      *
      * Critical conditions.
      */
-    const CRITICAL = BaseLogger::CRIT;
+    const CRITICAL = LoggerEngine::CRIT;
 
     /**
      * Error
@@ -36,33 +36,33 @@ interface SeverityInterface
      * Errors that do not require immediate
      * attention but should be monitored.
      */
-    const ERROR = BaseLogger::ERR;
+    const ERROR = LoggerEngine::ERR;
 
     /**
      * Warning
      *
      * Unusual or undesirable occurrences that are not errors.
      */
-    const WARNING = BaseLogger::WARN;
+    const WARNING = LoggerEngine::WARN;
 
     /**
      * Notice
      *
      * Normal but significant events.
      */
-    const NOTICE = BaseLogger::NOTICE;
+    const NOTICE = LoggerEngine::NOTICE;
 
     /**
      * Info
      *
      * Interesting events.
      */
-    const INFO = BaseLogger::INFO;
+    const INFO = LoggerEngine::INFO;
 
     /**
      * Debug
      *
      * Detailed information for debugging purposes.
      */
-    const DEBUG = BaseLogger::DEBUG;
+    const DEBUG = LoggerEngine::DEBUG;
 }

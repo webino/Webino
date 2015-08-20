@@ -4,8 +4,8 @@ namespace WebinoAppLib\Factory;
 
 use WebinoAppLib\Application;
 use WebinoAppLib\Exception;
-use WebinoAppLib\Service\Logger;
 use WebinoConfigLib\Log\Writer;
+use WebinoLogLib\Logger;
 use WebinoLogLib\Factory;
 use Zend\Log\Exception\InvalidArgumentException;
 
@@ -33,12 +33,10 @@ class LoggerFactory extends AbstractFactory
     protected function create()
     {
         try {
-            $engine = (new Factory)->create($this->resolveOptions());
+            return (new Factory)->create($this->resolveOptions());
         } catch (InvalidArgumentException $exc) {
             throw new Exception\InvalidArgumentException('Unable to create a logger', null, $exc);
         }
-
-        return new Logger($engine);
     }
 
     /**

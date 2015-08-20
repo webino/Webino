@@ -14,15 +14,15 @@ require __DIR__ . '/../bootstrap.php';
 $app = (new Factory)->create()->bootstrap();
 
 
-$filesystem = $app->getFilesystem();
+$filesystems = $app->getFilesystems();
 
 $defaultFiles = $app->file();
 
 $files = $app->file()->listContents();
 
 
-Assert::type(FilesystemManager::class, $filesystem);
-Assert::type(ServiceLocatorInterface::class, $filesystem);
+Assert::type(FilesystemManager::class, $filesystems);
+Assert::type(ServiceLocatorInterface::class, $filesystems);
 
 Assert::type(Filesystem::class, $defaultFiles);
 

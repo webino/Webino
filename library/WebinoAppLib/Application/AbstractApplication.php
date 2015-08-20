@@ -53,7 +53,7 @@ abstract class AbstractApplication implements
         self::DEBUGGER,
         self::LOGGER,
         self::CACHE,
-        self::FILESYSTEM,
+        self::FILESYSTEMS,
         self::ROUTER,
     ];
 

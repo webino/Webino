@@ -2,6 +2,8 @@
 
 namespace WebinoAppLib\Log;
 
+use WebinoLogLib\Message\AbstractInfoMessage;
+
 /**
  * Class AttachAggregateListener
  */
@@ -10,11 +12,8 @@ class AttachAggregateListener extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
-        return sprintf(
-            'Attaching aggregate listener `%s`',
-            get_class($args[0])
-        );
+        return 'Attaching aggregate listener {0}';
     }
 }

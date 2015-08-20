@@ -1,16 +1,16 @@
 <?php
 /**
- * Logger Message
+ * Logger Message Class
  * Webino example
  */
 
 use WebinoAppLib\Event\RouteEvent;
-use WebinoAppLib\Log\AbstractWarningMessage;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoBaseLib\Html\ScrollBoxHtml;
 use WebinoBaseLib\Html\TextHtml;
 use WebinoConfigLib\Feature\Log;
+use WebinoLogLib\Message\AbstractWarningMessage;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -19,11 +19,10 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyLogMessage extends AbstractWarningMessage
 {
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
         return 'Test log message!';
     }
-
 }
 
 $config = Webino::config([
@@ -51,7 +50,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'Application log:',
-        (new ScrollBoxHtml(nl2br(new TextHtml($log)), false)),
+        new ScrollBoxHtml(nl2br(new TextHtml($log)), false),
         new SourcePreview(__FILE__),
     ]);
 });

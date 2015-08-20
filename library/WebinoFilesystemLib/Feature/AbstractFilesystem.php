@@ -91,7 +91,6 @@ abstract class AbstractFilesystem extends AbstractFeature
     protected function configureAdapterMapInvokable($name, $class)
     {
         $this->configureAdapterMap(['invokables' => [$name => $class]]);
-
         return $this;
     }
 }

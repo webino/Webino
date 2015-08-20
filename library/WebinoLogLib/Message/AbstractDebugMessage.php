@@ -1,6 +1,6 @@
 <?php
 
-namespace WebinoAppLib\Log;
+namespace WebinoLogLib\Message;
 
 /**
  * Class AbstractDebugMessage

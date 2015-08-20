@@ -80,24 +80,24 @@ $options = [
 ];
 
 $factory = new Factory;
-$log = $factory->create($options);
+$logger = $factory->create($options);
 
 
-$log->debug(new TestDebugMessage);
+$logger->log()->debug(new TestDebugMessage);
 
-$log->info(new TestInfoMessage);
+$logger->log()->info(new TestInfoMessage);
 
-$log->notice(new TestNoticeMessage);
+$logger->log()->notice(new TestNoticeMessage);
 
-$log->warning(new TestWarnMessage);
+$logger->log()->warning(new TestWarnMessage);
 
-$log->error(new TestErrMessage);
+$logger->log()->error(new TestErrMessage);
 
-$log->critical(new TestCritMessage);
+$logger->log()->critical(new TestCritMessage);
 
-$log->alert(new TestAlertMessage);
+$logger->log()->alert(new TestAlertMessage);
 
-$log->emergency(new TestEmergMessage);
+$logger->log()->emergency(new TestEmergMessage);
 
 
 /** @var \Zend\Log\Writer\Mock $mockWriter */

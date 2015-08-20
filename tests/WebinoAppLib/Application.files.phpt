@@ -21,8 +21,6 @@ $config = Webino::config([
 $app = Webino::application($config)->bootstrap();
 
 
-$filesystem = $app->getFilesystem();
-
 $files[0] = $app->file()->listContents();
 
 

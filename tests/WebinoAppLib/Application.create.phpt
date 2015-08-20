@@ -1,12 +1,13 @@
 <?php
 
+use BsbFlysystem\Service\FilesystemManager;
 use Tester\Assert;
 use WebinoAppLib\Application;
 use WebinoAppLib\Application\ConfiguredApplication;
 use WebinoAppLib\Factory;
 use WebinoAppLib\Service\DebuggerInterface;
-use WebinoAppLib\Service\LoggerInterface;
 use WebinoEventLib\EventManager;
+use WebinoLogLib\LoggerInterface;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\Config\Config;
 
@@ -27,3 +28,4 @@ Assert::type(EventManager::class, $app->getEvents());
 Assert::type(DebuggerInterface::class, $app->getDebugger());
 Assert::type(LoggerInterface::class, $app->getLogger());
 Assert::type(StorageInterface::class, $app->getCache());
+Assert::type(FilesystemManager::class, $app->getFilesystems());

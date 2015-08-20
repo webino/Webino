@@ -13,52 +13,51 @@ $options = [
 ];
 
 $factory = new Factory;
-$log = $factory->create($options);
+$logger = $factory->create($options);
 
 $paramOne = 'ParamOne';
 $paramTwo = 'ParamTwo';
 
+$logger->log($logger::DEBUG, 'Test debug message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::DEBUG, 'Test debug message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::INFO, 'Test info message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::INFO, 'Test info message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::NOTICE, 'Test notice message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::NOTICE, 'Test notice message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::WARNING, 'Test warning message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::WARNING, 'Test warning message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::ERROR, 'Test error message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::ERROR, 'Test error message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::CRITICAL, 'Test critical message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::CRITICAL, 'Test critical message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::ALERT, 'Test alert message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
-$log->log($log::ALERT, 'Test alert message with extra values {0} {1}', [$paramOne, $paramTwo]);
-
-$log->log($log::EMERGENCY, 'Test emergency message with extra values {0} {1}', [$paramOne, $paramTwo]);
+$logger->log($logger::EMERGENCY, 'Test emergency message with extra values {0} {1}', [$paramOne, $paramTwo]);
 
 
 /** @var \Zend\Log\Writer\Mock $mockWriter */
 $mockWriter = $factory->loggerEngine->getWriters()->top();
 
 Assert::same('DEBUG', $mockWriter->events[0]['priorityName']);
-Assert::same('Test debug message with extra values ParamOne ParamTwo', $mockWriter->events[0]['message']);
+Assert::same('Test debug message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[0]['message']);
 
 Assert::same('INFO', $mockWriter->events[1]['priorityName']);
-Assert::same('Test info message with extra values ParamOne ParamTwo', $mockWriter->events[1]['message']);
+Assert::same('Test info message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[1]['message']);
 
 Assert::same('NOTICE', $mockWriter->events[2]['priorityName']);
-Assert::same('Test notice message with extra values ParamOne ParamTwo', $mockWriter->events[2]['message']);
+Assert::same('Test notice message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[2]['message']);
 
 Assert::same('WARN', $mockWriter->events[3]['priorityName']);
-Assert::same('Test warning message with extra values ParamOne ParamTwo', $mockWriter->events[3]['message']);
+Assert::same('Test warning message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[3]['message']);
 
 Assert::same('ERR', $mockWriter->events[4]['priorityName']);
-Assert::same('Test error message with extra values ParamOne ParamTwo', $mockWriter->events[4]['message']);
+Assert::same('Test error message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[4]['message']);
 
 Assert::same('CRIT', $mockWriter->events[5]['priorityName']);
-Assert::same('Test critical message with extra values ParamOne ParamTwo', $mockWriter->events[5]['message']);
+Assert::same('Test critical message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[5]['message']);
 
 Assert::same('ALERT', $mockWriter->events[6]['priorityName']);
-Assert::same('Test alert message with extra values ParamOne ParamTwo', $mockWriter->events[6]['message']);
+Assert::same('Test alert message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[6]['message']);
 
 Assert::same('EMERG', $mockWriter->events[7]['priorityName']);
-Assert::same('Test emergency message with extra values ParamOne ParamTwo', $mockWriter->events[7]['message']);
+Assert::same('Test emergency message with extra values `ParamOne` `ParamTwo`', $mockWriter->events[7]['message']);

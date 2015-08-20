@@ -18,8 +18,6 @@ $config = Webino::config([
 $app = Webino::application($config)->bootstrap();
 
 
-$filesystem = $app->getFilesystem();
-
 $inMemoryFiles = $app->file(InMemoryFiles::class);
 
 $app->file(InMemoryFiles::class)->put('test/file.txt', 'Example contents.');

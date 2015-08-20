@@ -2,6 +2,7 @@
 
 namespace WebinoAppLib\Log;
 
+use WebinoLogLib\Message\AbstractInfoMessage;
 use Zend\Stdlib\CallbackHandler;
 
 /**
@@ -12,7 +13,7 @@ class DetachListener extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
         if ($args[1] instanceof CallbackHandler) {
             $mData = $args[1]->getMetadata();

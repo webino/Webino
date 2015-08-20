@@ -13,24 +13,24 @@ $options = [
 ];
 
 $factory = new Factory;
-$log = $factory->create($options);
+$logger = $factory->create($options);
 
 
-$log->debug('Test debug message');
+$logger->log()->debug('Test debug message');
 
-$log->info('Test info message');
+$logger->log()->info('Test info message');
 
-$log->notice('Test notice message');
+$logger->log()->notice('Test notice message');
 
-$log->warning('Test warning message');
+$logger->log()->warning('Test warning message');
 
-$log->error('Test error message');
+$logger->log()->error('Test error message');
 
-$log->critical('Test critical message');
+$logger->log()->critical('Test critical message');
 
-$log->alert('Test alert message');
+$logger->log()->alert('Test alert message');
 
-$log->emergency('Test emergency message');
+$logger->log()->emergency('Test emergency message');
 
 
 /** @var \Zend\Log\Writer\Mock $mockWriter */

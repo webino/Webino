@@ -35,7 +35,7 @@ interface AbstractApplicationInterface
     /**
      * Application filesystem service name
      */
-    const FILESYSTEM = 'Filesystem';
+    const FILESYSTEMS = 'Filesystems';
 
     /**
      * Application router service name

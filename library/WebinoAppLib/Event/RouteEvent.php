@@ -2,6 +2,8 @@
 
 namespace WebinoAppLib\Event;
 
+use Zend\Stdlib\ResponseInterface;
+
 /**
  * Class RouteEvent
  */
@@ -19,15 +21,56 @@ class RouteEvent extends DispatchEvent implements
     const PREFIX = 'route.';
 
     /**
+     * @var DispatchEvent
+     */
+    private $parentEvent;
+
+    /**
      * @param DispatchEvent $event
      */
     public function __construct(DispatchEvent $event)
     {
         parent::__construct($event->getApp());
+        $this->parentEvent = $event;
 
         $this->setName($this::MATCH);
         $this->setParam($this::REQUEST, $event->getRequest());
-        $this->setResponse($event->getResponse());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        if ($this::MATCH === $name || interface_exists($name)) {
+            $this->name = (string) $name;
+            return $this;
+        }
+
+        $this->name = RouteEvent::PREFIX . $name;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResponse()
+    {
+        $response = parent::getResponse();
+        if (null === $response) {
+            $response = $this->parentEvent->getResponse();
+            parent::setResponse($response);
+        }
+        return $response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setResponse(ResponseInterface $response)
+    {
+        $this->parentEvent->setResponse($response);
+        return parent::setResponse($response);
     }
 
     /**

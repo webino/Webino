@@ -38,7 +38,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'Application log:',
-        (new ScrollBoxHtml(nl2br(new TextHtml($log)), false)),
+        new ScrollBoxHtml(nl2br(new TextHtml($log)), false),
         new SourcePreview(__FILE__),
     ]);
 });

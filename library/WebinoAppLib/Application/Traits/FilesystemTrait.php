@@ -3,7 +3,6 @@
 namespace WebinoAppLib\Application\Traits;
 
 use BsbFlysystem\Service\FilesystemManager;
-use WebinoAppLib\Application\AbstractApplicationInterface;
 use WebinoAppLib\Exception\InvalidArgumentException;
 use WebinoAppLib\Filesystem\LocalFiles;
 
@@ -15,23 +14,22 @@ trait FilesystemTrait
     /**
      * @var FilesystemManager
      */
-    private $filesystem;
+    private $filesystems;
 
     /**
      * @return FilesystemManager|mixed
      */
-    public function getFilesystem()
+    public function getFilesystems()
     {
-        return $this->filesystem;
+        return $this->filesystems;
     }
 
     /**
-     * @param object|FilesystemManager $filesystem
-     * @param bool $setService
+     * @param object|FilesystemManager $filesystems
      */
-    protected function setFilesystem(FilesystemManager $filesystem, $setService = true)
+    protected function setFilesystems(FilesystemManager $filesystems)
     {
-        $this->filesystem = $filesystem;
+        $this->filesystems = $filesystems;
     }
 
     /**
@@ -46,6 +44,6 @@ trait FilesystemTrait
                 ->format('string', $adapter);
         }
 
-        return $this->getFilesystem()->get($adapter);
+        return $this->getFilesystems()->get($adapter);
     }
 }

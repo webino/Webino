@@ -2,6 +2,7 @@
 
 namespace WebinoAppLib\Log;
 
+use WebinoLogLib\Message\AbstractInfoMessage;
 use Zend\EventManager\Event;
 
 /**
@@ -14,8 +15,8 @@ class TriggerEvent extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public function getMessage(...$args)
+    public function getMessage(array $args)
     {
-        return 'Event: ' . (($args[0] instanceof Event) ? $args[0]->getName() : (string) $args[0]);
+        return sprintf('Event: `%s`', (($args[0] instanceof Event) ? $args[0]->getName() : (string) $args[0]));
     }
 }

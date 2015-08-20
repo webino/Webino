@@ -2,8 +2,8 @@
 
 namespace WebinoAppLib\Application\Traits;
 
-use WebinoAppLib\Contract\LoggerInterface;
-use WebinoAppLib\Log\MessageInterface;
+use WebinoLogLib\LoggerInterface;
+use WebinoLogLib\Message\MessageInterface;
 
 /**
  * Trait Logger

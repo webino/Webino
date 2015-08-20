@@ -74,7 +74,7 @@ trait EventEmitterTrait
         $aggregate = $this->resolveListenerAggregate($event);
 
         if ($aggregate instanceof ListenerAggregateInterface) {
-            $this->log(Log\AttachAggregateListener::class, $aggregate);
+            $this->log(Log\AttachAggregateListener::class, [$aggregate]);
             $aggregate->attach($this->getEvents());
             return $this;
         }
@@ -84,7 +84,7 @@ trait EventEmitterTrait
         if ($event instanceof CallbackHandler) {
             $callback = $event->getCallback();
             $mData = $event->getMetadata();
-            $this->log(Log\AttachListener::class, $mData['event'], $callback, $mData['priority']);
+            $this->log(Log\AttachListener::class, [$mData['event'], $callback, $mData['priority']]);
             return $this->listeners[] = $this->getEvents()->attach(
                 $mData['event'],
                 $callback,
@@ -93,7 +93,7 @@ trait EventEmitterTrait
         }
 
         $normalized = $this->normalizeCallback($callback);
-        $this->log(Log\AttachListener::class, $event, $normalized, $priority);
+        $this->log(Log\AttachListener::class, [$event, $normalized, $priority]);
         $this->listeners[] = $this->getEvents()->attach($event, $normalized, $priority);
 
         return $this;
@@ -107,7 +107,7 @@ trait EventEmitterTrait
         $aggregate = $this->resolveListenerAggregate($event);
 
         if ($aggregate instanceof ListenerAggregateInterface) {
-            $this->log(Log\DetachAggregateListener::class, $aggregate);
+            $this->log(Log\DetachAggregateListener::class, [$aggregate]);
             $aggregate->detach($this->getEvents());
             return $this;
         }
@@ -145,7 +145,7 @@ trait EventEmitterTrait
                 continue;
             }
 
-            $this->log(Log\DetachListener::class, $event, $_callback, $priority);
+            $this->log(Log\DetachListener::class, [$event, $_callback, $priority]);
             $this->getEvents()->detach($listener);
             unset($this->listeners[$index]);
         }
@@ -164,7 +164,7 @@ trait EventEmitterTrait
             $target = $callback;
         }
 
-        $this->log(Log\TriggerEvent::class, $event);
+        $this->log(Log\TriggerEvent::class, [$event]);
 
         if (is_callable($argv)) {
             return $this->getEvents()->trigger($event, $target, [], $argv);

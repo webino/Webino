@@ -2,92 +2,75 @@
 
 namespace WebinoLogLib;
 
-use Psr\Log\AbstractLogger;
-use WebinoLogLib\Exception\InvalidArgumentException;
-use Zend\Log\Logger as LoggerEngine;
+use WebinoLogLib\Exception;
+use WebinoLogLib\Message\MessageInterface;
 
 /**
  * Class Logger
  */
-final class Logger extends AbstractLogger implements
-    SeverityInterface
+class Logger implements LoggerInterface
 {
     /**
-     * @var LoggerEngine
+     * @var BaseLogger
      */
     private $engine;
 
     /**
-     * @param LoggerEngine $engine
+     * @param BaseLogger $engine
      */
-    public function __construct(LoggerEngine $engine)
+    public function __construct(BaseLogger $engine)
     {
         $this->engine = $engine;
     }
 
     /**
-     * Logs with an arbitrary level.
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
-     * @return void
-     * @throws InvalidArgumentException Unknown error level
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log($level = null, ...$args)
     {
-        $this->engine->log(
-            $this->normalizeLevel($level),
-            $this->interpolate($this->normalizeMessage($message), $context),
-            $context
-        );
+        if (null === $level) {
+            return $this->engine;
+        }
+
+        $fromClass = ($level instanceof MessageInterface) ? $level : $this->messageFromClass($level);
+        if ($fromClass) {
+            $_level  = $fromClass->getLevel();
+            $_args   = isset($args[0]) ? $args[0] : [];
+            $message = $fromClass->getMessage($_args);
+
+        } else {
+            $_level = $level;
+            if (empty($args[0])) {
+                throw new Exception\InvalidArgumentException('Expected a log message but empty');
+            }
+            $message = $args[0];
+            $_args   = isset($args[1]) ? $args[1] : [];
+        }
+
+        try {
+            $this->engine->log($_level, (string) $message, $_args);
+        } catch (\Exception $exc) {
+            throw new Exception\DomainException('Unable to write log', null, $exc);
+        }
+
+        return $this->engine;
     }
 
     /**
-     * @param int $level
-     * @return mixed
-     * @throws InvalidArgumentException Unknown error level
+     * @param string $className Concrete MessageInterface class class name.
+     * @return null|MessageInterface
      */
-    private function normalizeLevel($level)
+    private function messageFromClass($className)
     {
-        if (is_numeric($level)) {
-            return $level;
-        }
+        if (class_exists($className)) {
+            $message = new $className;
+            if ($message instanceof MessageInterface) {
+                return $message;
+            }
 
-        $const = self::class . '::' . strtoupper($level);
-        if (defined($const)) {
-            return constant($const);
+            throw (new Exception\InvalidArgumentException('Expected class to be type of %s but got %s'))
+                ->format(MessageInterface::class, $message);
         }
-
-        throw (new InvalidArgumentException('Unknown error level %s'))
-            ->format($level);
-    }
-
-    /**
-     * @param $message
-     * @return mixed
-     */
-    private function normalizeMessage($message)
-    {
-        if (is_object($message) && !method_exists($message, '__toString')) {
-            return print_r($message, true);
-        }
-        return (string) $message;
-    }
-
-    /**
-     * Interpolates context values into the message placeholders.
-     *
-     * @param $message
-     * @param array $context
-     * @return string
-     */
-    private function interpolate($message, array $context = [])
-    {
-        $replace = [];
-        foreach ($context as $key => $val) {
-            $replace['{' . $key . '}'] = $val;
-        }
-        return strtr($message, $replace);
+        return null;
     }
 }
