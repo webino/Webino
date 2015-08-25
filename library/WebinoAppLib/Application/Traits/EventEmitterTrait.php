@@ -2,7 +2,6 @@
 
 namespace WebinoAppLib\Application\Traits;
 
-use Psr\Log\LoggerInterface;
 use WebinoAppLib\Log;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -44,9 +43,9 @@ trait EventEmitterTrait
     abstract public function has($service);
 
     /**
-     * @param mixed|\WebinoAppLib\Log\MessageInterface $level
+     * @param mixed|\WebinoLogLib\Message\MessageInterface $level
      * @param mixed ...$args
-     * @return LoggerInterface
+     * @return \Psr\Log\LoggerInterface
      */
     abstract public function log($level = null, ...$args);
 
@@ -67,7 +66,13 @@ trait EventEmitterTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Attach a listener to an event
+     *
+     * @param string|\Zend\EventManager\ListenerAggregateInterface $event
+     * @param string|callable|int $callback If string $event provided, expects PHP callback;
+     * @param int $priority Invocation priority
+     * @return \Zend\Stdlib\CallbackHandler|mixed CallbackHandler if attaching callable
+     *                          (to allow later unsubscribe); mixed if attaching aggregate
      */
     public function bind($event, $callback = null, $priority = 1)
     {

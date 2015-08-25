@@ -45,6 +45,8 @@
     "mikey179/vfsStream": "1.*",
     "psr/log": "1.0.*",
     "firephp/firephp-core": "0.*",
+    "ccampbell/chromephp": "4.*",
+    "league/climate": "3.*",
     "psy/psysh": "0.*"
   },
   "autoload": {
@@ -53,10 +55,12 @@
       "WebinoConfigLib\\": "library/",
       "WebinoEventLib\\": "library/",
       "WebinoFilesystemLib\\": "library/",
+      "WebinoExamplesLib\\": "library/",
       "WebinoLogLib\\": "library/",
       "WebinoDomLib\\": "library/",
       "WebinoDevLib\\": "library/",
       "WebinoDrawLib\\": "library/",
+      "WebinoHtmlLib\\": "library/",
       "WebinoBaseLib\\": "library/",
       "WebinoAppLib\\": "library/",
       "Webino\\": "library/"

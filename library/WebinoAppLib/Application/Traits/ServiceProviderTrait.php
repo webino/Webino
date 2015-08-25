@@ -27,7 +27,11 @@ trait ServiceProviderTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Return registered service
+     *
+     * @param string $service Service name
+     * @return mixed
+     * @throws \WebinoAppLib\Exception\UnknownServiceException
      */
     public function get($service)
     {

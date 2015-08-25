@@ -2,10 +2,9 @@
 
 namespace WebinoAppLib\Listener;
 
-use WebinoAppLib\Feature\Debugger;
+use WebinoAppLib\Feature\DefaultDebugger;
 use WebinoAppLib\Event\AppEvent;
 use WebinoEventLib\AbstractListener;
-use Zend\Http\Response;
 
 /**
  * Class DebuggerListener
@@ -27,13 +26,13 @@ class DebuggerListener extends AbstractListener
     public function setupInfo(AppEvent $event)
     {
         $app = $event->getApp();
-        $cfg = $app->getConfig(Debugger::DEBUGGER);
+        $cfg = $app->getConfig(DefaultDebugger::DEBUGGER);
 
         if (empty($cfg)) {
             return;
         }
 
-        $info = $cfg->{Debugger::INFO};
+        $info = $cfg->{DefaultDebugger::INFO};
         if (empty($info)) {
             return;
         }
@@ -47,13 +46,13 @@ class DebuggerListener extends AbstractListener
     public function setBarPanels(AppEvent $event)
     {
         $app = $event->getApp();
-        $cfg = $app->getConfig(Debugger::DEBUGGER);
+        $cfg = $app->getConfig(DefaultDebugger::DEBUGGER);
 
         if (empty($cfg)) {
             return;
         }
 
-        $panels = $cfg->{Debugger::BAR_PANELS};
+        $panels = $cfg->{DefaultDebugger::BAR_PANELS};
         if (empty($panels)) {
             return;
         }

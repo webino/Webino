@@ -16,14 +16,8 @@ abstract class AbstractCache extends AbstractFeature
      */
     public function __construct()
     {
-        $this->mergeArray([
-            Config::CORE => [
-                Config::SERVICES => [
-                    Config::SERVICES_FACTORIES => [
-                        Application::CACHE => StorageCacheFactory::class,
-                    ],
-                ],
-            ],
+        parent::__construct([
+            new CoreService(Application::CACHE, StorageCacheFactory::class),
         ]);
     }
 }

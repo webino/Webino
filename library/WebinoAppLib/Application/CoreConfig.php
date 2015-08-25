@@ -5,10 +5,9 @@ namespace WebinoAppLib\Application;
 use WebinoAppLib\Application;
 use WebinoAppLib\Factory;
 use WebinoAppLib\Feature;
-use WebinoAppLib\Feature\Listener;
-use WebinoAppLib\Listener\RequestListener;
-use WebinoAppLib\Listener\ResponseListener;
+use WebinoAppLib\Listener;
 use WebinoEventLib\EventManager;
+use WebinoLogLib\Factory as LogLibFactory;
 
 /**
  * Class CoreConfig
@@ -21,7 +20,8 @@ class CoreConfig extends Feature\Config
     public function __construct(array $config = [])
     {
         $this->addFeatures([
-            new Feature\Debugger,
+            new Feature\DefaultDebugger,
+            new Feature\DefaultConsole,
             new Feature\DefaultFilesystem,
             new Feature\DefaultRouter,
             new Feature\CoreService([Factory\EventsFactory::ENGINE => EventManager::class]),
@@ -31,8 +31,12 @@ class CoreConfig extends Feature\Config
             new Feature\CoreService(Application::LOGGER, Factory\LoggerFactory::class),
             new Feature\CoreService(Application::FILESYSTEMS, Factory\FilesystemFactory::class),
 
-            new Listener(RequestListener::class),
-            new Listener(ResponseListener::class),
+            new Feature\CoreService(LogLibFactory::class),
+            new Feature\CoreService(Factory\ResponseFactory::class, Factory\ResponseFactory::class),
+
+            new Feature\Listener(Listener\RequestListener::class),
+            new Feature\Listener(Listener\ResponseListener::class),
+            new Feature\Listener(Listener\ViewListener::class),
         ]);
 
         parent::__construct($config);

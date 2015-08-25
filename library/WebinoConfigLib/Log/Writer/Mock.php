@@ -2,12 +2,10 @@
 
 namespace WebinoConfigLib\Log\Writer;
 
-use WebinoConfigLib\AbstractConfig;
-
 /**
  * Class Mock
  */
-class Mock extends AbstractConfig
+class Mock extends AbstractWriter
 {
     /**
      * Create a mock log writer

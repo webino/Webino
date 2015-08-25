@@ -9,7 +9,7 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Feature\DebugBarPanel;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\TitleHtml;
+use WebinoHtmlLib\TitleHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -37,7 +37,7 @@ class MyDebugBarPanel extends AbstractPanel
 
     public function getTab()
     {
-        return $this->createIcon('user', 'top: -3px;') . parent::getTab();
+        return $this->createIcon('user', ['top' => '-3px']) . parent::getTab();
     }
 
     public function getPanel()

@@ -6,6 +6,7 @@ use ArrayObject;
 use WebinoConfigLib\Feature\Route;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
+use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\RequestInterface;
 
@@ -40,11 +41,15 @@ final class Router implements RouteStackInterface
     }
 
     /**
-     * @return RouteStackInterface
+     * @return \Zend\Mvc\Router\PriorityList|array
      */
-    public function getRouter()
+    public function getRoutes()
     {
-        return $this->router;
+        if ($this->router instanceof SimpleRouteStack) {
+            return $this->router->getRoutes();
+        }
+
+        return [];
     }
 
     /**

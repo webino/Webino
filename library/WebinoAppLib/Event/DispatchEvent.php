@@ -4,29 +4,18 @@ namespace WebinoAppLib\Event;
 
 use WebinoAppLib\Application\AbstractApplication;
 use WebinoAppLib\Application\ConfiguredApplicationInterface;
-use Zend\Http\Response\Stream;
-use Zend\Mvc\Service\ResponseFactory;
+use WebinoAppLib\Factory\ResponseFactory;
+use Zend\Http\AbstractMessage;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
 
 /**
  * Class DispatchEvent
  */
-class DispatchEvent extends AppEvent
+class DispatchEvent extends AppEvent implements
+    DispatchEventInterface
 {
     /**
-     * Request param name
-     */
-    const REQUEST = 'request';
-
-    /**
-     * Response param name
-     */
-    const RESPONSE = 'response';
-
-    /**
-     * DispatchEvent constructor.
-     *
      * @param ConfiguredApplicationInterface|AbstractApplication $app
      */
     public function __construct(ConfiguredApplicationInterface $app)
@@ -44,18 +33,17 @@ class DispatchEvent extends AppEvent
     }
 
     /**
-     * @return ResponseInterface
+     * @return ResponseInterface|AbstractMessage
      */
     public function getResponse()
     {
         $response = $this->getParam($this::RESPONSE);
         if (empty($response)) {
-//            e();
-//            d('q');
-            $response = (new ResponseFactory)->createService($this->getApp()->getServices());
+            /** @var ResponseFactory $factory */
+            $factory  = $this->getApp()->get(ResponseFactory::class);
+            $response = $factory->createResponse();
             $this->setResponse($response);
         }
-
         return $response;
     }
 
@@ -78,42 +66,28 @@ class DispatchEvent extends AppEvent
     public function setResponseContent($content)
     {
         $response = $this->getResponse();
-        $response->setContent($response->getContent() . (is_array($content) ? join(null, $content) : $content));
+        $response->setContent($response->getContent() . $this->normalizeResponseContent($content));
         return $this;
     }
 
     /**
      * Set the content of a response
      *
-     * @param string $content
+     * @param string|array $content
      * @return self
      */
     public function resetResponseContent($content = null)
     {
-        $this->getResponse()->setContent($content);
+        $this->getResponse()->setContent($this->normalizeResponseContent($content));
         return $this;
     }
 
     /**
-     * @param string|resource $pathOrStream
-     * @return self
+     * @param string|array $content
+     * @return string
      */
-    public function setResponseStream($pathOrStream)
+    private function normalizeResponseContent($content)
     {
-        $resource = is_resource($pathOrStream) ? $pathOrStream : fopen($pathOrStream, 'r');
-        $stream   = new Stream;
-
-        $stream->setStream($resource);
-        $this->setResponse($stream);
-
-        // TODO return Stream response object
-        return $this;
-    }
-
-    // TODO decouple to Stream response
-    public function setForceDownload()
-    {
-        $this->getResponse()->getHeaders()->addHeaderLine('Content-type', 'application/force-download');
-        return $this;
+        return (is_array($content) ? join(null, $content) : $content);
     }
 }

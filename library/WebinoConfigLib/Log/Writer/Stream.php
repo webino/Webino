@@ -2,12 +2,10 @@
 
 namespace WebinoConfigLib\Log\Writer;
 
-use WebinoConfigLib\Log\Writer as BaseWriter;
-
 /**
  * Class Stream
  */
-class Stream extends BaseWriter
+class Stream extends AbstractWriter
 {
     /**
      * Create a stream log writer
@@ -16,16 +14,18 @@ class Stream extends BaseWriter
      * @param string|null $mode File mode
      * @param string|null $separator Log message separator
      */
-    public function __construct($stream, $mode = null, $separator = null)
+    public function __construct($stream = null, $mode = null, $separator = null)
     {
+        $options = [];
+
+        $stream and $options['stream']       = $stream;
+        $mode   and $options['mode']         = $mode;
+        $mode   and $options['logSeparator'] = $separator;
+
         $this->mergeArray([
-            'name' => 'stream',
+            'name'     => 'stream',
             'priority' => null,
-            'options' => [
-                'stream' => $stream,
-                'mode' => $mode,
-                'logSeparator' => $separator,
-            ],
+            'options'  => $options,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace WebinoLogLib\Message;
 
 use WebinoLogLib\SeverityInterface;
+use Zend\Stdlib\Parameters;
 
 /**
  * Interface MessageInterface
@@ -19,8 +20,8 @@ interface MessageInterface extends SeverityInterface
     /**
      * Return the log message
      *
-     * @param array $args Message arguments
+     * @param Parameters $args Message arguments
      * @return mixed
      */
-    public function getMessage(array $args);
+    public function getMessage(Parameters $args);
 }

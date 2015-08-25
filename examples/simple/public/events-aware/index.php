@@ -9,7 +9,7 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\TextHtml;
+use WebinoHtmlLib\TextHtml;
 use WebinoEventLib\Event;
 use WebinoEventLib\EventManagerAwareInterface;
 use WebinoEventLib\EventManagerAwareTrait;

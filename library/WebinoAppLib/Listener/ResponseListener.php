@@ -4,9 +4,10 @@ namespace WebinoAppLib\Listener;
 
 use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Event\DispatchEvent;
+use WebinoAppLib\Event\SendResponseEvent;
+use WebinoAppLib\Response\OnResponseInterface;
 use WebinoEventLib\AbstractListener;
 use Zend\Mvc\ResponseSender;
-use Zend\Stdlib\ResponseInterface;
 
 /**
  * Class ResponseListener
@@ -19,6 +20,11 @@ final class ResponseListener extends AbstractListener
     public function init()
     {
         $this->listen(AppEvent::DISPATCH, [$this, 'sendResponse'], AppEvent::FINISH * 999);
+        $this->listen(SendResponseEvent::class, [$this, 'onResponse'], SendResponseEvent::BEGIN * 999);
+
+        $this->listen(SendResponseEvent::class, new ResponseSender\SimpleStreamResponseSender);
+        $this->listen(SendResponseEvent::class, new ResponseSender\HttpResponseSender);
+        $this->listen(SendResponseEvent::class, new ResponseSender\ConsoleResponseSender);
     }
 
     /**
@@ -27,32 +33,17 @@ final class ResponseListener extends AbstractListener
     public function sendResponse(DispatchEvent $event)
     {
         $response = $event->getResponse();
-        empty($response) or $this->respond($response);
+        $responseEvent = new SendResponseEvent($event);
+        $responseEvent->setResponse($response);
+        $event->getApp()->emit($responseEvent);
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param SendResponseEvent $event
      */
-    private function respond(ResponseInterface $response)
+    public function onResponse(SendResponseEvent $event)
     {
-        $event = new ResponseSender\SendResponseEvent;
-        $event->setResponse($response);
-
-        foreach ($this->getResponders() as $responder) {
-            $responder($event);
-        }
-    }
-
-    /**
-     * @return \Zend\Mvc\ResponseSender\ResponseSenderInterface[]
-     */
-    private function getResponders()
-    {
-        return [
-            new ResponseSender\PhpEnvironmentResponseSender,
-            new ResponseSender\ConsoleResponseSender,
-            new ResponseSender\SimpleStreamResponseSender,
-            new ResponseSender\HttpResponseSender,
-        ];
+        $response = $event->getResponse();
+        $response instanceof OnResponseInterface and $response->onResponse($event);
     }
 }

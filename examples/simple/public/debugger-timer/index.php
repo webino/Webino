@@ -7,7 +7,7 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\TextHtml;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 

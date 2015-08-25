@@ -1,0 +1,22 @@
+<?php /** @var \WebinoAppLib\Debugger\Bar\ModulesPanel $this */ ?>
+<div>
+    <h1><?= $this->getTitle() ?></h1>
+    <div>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Version</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($this->getModules() as $name => $version): ?>
+                <tr>
+                    <td><?= $name ?></td>
+                    <td><strong><?= $version ?></strong></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

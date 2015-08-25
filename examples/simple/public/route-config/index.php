@@ -9,7 +9,7 @@ use WebinoAppLib\Feature\Listener;
 use WebinoAppLib\Listener\RouteListenerTrait;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\TextHtml;
+use WebinoHtmlLib\TextHtml;
 use WebinoConfigLib\Feature\Route;
 use WebinoEventLib\AbstractListener;
 

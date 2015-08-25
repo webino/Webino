@@ -41,9 +41,9 @@ TODO...
     installation
 
     basics/basic-usage
-    basics/advanced-usage
+    basics/application-modules
     basics/skeleton-application
-    basics/skeleton-module
+    basics/command-line-interface
 
     architecture/application
     architecture/config
@@ -58,3 +58,4 @@ TODO...
     guide/caching
     guide/filesystem
     guide/routing
+    guide/console

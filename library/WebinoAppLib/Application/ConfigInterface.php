@@ -18,14 +18,14 @@ interface ConfigInterface
     const SERVICES = 'services';
 
     /**
-     * Services factories config node key
+     * Invokables config node key
      */
-    const SERVICES_INVOKABLES = 'invokables';
+    const INVOKABLES = 'invokables';
 
     /**
-     * Services factories config node key
+     * Factories config node key
      */
-    const SERVICES_FACTORIES = 'factories';
+    const FACTORIES = 'factories';
 
     /**
      * Listeners config node key

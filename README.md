@@ -9,6 +9,7 @@ Webino™ is a platform for creating quality and modular web applications.
 It is built on [PHP](http://php.net/) with [Zend Framework 2](http://framework.zend.com/)
 and other useful open-source packages.
 
+- Demo [demo.webino.org](http://demo.webino.org)
 
 ## Goals
 

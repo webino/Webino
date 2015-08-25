@@ -1,19 +1,14 @@
 <?php
 
 use Tester\Assert;
-use WebinoConfigLib\Log\Writer\Mock;
+use WebinoConfigLib\Feature\MockLog;
 use WebinoLogLib\Factory;
 
 require __DIR__ . '/../bootstrap.php';
 
-$options = [
-    'writers' => [
-        'mock' => (new Mock)->toArray(),
-    ],
-];
 
 $factory = new Factory;
-$logger = $factory->create($options);
+$logger  = $factory->create(current((new MockLog)->toArray()));
 
 
 $logger->log()->debug('Test debug message');

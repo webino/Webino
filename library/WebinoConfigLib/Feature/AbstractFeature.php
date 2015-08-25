@@ -2,12 +2,12 @@
 
 namespace WebinoConfigLib\Feature;
 
-use WebinoConfigLib\AbstractConfig;
+use WebinoConfigLib\Config;
 
 /**
  * Class AbstractFeature
  */
-class AbstractFeature extends AbstractConfig implements
+class AbstractFeature extends Config implements
     FeatureInterface
 {
 

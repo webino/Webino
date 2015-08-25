@@ -13,5 +13,7 @@ Adding routes via config.
     ]);
 
 
-- see: `Route Config Example <http://demo.webino.org/route-config>`_ | :ref:`api-routing-app-url`
-  | :ref:`api-routing-app-bindRoute`
+.. seealso::
+   :ref:`api-routing-app-url` |
+   :ref:`api-routing-app-bindRoute` |
+   `Route Config Example <http://demo.webino.org/route-config>`_

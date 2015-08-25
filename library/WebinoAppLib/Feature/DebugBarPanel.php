@@ -19,6 +19,6 @@ class DebugBarPanel extends AbstractConfig implements
     public function __construct($name, $class, $factoryClass = null)
     {
         parent::__construct([new Service($class, $factoryClass)]);
-        $this->mergeArray([Debugger::DEBUGGER => [Debugger::BAR_PANELS => [$name => $class]]]);
+        $this->mergeArray([DefaultDebugger::DEBUGGER => [DefaultDebugger::BAR_PANELS => [$name => $class]]]);
     }
 }

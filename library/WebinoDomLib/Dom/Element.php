@@ -2,7 +2,7 @@
 
 namespace WebinoDomLib\Dom;
 
-use WebinoBaseLib\Html\EscaperAwareTrait;
+use WebinoHtmlLib\EscaperAwareTrait;
 
 /**
  * Class Element

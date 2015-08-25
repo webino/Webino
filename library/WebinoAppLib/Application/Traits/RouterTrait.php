@@ -3,11 +3,11 @@
 namespace WebinoAppLib\Application\Traits;
 
 use ArrayObject;
-use WebinoAppLib\Event\RouteEvent;
-use WebinoAppLib\Event\RouteEventNameResolver;
 use WebinoAppLib\Router\Url;
 use WebinoAppLib\Service\Router;
+use WebinoAppLib\Util\RouteEventNameResolver;
 use WebinoConfigLib\Feature\Route;
+use Zend\Console\Console;
 use Zend\Mvc\Router\RouteStackInterface;
 
 /**
@@ -81,6 +81,10 @@ trait RouterTrait
      */
     public function bindRoute($name, $callback = null, $priority = 1)
     {
-        return $this->bind((new RouteEventNameResolver)->__invoke($name), $callback, $priority);
+        if (Console::isConsole()) {
+            return null;
+        }
+
+        return $this->bind(call_user_func(RouteEventNameResolver::getInstance(), $name), $callback, $priority);
     }
 }

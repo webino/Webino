@@ -4,8 +4,8 @@ namespace WebinoAppLib\Debugger\Bar;
 
 use Tracy\IBarPanel;
 use WebinoAppLib\Exception;
-use WebinoBaseLib\Html\ImgHtml;
-use WebinoBaseLib\Html\InlineTextHtml;
+use WebinoHtmlLib\ImgHtml;
+use WebinoHtmlLib\InlineTextHtml;
 
 /**
  * Class AbstractPanel
@@ -25,12 +25,15 @@ abstract class AbstractPanel implements IBarPanel
     /**
      * @return string
      */
-    abstract protected function getLabel();
+    abstract protected function getTitle();
 
     /**
      * @return string
      */
-    abstract protected function getTitle();
+    protected function getLabel()
+    {
+        return '';
+    }
 
     /**
      * @return string
@@ -69,9 +72,11 @@ abstract class AbstractPanel implements IBarPanel
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $name
+     * @param array $style
+     * @return ImgHtml
      */
-    protected function createIcon($name, $style = '')
+    protected function createIcon($name, array $style = [])
     {
         $data   = file_get_contents($this->getDir() . '/' . $name . '.png');
         $base64 = 'data:image/png;base64,' . base64_encode($data);

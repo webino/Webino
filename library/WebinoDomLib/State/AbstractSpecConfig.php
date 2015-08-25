@@ -18,7 +18,6 @@ abstract class AbstractSpecConfig extends AbstractFeature
 
     /**
      * @param string $name
-     * @return $this
      */
     public function __construct($name)
     {

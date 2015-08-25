@@ -18,6 +18,6 @@ class DebugBarInfo extends AbstractConfig implements
     public function __construct($info, $value = null)
     {
         $_info = is_string($info) ? $info = [$info => (string) $value] : (array) $info;
-        parent::__construct([[Debugger::DEBUGGER => [Debugger::INFO => $_info]]]);
+        parent::__construct([[DefaultDebugger::DEBUGGER => [DefaultDebugger::INFO => $_info]]]);
     }
 }

@@ -16,7 +16,8 @@ Toggling application config caching.
     ]);
 
 
-- see: :ref:`api-caching-caching-methods`
+.. seealso::
+   :ref:`api-caching-caching-methods`
 
 
 FilesystemCache

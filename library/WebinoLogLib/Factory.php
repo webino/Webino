@@ -37,6 +37,6 @@ final class Factory
             throw new Exception\InvalidArgumentException('Unable to create a logger', null, $exc);
         }
 
-        return new Logger(new BaseLogger($this->loggerEngine));
+        return new Logger(new PsrLogger($this->loggerEngine));
     }
 }

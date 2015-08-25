@@ -2,12 +2,10 @@
 
 namespace WebinoConfigLib\Log\Writer;
 
-use WebinoConfigLib\AbstractConfig;
-
 /**
  * Class Noop
  */
-class Noop extends AbstractConfig
+class Noop extends AbstractWriter
 {
     /**
      * Create a black hole log writer

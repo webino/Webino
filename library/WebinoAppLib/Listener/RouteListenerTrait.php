@@ -2,7 +2,8 @@
 
 namespace WebinoAppLib\Listener;
 
-use WebinoAppLib\Event\RouteEventNameResolver;
+use WebinoAppLib\Util\RouteEventNameResolver;
+use Zend\Console\Console;
 
 /**
  * Class RouteListenerTrait
@@ -27,8 +28,12 @@ trait RouteListenerTrait
      */
     protected function listenRoute($name, $callback = null, $priority = 1)
     {
+        if (Console::isConsole()) {
+            return $this;
+        }
+
         $this->listen(
-            (new RouteEventNameResolver)->__invoke($name),
+            call_user_func(new RouteEventNameResolver, $name),
             $callback,
             $priority
         );

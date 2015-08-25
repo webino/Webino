@@ -7,10 +7,11 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\ScrollBoxHtml;
-use WebinoBaseLib\Html\TextHtml;
+use WebinoExamplesLib\Html\ScrollBoxHtml;
+use WebinoHtmlLib\TextHtml;
 use WebinoConfigLib\Feature\Log;
 use WebinoLogLib\Message\AbstractWarningMessage;
+use Zend\Stdlib\Parameters;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -19,9 +20,9 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyLogMessage extends AbstractWarningMessage
 {
-    public function getMessage(array $args)
+    public function getMessage(Parameters $args)
     {
-        return 'Test log message!';
+        return count($args) ? 'Test warning log message {0} {1}!' : 'Test warning log message!';
     }
 }
 
@@ -41,6 +42,12 @@ $app = Webino::application($config)->bootstrap();
  */
 $app->log(MyLogMessage::class);
 
+/**
+ * Writing log message
+ * with arguments.
+ */
+$app->log(MyLogMessage::class, ['paramOne', 'paramTwo']);
+
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     /**
      * Obtaining log
@@ -50,7 +57,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'Application log:',
-        new ScrollBoxHtml(nl2br(new TextHtml($log)), false),
+        new ScrollBoxHtml(nl2br(new TextHtml($log))),
         new SourcePreview(__FILE__),
     ]);
 });

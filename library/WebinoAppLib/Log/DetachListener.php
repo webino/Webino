@@ -4,6 +4,7 @@ namespace WebinoAppLib\Log;
 
 use WebinoLogLib\Message\AbstractInfoMessage;
 use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\Parameters;
 
 /**
  * Class DetachListener
@@ -13,23 +14,19 @@ class DetachListener extends AbstractInfoMessage
     /**
      * {@inheritdoc}
      */
-    public function getMessage(array $args)
+    public function getMessage(Parameters $args)
     {
         if ($args[1] instanceof CallbackHandler) {
             $mData = $args[1]->getMetadata();
-            $args = [
-                $mData['event'],
-                $args[1]->getCallback(),
-                $mData['priority'],
-            ];
+            $args->handler  = $args[1]->getCallback();
+            $args->event    = $mData['event'];
+            $args->priority = $mData['priority'];
+        } else {
+            $args->handler  = get_class($args[1]);
+            $args->event    = $args[0];
+            $args->priority = $args[2];
         }
 
-        /** @noinspection PhpParamsInspection */
-        return sprintf(
-            'Detaching `%s` from an event `%s` with priority `%s`',
-            get_class($args[1]),
-            $args[0],
-            $args[2]
-        );
+        return 'Detaching {handler} from an event {event} with priority {priority}';
     }
 }

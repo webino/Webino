@@ -2,13 +2,12 @@
 
 namespace WebinoConfigLib\Feature;
 
+use WebinoBaseLib\ToArrayInterface;
+
 /**
  * Interface FeatureInterface
  */
-interface FeatureInterface
+interface FeatureInterface extends ToArrayInterface
 {
-    /**
-     * @return array
-     */
-    public function toArray();
+
 }

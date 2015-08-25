@@ -2,12 +2,10 @@
 
 namespace WebinoConfigLib\Log\Writer;
 
-use WebinoConfigLib\AbstractConfig;
-
 /**
  * Class FirePhp
  */
-class FirePhp extends AbstractConfig
+class FirePhp extends AbstractWriter
 {
     /**
      * Create a FirePhp log writer

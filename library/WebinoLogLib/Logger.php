@@ -4,6 +4,7 @@ namespace WebinoLogLib;
 
 use WebinoLogLib\Exception;
 use WebinoLogLib\Message\MessageInterface;
+use Zend\Stdlib\Parameters;
 
 /**
  * Class Logger
@@ -11,14 +12,19 @@ use WebinoLogLib\Message\MessageInterface;
 class Logger implements LoggerInterface
 {
     /**
-     * @var BaseLogger
+     * @var PsrLogger
      */
     private $engine;
 
     /**
-     * @param BaseLogger $engine
+     * @var MessageInterface[]
      */
-    public function __construct(BaseLogger $engine)
+    private $messages = [];
+
+    /**
+     * @param PsrLogger $engine
+     */
+    public function __construct(PsrLogger $engine)
     {
         $this->engine = $engine;
     }
@@ -35,7 +41,7 @@ class Logger implements LoggerInterface
         $fromClass = ($level instanceof MessageInterface) ? $level : $this->messageFromClass($level);
         if ($fromClass) {
             $_level  = $fromClass->getLevel();
-            $_args   = isset($args[0]) ? $args[0] : [];
+            $_args   = new Parameters(isset($args[0]) ? $args[0] : []);
             $message = $fromClass->getMessage($_args);
 
         } else {
@@ -44,11 +50,11 @@ class Logger implements LoggerInterface
                 throw new Exception\InvalidArgumentException('Expected a log message but empty');
             }
             $message = $args[0];
-            $_args   = isset($args[1]) ? $args[1] : [];
+            $_args   = new Parameters(isset($args[1]) ? $args[1] : []);
         }
 
         try {
-            $this->engine->log($_level, (string) $message, $_args);
+            $this->engine->log($_level, (string) $message, $_args->toArray());
         } catch (\Exception $exc) {
             throw new Exception\DomainException('Unable to write log', null, $exc);
         }
@@ -62,15 +68,23 @@ class Logger implements LoggerInterface
      */
     private function messageFromClass($className)
     {
+        if (isset($this->messages[$className])) {
+            // return cached
+            return $this->messages[$className];
+        }
+
         if (class_exists($className)) {
+            // create a log message
             $message = new $className;
             if ($message instanceof MessageInterface) {
+                $this->messages[$className] = $message;
                 return $message;
             }
 
             throw (new Exception\InvalidArgumentException('Expected class to be type of %s but got %s'))
                 ->format(MessageInterface::class, $message);
         }
+
         return null;
     }
 }

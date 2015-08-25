@@ -16,7 +16,9 @@ Configuring listeners.
     ]);
 
 
-- see: :ref:`architecture-events-event-listeners`
+.. seealso::
+   :ref:`architecture-events-event-listeners` |
+   `Bootstrap Bind Config Example <http://demo.webino.org/events-bind-app-bootstrap-config>`_
 
 
 CoreListener
@@ -37,4 +39,6 @@ Configuring core listeners.
     ]);
 
 
-- see: :ref:`architecture-events-core-listeners`
+.. seealso::
+   :ref:`architecture-events-core-listeners` |
+   `Bootstrap Bind Core Config Example <http://demo.webino.org/events-bind-app-bootstrap-core-config>`_

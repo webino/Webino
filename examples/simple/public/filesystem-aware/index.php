@@ -10,10 +10,10 @@ use WebinoAppLib\Factory\AbstractFactory;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\ScrollBoxHtml;
-use WebinoBaseLib\Html\TextHtml;
+use WebinoExamplesLib\Html\ScrollBoxHtml;
 use WebinoFilesystemLib\FilesystemAwareInterface;
 use WebinoFilesystemLib\FilesystemAwareTrait;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -77,7 +77,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'File contents:',
-        new ScrollBoxHtml(nl2br(new TextHtml($file)), false),
+        new ScrollBoxHtml(nl2br(new TextHtml($file))),
         new SourcePreview(__FILE__),
     ]);
 });

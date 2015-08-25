@@ -8,12 +8,13 @@ use WebinoAppLib\Factory;
 use WebinoConfigLib\Feature\Log;
 use WebinoLogLib\Message\AbstractInfoMessage;
 use WebinoLogLib\Message\AbstractWarningMessage;
+use Zend\Stdlib\Parameters;
 
 require __DIR__ . '/../bootstrap.php';
 
 class MyLogMessageOne extends AbstractInfoMessage
 {
-    public function getMessage(array $args)
+    public function getMessage(Parameters $args)
     {
         return __CLASS__ . ' example...';
     }
@@ -21,7 +22,7 @@ class MyLogMessageOne extends AbstractInfoMessage
 
 class MyLogMessageTwo extends AbstractWarningMessage
 {
-    public function getMessage(array $args)
+    public function getMessage(Parameters $args)
     {
         return __CLASS__ . ' example...';
     }

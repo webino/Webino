@@ -20,8 +20,8 @@ class Listener extends AbstractFeature
         $_listener = is_array($listener) ? $listener : [$listener => $listener];
         $key = current($_listener);
         $service = is_null($factoryClass)
-            ? [Config::SERVICES_INVOKABLES => [$key => $key]]
-            : [Config::SERVICES_FACTORIES => [$key => $factoryClass]];
+            ? [Config::INVOKABLES => [$key => $key]]
+            : [Config::FACTORIES => [$key => $factoryClass]];
 
         $this->mergeArray([
             Config::LISTENERS => $_listener,

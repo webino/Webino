@@ -37,7 +37,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param string $route Literal route.
-     * @return self
+     * @return $this
      */
     public function setLiteral($route)
     {
@@ -47,7 +47,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param string $route Segment route.
-     * @return self
+     * @return $this
      */
     public function setSegment($route)
     {
@@ -57,7 +57,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param string $type Route type.
-     * @return self
+     * @return $this
      */
     public function setType($type = RouteInterface::LITERAL)
     {
@@ -75,7 +75,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param string $name Route name.
-     * @return self
+     * @return $this
      */
     public function setName($name)
     {
@@ -85,7 +85,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param bool $mayTerminate
-     * @return self
+     * @return $this
      */
     public function setMayTerminate($mayTerminate = true)
     {
@@ -95,7 +95,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param array $defaults
-     * @return self
+     * @return $this
      */
     public function setDefaults(array $defaults)
     {
@@ -105,7 +105,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param self[] $routes
-     * @return self
+     * @return $this
      */
     public function setChild(array $routes)
     {
@@ -119,7 +119,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param RouteInterface[] $routes
-     * @return self
+     * @return $this
      */
     public function chain(array $routes)
     {
@@ -137,7 +137,7 @@ class Route extends AbstractFeature implements
 
     /**
      * @param string $route Route path
-     * @return self
+     * @return $this
      */
     public function setRoute($route)
     {

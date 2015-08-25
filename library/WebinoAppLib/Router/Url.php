@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Router;
 
-use WebinoBaseLib\Html\UrlHtml;
+use WebinoHtmlLib\UrlHtml;
 use Zend\Mvc\Router\RouteStackInterface;
 
 /**

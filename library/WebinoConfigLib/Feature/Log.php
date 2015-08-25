@@ -15,14 +15,56 @@ class Log extends AbstractLog
     const DEFAULT_FILE_PATH = 'data/log/app.log';
 
     /**
+     * @var bool
+     */
+    private static $useLastFilePath = false;
+
+    /**
      * @param string $filePath
      */
     public function __construct($filePath = null)
     {
-        $this->mergeArray([
-            $this::KEY => (new Writer([
-                (new Writer\Stream((null === $filePath) ? self::DEFAULT_FILE_PATH : $filePath))->toArray(),
-            ]))->toArray(),
-        ]);
+        if (null === $filePath && !$this::$useLastFilePath) {
+            $filePath = $this::DEFAULT_FILE_PATH;
+        } else {
+            $this::$useLastFilePath = true;
+        }
+
+        $this->writer = new Writer\Stream($filePath);
+        $this->setSimpleFormat();
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->setWriterKey($name);
+        return $this;
+    }
+
+    /**
+     * Set simple message format
+     *
+     * @param string|null $format %timestamp% %priorityName% (%priority%): %message% %extra%
+     * @return $this
+     */
+    public function setSimpleFormat($format = null)
+    {
+        $options = ['format' => $format ? $format : '%timestamp% %priorityName% (%priority%): %message%'];
+        $this->writer->setFormatter('simple', $options);
+        return $this;
+    }
+
+    /**
+     * Set XML message format
+     *
+     * @return $this
+     */
+    public function setXmlFormat()
+    {
+        $this->writer->setFormatter('xml');
+        return $this;
     }
 }

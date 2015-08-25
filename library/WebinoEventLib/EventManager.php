@@ -2,7 +2,7 @@
 
 namespace WebinoEventLib;
 
-use Zend\EventManager\EventInterface;
+use Zend\EventManager\EventInterface as BaseEventInterface;
 use Zend\EventManager\EventManager as BaseEventManager;
 use Zend\EventManager\ResponseCollection;
 
@@ -22,11 +22,11 @@ class EventManager extends BaseEventManager
      * Added argument unpacking support, removed shared events support.
      *
      * @param string $eventName Event name
-     * @param EventInterface $event Event object
+     * @param BaseEventInterface $event Event object
      * @param null|callable $callback
      * @return ResponseCollection
      */
-    protected function triggerListeners($eventName, EventInterface $event, $callback = null)
+    protected function triggerListeners($eventName, BaseEventInterface $event, $callback = null)
     {
         $responses = new ResponseCollection;
         $listeners = $this->getListeners($eventName);

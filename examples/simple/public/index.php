@@ -6,11 +6,11 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\FieldsetHtml;
-use WebinoBaseLib\Html\LineBreakHtml;
-use WebinoBaseLib\Html\Title3Html;
-use WebinoBaseLib\Html\TitleHtml;
-use WebinoBaseLib\Html\UrlHtml;
+use WebinoHtmlLib\FieldsetHtml;
+use WebinoHtmlLib\LineBreakHtml;
+use WebinoHtmlLib\Title3Html;
+use WebinoHtmlLib\TitleHtml;
+use WebinoHtmlLib\UrlHtml;
 
 require __DIR__ . '/../vendor/autoload.php';
 

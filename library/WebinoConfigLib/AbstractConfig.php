@@ -3,12 +3,13 @@
 namespace WebinoConfigLib;
 
 use ArrayObject;
+use WebinoBaseLib\ToArrayInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class Config
  */
-class AbstractConfig
+class AbstractConfig implements ToArrayInterface
 {
     /**
      * @var ArrayObject
@@ -36,10 +37,10 @@ class AbstractConfig
     }
 
     /**
-     * @param self $merge
+     * @param ToArrayInterface $merge
      * @return self
      */
-    protected function merge(self $merge)
+    protected function merge(ToArrayInterface $merge)
     {
         $this->mergeArray($merge->toArray());
         return $this;

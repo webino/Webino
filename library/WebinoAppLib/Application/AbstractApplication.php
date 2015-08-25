@@ -11,6 +11,7 @@ use Zend\ServiceManager\ServiceManager;
  */
 abstract class AbstractApplication implements
     AbstractApplicationInterface,
+    Contract\ConsoleInterface,
     Contract\DebuggerInterface,
     Contract\ServiceProviderInterface,
     Contract\ConfigInterface,
@@ -20,6 +21,7 @@ abstract class AbstractApplication implements
     Contract\FilesystemInterface,
     Contract\RouterInterface
 {
+    use Traits\ConsoleTrait;
     use Traits\DebuggerTrait;
     use Traits\ServiceProviderTrait;
     use Traits\ConfigTrait;

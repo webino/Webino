@@ -1,0 +1,10 @@
+#!/usr/bin/vim -ns
+:%s%^+  %+++
+:%s%^-  %---
+:%s%^   %
+:set nu
+:let html_use_css=1
+:so $VIMRUNTIME/syntax/2html.vim
+:wq
+:qa!
+

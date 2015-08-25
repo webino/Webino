@@ -28,14 +28,6 @@ class ConfigPanel extends AbstractPanel
     /**
      * @return string
      */
-    protected function getLabel()
-    {
-        return 'Config';
-    }
-
-    /**
-     * @return string
-     */
     protected function getTitle()
     {
         return 'Application config';
@@ -56,7 +48,7 @@ class ConfigPanel extends AbstractPanel
      */
     public function getTab()
     {
-        return $this->createIcon('config', 'top: -3px;') . parent::getTab();
+        return $this->createIcon('config',[ 'margin-top' => '5px']) . parent::getTab();
     }
 
     /**

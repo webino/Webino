@@ -1,7 +1,14 @@
 <style>
     #tracy-debug pre.tracy-dump { overflow: visible; }
+
+    #tracy-debug-bar li > a,
+    #tracy-debug-bar li > span {
+        min-height: 20px;
+        padding: 0 .15em !important;
+    }
 </style>
-<div class="tracy-inner" style="max-width: 100%%;">
+<?php /** @var \WebinoAppLib\Debugger\Bar\ConfigPanel $this */?>
+<div class="tracy-inner" style="max-width: 100%;">
     <h1><?= $this->getTitle() ?></h1>
     <div><?= $this->getContent() ?></div>
 </div>

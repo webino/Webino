@@ -10,13 +10,16 @@ Configuring services.
 
     new Config([
         // invokable
-        new Service(MyExampleService::class),
+        new Service(MyService::class),
         // factory
-        new Service(MyExampleService::class, MyExampleServiceFactory::class),
+        new Service(MyService::class, MyServiceFactory::class),
     ]);
 
 
-- see: :ref:`api-services-app-get`
+.. seealso::
+   :ref:`api-services-app-get` |
+   :ref:`architecture-services-invokables` |
+   :ref:`architecture-services-factory`
 
 
 CoreService
@@ -30,8 +33,15 @@ Application core service config feature.
     use WebinoAppLib\Feature\CoreService;
 
     new CoreConfig([
-        new CoreService(MyExampleCoreService::class),
+        // invokable
+        new CoreService(MyCoreService::class),
+        // factory
+        new CoreService(MyCoreService::class, MyCoreServiceFactory::class),
     ]);
 
 
-- see: :ref:`architecture-services` | :ref:`api-services-app-get`
+.. seealso::
+   :ref:`api-services-app-get` |
+   :ref:`architecture-services-core` |
+   :ref:`architecture-services-invokables` |
+   :ref:`architecture-services-factory`

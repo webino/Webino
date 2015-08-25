@@ -4,11 +4,11 @@ namespace WebinoAppLib;
 
 use WebinoAppLib\Application;
 use WebinoAppLib\Application\AbstractApplication;
+use WebinoAppLib\Application\Config;
 use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Exception\DomainException;
 use WebinoAppLib\Exception\InvalidArgumentException;
 use WebinoAppLib\Service\DebuggerInterface;
-use Zend\Config\Config;
 use Zend\ServiceManager\ServiceManager;
 
 /**
@@ -158,14 +158,14 @@ class Factory
     {
         $config = $coreConfig[CoreConfig::SERVICES];
 
-        if (!empty($config[CoreConfig::SERVICES_INVOKABLES])) {
-            foreach ($config[CoreConfig::SERVICES_INVOKABLES] as $name => $service) {
+        if (!empty($config[CoreConfig::INVOKABLES])) {
+            foreach ($config[CoreConfig::INVOKABLES] as $name => $service) {
                 $services->setInvokableClass($name, $service);
             }
         }
 
-        if (!empty($config[CoreConfig::SERVICES_FACTORIES])) {
-            foreach ($config[CoreConfig::SERVICES_FACTORIES] as $name => $service) {
+        if (!empty($config[CoreConfig::FACTORIES])) {
+            foreach ($config[CoreConfig::FACTORIES] as $name => $service) {
                 $services->setFactory($name, $service);
             }
         }

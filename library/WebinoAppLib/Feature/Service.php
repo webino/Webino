@@ -18,8 +18,8 @@ class Service extends AbstractFeature
     public function __construct($service, $factoryClass = null)
     {
         $service = is_null($factoryClass)
-            ? [Config::SERVICES_INVOKABLES => is_array($service) ? $service : [$service => $service]]
-            : [Config::SERVICES_FACTORIES => [$service => $factoryClass]];
+            ? [Config::INVOKABLES => is_array($service) ? $service : [$service => $service]]
+            : [Config::FACTORIES => [$service => $factoryClass]];
 
         $this->mergeArray([Config::SERVICES => $service]);
     }

@@ -3,7 +3,6 @@
 namespace WebinoAppLib\Feature;
 
 use WebinoAppLib\Application;
-use WebinoAppLib\Application\ConfigInterface;
 use WebinoAppLib\Factory\RouterFactory;
 use WebinoAppLib\Listener\RoutingListener;
 use WebinoAppLib\Router\DefaultRoute;
@@ -27,16 +26,9 @@ class DefaultRouter extends Config implements
     public function __construct()
     {
         parent::__construct([
+            new DefaultRoute,
             new Listener(RoutingListener::class),
-            (new Route(DefaultRoute::class))->setLiteral('/'),
-        ]);
-
-        $this->mergeArray([
-            ConfigInterface::SERVICES => [
-                ConfigInterface::SERVICES_FACTORIES => [
-                    Application::ROUTER => RouterFactory::class,
-                ],
-            ],
+            new Service(Application::ROUTER, RouterFactory::class),
         ]);
     }
 }

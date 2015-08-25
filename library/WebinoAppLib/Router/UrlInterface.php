@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Router;
 
-use WebinoBaseLib\Html\UrlHtmlInterface;
+use WebinoHtmlLib\UrlHtmlInterface;
 
 /**
  * Interface UrlInterface

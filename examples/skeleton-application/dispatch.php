@@ -213,6 +213,8 @@ $app->bind(AppEvent::DISPATCH, function (DispatchEvent $event) {
     $state->spec = $spec;
     $state->content = $content;
 
+    dd('x');
+
     // TODO create a template
     $layout = '<!DOCTYPE html><html><head><title>Webino Prototype</title></head><body>
 <div class="side-column" style="background: green;"><p>before</p></div>

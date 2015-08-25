@@ -14,7 +14,8 @@ Overriding default local working dir filesystem.
     ]);
 
 
-- see: :ref:`api-filesystem-app-file`
+.. seealso::
+   :ref:`api-filesystem-app-file`
 
 
 MemoryFilesystem
@@ -32,4 +33,6 @@ Configuring temporary filesystem in the memory.
     ]);
 
 
-- see: :ref:`api-filesystem-app-file`
+.. seealso::
+   :ref:`api-filesystem-app-file` |
+   `Filesystem Config Example <http://demo.webino.org/filesystem-config>`_

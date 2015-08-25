@@ -10,12 +10,13 @@ use WebinoAppLib\Factory\AbstractFactory;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoBaseLib\Html\TextHtml;
-use WebinoBaseLib\Html\ScrollBoxHtml;
+use WebinoHtmlLib\TextHtml;
+use WebinoExamplesLib\Html\ScrollBoxHtml;
 use WebinoConfigLib\Feature\Log;
 use WebinoLogLib\LoggerAwareInterface;
 use WebinoLogLib\LoggerAwareTrait;
 use WebinoLogLib\Message\AbstractWarningMessage;
+use Zend\Stdlib\Parameters;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -24,9 +25,9 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyLogMessage extends AbstractWarningMessage
 {
-    public function getMessage(array $args)
+    public function getMessage(Parameters $args)
     {
-        return empty($args) ? 'Test service warning log message!' : 'Test service warning log message {0} {1}!';
+        return count($args) ? 'Test service warning log message {0} {1}!' : 'Test service warning log message!';
     }
 }
 
@@ -64,7 +65,7 @@ class MyService implements LoggerAwareInterface
          * Logging message class
          * with arguments.
          */
-        $this->getLogger()->log(MyLogMessage::class, 'paramOne', 'paramTwo');
+        $this->getLogger()->log(MyLogMessage::class, ['paramOne', 'paramTwo']);
     }
 }
 
@@ -122,7 +123,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'Application log:',
-        new ScrollBoxHtml(nl2br(new TextHtml($log)), false),
+        new ScrollBoxHtml(nl2br(new TextHtml($log))),
         new SourcePreview(__FILE__),
     ]);
 });

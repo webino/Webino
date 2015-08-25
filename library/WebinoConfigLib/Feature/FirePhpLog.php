@@ -14,10 +14,6 @@ class FirePhpLog extends AbstractLog
      */
     public function __construct()
     {
-        $this->mergeArray([
-            $this::KEY => (new Writer([
-                (new Writer\FirePhp)->toArray(),
-            ]))->toArray(),
-        ]);
+        $this->writer = new Writer\FirePhp;
     }
 }
