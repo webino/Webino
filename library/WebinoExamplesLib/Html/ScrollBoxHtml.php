@@ -7,7 +7,7 @@ use WebinoHtmlLib\ScrollBoxHtml as BaseScrollBoxHtml;
 /**
  * Class ScrollBoxHtml
  */
-final class ScrollBoxHtml extends BaseScrollBoxHtml
+class ScrollBoxHtml extends BaseScrollBoxHtml
 {
     /**
      * @param string $text

@@ -10,6 +10,8 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route\Console;
+use WebinoExamplesLib\Html\ConsolePreviewHtml;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -27,7 +29,7 @@ class ConsoleFormatsExample extends AbstractConsoleCommand
         $cli = $event->getCli();
 
         $cli
-            ->out('● Colors ●')->br()
+            ->out('● Colors:')->br()
             ->black('Black text!')
             ->red('Red text!')
             ->green('Green text!')
@@ -46,7 +48,7 @@ class ConsoleFormatsExample extends AbstractConsoleCommand
             ->white('White text!');
 
         $cli
-            ->br(2)->out('● Background Colors ●')->br()
+            ->br(2)->out('● Background Colors:')->br()
             ->backgroundBlack('Text on black background!')
             ->backgroundRed('Text on red background!')
             ->backgroundGreen('Text on green background!')
@@ -65,14 +67,14 @@ class ConsoleFormatsExample extends AbstractConsoleCommand
             ->backgroundWhite('Text on white background!');
 
         $cli
-            ->br(2)->out('● Text Style ●')->br()
+            ->br(2)->out('● Text Style:')->br()
             ->bold('Bold text!')
             ->dim('Dim text!')
             ->underline('Underlined text!')
             ->invert('Inverted text!');
 
         $cli
-            ->br(2)->out('● Style Commands ●')->br()
+            ->br(2)->out('● Style Commands:')->br()
             ->info('Info text style!')
             ->comment('Comment text style!')
             ->whisper('Whisper text style!')
@@ -91,7 +93,9 @@ $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        'Use Command Line Interface!',
+        new TextHtml('Use Command Line Interface!'),
+        new TextHtml('Console output preview:'),
+        new ConsolePreviewHtml('preview.jpg'),
         new SourcePreview(__FILE__),
     ]);
 });

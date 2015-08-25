@@ -9,6 +9,8 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route\Console;
+use WebinoExamplesLib\Html\ConsolePreviewHtml;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -41,7 +43,7 @@ $app->bindConsole('myCommand', function (ConsoleEvent $event) {
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        'Use Command Line Interface!',
+        new TextHtml('Use Command Line Interface!'),
         new SourcePreview(__FILE__),
     ]);
 });
