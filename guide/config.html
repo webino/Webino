@@ -80,7 +80,7 @@
 </ul>
 </div>
 <div class="section" id="app-getconfig">
-<h3><a class="toc-backref" href="#id6">$app-&gt;getConfig()</a><a class="headerlink" href="#app-getconfig" title="Permalink to this headline">¶</a></h3>
+<span id="api-config-app-get-config"></span><h3><a class="toc-backref" href="#id6">$app-&gt;getConfig()</a><a class="headerlink" href="#app-getconfig" title="Permalink to this headline">¶</a></h3>
 <p>Accessing application configuration.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Config\Config $config */</span>
 <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">();</span>
@@ -115,11 +115,14 @@
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
     <span class="k">new</span> <span class="nx">SomeConfigFeature</span><span class="p">,</span>
-
 <span class="p">]);</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-config-app-get-config"><span>$app-&gt;getConfig()</span></a> |
+<a class="reference external" href="http://demo.webino.org/config-feature">Config Feature Example</a></p>
 </div>
 <p><div class="vspace"></div></p>
 <p>Available features:</p>
@@ -137,17 +140,24 @@
 </li>
 <li><a class="reference internal" href="#logging" id="id14">Logging</a><ul>
 <li><a class="reference internal" href="#log" id="id15">Log</a></li>
-<li><a class="reference internal" href="#firephplog" id="id16">FirePhpLog</a></li>
+<li><a class="reference internal" href="#logger" id="id16">Logger</a></li>
+<li><a class="reference internal" href="#chromephplog" id="id17">ChromePhpLog</a></li>
+<li><a class="reference internal" href="#firephplog" id="id18">FirePhpLog</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cache" id="id17">Cache</a></li>
-<li><a class="reference internal" href="#filesystem" id="id18">Filesystem</a><ul>
-<li><a class="reference internal" href="#defaultfilesystem" id="id19">DefaultFilesystem</a></li>
-<li><a class="reference internal" href="#memoryfilesystem" id="id20">MemoryFilesystem</a></li>
+<li><a class="reference internal" href="#caching" id="id19">Caching</a><ul>
+<li><a class="reference internal" href="#configcacheenabled" id="id20">ConfigCacheEnabled</a></li>
+<li><a class="reference internal" href="#filesystemcache" id="id21">FilesystemCache</a></li>
+<li><a class="reference internal" href="#memorycache" id="id22">MemoryCache</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#routing" id="id21">Routing</a><ul>
-<li><a class="reference internal" href="#route" id="id22">Route</a></li>
+<li><a class="reference internal" href="#filesystem" id="id23">Filesystem</a><ul>
+<li><a class="reference internal" href="#defaultfilesystem" id="id24">DefaultFilesystem</a></li>
+<li><a class="reference internal" href="#memoryfilesystem" id="id25">MemoryFilesystem</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#routing" id="id26">Routing</a><ul>
+<li><a class="reference internal" href="#route" id="id27">Route</a></li>
 </ul>
 </li>
 </ul>
@@ -169,9 +179,11 @@
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="../architecture/events.html#architecture-events-event-listeners"><span>Event Listeners</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../architecture/events.html#architecture-events-event-listeners"><span>Event Listeners</span></a> |
+<a class="reference external" href="http://demo.webino.org/events-bind-app-bootstrap-config">Bootstrap Bind Config Example</a></p>
+</div>
 </div>
 <div class="section" id="corelistener">
 <h4><a class="toc-backref" href="#id10">CoreListener</a><a class="headerlink" href="#corelistener" title="Permalink to this headline">¶</a></h4>
@@ -187,9 +199,11 @@
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="../architecture/events.html#architecture-events-core-listeners"><span>Core Listeners</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../architecture/events.html#architecture-events-core-listeners"><span>Core Listeners</span></a> |
+<a class="reference external" href="http://demo.webino.org/events-bind-app-bootstrap-core-config">Bootstrap Bind Core Config Example</a></p>
+</div>
 </div>
 </div>
 <div class="section" id="services">
@@ -203,15 +217,18 @@
 
 <span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
     <span class="c1">// invokable</span>
-    <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyExampleService</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyService</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
     <span class="c1">// factory</span>
-    <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyExampleService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyExampleServiceFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyServiceFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="services.html#api-services-app-get"><span>$app-&gt;get()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="services.html#api-services-app-get"><span>$app-&gt;get()</span></a> |
+<a class="reference internal" href="../architecture/services.html#architecture-services-invokables"><span>Invokables</span></a> |
+<a class="reference internal" href="../architecture/services.html#architecture-services-factory"><span>Service Factory</span></a></p>
+</div>
 </div>
 <div class="section" id="coreservice">
 <h4><a class="toc-backref" href="#id13">CoreService</a><a class="headerlink" href="#coreservice" title="Permalink to this headline">¶</a></h4>
@@ -220,36 +237,126 @@
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\CoreService</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="k">new</span> <span class="nx">CoreService</span><span class="p">(</span><span class="nx">MyExampleCoreService</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
+    <span class="c1">// invokable</span>
+    <span class="k">new</span> <span class="nx">CoreService</span><span class="p">(</span><span class="nx">MyCoreService</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
+    <span class="c1">// factory</span>
+    <span class="k">new</span> <span class="nx">CoreService</span><span class="p">(</span><span class="nx">MyCoreService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyCoreServiceFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="../architecture/services.html#architecture-services"><span>Core Services</span></a> | <a class="reference internal" href="services.html#api-services-app-get"><span>$app-&gt;get()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="services.html#api-services-app-get"><span>$app-&gt;get()</span></a> |
+<a class="reference internal" href="../architecture/services.html#architecture-services-core"><span>Core Services</span></a> |
+<a class="reference internal" href="../architecture/services.html#architecture-services-invokables"><span>Invokables</span></a> |
+<a class="reference internal" href="../architecture/services.html#architecture-services-factory"><span>Service Factory</span></a></p>
+</div>
 </div>
 </div>
 <div class="section" id="logging">
 <h3><a class="toc-backref" href="#id14">Logging</a><a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
 <p>Use logging config features to configure logging.</p>
 <div class="section" id="log">
-<h4><a class="toc-backref" href="#id15">Log</a><a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h4>
-<p>Configuring logger.</p>
+<span id="config-logging-log"></span><h4><a class="toc-backref" href="#id15">Log</a><a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h4>
+<p>Configuring app file logger writer, <code class="docutils literal"><span class="pre">data/log/app.log</span></code> by default.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="c1">// Enabling default logging</span>
     <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
+    <span class="c1">// Overriding default logging file</span>
+    <span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log&#39;</span><span class="p">),</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="logging.html#api-logging-app-log"><span>$app-&gt;log()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="logging.html#api-logging"><span>Logger Interface</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message">Log Message Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-PSR-3">PSR-3 Logger Example</a></p>
+</div>
+<p>Configuring file logger formatting.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="c1">// Simple format</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setSimpleFormat</span><span class="p">(</span><span class="s1">&#39;%timestamp% %priorityName% (%priority%): %message% %extra%&#39;</span><span class="p">),</span>
+
+    <span class="c1">// XML format</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log.xml&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setXmlFormat</span><span class="p">(),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="logging.html#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-XML">Log XML Format Example</a></p>
+</div>
+<div class="section" id="forking-logger">
+<span id="config-logging-forking"></span><h5>Forking Logger<a class="headerlink" href="#forking-logger" title="Permalink to this headline">¶</a></h5>
+<p>Creating new logger writer instead of overriding the default.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/my-app.log&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;my&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="logging.html#config-logging-filters"><span>Logging Filters</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-priority">Logger Priority Filter Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-regex">Logger Regex Filter Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="logger">
+<span id="config-logging-logger"></span><h4><a class="toc-backref" href="#id16">Logger</a><a class="headerlink" href="#logger" title="Permalink to this headline">¶</a></h4>
+<p>Configuring custom logger.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Logger</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Logger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
+        <span class="c1">// etc.</span>
+    <span class="p">]),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="logging.html#api-logging-app-get-logger"><span>$app-&gt;getLogger()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
+</div>
+</div>
+<div class="section" id="chromephplog">
+<h4><a class="toc-backref" href="#id17">ChromePhpLog</a><a class="headerlink" href="#chromephplog" title="Permalink to this headline">¶</a></h4>
+<p>Configuring app ChromePHP logger writer.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ChromePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">ChromePhpLog</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="logging.html#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-ChromePHP">Chrome Logger Example</a></p>
+</div>
 </div>
 <div class="section" id="firephplog">
-<h4><a class="toc-backref" href="#id16">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Permalink to this headline">¶</a></h4>
-<p>Configuring FirePHP logger.</p>
+<h4><a class="toc-backref" href="#id18">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Permalink to this headline">¶</a></h4>
+<p>Configuring app FirePHP logger writer.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
 
@@ -258,20 +365,65 @@
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="logging.html#api-logging-app-log"><span>$app-&gt;log()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="logging.html#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-FirePHP">Firefox Logger Example</a></p>
 </div>
 </div>
-<div class="section" id="cache">
-<h3><a class="toc-backref" href="#id17">Cache</a><a class="headerlink" href="#cache" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="caching">
+<h3><a class="toc-backref" href="#id19">Caching</a><a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h3>
 <p>Use cache config features to configure caching.</p>
+<div class="section" id="configcacheenabled">
+<h4><a class="toc-backref" href="#id20">ConfigCacheEnabled</a><a class="headerlink" href="#configcacheenabled" title="Permalink to this headline">¶</a></h4>
+<p>Toggling application config caching.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="c1">// enable</span>
+    <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">,</span>
+    <span class="c1">// disable</span>
+    <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">(</span><span class="k">false</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="caching.html#api-caching-caching-methods"><span>Caching Methods</span></a></p>
+</div>
+</div>
+<div class="section" id="filesystemcache">
+<h4><a class="toc-backref" href="#id21">FilesystemCache</a><a class="headerlink" href="#filesystemcache" title="Permalink to this headline">¶</a></h4>
+<p>Configuring filesystem cache.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\FilesystemCache</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="memorycache">
+<h4><a class="toc-backref" href="#id22">MemoryCache</a><a class="headerlink" href="#memorycache" title="Permalink to this headline">¶</a></h4>
+<p>Configuring in memory cache.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryCache</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">MemoryCache</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="filesystem">
-<h3><a class="toc-backref" href="#id18">Filesystem</a><a class="headerlink" href="#filesystem" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id23">Filesystem</a><a class="headerlink" href="#filesystem" title="Permalink to this headline">¶</a></h3>
 <p>Use filesystem config features to configure filesystems.</p>
 <div class="section" id="defaultfilesystem">
-<h4><a class="toc-backref" href="#id19">DefaultFilesystem</a><a class="headerlink" href="#defaultfilesystem" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id24">DefaultFilesystem</a><a class="headerlink" href="#defaultfilesystem" title="Permalink to this headline">¶</a></h4>
 <p>Overriding default local working dir filesystem.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\DefaultFilesystem</span><span class="p">;</span>
@@ -282,12 +434,13 @@
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="filesystem.html#api-filesystem-app-file"><span>$app-&gt;file()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="filesystem.html#api-filesystem-app-file"><span>$app-&gt;file()</span></a></p>
+</div>
 </div>
 <div class="section" id="memoryfilesystem">
-<h4><a class="toc-backref" href="#id20">MemoryFilesystem</a><a class="headerlink" href="#memoryfilesystem" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id25">MemoryFilesystem</a><a class="headerlink" href="#memoryfilesystem" title="Permalink to this headline">¶</a></h4>
 <p>Configuring temporary filesystem in the memory.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryFilesystem</span><span class="p">;</span>
@@ -297,16 +450,18 @@
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="filesystem.html#api-filesystem-app-file"><span>$app-&gt;file()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="filesystem.html#api-filesystem-app-file"><span>$app-&gt;file()</span></a> |
+<a class="reference external" href="http://demo.webino.org/filesystem-config">Filesystem Config Example</a></p>
+</div>
 </div>
 </div>
 <div class="section" id="routing">
-<h3><a class="toc-backref" href="#id21">Routing</a><a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id26">Routing</a><a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h3>
 <p>Use routing config features to configure routing.</p>
 <div class="section" id="route">
-<h4><a class="toc-backref" href="#id22">Route</a><a class="headerlink" href="#route" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id27">Route</a><a class="headerlink" href="#route" title="Permalink to this headline">¶</a></h4>
 <p>Adding routes via config.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Route</span><span class="p">;</span>
@@ -316,10 +471,12 @@
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference external" href="http://demo.webino.org/route-config">Route Config Example</a> | <a class="reference internal" href="routing.html#api-routing-app-url"><span>$app-&gt;url()</span></a>
-| <a class="reference internal" href="routing.html#api-routing-app-bindroute"><span>$app-&gt;bindRoute()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="routing.html#api-routing-app-url"><span>$app-&gt;url()</span></a> |
+<a class="reference internal" href="routing.html#api-routing-app-bindroute"><span>$app-&gt;bindRoute()</span></a> |
+<a class="reference external" href="http://demo.webino.org/route-config">Route Config Example</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -360,25 +517,22 @@
             <a href="../basics/basic-usage.html">Basic Usage</a>
         </li>
         <li>
-            <a href="../basics/advanced-usage.html">Advanced Usage</a>
+            <a href="../basics/application-modules.html">Application Modules</a>
         </li>
         <li>
             <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
         </li>
         <li>
-            <a href="../basics/skeleton-module.html">Skeleton Module [TODO]</a>
-        </li>
-        <li>
-            <a href="../basics/application-config.html">Application Config [TODO]</a>
-        </li>
-        <li>
-            <a href="../basics/module-config.html">Module Config [TODO]</a>
-        </li>
-        <li>
             <a href="../basics/request-responding.html">Request Responding [TODO]</a>
         </li>
         <li>
-            <a href="../basics/command-line-interface.html">Command Line Interface [TODO]</a>
+            <a href="../basics/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/public-assets.html">Public Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/command-line-interface.html">Command Line Interface</a>
         </li>
     </ul>
 
@@ -395,15 +549,6 @@
         </li>
         <li>
             <a href="../architecture/events.html">Event System</a>
-        </li>
-        <li>
-            <a href="../architecture/templates.html">Templates [TODO]</a>
-        </li>
-        <li>
-            <a href="../architecture/modules.html">Modules [TODO]</a>
-        </li>
-        <li>
-            <a href="../architecture/public-assets.html">Public Assets [TODO]</a>
         </li>
     </ul>
 
@@ -458,7 +603,7 @@
             <a href="localization.html">Localization [TODO]</a>
         </li>
         <li>
-            <a href="console.html">Console [TODO]</a>
+            <a href="console.html">Console</a>
         </li>
     </ul>
 

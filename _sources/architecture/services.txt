@@ -18,6 +18,8 @@ is to use only invokables and factories. Using a magic to resolve services depen
 isn't implemented, because with large projects it becomes messy and slow.
 
 
+.. _architecture-services-invokables:
+
 Invokables
 ==========
 
@@ -59,11 +61,11 @@ Registering an invokable service via application config.
     use WebinoAppLib\Feature\Service;
 
     new Config([
-
         new Service(MyInvokableService::class),
-
     ]);
 
+
+.. _architecture-services-factory:
 
 Service Factory
 ===============
@@ -102,13 +104,11 @@ Registering a service created by factory via application config.
     use WebinoAppLib\Feature\Service;
 
     new Config([
-
         new Service(MyService::class, MyServiceFactory::class),
-
     ]);
 
 
-.. _architecture-services:
+.. _architecture-services-core:
 
 Core Services
 =============
@@ -122,12 +122,9 @@ and write enabled. They are registered into the core section of the application 
     use WebinoAppLib\Feature\CoreService;
 
     new CoreConfig([
-
         // invokable
         new CoreService(MyInvokableService::class),
-
         // factory
         new CoreService(MyService::class, MyServiceFactory::class),
-
     ]);
 

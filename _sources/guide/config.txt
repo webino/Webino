@@ -23,6 +23,7 @@ Config Methods
     :depth: 1
     :local:
 
+.. _api-config-app-get-config:
 
 $app->getConfig()
 ^^^^^^^^^^^^^^^^^
@@ -76,10 +77,13 @@ Config features are registered into the configuration like following:
     use WebinoAppLib\Feature\Config;
 
     new Config([
-
         new SomeConfigFeature,
-
     ]);
+
+
+.. seealso::
+   :ref:`api-config-app-get-config` |
+   `Config Feature Example <http://demo.webino.org/config-feature>`_
 
 
 |vspace|
@@ -115,12 +119,12 @@ Use logging config features to configure logging.
 .. include:: /guide/config/logging.rst.inc
 
 
-Cache
-^^^^^
+Caching
+^^^^^^^
 
 Use cache config features to configure caching.
 
-.. include:: /guide/config/cache.rst.inc
+.. include:: /guide/config/caching.rst.inc
 
 
 Filesystem

@@ -62,42 +62,66 @@
 <h1>Application Logging<a class="headerlink" href="#application-logging" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#application-logger-service" id="id4">Application Logger Service</a></li>
-<li><a class="reference internal" href="#logging-config" id="id5">Logging Config</a></li>
-<li><a class="reference internal" href="#available-log-message-classes" id="id6">Available Log Message Classes</a></li>
-<li><a class="reference internal" href="#psr-3-logger-interface" id="id7">PSR-3-Logger Interface</a></li>
+<li><a class="reference internal" href="#logger-interface" id="id20">Logger Interface</a></li>
+<li><a class="reference internal" href="#psr-3-logger-interface" id="id21">PSR-3 Logger Interface</a></li>
+<li><a class="reference internal" href="#logging-config" id="id22">Logging Config</a></li>
+<li><a class="reference internal" href="#logging-filters" id="id23">Logging Filters</a></li>
+<li><a class="reference internal" href="#log-message-classes" id="id24">Log Message Classes</a></li>
+<li><a class="reference internal" href="#logging-cookbook" id="id25">Logging Cookbook</a></li>
 </ul>
 </div>
 <p>Logs are important for monitoring the security of your application and to track events if problems occur,
 as well as for auditing the correct usage of the system. The PSR-Logger interface standard is supported.</p>
-<div class="section" id="application-logger-service">
-<h2><a class="toc-backref" href="#id4">Application Logger Service</a><a class="headerlink" href="#application-logger-service" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>The best practice is to log a message via class.</p>
+<ul class="simple">
+<li>Powered by <a class="reference external" href="https://github.com/zendframework/zend-log">Zend Log</a></li>
+</ul>
+<div class="section" id="logger-interface">
+<span id="api-logging"></span><h2><a class="toc-backref" href="#id20">Logger Interface</a><a class="headerlink" href="#logger-interface" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
-<li><a class="reference internal" href="#app-getlogger" id="id8">$app-&gt;getLogger()</a></li>
-<li><a class="reference internal" href="#app-log" id="id9">$app-&gt;log()</a></li>
+<li><a class="reference internal" href="#app-getlogger" id="id26">$app-&gt;getLogger()</a></li>
+<li><a class="reference internal" href="#app-log" id="id27">$app-&gt;log()</a></li>
 </ul>
 </div>
 <div class="section" id="app-getlogger">
-<h3><a class="toc-backref" href="#id8">$app-&gt;getLogger()</a><a class="headerlink" href="#app-getlogger" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p>Accessing logger service.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Service\LoggerInterface $logger */</span>
+<span id="api-logging-app-get-logger"></span><h3><a class="toc-backref" href="#id26">$app-&gt;getLogger()</a><a class="headerlink" href="#app-getlogger" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Obtaining logger service.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoLogLib\LoggerInterface $logger */</span>
 <span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">();</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-log"><span>Config Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware">Logger Aware Example</a></p>
+</div>
+<p>Obtaining custom logger service.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoLogLib\LoggerInterface $logger */</span>
+<span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-logger"><span>Config Custom Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
+</div>
 </div>
 <div class="section" id="app-log">
-<span id="api-logging-app-log"></span><h3><a class="toc-backref" href="#id9">$app-&gt;log()</a><a class="headerlink" href="#app-log" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<span id="api-logging-app-log"></span><h3><a class="toc-backref" href="#id27">$app-&gt;log()</a><a class="headerlink" href="#app-log" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p>Writing messages to a log.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// creating a debug message class</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Log\AbstractDebugMessage</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoLogLib\Message\AbstractDebugMessage</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Zend\Stdlib\Parameters</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">MyDebugMessage</span> <span class="k">extends</span> <span class="nx">AbstractDebugMessage</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="o">...</span><span class="nv">$args</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="nx">Parameters</span> <span class="nv">$args</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">// do something...</span>
+        <span class="c1">// $args[0]</span>
+        <span class="c1">// $args[1]</span>
+        <span class="c1">// $args-&gt;exception</span>
 
         <span class="c1">// return a log message</span>
         <span class="k">return</span> <span class="s1">&#39;My log message text with arguments {0} {1}&#39;</span><span class="p">;</span>
@@ -114,34 +138,197 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nv">$app</span><span class="o">::</span><span class="na">DEBUG</span><span class="p">,</span> <span class="s1">&#39;My log message text with arguments {0} {1}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">]);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-log-messages"><span>Log Message Classes</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message">Log Message Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a></p>
+</div>
+<p>Obtaining PSR-3 logger.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Psr\Log\LoggerInterface $logger */</span>
+<span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging-psr-3"><span>PSR-3 Logger Interface</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-PSR-3">PSR-3 Logger Example</a></p>
+</div>
+</div>
+</div>
+<div class="monospace-topic section" id="psr-3-logger-interface">
+<span id="api-logging-psr-3"></span><h2><a class="toc-backref" href="#id21">PSR-3 Logger Interface</a><a class="headerlink" href="#psr-3-logger-interface" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Calling the <code class="docutils literal"><span class="pre">$app-&gt;log()</span></code> method without arguments returns the standard PSR-3 logger object,
+on which we can call standard logging methods.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// just text</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emergency</span><span class="p">(</span><span class="s1">&#39;Something really bad happened.&#39;</span><span class="p">);</span>
+
+<span class="c1">// text with argument placeholders</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Message text example with arguments: {0} {1}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">]);</span>
+
+<span class="c1">// text with context variables</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">&#39;Some debug information...&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;exception&#39;</span> <span class="o">=&gt;</span> <span class="nv">$exc</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p><div class="vspace"></div></p>
+<p>Available methods:</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#app-log-emergency" id="id28">$app-&gt;log()-&gt;emergency()</a></li>
+<li><a class="reference internal" href="#app-log-alert" id="id29">$app-&gt;log()-&gt;alert()</a></li>
+<li><a class="reference internal" href="#app-log-critical" id="id30">$app-&gt;log()-&gt;critical()</a></li>
+<li><a class="reference internal" href="#app-log-error" id="id31">$app-&gt;log()-&gt;error()</a></li>
+<li><a class="reference internal" href="#app-log-warning" id="id32">$app-&gt;log()-&gt;warning()</a></li>
+<li><a class="reference internal" href="#app-log-notice" id="id33">$app-&gt;log()-&gt;notice()</a></li>
+<li><a class="reference internal" href="#app-log-info" id="id34">$app-&gt;log()-&gt;info()</a></li>
+<li><a class="reference internal" href="#app-log-debug" id="id35">$app-&gt;log()-&gt;debug()</a></li>
+</ul>
+</div>
+<div class="section" id="app-log-emergency">
+<h3><a class="toc-backref" href="#id28">$app-&gt;log()-&gt;emergency()</a><a class="headerlink" href="#app-log-emergency" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Emergency, the system is unusable.</em></p>
+</div>
+<div class="section" id="app-log-alert">
+<h3><a class="toc-backref" href="#id29">$app-&gt;log()-&gt;alert()</a><a class="headerlink" href="#app-log-alert" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Alert, immediate action is required.</em></p>
+</div>
+<div class="section" id="app-log-critical">
+<h3><a class="toc-backref" href="#id30">$app-&gt;log()-&gt;critical()</a><a class="headerlink" href="#app-log-critical" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Critical, critical conditions.</em></p>
+</div>
+<div class="section" id="app-log-error">
+<h3><a class="toc-backref" href="#id31">$app-&gt;log()-&gt;error()</a><a class="headerlink" href="#app-log-error" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Error, errors that do not require immediate attention but should be monitored.</em></p>
+</div>
+<div class="section" id="app-log-warning">
+<h3><a class="toc-backref" href="#id32">$app-&gt;log()-&gt;warning()</a><a class="headerlink" href="#app-log-warning" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Warning, unusual or undesirable occurrences that are not errors.</em></p>
+</div>
+<div class="section" id="app-log-notice">
+<h3><a class="toc-backref" href="#id33">$app-&gt;log()-&gt;notice()</a><a class="headerlink" href="#app-log-notice" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Notice, normal but significant events.</em></p>
+</div>
+<div class="section" id="app-log-info">
+<h3><a class="toc-backref" href="#id34">$app-&gt;log()-&gt;info()</a><a class="headerlink" href="#app-log-info" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Info, interesting events.</em></p>
+</div>
+<div class="section" id="app-log-debug">
+<h3><a class="toc-backref" href="#id35">$app-&gt;log()-&gt;debug()</a><a class="headerlink" href="#app-log-debug" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p><em>Debug, detailed information for debugging purposes.</em></p>
 </div>
 </div>
 <div class="section" id="logging-config">
-<h2><a class="toc-backref" href="#id5">Logging Config</a><a class="headerlink" href="#logging-config" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<div class="contents local topic" id="id2">
+<h2><a class="toc-backref" href="#id22">Logging Config</a><a class="headerlink" href="#logging-config" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="contents local topic" id="id3">
 <ul class="simple">
-<li><a class="reference internal" href="#log" id="id10">Log</a></li>
-<li><a class="reference internal" href="#firephplog" id="id11">FirePhpLog</a></li>
+<li><a class="reference internal" href="#log" id="id36">Log</a></li>
+<li><a class="reference internal" href="#logger" id="id37">Logger</a></li>
+<li><a class="reference internal" href="#chromephplog" id="id38">ChromePhpLog</a></li>
+<li><a class="reference internal" href="#firephplog" id="id39">FirePhpLog</a></li>
 </ul>
 </div>
 <div class="section" id="log">
-<h3><a class="toc-backref" href="#id10">Log</a><a class="headerlink" href="#log" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p>Configuring logger.</p>
+<span id="config-logging-log"></span><h3><a class="toc-backref" href="#id36">Log</a><a class="headerlink" href="#log" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Configuring app file logger writer, <code class="docutils literal"><span class="pre">data/log/app.log</span></code> by default.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
 
 <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="c1">// Enabling default logging</span>
     <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
+    <span class="c1">// Overriding default logging file</span>
+    <span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log&#39;</span><span class="p">),</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging"><span>Logger Interface</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message">Log Message Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-PSR-3">PSR-3 Logger Example</a></p>
+</div>
+<p>Configuring file logger formatting.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="c1">// Simple format</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setSimpleFormat</span><span class="p">(</span><span class="s1">&#39;%timestamp% %priorityName% (%priority%): %message% %extra%&#39;</span><span class="p">),</span>
+
+    <span class="c1">// XML format</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log.xml&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setXmlFormat</span><span class="p">(),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-XML">Log XML Format Example</a></p>
+</div>
+<div class="section" id="forking-logger">
+<span id="config-logging-forking"></span><h4>Forking Logger<a class="headerlink" href="#forking-logger" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Creating new logger writer instead of overriding the default.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/my-app.log&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;my&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-filters"><span>Logging Filters</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-priority">Logger Priority Filter Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-regex">Logger Regex Filter Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="logger">
+<span id="config-logging-logger"></span><h3><a class="toc-backref" href="#id37">Logger</a><a class="headerlink" href="#logger" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Configuring custom logger.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Logger</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Logger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
+        <span class="c1">// etc.</span>
+    <span class="p">]),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-get-logger"><span>$app-&gt;getLogger()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
+</div>
+</div>
+<div class="section" id="chromephplog">
+<h3><a class="toc-backref" href="#id38">ChromePhpLog</a><a class="headerlink" href="#chromephplog" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Configuring app ChromePHP logger writer.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ChromePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">ChromePhpLog</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-ChromePHP">Chrome Logger Example</a></p>
+</div>
 </div>
 <div class="section" id="firephplog">
-<h3><a class="toc-backref" href="#id11">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p>Configuring FirePHP logger.</p>
+<h3><a class="toc-backref" href="#id39">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Configuring app FirePHP logger writer.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
 
@@ -150,13 +337,95 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 <span class="p">]);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-FirePHP">Firefox Logger Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="logging-filters">
+<span id="config-logging-filters"></span><h2><a class="toc-backref" href="#id23">Logging Filters</a><a class="headerlink" href="#logging-filters" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>A filter blocks a message from being written to the log.</p>
+<div class="contents local topic" id="id9">
 <ul class="simple">
-<li>see: <a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a></li>
+<li><a class="reference internal" href="#priority-filter" id="id40">Priority filter</a></li>
+<li><a class="reference internal" href="#regex-filter" id="id41">Regex filter</a></li>
 </ul>
 </div>
+<div class="section" id="priority-filter">
+<h3><a class="toc-backref" href="#id40">Priority filter</a><a class="headerlink" href="#priority-filter" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Configuring logger priority filter. Filters out all messages that are below required priority.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">filterPriority</span><span class="p">(</span><span class="nx">Log</span><span class="o">::</span><span class="na">EMERGENCY</span><span class="p">),</span>
+
+    <span class="p">(</span><span class="k">new</span> <span class="nx">FirePhpLog</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">filterPriority</span><span class="p">(</span><span class="nx">FirePhpLog</span><span class="o">::</span><span class="na">INFO</span><span class="p">),</span>
+
+    <span class="c1">// etc.</span>
+<span class="p">]);</span>
+</pre></div>
 </div>
-<div class="section" id="available-log-message-classes">
-<h2><a class="toc-backref" href="#id6">Available Log Message Classes</a><a class="headerlink" href="#available-log-message-classes" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-forking"><span>Forking Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-priority">Logger Priority Filter Example</a></p>
+</div>
+</div>
+<div class="section" id="regex-filter">
+<h3><a class="toc-backref" href="#id41">Regex filter</a><a class="headerlink" href="#regex-filter" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Configuring logger regex filter. Filters out all messages that do not match required pattern.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">filterRegex</span><span class="p">(</span><span class="s1">&#39;~^Attach~&#39;</span><span class="p">),</span>
+
+    <span class="p">(</span><span class="k">new</span> <span class="nx">FirePhpLog</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">filterRegex</span><span class="p">(</span><span class="s1">&#39;~^Event~&#39;</span><span class="p">),</span>
+
+    <span class="c1">// etc.</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-forking"><span>Forking Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-regex">Logger Regex Filter Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="log-message-classes">
+<span id="api-log-messages"></span><h2><a class="toc-backref" href="#id24">Log Message Classes</a><a class="headerlink" href="#log-message-classes" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The best practice is to log messages via class.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoLogLib\Message\AbstractDebugMessage</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyDebugMessage</span> <span class="k">extends</span> <span class="nx">AbstractDebugMessage</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="k">array</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// do something...</span>
+        <span class="c1">// $args[0]</span>
+        <span class="c1">// $args[1]</span>
+        <span class="c1">// $args[&#39;exception&#39;]</span>
+
+        <span class="c1">// return a log message</span>
+        <span class="k">return</span> <span class="s1">&#39;My log message text with arguments {0} {1}&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference internal" href="#cookbook-logger-messages"><span>Creating Logger Messages</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a></p>
+</div>
 <p>Use following log message classes in the <code class="docutils literal"><span class="pre">WebinoLogLib\Message</span></code> namespace to extend your custom
 message classes.</p>
 <dl class="docutils">
@@ -178,66 +447,238 @@ message classes.</p>
 <dd><em>Debug, detailed information for debugging purposes.</em></dd>
 </dl>
 </div>
-<div class="monospace-topic section" id="psr-3-logger-interface">
-<h2><a class="toc-backref" href="#id7">PSR-3-Logger Interface</a><a class="headerlink" href="#psr-3-logger-interface" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>Calling the <code class="docutils literal"><span class="pre">$app-&gt;log()</span></code> method without arguments returns the standard PSR-3 logger object,
-on which we can call standard logging methods.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// just text</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emergency</span><span class="p">(</span><span class="s1">&#39;Something really bad happened.&#39;</span><span class="p">);</span>
-
-<span class="c1">// text with argument placeholders</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Message text example with arguments: {0} {1}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$argOne</span><span class="p">,</span> <span class="nv">$argTwo</span><span class="p">]);</span>
-
-<span class="c1">// text with context variables</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">&#39;Some debug information...&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;extra&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;exception&#39;</span> <span class="o">=&gt;</span> <span class="nv">$exc</span><span class="p">]);</span>
-</pre></div>
-</div>
-<p><div class="vspace"></div></p>
-<p>Available methods:</p>
-<div class="contents local topic" id="id3">
+<div class="section" id="logging-cookbook">
+<h2><a class="toc-backref" href="#id25">Logging Cookbook</a><a class="headerlink" href="#logging-cookbook" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="contents local topic" id="id13">
 <ul class="simple">
-<li><a class="reference internal" href="#app-log-emergency" id="id12">$app-&gt;log()-&gt;emergency()</a></li>
-<li><a class="reference internal" href="#app-log-alert" id="id13">$app-&gt;log()-&gt;alert()</a></li>
-<li><a class="reference internal" href="#app-log-critical" id="id14">$app-&gt;log()-&gt;critical()</a></li>
-<li><a class="reference internal" href="#app-log-error" id="id15">$app-&gt;log()-&gt;error()</a></li>
-<li><a class="reference internal" href="#app-log-warning" id="id16">$app-&gt;log()-&gt;warning()</a></li>
-<li><a class="reference internal" href="#app-log-notice" id="id17">$app-&gt;log()-&gt;notice()</a></li>
-<li><a class="reference internal" href="#app-log-info" id="id18">$app-&gt;log()-&gt;info()</a></li>
-<li><a class="reference internal" href="#app-log-debug" id="id19">$app-&gt;log()-&gt;debug()</a></li>
+<li><a class="reference internal" href="#creating-logger-messages" id="id42">Creating Logger Messages</a></li>
+<li><a class="reference internal" href="#creating-logger-aware-services" id="id43">Creating Logger Aware Services</a></li>
+<li><a class="reference internal" href="#creating-custom-loggers" id="id44">Creating Custom Loggers</a></li>
+<li><a class="reference internal" href="#creating-custom-logger-aware-services" id="id45">Creating Custom Logger Aware Services</a></li>
 </ul>
 </div>
-<div class="section" id="app-log-emergency">
-<h3><a class="toc-backref" href="#id12">$app-&gt;log()-&gt;emergency()</a><a class="headerlink" href="#app-log-emergency" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Emergency, the system is unusable.</em></p>
+<div class="section" id="creating-logger-messages">
+<span id="cookbook-logger-messages"></span><h3><a class="toc-backref" href="#id42">Creating Logger Messages</a><a class="headerlink" href="#creating-logger-messages" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Choose one of the abstract log messages in the <code class="docutils literal"><span class="pre">WebinoLogLib\Message</span></code> namespace.</p>
+<p>Create file in your package folder with the name of your log message. For example <code class="docutils literal"><span class="pre">Log\MyLogMessage.php</span></code>
+with the following contents:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Log</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">WebinoLogLib\Message\AbstractDebugMessage</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Zend\Stdlib\Parameters</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyLogMessage</span> <span class="k">extends</span> <span class="nx">AbstractDebugMessage</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">(</span><span class="nx">Parameters</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// do something...</span>
+        <span class="c1">// $args[0]</span>
+        <span class="c1">// $args[1]</span>
+        <span class="c1">// $args-&gt;exception</span>
+
+        <span class="c1">// return a log message</span>
+        <span class="k">return</span> <span class="s1">&#39;My log message text with arguments {0} {1}&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="app-log-alert">
-<h3><a class="toc-backref" href="#id13">$app-&gt;log()-&gt;alert()</a><a class="headerlink" href="#app-log-alert" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Alert, immediate action is required.</em></p>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-log-messages"><span>Log Message Classes</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a></p>
 </div>
-<div class="section" id="app-log-critical">
-<h3><a class="toc-backref" href="#id14">$app-&gt;log()-&gt;critical()</a><a class="headerlink" href="#app-log-critical" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Critical, critical conditions.</em></p>
+<p>Then you can log the message via application logger:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Log\MyLogMessage</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nx">MyLogMessage</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
 </div>
-<div class="section" id="app-log-error">
-<h3><a class="toc-backref" href="#id15">$app-&gt;log()-&gt;error()</a><a class="headerlink" href="#app-log-error" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Error, errors that do not require immediate attention but should be monitored.</em></p>
+<p>Or using custom logger, if you have configured one:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Log\MyLogMessage</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nx">MyLogMessage</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
 </div>
-<div class="section" id="app-log-warning">
-<h3><a class="toc-backref" href="#id16">$app-&gt;log()-&gt;warning()</a><a class="headerlink" href="#app-log-warning" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Warning, unusual or undesirable occurrences that are not errors.</em></p>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-logger"><span>Config Custom Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
 </div>
-<div class="section" id="app-log-notice">
-<h3><a class="toc-backref" href="#id17">$app-&gt;log()-&gt;notice()</a><a class="headerlink" href="#app-log-notice" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Notice, normal but significant events.</em></p>
 </div>
-<div class="section" id="app-log-info">
-<h3><a class="toc-backref" href="#id18">$app-&gt;log()-&gt;info()</a><a class="headerlink" href="#app-log-info" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Info, interesting events.</em></p>
+<div class="section" id="creating-logger-aware-services">
+<h3><a class="toc-backref" href="#id43">Creating Logger Aware Services</a><a class="headerlink" href="#creating-logger-aware-services" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Create file in your package folder with the name of your service. For example <code class="docutils literal"><span class="pre">Service\MyService.php</span></code>
+with the following contents:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Service</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">WebinoLogLib\LoggerAwareInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoLogLib\LoggerAwareTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyService</span> <span class="k">implements</span> <span class="nx">LoggerAwareInterface</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">LoggerAwareTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nx">MyLogMessage</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="app-log-debug">
-<h3><a class="toc-backref" href="#id19">$app-&gt;log()-&gt;debug()</a><a class="headerlink" href="#app-log-debug" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Debug, detailed information for debugging purposes.</em></p>
+<p>Create a factory for your service to inject the logger. For example <code class="docutils literal"><span class="pre">Factory\MyServiceFactory.php</span></code>
+with the following contents:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Factory</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">MyPackage\Service\MyService</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Factory\AbstractFactory</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyServiceFactory</span> <span class="k">extends</span> <span class="nx">AbstractFactory</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$myService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyService</span><span class="p">;</span>
+
+        <span class="sd">/**</span>
+<span class="sd">         * Injecting app logger</span>
+<span class="sd">         * into custom service.</span>
+<span class="sd">         */</span>
+        <span class="nv">$myService</span><span class="o">-&gt;</span><span class="na">setLogger</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getApp</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">());</span>
+
+        <span class="k">return</span> <span class="nv">$myService</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add your service to the application via configuration.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Service</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyServiceFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>Then calling method on your service will write a message to the application log file.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Service\MyService</span><span class="p">;</span>
+
+<span class="sd">/** @var MyService $myService */</span>
+<span class="nv">$myService</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">MyService</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$myService</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="../architecture/services.html#architecture-services-factory"><span>Service Factory</span></a> ●
+<a class="reference internal" href="#config-logging-log"><span>Config Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware">Logger Aware Example</a></p>
+</div>
+</div>
+<div class="section" id="creating-custom-loggers">
+<h3><a class="toc-backref" href="#id44">Creating Custom Loggers</a><a class="headerlink" href="#creating-custom-loggers" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Add new logger feature to application configuration:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Logger</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Logger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my.log&#39;</span><span class="p">),</span>
+    <span class="p">]),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>Then obtain your custom logger:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$myLogger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-logging-logger"><span>Config Custom Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a></p>
+</div>
+</div>
+<div class="section" id="creating-custom-logger-aware-services">
+<h3><a class="toc-backref" href="#id45">Creating Custom Logger Aware Services</a><a class="headerlink" href="#creating-custom-logger-aware-services" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Create file in your package folder with the name of your service. For example <code class="docutils literal"><span class="pre">Service\MyService.php</span></code>
+with the following contents:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Service</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">WebinoLogLib\LoggerAwareInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoLogLib\LoggerAwareTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyService</span> <span class="k">implements</span> <span class="nx">LoggerAwareInterface</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">LoggerAwareTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nx">MyLogMessage</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Create a factory for your service to inject your custom logger. For example <code class="docutils literal"><span class="pre">Factory\MyServiceFactory.php</span></code>
+with the following contents:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Factory</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">MyPackage\Service\MyService</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Factory\AbstractFactory</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyServiceFactory</span> <span class="k">extends</span> <span class="nx">AbstractFactory</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">create</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$myService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyService</span><span class="p">;</span>
+
+        <span class="sd">/**</span>
+<span class="sd">         * Injecting custom logger</span>
+<span class="sd">         * into custom service.</span>
+<span class="sd">         */</span>
+        <span class="nv">$myService</span><span class="o">-&gt;</span><span class="na">setLogger</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getApp</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$myService</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add new logger feature to application configuration:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Logger</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Logger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my.log&#39;</span><span class="p">),</span>
+    <span class="p">]),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>Add your service to the application via configuration.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Service</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Service</span><span class="p">(</span><span class="nx">MyService</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyServiceFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>Then calling method on your service will write a message to your custom log file.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Service\MyService</span><span class="p">;</span>
+
+<span class="sd">/** @var MyService $myService */</span>
+<span class="nv">$myService</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">MyService</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$myService</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="../architecture/services.html#architecture-services-factory"><span>Service Factory</span></a> ●
+<a class="reference internal" href="#config-logging-logger"><span>Config Custom Logger</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -273,25 +714,22 @@ on which we can call standard logging methods.</p>
             <a href="../basics/basic-usage.html">Basic Usage</a>
         </li>
         <li>
-            <a href="../basics/advanced-usage.html">Advanced Usage</a>
+            <a href="../basics/application-modules.html">Application Modules</a>
         </li>
         <li>
             <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
         </li>
         <li>
-            <a href="../basics/skeleton-module.html">Skeleton Module [TODO]</a>
-        </li>
-        <li>
-            <a href="../basics/application-config.html">Application Config [TODO]</a>
-        </li>
-        <li>
-            <a href="../basics/module-config.html">Module Config [TODO]</a>
-        </li>
-        <li>
             <a href="../basics/request-responding.html">Request Responding [TODO]</a>
         </li>
         <li>
-            <a href="../basics/command-line-interface.html">Command Line Interface [TODO]</a>
+            <a href="../basics/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/public-assets.html">Public Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/command-line-interface.html">Command Line Interface</a>
         </li>
     </ul>
 
@@ -308,15 +746,6 @@ on which we can call standard logging methods.</p>
         </li>
         <li>
             <a href="../architecture/events.html">Event System</a>
-        </li>
-        <li>
-            <a href="../architecture/templates.html">Templates [TODO]</a>
-        </li>
-        <li>
-            <a href="../architecture/modules.html">Modules [TODO]</a>
-        </li>
-        <li>
-            <a href="../architecture/public-assets.html">Public Assets [TODO]</a>
         </li>
     </ul>
 
@@ -371,7 +800,7 @@ on which we can call standard logging methods.</p>
             <a href="localization.html">Localization [TODO]</a>
         </li>
         <li>
-            <a href="console.html">Console [TODO]</a>
+            <a href="console.html">Console</a>
         </li>
     </ul>
 

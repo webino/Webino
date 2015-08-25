@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Advanced Usage &mdash; Webino 0.1.0alpha dokumentácia</title>
+    <title>Command Line Interface &mdash; Webino 0.1.0alpha dokumentácia</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
-    <link rel="next" title="Webino Skeleton Application" href="skeleton-application.html" />
-    <link rel="prev" title="Basic Usage" href="basic-usage.html" />
+    <link rel="next" title="Application Architecture" href="../architecture/application.html" />
+    <link rel="prev" title="Webino Skeleton Application" href="skeleton-application.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -38,10 +38,10 @@
     <ul>
         <li>
           &larr;
-          <a href="basic-usage.html" title="Previous document">Basic Usage</a>
+          <a href="skeleton-application.html" title="Previous document">Webino Skeleton Application</a>
         </li>
         <li>
-          <a href="skeleton-application.html" title="Next document">Webino Skeleton Application</a>
+          <a href="../architecture/application.html" title="Next document">Application Architecture</a>
           &rarr;
         </li>
     </ul>
@@ -58,50 +58,85 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="advanced-usage">
-<h1>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+  <div class="section" id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#application-index-file" id="id1">Application Index File</a></li>
-<li><a class="reference internal" href="#application-configuration" id="id2">Application Configuration</a></li>
+<li><a class="reference internal" href="#usage" id="id1">Usage</a></li>
+<li><a class="reference internal" href="#help-command" id="id2">Help Command</a></li>
+<li><a class="reference internal" href="#runtime-console" id="id3">Runtime Console</a></li>
+<li><a class="reference internal" href="#script-version" id="id4">Script Version</a></li>
+<li><a class="reference internal" href="#custom-commands" id="id5">Custom Commands</a></li>
 </ul>
 </div>
-<p>The application is basically a configuration and an execution code. The configuration is cached, if enabled so,
-and could be modified until application is fully bootstrapped.</p>
-<p><div class="vspace"></div></p>
-<div class="admonition note">
-<p class="first admonition-title">Poznámka</p>
-<p class="last">See <code class="docutils literal"><span class="pre">examples/advanced-usage/</span></code> directory.</p>
+<p>Besides the rich features for building web applications, Webino™ has also full featured support for console
+applications.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id1">Usage</a><a class="headerlink" href="#usage" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>You execute a command line action running application index file:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php
+</pre></div>
 </div>
-<div class="section" id="application-index-file">
-<h2><a class="toc-backref" href="#id1">Application Index File</a><a class="headerlink" href="#application-index-file" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>The application object is created, bootstrapped and dispatched in the index file.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// index.php</span>
-
-<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
-
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
+<p>That shows a list of all available commands.</p>
+</div>
+<div class="section" id="help-command">
+<h2><a class="toc-backref" href="#id2">Help Command</a><a class="headerlink" href="#help-command" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Every command also includes a help screen which displays and describes the command&#8217;s available arguments and options.
+To view a help screen, simply precede the name of the command with <code class="docutils literal"><span class="pre">help</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php <span class="nb">help</span> &lt;<span class="nb">command</span>&gt;
 </pre></div>
 </div>
 </div>
-<div class="section" id="application-configuration">
-<h2><a class="toc-backref" href="#id2">Application Configuration</a><a class="headerlink" href="#application-configuration" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>Application is configured in the OOP style, so instead of writing an array we are using config features.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// config/application.php</span>
+<div class="section" id="runtime-console">
+<h2><a class="toc-backref" href="#id3">Runtime Console</a><a class="headerlink" href="#runtime-console" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The Webino™ application comes with a built in REPL (Read-Eval-Print Loop) that makes it easy to run PHP code in
+an interactive console. You can start the interactive console using:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php console
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Poznámka</p>
+<p class="last">Runtime developer console is powered by <a class="reference external" href="http://psysh.org/">PsySH</a>.</p>
+</div>
+</div>
+<div class="section" id="script-version">
+<h2><a class="toc-backref" href="#id4">Script Version</a><a class="headerlink" href="#script-version" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>You may also view the current version of your Webino™ installation using the <code class="docutils literal"><span class="pre">version</span></code> command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php version
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-commands">
+<h2><a class="toc-backref" href="#id5">Custom Commands</a><a class="headerlink" href="#custom-commands" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The best practice to define a console command is as a class. For example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Console</span><span class="p">;</span>
 
-<span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature</span> <span class="k">as</span> <span class="nx">AppFeature</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature</span> <span class="k">as</span> <span class="nx">ConfigFeature</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Console\AbstractConsoleCommand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
 
-<span class="k">return</span> <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="k">new</span> <span class="nx">ConfigFeature\Log</span><span class="p">,</span>
-    <span class="k">new</span> <span class="nx">ConfigFeature\FirePhpLog</span><span class="p">,</span>
-    <span class="k">new</span> <span class="nx">ConfigFeature\ConfigCacheEnabled</span><span class="p">,</span>
-    <span class="k">new</span> <span class="nx">AppFeature\FilesystemCache</span><span class="p">,</span>
+<span class="k">class</span> <span class="nc">MyConsoleCommand</span> <span class="k">extends</span> <span class="nx">AbstractConsoleCommand</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">(</span><span class="nx">Console</span> <span class="nv">$console</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$console</span>
+            <span class="o">-&gt;</span><span class="na">setRoute</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">&#39;My command title&#39;</span><span class="p">);</span>
+            <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;My command description.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    <span class="p">(</span><span class="k">new</span> <span class="nx">MyCustomFeature</span><span class="p">)</span>
-        <span class="o">-&gt;</span><span class="na">setAnything</span><span class="p">(),</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getCli</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;My custom command example!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add a custom console command into application configuration.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Console\MyConsoleCommand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">MyConsoleCommand</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -139,25 +174,22 @@ and could be modified until application is fully bootstrapped.</p>
             <a href="basic-usage.html">Basic Usage</a>
         </li>
         <li>
-            <a href="#">Advanced Usage</a>
+            <a href="application-modules.html">Application Modules</a>
         </li>
         <li>
             <a href="skeleton-application.html">Skeleton Application [TODO]</a>
         </li>
         <li>
-            <a href="skeleton-module.html">Skeleton Module [TODO]</a>
-        </li>
-        <li>
-            <a href="application-config.html">Application Config [TODO]</a>
-        </li>
-        <li>
-            <a href="module-config.html">Module Config [TODO]</a>
-        </li>
-        <li>
             <a href="request-responding.html">Request Responding [TODO]</a>
         </li>
         <li>
-            <a href="command-line-interface.html">Command Line Interface [TODO]</a>
+            <a href="templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="public-assets.html">Public Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="#">Command Line Interface</a>
         </li>
     </ul>
 
@@ -174,15 +206,6 @@ and could be modified until application is fully bootstrapped.</p>
         </li>
         <li>
             <a href="../architecture/events.html">Event System</a>
-        </li>
-        <li>
-            <a href="../architecture/templates.html">Templates [TODO]</a>
-        </li>
-        <li>
-            <a href="../architecture/modules.html">Modules [TODO]</a>
-        </li>
-        <li>
-            <a href="../architecture/public-assets.html">Public Assets [TODO]</a>
         </li>
     </ul>
 
@@ -237,7 +260,7 @@ and could be modified until application is fully bootstrapped.</p>
             <a href="../guide/localization.html">Localization [TODO]</a>
         </li>
         <li>
-            <a href="../guide/console.html">Console [TODO]</a>
+            <a href="../guide/console.html">Console</a>
         </li>
     </ul>
 
@@ -282,10 +305,10 @@ and could be modified until application is fully bootstrapped.</p>
     <ul>
         <li>
           &larr;
-          <a href="basic-usage.html" title="Previous document">Basic Usage</a>
+          <a href="skeleton-application.html" title="Previous document">Webino Skeleton Application</a>
         </li>
         <li>
-          <a href="skeleton-application.html" title="Next document">Webino Skeleton Application</a>
+          <a href="../architecture/application.html" title="Next document">Application Architecture</a>
           &rarr;
         </li>
     </ul>

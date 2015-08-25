@@ -1,0 +1,1014 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Console &mdash; Webino 0.1.0alpha dokumentácia</title>
+    
+    <link rel="stylesheet" href="../_static/better.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
+    <link rel="prev" title="Application Routing" href="routing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../_static/common.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
+  </head>
+  <body role="document">
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="routing.html" title="Previous document">Application Routing</a>
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="sub-monospace section" id="application-console">
+<h1>Application Console<a class="headerlink" href="#application-console" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#console-interface" id="id13">Console Interface</a></li>
+<li><a class="reference internal" href="#console-config" id="id14">Console Config</a></li>
+<li><a class="reference internal" href="#console-commands" id="id15">Console Commands</a></li>
+<li><a class="reference internal" href="#commands-schedule" id="id16">Commands Schedule</a></li>
+<li><a class="reference internal" href="#console-cookbook" id="id17">Console Cookbook</a></li>
+</ul>
+</div>
+<p>TODO...</p>
+<ul class="simple">
+<li>Powered by <a class="reference external" href="http://climate.thephpleague.com/">CLImate</a></li>
+</ul>
+<div class="section" id="console-interface">
+<span id="api-console"></span><h2><a class="toc-backref" href="#id13">Console Interface</a><a class="headerlink" href="#console-interface" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#app-bindconsole" id="id18">$app-&gt;bindConsole()</a></li>
+<li><a class="reference internal" href="#event-getcli" id="id19">$event-&gt;getCli()</a></li>
+<li><a class="reference internal" href="#colors" id="id20">Colors</a><ul>
+<li><a class="reference internal" href="#cli-black" id="id21">$cli-&gt;black()</a></li>
+<li><a class="reference internal" href="#cli-red" id="id22">$cli-&gt;red()</a></li>
+<li><a class="reference internal" href="#cli-green" id="id23">$cli-&gt;green()</a></li>
+<li><a class="reference internal" href="#cli-yellow" id="id24">$cli-&gt;yellow()</a></li>
+<li><a class="reference internal" href="#cli-blue" id="id25">$cli-&gt;blue()</a></li>
+<li><a class="reference internal" href="#cli-magenta" id="id26">$cli-&gt;magenta()</a></li>
+<li><a class="reference internal" href="#cli-cyan" id="id27">$cli-&gt;cyan()</a></li>
+<li><a class="reference internal" href="#cli-lightgray" id="id28">$cli-&gt;lightGray()</a></li>
+<li><a class="reference internal" href="#cli-darkgray" id="id29">$cli-&gt;darkGray()</a></li>
+<li><a class="reference internal" href="#cli-lightred" id="id30">$cli-&gt;lightRed()</a></li>
+<li><a class="reference internal" href="#cli-lightgreen" id="id31">$cli-&gt;lightGreen()</a></li>
+<li><a class="reference internal" href="#cli-lightyellow" id="id32">$cli-&gt;lightYellow()</a></li>
+<li><a class="reference internal" href="#cli-lightblue" id="id33">$cli-&gt;lightBlue()</a></li>
+<li><a class="reference internal" href="#cli-lightmagenta" id="id34">$cli-&gt;lightMagenta()</a></li>
+<li><a class="reference internal" href="#cli-lightcyan" id="id35">$cli-&gt;lightCyan()</a></li>
+<li><a class="reference internal" href="#cli-white" id="id36">$cli-&gt;white()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#background-colors" id="id37">Background Colors</a><ul>
+<li><a class="reference internal" href="#cli-backgroundblack" id="id38">$cli-&gt;backgroundBlack()</a></li>
+<li><a class="reference internal" href="#cli-backgroundred" id="id39">$cli-&gt;backgroundRed()</a></li>
+<li><a class="reference internal" href="#cli-backgroundgreen" id="id40">$cli-&gt;backgroundGreen()</a></li>
+<li><a class="reference internal" href="#cli-backgroundyellow" id="id41">$cli-&gt;backgroundYellow()</a></li>
+<li><a class="reference internal" href="#cli-backgroundblue" id="id42">$cli-&gt;backgroundBlue()</a></li>
+<li><a class="reference internal" href="#cli-backgroundmagenta" id="id43">$cli-&gt;backgroundMagenta()</a></li>
+<li><a class="reference internal" href="#cli-backgroundcyan" id="id44">$cli-&gt;backgroundCyan()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightgray" id="id45">$cli-&gt;backgroundLightGray()</a></li>
+<li><a class="reference internal" href="#cli-backgrounddarkgray" id="id46">$cli-&gt;backgroundDarkGray()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightred" id="id47">$cli-&gt;backgroundLightRed()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightgreen" id="id48">$cli-&gt;backgroundLightGreen()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightyellow" id="id49">$cli-&gt;backgroundLightYellow()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightblue" id="id50">$cli-&gt;backgroundLightBlue()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightmagenta" id="id51">$cli-&gt;backgroundLightMagenta()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightcyan" id="id52">$cli-&gt;backgroundLightCyan()</a></li>
+<li><a class="reference internal" href="#cli-backgroundwhite" id="id53">$cli-&gt;backgroundWhite()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#text-style" id="id54">Text Style</a><ul>
+<li><a class="reference internal" href="#cli-bold" id="id55">$cli-&gt;bold()</a></li>
+<li><a class="reference internal" href="#cli-dim" id="id56">$cli-&gt;dim()</a></li>
+<li><a class="reference internal" href="#cli-underline" id="id57">$cli-&gt;underline()</a></li>
+<li><a class="reference internal" href="#cli-invert" id="id58">$cli-&gt;invert()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#style-commands" id="id59">Style Commands</a><ul>
+<li><a class="reference internal" href="#cli-info" id="id60">$cli-&gt;info()</a></li>
+<li><a class="reference internal" href="#cli-comment" id="id61">$cli-&gt;comment()</a></li>
+<li><a class="reference internal" href="#cli-whisper" id="id62">$cli-&gt;whisper()</a></li>
+<li><a class="reference internal" href="#cli-shout" id="id63">$cli-&gt;shout()</a></li>
+<li><a class="reference internal" href="#cli-error" id="id64">$cli-&gt;error()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions" id="id65">Functions</a><ul>
+<li><a class="reference internal" href="#cli-out" id="id66">$cli-&gt;out()</a></li>
+<li><a class="reference internal" href="#cli-inline" id="id67">$cli-&gt;inline()</a></li>
+<li><a class="reference internal" href="#cli-columns" id="id68">$cli-&gt;columns()</a></li>
+<li><a class="reference internal" href="#cli-table" id="id69">$cli-&gt;table()</a></li>
+<li><a class="reference internal" href="#cli-json" id="id70">$cli-&gt;json()</a></li>
+<li><a class="reference internal" href="#cli-br" id="id71">$cli-&gt;br()</a></li>
+<li><a class="reference internal" href="#cli-tab" id="id72">$cli-&gt;tab()</a></li>
+<li><a class="reference internal" href="#cli-draw" id="id73">$cli-&gt;draw()</a></li>
+<li><a class="reference internal" href="#cli-border" id="id74">$cli-&gt;border()</a></li>
+<li><a class="reference internal" href="#cli-dump" id="id75">$cli-&gt;dump()</a></li>
+<li><a class="reference internal" href="#cli-flank" id="id76">$cli-&gt;flank()</a></li>
+<li><a class="reference internal" href="#cli-progress" id="id77">$cli-&gt;progress()</a></li>
+<li><a class="reference internal" href="#cli-padding" id="id78">$cli-&gt;padding()</a></li>
+<li><a class="reference internal" href="#cli-input" id="id79">$cli-&gt;input()</a></li>
+<li><a class="reference internal" href="#cli-confirm" id="id80">$cli-&gt;confirm()</a></li>
+<li><a class="reference internal" href="#cli-password" id="id81">$cli-&gt;password()</a></li>
+<li><a class="reference internal" href="#cli-checkboxes" id="id82">$cli-&gt;checkboxes()</a></li>
+<li><a class="reference internal" href="#cli-radio" id="id83">$cli-&gt;radio()</a></li>
+<li><a class="reference internal" href="#cli-animation" id="id84">$cli-&gt;animation()</a></li>
+<li><a class="reference internal" href="#cli-addart" id="id85">$cli-&gt;addArt()</a></li>
+<li><a class="reference internal" href="#cli-clear" id="id86">$cli-&gt;clear()</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="app-bindconsole">
+<span id="api-console-bind-console"></span><h3><a class="toc-backref" href="#id18">$app-&gt;bindConsole()</a><a class="headerlink" href="#app-bindconsole" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Binding to console commands.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Console\ConsoleDefault</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindConsole</span><span class="p">(</span><span class="nx">ConsoleDefault</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$cli</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getCli</span><span class="p">();</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#config-console"><span>Config Console</span></a> ●
+<a class="reference external" href="http://demo.webino.org/console">Console Example</a></p>
+</div>
+</div>
+<div class="section" id="event-getcli">
+<h3><a class="toc-backref" href="#id19">$event-&gt;getCli()</a><a class="headerlink" href="#event-getcli" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>Obtaining the console service from the console event object.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+
+<span class="nv">$consoleEventHandler</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$cli</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getCli</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Fluent interface:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Method chaining</span>
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">(</span><span class="s1">&#39;Red text!&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">(</span><span class="s1">&#39;Green text!&#39;</span><span class="p">);</span>
+
+<span class="c1">// If you prefer, you can also simply chain</span>
+<span class="c1">// the color method and continue using out.</span>
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Blue? Wow!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="colors">
+<h3><a class="toc-backref" href="#id20">Colors</a><a class="headerlink" href="#colors" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#cli-black" id="id87">$cli-&gt;black()</a></li>
+<li><a class="reference internal" href="#cli-red" id="id88">$cli-&gt;red()</a></li>
+<li><a class="reference internal" href="#cli-green" id="id89">$cli-&gt;green()</a></li>
+<li><a class="reference internal" href="#cli-yellow" id="id90">$cli-&gt;yellow()</a></li>
+<li><a class="reference internal" href="#cli-blue" id="id91">$cli-&gt;blue()</a></li>
+<li><a class="reference internal" href="#cli-magenta" id="id92">$cli-&gt;magenta()</a></li>
+<li><a class="reference internal" href="#cli-cyan" id="id93">$cli-&gt;cyan()</a></li>
+<li><a class="reference internal" href="#cli-lightgray" id="id94">$cli-&gt;lightGray()</a></li>
+<li><a class="reference internal" href="#cli-darkgray" id="id95">$cli-&gt;darkGray()</a></li>
+<li><a class="reference internal" href="#cli-lightred" id="id96">$cli-&gt;lightRed()</a></li>
+<li><a class="reference internal" href="#cli-lightgreen" id="id97">$cli-&gt;lightGreen()</a></li>
+<li><a class="reference internal" href="#cli-lightyellow" id="id98">$cli-&gt;lightYellow()</a></li>
+<li><a class="reference internal" href="#cli-lightblue" id="id99">$cli-&gt;lightBlue()</a></li>
+<li><a class="reference internal" href="#cli-lightmagenta" id="id100">$cli-&gt;lightMagenta()</a></li>
+<li><a class="reference internal" href="#cli-lightcyan" id="id101">$cli-&gt;lightCyan()</a></li>
+<li><a class="reference internal" href="#cli-white" id="id102">$cli-&gt;white()</a></li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-formatting">Console Formatting Example</a></p>
+</div>
+<p><div class="vspace"></div></p>
+<div class="section" id="cli-black">
+<h4><a class="toc-backref" href="#id87">$cli-&gt;black()</a><a class="headerlink" href="#cli-black" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in black color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">black</span><span class="p">(</span><span class="s1">&#39;Black text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-red">
+<h4><a class="toc-backref" href="#id88">$cli-&gt;red()</a><a class="headerlink" href="#cli-red" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in red color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">(</span><span class="s1">&#39;Red text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-green">
+<h4><a class="toc-backref" href="#id89">$cli-&gt;green()</a><a class="headerlink" href="#cli-green" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in green color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">(</span><span class="s1">&#39;Green text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-yellow">
+<h4><a class="toc-backref" href="#id90">$cli-&gt;yellow()</a><a class="headerlink" href="#cli-yellow" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in yellow color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">yellow</span><span class="p">(</span><span class="s1">&#39;Yellow text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-blue">
+<h4><a class="toc-backref" href="#id91">$cli-&gt;blue()</a><a class="headerlink" href="#cli-blue" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in blue color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Blue text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-magenta">
+<h4><a class="toc-backref" href="#id92">$cli-&gt;magenta()</a><a class="headerlink" href="#cli-magenta" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in magenta color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">magenta</span><span class="p">(</span><span class="s1">&#39;Magenta text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-cyan">
+<h4><a class="toc-backref" href="#id93">$cli-&gt;cyan()</a><a class="headerlink" href="#cli-cyan" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in cyan color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">cyan</span><span class="p">(</span><span class="s1">&#39;Cyan text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightgray">
+<h4><a class="toc-backref" href="#id94">$cli-&gt;lightGray()</a><a class="headerlink" href="#cli-lightgray" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light gray color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGray</span><span class="p">(</span><span class="s1">&#39;Light gray text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-darkgray">
+<h4><a class="toc-backref" href="#id95">$cli-&gt;darkGray()</a><a class="headerlink" href="#cli-darkgray" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in dark gray color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">darkGray</span><span class="p">(</span><span class="s1">&#39;Dark gray text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightred">
+<h4><a class="toc-backref" href="#id96">$cli-&gt;lightRed()</a><a class="headerlink" href="#cli-lightred" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light red color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightRed</span><span class="p">(</span><span class="s1">&#39;Light red text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightgreen">
+<h4><a class="toc-backref" href="#id97">$cli-&gt;lightGreen()</a><a class="headerlink" href="#cli-lightgreen" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light green color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGreen</span><span class="p">(</span><span class="s1">&#39;Light green text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightyellow">
+<h4><a class="toc-backref" href="#id98">$cli-&gt;lightYellow()</a><a class="headerlink" href="#cli-lightyellow" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light yellow color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightYellow</span><span class="p">(</span><span class="s1">&#39;Light yellow text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightblue">
+<h4><a class="toc-backref" href="#id99">$cli-&gt;lightBlue()</a><a class="headerlink" href="#cli-lightblue" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light blue color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightBlue</span><span class="p">(</span><span class="s1">&#39;Light blue text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightmagenta">
+<h4><a class="toc-backref" href="#id100">$cli-&gt;lightMagenta()</a><a class="headerlink" href="#cli-lightmagenta" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light magenta color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightMagenta</span><span class="p">(</span><span class="s1">&#39;Light magenta text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-lightcyan">
+<h4><a class="toc-backref" href="#id101">$cli-&gt;lightCyan()</a><a class="headerlink" href="#cli-lightcyan" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in light cyan color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightCyan</span><span class="p">(</span><span class="s1">&#39;Light cyan text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-white">
+<h4><a class="toc-backref" href="#id102">$cli-&gt;white()</a><a class="headerlink" href="#cli-white" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in white color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">white</span><span class="p">(</span><span class="s1">&#39;White text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="background-colors">
+<h3><a class="toc-backref" href="#id37">Background Colors</a><a class="headerlink" href="#background-colors" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="contents local topic" id="id3">
+<ul class="simple">
+<li><a class="reference internal" href="#cli-backgroundblack" id="id103">$cli-&gt;backgroundBlack()</a></li>
+<li><a class="reference internal" href="#cli-backgroundred" id="id104">$cli-&gt;backgroundRed()</a></li>
+<li><a class="reference internal" href="#cli-backgroundgreen" id="id105">$cli-&gt;backgroundGreen()</a></li>
+<li><a class="reference internal" href="#cli-backgroundyellow" id="id106">$cli-&gt;backgroundYellow()</a></li>
+<li><a class="reference internal" href="#cli-backgroundblue" id="id107">$cli-&gt;backgroundBlue()</a></li>
+<li><a class="reference internal" href="#cli-backgroundmagenta" id="id108">$cli-&gt;backgroundMagenta()</a></li>
+<li><a class="reference internal" href="#cli-backgroundcyan" id="id109">$cli-&gt;backgroundCyan()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightgray" id="id110">$cli-&gt;backgroundLightGray()</a></li>
+<li><a class="reference internal" href="#cli-backgrounddarkgray" id="id111">$cli-&gt;backgroundDarkGray()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightred" id="id112">$cli-&gt;backgroundLightRed()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightgreen" id="id113">$cli-&gt;backgroundLightGreen()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightyellow" id="id114">$cli-&gt;backgroundLightYellow()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightblue" id="id115">$cli-&gt;backgroundLightBlue()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightmagenta" id="id116">$cli-&gt;backgroundLightMagenta()</a></li>
+<li><a class="reference internal" href="#cli-backgroundlightcyan" id="id117">$cli-&gt;backgroundLightCyan()</a></li>
+<li><a class="reference internal" href="#cli-backgroundwhite" id="id118">$cli-&gt;backgroundWhite()</a></li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-formatting">Console Formatting Example</a></p>
+</div>
+<p><div class="vspace"></div></p>
+<div class="section" id="cli-backgroundblack">
+<h4><a class="toc-backref" href="#id103">$cli-&gt;backgroundBlack()</a><a class="headerlink" href="#cli-backgroundblack" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on black background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundBlack</span><span class="p">(</span><span class="s1">&#39;Text on black background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundred">
+<h4><a class="toc-backref" href="#id104">$cli-&gt;backgroundRed()</a><a class="headerlink" href="#cli-backgroundred" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on red background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundRed</span><span class="p">(</span><span class="s1">&#39;Text on red background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundgreen">
+<h4><a class="toc-backref" href="#id105">$cli-&gt;backgroundGreen()</a><a class="headerlink" href="#cli-backgroundgreen" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on green background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundGreen</span><span class="p">(</span><span class="s1">&#39;Text on green background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundyellow">
+<h4><a class="toc-backref" href="#id106">$cli-&gt;backgroundYellow()</a><a class="headerlink" href="#cli-backgroundyellow" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on yellow background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundYellow</span><span class="p">(</span><span class="s1">&#39;Text on yellow background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundblue">
+<h4><a class="toc-backref" href="#id107">$cli-&gt;backgroundBlue()</a><a class="headerlink" href="#cli-backgroundblue" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on blue background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundBlue</span><span class="p">(</span><span class="s1">&#39;Text on blue background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundmagenta">
+<h4><a class="toc-backref" href="#id108">$cli-&gt;backgroundMagenta()</a><a class="headerlink" href="#cli-backgroundmagenta" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on magenta background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundMagenta</span><span class="p">(</span><span class="s1">&#39;Text on magenta background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundcyan">
+<h4><a class="toc-backref" href="#id109">$cli-&gt;backgroundCyan()</a><a class="headerlink" href="#cli-backgroundcyan" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on cyan background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundCyan</span><span class="p">(</span><span class="s1">&#39;Text on cyan background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightgray">
+<h4><a class="toc-backref" href="#id110">$cli-&gt;backgroundLightGray()</a><a class="headerlink" href="#cli-backgroundlightgray" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light gray background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightGray</span><span class="p">(</span><span class="s1">&#39;Text on light gray background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgrounddarkgray">
+<h4><a class="toc-backref" href="#id111">$cli-&gt;backgroundDarkGray()</a><a class="headerlink" href="#cli-backgrounddarkgray" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on dark gray background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundDarkGray</span><span class="p">(</span><span class="s1">&#39;Text on dark gray background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightred">
+<h4><a class="toc-backref" href="#id112">$cli-&gt;backgroundLightRed()</a><a class="headerlink" href="#cli-backgroundlightred" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light red background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightRed</span><span class="p">(</span><span class="s1">&#39;Text on light red background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightgreen">
+<h4><a class="toc-backref" href="#id113">$cli-&gt;backgroundLightGreen()</a><a class="headerlink" href="#cli-backgroundlightgreen" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light green background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightGreen</span><span class="p">(</span><span class="s1">&#39;Text on light green background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightyellow">
+<h4><a class="toc-backref" href="#id114">$cli-&gt;backgroundLightYellow()</a><a class="headerlink" href="#cli-backgroundlightyellow" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light yellow background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightYellow</span><span class="p">(</span><span class="s1">&#39;Text on light yellow background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightblue">
+<h4><a class="toc-backref" href="#id115">$cli-&gt;backgroundLightBlue()</a><a class="headerlink" href="#cli-backgroundlightblue" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light blue background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightBlue</span><span class="p">(</span><span class="s1">&#39;Text on light blue background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightmagenta">
+<h4><a class="toc-backref" href="#id116">$cli-&gt;backgroundLightMagenta()</a><a class="headerlink" href="#cli-backgroundlightmagenta" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light magenta background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightMagenta</span><span class="p">(</span><span class="s1">&#39;Text on light magenta background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundlightcyan">
+<h4><a class="toc-backref" href="#id117">$cli-&gt;backgroundLightCyan()</a><a class="headerlink" href="#cli-backgroundlightcyan" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on light cyan background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightCyan</span><span class="p">(</span><span class="s1">&#39;Text on light cyan background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-backgroundwhite">
+<h4><a class="toc-backref" href="#id118">$cli-&gt;backgroundWhite()</a><a class="headerlink" href="#cli-backgroundwhite" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text on white background color.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundWhite</span><span class="p">(</span><span class="s1">&#39;Text on white background!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="text-style">
+<h3><a class="toc-backref" href="#id54">Text Style</a><a class="headerlink" href="#text-style" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="contents local topic" id="id5">
+<ul class="simple">
+<li><a class="reference internal" href="#cli-bold" id="id119">$cli-&gt;bold()</a></li>
+<li><a class="reference internal" href="#cli-dim" id="id120">$cli-&gt;dim()</a></li>
+<li><a class="reference internal" href="#cli-underline" id="id121">$cli-&gt;underline()</a></li>
+<li><a class="reference internal" href="#cli-invert" id="id122">$cli-&gt;invert()</a></li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-formatting">Console Formatting Example</a></p>
+</div>
+<p><div class="vspace"></div></p>
+<div class="section" id="cli-bold">
+<h4><a class="toc-backref" href="#id119">$cli-&gt;bold()</a><a class="headerlink" href="#cli-bold" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console bold text.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">bold</span><span class="p">(</span><span class="s1">&#39;Bold text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-dim">
+<h4><a class="toc-backref" href="#id120">$cli-&gt;dim()</a><a class="headerlink" href="#cli-dim" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console dim text.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">dim</span><span class="p">(</span><span class="s1">&#39;Dim text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-underline">
+<h4><a class="toc-backref" href="#id121">$cli-&gt;underline()</a><a class="headerlink" href="#cli-underline" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console underlined text.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">underline</span><span class="p">(</span><span class="s1">&#39;Underlined text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-invert">
+<h4><a class="toc-backref" href="#id122">$cli-&gt;invert()</a><a class="headerlink" href="#cli-invert" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console inverted text.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">invert</span><span class="p">(</span><span class="s1">&#39;Inverted text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="style-commands">
+<h3><a class="toc-backref" href="#id59">Style Commands</a><a class="headerlink" href="#style-commands" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="contents local topic" id="id7">
+<ul class="simple">
+<li><a class="reference internal" href="#cli-info" id="id123">$cli-&gt;info()</a></li>
+<li><a class="reference internal" href="#cli-comment" id="id124">$cli-&gt;comment()</a></li>
+<li><a class="reference internal" href="#cli-whisper" id="id125">$cli-&gt;whisper()</a></li>
+<li><a class="reference internal" href="#cli-shout" id="id126">$cli-&gt;shout()</a></li>
+<li><a class="reference internal" href="#cli-error" id="id127">$cli-&gt;error()</a></li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-formatting">Console Formatting Example</a></p>
+</div>
+<p><div class="vspace"></div></p>
+<div class="section" id="cli-info">
+<h4><a class="toc-backref" href="#id123">$cli-&gt;info()</a><a class="headerlink" href="#cli-info" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in an info style.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Info text style!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-comment">
+<h4><a class="toc-backref" href="#id124">$cli-&gt;comment()</a><a class="headerlink" href="#cli-comment" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in a comment style.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">comment</span><span class="p">(</span><span class="s1">&#39;Comment text style!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-whisper">
+<h4><a class="toc-backref" href="#id125">$cli-&gt;whisper()</a><a class="headerlink" href="#cli-whisper" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in a whisper style.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">whisper</span><span class="p">(</span><span class="s1">&#39;Whisper text style!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-shout">
+<h4><a class="toc-backref" href="#id126">$cli-&gt;shout()</a><a class="headerlink" href="#cli-shout" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in a shout style.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">shout</span><span class="p">(</span><span class="s1">&#39;Shout text style!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-error">
+<h4><a class="toc-backref" href="#id127">$cli-&gt;error()</a><a class="headerlink" href="#cli-error" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text in an error style.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Error text style!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="functions">
+<h3><a class="toc-backref" href="#id65">Functions</a><a class="headerlink" href="#functions" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="contents local topic" id="id9">
+<ul class="simple">
+<li><a class="reference internal" href="#cli-out" id="id128">$cli-&gt;out()</a></li>
+<li><a class="reference internal" href="#cli-inline" id="id129">$cli-&gt;inline()</a></li>
+<li><a class="reference internal" href="#cli-columns" id="id130">$cli-&gt;columns()</a></li>
+<li><a class="reference internal" href="#cli-table" id="id131">$cli-&gt;table()</a></li>
+<li><a class="reference internal" href="#cli-json" id="id132">$cli-&gt;json()</a></li>
+<li><a class="reference internal" href="#cli-br" id="id133">$cli-&gt;br()</a></li>
+<li><a class="reference internal" href="#cli-tab" id="id134">$cli-&gt;tab()</a></li>
+<li><a class="reference internal" href="#cli-draw" id="id135">$cli-&gt;draw()</a></li>
+<li><a class="reference internal" href="#cli-border" id="id136">$cli-&gt;border()</a></li>
+<li><a class="reference internal" href="#cli-dump" id="id137">$cli-&gt;dump()</a></li>
+<li><a class="reference internal" href="#cli-flank" id="id138">$cli-&gt;flank()</a></li>
+<li><a class="reference internal" href="#cli-progress" id="id139">$cli-&gt;progress()</a></li>
+<li><a class="reference internal" href="#cli-padding" id="id140">$cli-&gt;padding()</a></li>
+<li><a class="reference internal" href="#cli-input" id="id141">$cli-&gt;input()</a></li>
+<li><a class="reference internal" href="#cli-confirm" id="id142">$cli-&gt;confirm()</a></li>
+<li><a class="reference internal" href="#cli-password" id="id143">$cli-&gt;password()</a></li>
+<li><a class="reference internal" href="#cli-checkboxes" id="id144">$cli-&gt;checkboxes()</a></li>
+<li><a class="reference internal" href="#cli-radio" id="id145">$cli-&gt;radio()</a></li>
+<li><a class="reference internal" href="#cli-animation" id="id146">$cli-&gt;animation()</a></li>
+<li><a class="reference internal" href="#cli-addart" id="id147">$cli-&gt;addArt()</a></li>
+<li><a class="reference internal" href="#cli-clear" id="id148">$cli-&gt;clear()</a></li>
+</ul>
+</div>
+<div class="section" id="cli-out">
+<h4><a class="toc-backref" href="#id128">$cli-&gt;out()</a><a class="headerlink" href="#cli-out" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Console text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-inline">
+<h4><a class="toc-backref" href="#id129">$cli-&gt;inline()</a><a class="headerlink" href="#cli-inline" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Printing console text inline, without ending line break.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">(</span><span class="s1">&#39;Inline console text!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-columns">
+<h4><a class="toc-backref" href="#id130">$cli-&gt;columns()</a><a class="headerlink" href="#cli-columns" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>List out an array of data so that it is easily readable.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;12 Monkeys&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;12 Years a Slave&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;A River Runs Through It&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Across the Tracks&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Babel&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Being John Malkovich&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Burn After Reading&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;By the Sea&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Confessions of a Dangerous Mind&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Contact&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Cool World&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Cutting Class&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fight Club&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fury&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Happy Feet Two&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Happy Together&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Hunk&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Inglourious Basterds&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Interview with the Vampire&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Johnny Suede&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Kalifornia&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Killing Them Softly&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Legends of the Fall&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Less Than Zero&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Meet Joe Black&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Megamind&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Moneyball&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Specify the number of columns by passing in a second parameter.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Poznámka</p>
+<p class="last">Console service will try to figure out how the content best fits in your terminal by default.</p>
+</div>
+<p>Specify the columns via an array of arrays.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;Gary&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="s1">&#39;Terry&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">6.6</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">9.1</span><span class="p">,</span> <span class="mf">8.2</span><span class="p">,</span> <span class="mf">7.3</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">],</span>
+<span class="p">];</span>
+
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-table">
+<h4><a class="toc-backref" href="#id131">$cli-&gt;table()</a><a class="headerlink" href="#cli-table" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>Make table out of an array of data so that it is easily readable.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="s1">&#39;Walter White&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Father&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Teacher&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+      <span class="s1">&#39;Skyler White&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Mother&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Accountant&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+      <span class="s1">&#39;Walter White Jr.&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Son&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Student&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you pass in an array of associative arrays or objects, the keys will automatically become the header of the table.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;name&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Walter White&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Father&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;profession&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Teacher&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;name&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Skyler White&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Mother&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;profession&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Accountant&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;name&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Walter White Jr.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;role&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Son&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;profession&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Student&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-json">
+<h4><a class="toc-backref" href="#id132">$cli-&gt;json()</a><a class="headerlink" href="#cli-json" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-br">
+<h4><a class="toc-backref" href="#id133">$cli-&gt;br()</a><a class="headerlink" href="#cli-br" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-tab">
+<h4><a class="toc-backref" href="#id134">$cli-&gt;tab()</a><a class="headerlink" href="#cli-tab" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-draw">
+<h4><a class="toc-backref" href="#id135">$cli-&gt;draw()</a><a class="headerlink" href="#cli-draw" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-border">
+<h4><a class="toc-backref" href="#id136">$cli-&gt;border()</a><a class="headerlink" href="#cli-border" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-dump">
+<h4><a class="toc-backref" href="#id137">$cli-&gt;dump()</a><a class="headerlink" href="#cli-dump" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-flank">
+<h4><a class="toc-backref" href="#id138">$cli-&gt;flank()</a><a class="headerlink" href="#cli-flank" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-progress">
+<h4><a class="toc-backref" href="#id139">$cli-&gt;progress()</a><a class="headerlink" href="#cli-progress" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-padding">
+<h4><a class="toc-backref" href="#id140">$cli-&gt;padding()</a><a class="headerlink" href="#cli-padding" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-input">
+<h4><a class="toc-backref" href="#id141">$cli-&gt;input()</a><a class="headerlink" href="#cli-input" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-confirm">
+<h4><a class="toc-backref" href="#id142">$cli-&gt;confirm()</a><a class="headerlink" href="#cli-confirm" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-password">
+<h4><a class="toc-backref" href="#id143">$cli-&gt;password()</a><a class="headerlink" href="#cli-password" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-checkboxes">
+<h4><a class="toc-backref" href="#id144">$cli-&gt;checkboxes()</a><a class="headerlink" href="#cli-checkboxes" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-radio">
+<h4><a class="toc-backref" href="#id145">$cli-&gt;radio()</a><a class="headerlink" href="#cli-radio" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-animation">
+<h4><a class="toc-backref" href="#id146">$cli-&gt;animation()</a><a class="headerlink" href="#cli-animation" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-addart">
+<h4><a class="toc-backref" href="#id147">$cli-&gt;addArt()</a><a class="headerlink" href="#cli-addart" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+<div class="section" id="cli-clear">
+<h4><a class="toc-backref" href="#id148">$cli-&gt;clear()</a><a class="headerlink" href="#cli-clear" title="Trvalý odkaz na tento nadpis">¶</a></h4>
+<p>TODO...</p>
+</div>
+</div>
+</div>
+<div class="section" id="console-config">
+<h2><a class="toc-backref" href="#id14">Console Config</a><a class="headerlink" href="#console-config" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="contents local topic" id="id10">
+<ul class="simple">
+<li><a class="reference internal" href="#console" id="id149">Console</a></li>
+</ul>
+</div>
+<div class="section" id="console">
+<span id="config-console"></span><h3><a class="toc-backref" href="#id149">Console</a><a class="headerlink" href="#console" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>TODO...</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Route\Console</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Console</span><span class="p">(</span><span class="s1">&#39;TODO...&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setRoute</span><span class="p">(),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference internal" href="#api-console-bind-console"><span>$app-&gt;bindConsole()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/console-command">Console Command Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="console-commands">
+<span id="config-console-commands"></span><h2><a class="toc-backref" href="#id15">Console Commands</a><a class="headerlink" href="#console-commands" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>A filter blocks a message from being written to the log.</p>
+</div>
+<div class="section" id="commands-schedule">
+<h2><a class="toc-backref" href="#id16">Commands Schedule</a><a class="headerlink" href="#commands-schedule" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>TODO...</p>
+</div>
+<div class="section" id="console-cookbook">
+<h2><a class="toc-backref" href="#id17">Console Cookbook</a><a class="headerlink" href="#console-cookbook" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="contents local topic" id="id12">
+<ul class="simple">
+<li><a class="reference internal" href="#configuring-console" id="id150">Configuring Console</a></li>
+<li><a class="reference internal" href="#creating-console-commands" id="id151">Creating Console Commands</a></li>
+</ul>
+</div>
+<div class="section" id="configuring-console">
+<h3><a class="toc-backref" href="#id150">Configuring Console</a><a class="headerlink" href="#configuring-console" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>TODO...</p>
+</div>
+<div class="section" id="creating-console-commands">
+<h3><a class="toc-backref" href="#id151">Creating Console Commands</a><a class="headerlink" href="#creating-console-commands" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<p>TODO...</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/webino.png" alt="Logo"/>
+            </a></p><menu>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>
+            <a href="../index.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../demo-application.html">Demo Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../installation.html">Installation [TODO]</a>
+        </li>
+        <li>
+            <a href="../available-modules.html">Available Modules [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>The Basics</h2>
+    <ul>
+        <li>
+            <a href="../basics/basic-usage.html">Basic Usage</a>
+        </li>
+        <li>
+            <a href="../basics/application-modules.html">Application Modules</a>
+        </li>
+        <li>
+            <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/request-responding.html">Request Responding [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/public-assets.html">Public Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="../basics/command-line-interface.html">Command Line Interface</a>
+        </li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <ul>
+        <li>
+            <a href="../architecture/application.html">Application</a>
+        </li>
+        <li>
+            <a href="../architecture/config.html">Configuration</a>
+        </li>
+        <li>
+            <a href="../architecture/services.html">Services</a>
+        </li>
+        <li>
+            <a href="../architecture/events.html">Event System</a>
+        </li>
+    </ul>
+
+    <h2>User Guide</h2>
+    <ul>
+        <li>
+            <a href="config.html">Config</a>
+        </li>
+        <li>
+            <a href="services.html">Services</a>
+        </li>
+        <li>
+            <a href="events.html">Events</a>
+        </li>
+        <li>
+            <a href="debugging.html">Debugging</a>
+        </li>
+        <li>
+            <a href="logging.html">Logging</a>
+        </li>
+        <li>
+            <a href="caching.html">Caching [TODO]</a>
+        </li>
+        <li>
+            <a href="filesystem.html">Filesystem</a>
+        </li>
+        <li>
+            <a href="routing.html">Routing</a>
+        </li>
+        <li>
+            <a href="requests.html">Requests [TODO]</a>
+        </li>
+        <li>
+            <a href="responses.html">Responses [TODO]</a>
+        </li>
+        <li>
+            <a href="sessions.html">Sessions [TODO]</a>
+        </li>
+        <li>
+            <a href="mail.html">Mail [TODO]</a>
+        </li>
+        <li>
+            <a href="data.html">Data [TODO]</a>
+        </li>
+        <li>
+            <a href="templates.html">Templates [TODO]</a>
+        </li>
+        <li>
+            <a href="assets.html">Assets [TODO]</a>
+        </li>
+        <li>
+            <a href="localization.html">Localization [TODO]</a>
+        </li>
+        <li>
+            <a href="#">Console</a>
+        </li>
+    </ul>
+
+    <h2>Delivery</h2>
+    <ul>
+        <li>
+            <a href="../delivery/application-build.html">Application Build [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-integration.html">Continuous Integration [TODO]</a>
+        </li>
+        <li>
+            <a href="../delivery/continuous-delivery.html">Continuous Delivery [TODO]</a>
+        </li>
+    </ul>
+
+    <h2>Development</h2>
+    <ul>
+        <li>
+            <a href="../development/api-docs.html">API Docs [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/roadmap.html">Roadmap [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/release-notes.html">Release Notes [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/upgrade-guide.html">Upgrade Guide [TODO]</a>
+        </li>
+        <li>
+            <a href="../development/contribution-guide.html">Contribution guide [TODO]</a>
+        </li>
+    </ul>
+</menu>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="routing.html" title="Previous document">Application Routing</a>
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2015, Webino, s. r. o. All rights reserved.
+
+  </footer>
+
+  
+  </body>
+</html>

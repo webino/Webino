@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Webino Skeleton Module &mdash; Webino 0.1.0alpha documentation</title>
+    <title>Command Line Interface &mdash; Webino 0.1.0alpha documentation</title>
     
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -24,6 +24,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="next" title="Application Architecture" href="../architecture/application.html" />
+    <link rel="prev" title="Webino Skeleton Application" href="skeleton-application.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
@@ -33,6 +35,14 @@
   <div class="related top">
   <nav id="rellinks">
     <ul>
+        <li>
+          &larr;
+          <a href="skeleton-application.html" title="Previous document">Webino Skeleton Application</a>
+        </li>
+        <li>
+          <a href="../architecture/application.html" title="Next document">Application Architecture</a>
+          &rarr;
+        </li>
     </ul>
   </nav>
   <nav id="breadcrumbs">
@@ -47,46 +57,88 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="webino-skeleton-module">
-<h1>Webino Skeleton Module<a class="headerlink" href="#webino-skeleton-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#directory-structure" id="id1">Directory Structure</a></li>
+<li><a class="reference internal" href="#usage" id="id1">Usage</a></li>
+<li><a class="reference internal" href="#help-command" id="id2">Help Command</a></li>
+<li><a class="reference internal" href="#runtime-console" id="id3">Runtime Console</a></li>
+<li><a class="reference internal" href="#script-version" id="id4">Script Version</a></li>
+<li><a class="reference internal" href="#custom-commands" id="id5">Custom Commands</a></li>
 </ul>
 </div>
-<p>For new modules it&#8217;s best to use the Webino™ Skeleton Module.</p>
-<p><div class="vspace"></div></p>
+<p>Besides the rich features for building web applications, Webino™ has also full featured support for console
+applications.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id1">Usage</a><a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>You execute a command line action running application index file:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php
+</pre></div>
+</div>
+<p>That shows a list of all available commands.</p>
+</div>
+<div class="section" id="help-command">
+<h2><a class="toc-backref" href="#id2">Help Command</a><a class="headerlink" href="#help-command" title="Permalink to this headline">¶</a></h2>
+<p>Every command also includes a help screen which displays and describes the command&#8217;s available arguments and options.
+To view a help screen, simply precede the name of the command with <code class="docutils literal"><span class="pre">help</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php <span class="nb">help</span> &lt;<span class="nb">command</span>&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="runtime-console">
+<h2><a class="toc-backref" href="#id3">Runtime Console</a><a class="headerlink" href="#runtime-console" title="Permalink to this headline">¶</a></h2>
+<p>The Webino™ application comes with a built in REPL (Read-Eval-Print Loop) that makes it easy to run PHP code in
+an interactive console. You can start the interactive console using:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php console
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">See <code class="docutils literal"><span class="pre">examples/skeleton-module/</span></code> directory.</p>
+<p class="last">Runtime developer console is powered by <a class="reference external" href="http://psysh.org/">PsySH</a>.</p>
 </div>
-<div class="section" id="directory-structure">
-<h2><a class="toc-backref" href="#id1">Directory Structure</a><a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">&lt;module-name&gt;/</span></code> <em>The module root directory.</em><ul>
-<li><code class="docutils literal"><span class="pre">Module.php</span></code> <em>Module core class file.</em></li>
-<li><code class="docutils literal"><span class="pre">config/</span></code> <em>Configuration files directory.</em></li>
-<li><code class="docutils literal"><span class="pre">data/</span></code> <em>Data files directory, archives.</em></li>
-<li><code class="docutils literal"><span class="pre">doc/</span></code> <em>Documentation files directory.</em><ul>
-<li><code class="docutils literal"><span class="pre">media/</span></code> <em>Media files directory.</em></li>
-</ul>
-</li>
-<li><code class="docutils literal"><span class="pre">language/</span></code> <em>Language files directory.</em></li>
-<li><code class="docutils literal"><span class="pre">public/</span></code> <em>Public files directory, web server root.</em><ul>
-<li><code class="docutils literal"><span class="pre">assets/</span></code> <em>Public assets directory.</em></li>
-</ul>
-</li>
-<li><code class="docutils literal"><span class="pre">src/</span></code> <em>Source files directory.</em></li>
-<li><code class="docutils literal"><span class="pre">tests/</span></code> <em>Tests files directory.</em><ul>
-<li><code class="docutils literal"><span class="pre">resources/</span></code> <em>Tests resources directory.</em></li>
-<li><code class="docutils literal"><span class="pre">selenium/</span></code> <em>Selenium tests directory.</em></li>
-<li><code class="docutils literal"><span class="pre">tester/</span></code> <em>Nette Tester tests directory.</em></li>
-</ul>
-</li>
-<li><code class="docutils literal"><span class="pre">view/</span></code> <em>Template files directory.</em></li>
-</ul>
-</li>
-</ul>
+</div>
+<div class="section" id="script-version">
+<h2><a class="toc-backref" href="#id4">Script Version</a><a class="headerlink" href="#script-version" title="Permalink to this headline">¶</a></h2>
+<p>You may also view the current version of your Webino™ installation using the <code class="docutils literal"><span class="pre">version</span></code> command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>php index.php version
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-commands">
+<h2><a class="toc-backref" href="#id5">Custom Commands</a><a class="headerlink" href="#custom-commands" title="Permalink to this headline">¶</a></h2>
+<p>The best practice to define a console command is as a class. For example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Console</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">WebinoAppLib\Console\AbstractConsoleCommand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyConsoleCommand</span> <span class="k">extends</span> <span class="nx">AbstractConsoleCommand</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">(</span><span class="nx">Console</span> <span class="nv">$console</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$console</span>
+            <span class="o">-&gt;</span><span class="na">setRoute</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">&#39;My command title&#39;</span><span class="p">);</span>
+            <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;My command description.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getCli</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;My custom command example!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add a custom console command into application configuration.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Console\MyConsoleCommand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">MyConsoleCommand</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -136,7 +188,7 @@
             <a href="public-assets.html">Public Assets [TODO]</a>
         </li>
         <li>
-            <a href="command-line-interface.html">Command Line Interface</a>
+            <a href="#">Command Line Interface</a>
         </li>
     </ul>
 
@@ -250,6 +302,14 @@
   <div class="related bottom">
   <nav id="rellinks">
     <ul>
+        <li>
+          &larr;
+          <a href="skeleton-application.html" title="Previous document">Webino Skeleton Application</a>
+        </li>
+        <li>
+          <a href="../architecture/application.html" title="Next document">Application Architecture</a>
+          &rarr;
+        </li>
     </ul>
   </nav>
   <nav id="breadcrumbs">

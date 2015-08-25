@@ -16,11 +16,37 @@ div.document {
     max-width: 74rem;
     margin: 0 auto;
 }
+div.related {
+    padding: 4px 0;
+    color: #666;
+}
 div.document {
     padding-bottom: 60px;
 }
 a {
+    position: relative;
+    display: inline-block;
+    padding: 2px 4px;
+    margin: -2px -4px;
     color: #159 !important;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-transition: color .25s ease-out, background-color .25s ease-out;
+    -moz-transition: color .25s ease-out, background-color .25s ease-out;
+    -o-transition: color .25s ease-out, background-color .25s ease-out;
+    transition: color .25s ease-out, background-color .25s ease-out;
+}
+a:visited {
+    color: #2f99d9 !important;
+}
+a:hover {
+    text-decoration: none;
+    color: #fff !important;
+    background: #2f99d9;
+}
+a.headerlink {
+    margin-left: 8px !important;
 }
 h1:first-child,
 h2:first-child,
@@ -260,7 +286,7 @@ pre {
     border: none;
 }
 .contents.local.topic ul {
-    margin: 20px 0 50px;
+    margin: 20px 0 30px;
     padding: 0 0 0 20px;
 }
 .contents.local.topic ul ul {
@@ -277,14 +303,20 @@ pre {
 }
 
 /* Admonition */
+.admonition.seealso,
 .admonition.note {
     padding: 14px 14px 14px 60px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 3px;
-    background: #f7f4e8 url("note.gif") no-repeat 1.5% 10px;
+    color: #666;
+    background: #f0f0f0 url("tip.png") no-repeat 10px 6px;
 }
+.admonition.seealso .admonition-title,
 .admonition.note .admonition-title {
     display: none;
+}
+.admonition a {
+    font-style: italic !important;
 }
 /* /Admonition */
 

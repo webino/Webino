@@ -30,6 +30,7 @@ Accessing event manager service.
     /** @var \WebinoEventLib\EventManager $events */
     $events = $app->getEvents();
 
+
 .. _api-events-app-bind:
 
 $app->bind()
@@ -38,6 +39,8 @@ $app->bind()
 Binding a listener to an event.
 
 .. code-block:: php
+
+    use WebinoAppLib\Event\AppEvent;
 
     // creating a closure listener
     $handler = function (AppEvent $event) {
@@ -251,6 +254,18 @@ Setting a response text, it will appended to the already existing one.
     $event->setResponseContent('Example response content.');
 
 
+Setting a response content as array, it will be joined to string.
+
+.. code-block:: php
+
+    /** @var \WebinoAppLib\Event\DispatchEvent $event */
+    $event->setResponseContent([
+        'Example',
+        ' response',
+        ' content.',
+    ]);
+
+
 $event->resetResponseContent()
 ------------------------------
 
@@ -260,6 +275,18 @@ Setting a response text, clearing the already existing one.
 
     /** @var \WebinoAppLib\Event\DispatchEvent $event */
     $event->resetResponseContent('Example response content.');
+
+
+Setting a response content as array, it will be joined to string.
+
+.. code-block:: php
+
+    /** @var \WebinoAppLib\Event\DispatchEvent $event */
+    $event->resetResponseContent([
+        'Example',
+        ' response',
+        ' content.',
+    ]);
 
 
 $event->setResponseStream()

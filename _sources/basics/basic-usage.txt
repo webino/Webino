@@ -11,8 +11,8 @@ The application is basically a configuration and an execution code.
 
 |vspace|
 
-.. note::
-    See ``examples/basic-usage/`` directory.
+.. seealso::
+    `Preview Live Examples <http://demo.webino.org>`_
 
 
 Index File
