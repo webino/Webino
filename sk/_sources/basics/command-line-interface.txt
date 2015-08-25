@@ -23,6 +23,9 @@ You execute a command line action running application index file:
 
 That shows a list of all available commands.
 
+.. seealso::
+   `Console Example <http://demo.webino.org/console>`_
+
 
 Help Command
 ============
@@ -99,3 +102,7 @@ Add a custom console command into application configuration.
     new Config([
         new MyConsoleCommand,
     ]);
+
+
+.. seealso::
+   `Console Command Example <http://demo.webino.org/console-command>`_
