@@ -12,17 +12,12 @@ use WebinoConfigLib\Feature\Route\Console;
 class ConsoleDefault extends AbstractConsoleCommand
 {
     /**
-     * Console system banner
-     */
-    const BANNER = '<background_green> Webino™ </background_green> version <yellow>%s</yellow>';
-
-    /**
      * @inheritDoc
      */
     protected function init()
     {
         parent::init();
-        $this->listenConsole(ConsoleEvent::MATCH, 'showSystemBanner');
+        $this->listenConsole(ConsoleEvent::ROUTE_MATCH, 'showSystemBanner');
     }
 
     /**
@@ -36,12 +31,9 @@ class ConsoleDefault extends AbstractConsoleCommand
             ->setDefaults([null => null]);
     }
 
-    /**
-     * @param ConsoleEvent $event
-     */
     public function showSystemBanner(ConsoleEvent $event)
     {
-        $event->getCli()->br()->out(sprintf($this::BANNER, Webino::VERSION))->br();
+        $event->getCli()->br()->out(sprintf('<background_green> Webino™ </background_green> version <yellow>%s</yellow>', Webino::VERSION))->br();
     }
 
     /**
@@ -59,7 +51,7 @@ class ConsoleDefault extends AbstractConsoleCommand
                 continue;
             }
 
-            $routeLen = strlen($route->options->route);
+            $routeLen = strlen($this->resolveRouteCommand($route->options->route));
             $routeLen > $maxLen and $maxLen = $routeLen;
 
             $newRoutes[$route->options->route] = $route;
@@ -69,7 +61,7 @@ class ConsoleDefault extends AbstractConsoleCommand
 
         foreach ($newRoutes as $route) {
 
-            $command = $route->options->route;
+            $command = $this->resolveRouteCommand($route->options->route);
             $title = isset($route->options->defaults->title)
                 ? $route->options->defaults->title
                 : null;
@@ -79,5 +71,18 @@ class ConsoleDefault extends AbstractConsoleCommand
         }
 
         $event->getCli()->br();
+    }
+
+    /**
+     * Return console route command name
+     *
+     * @param string $route
+     * @return string
+     */
+    private function resolveRouteCommand($route)
+    {
+        $matches = [];
+        preg_match('~^[a-zA-Z:_-]+~', $route, $matches);
+        return current($matches);
     }
 }

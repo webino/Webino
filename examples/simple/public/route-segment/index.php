@@ -45,8 +45,8 @@ class MyListener extends AbstractListener
              * Obtaining route
              * parameter value.
              */
-            $requiredParam = $event->getRouteParam('requiredParam');
-            $optionalParam = $event->getRouteParam('optionalParam');
+            $requiredParam = $event->getParam('requiredParam');
+            $optionalParam = $event->getParam('optionalParam');
 
             $event->setResponseContent([
                 new TextHtml('My Route Example!'),

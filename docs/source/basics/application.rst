@@ -6,6 +6,7 @@ Application Architecture
     :depth: 1
     :local:
 
+
 The Webino™ application architecture is based around the Zend Frameowrk 2 but simplified and enhanced.
 It also brings some other useful open-source packages to make a web application devstack.
 

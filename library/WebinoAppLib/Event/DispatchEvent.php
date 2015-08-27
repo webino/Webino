@@ -29,7 +29,7 @@ class DispatchEvent extends AppEvent implements
      */
     public function getRequest()
     {
-        return $this->getParam($this::REQUEST);
+        return $this->getEventParam($this::REQUEST);
     }
 
     /**
@@ -37,7 +37,7 @@ class DispatchEvent extends AppEvent implements
      */
     public function getResponse()
     {
-        $response = $this->getParam($this::RESPONSE);
+        $response = $this->getEventParam($this::RESPONSE);
         if (empty($response)) {
             /** @var ResponseFactory $factory */
             $factory  = $this->getApp()->get(ResponseFactory::class);
@@ -53,7 +53,7 @@ class DispatchEvent extends AppEvent implements
      */
     public function setResponse(ResponseInterface $response)
     {
-        $this->setParam($this::RESPONSE, $response);
+        $this->setEventParam($this::RESPONSE, $response);
         return $this;
     }
 

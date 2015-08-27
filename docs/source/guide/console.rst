@@ -1,3 +1,5 @@
+.. _guide-console:
+
 .. rst-class:: sub-monospace
 
 ===================
@@ -9,9 +11,191 @@ Application Console
     :local:
 
 
-TODO...
+This section provides an introduction into console service. Console tools are ideal for use in cron jobs,
+or command line based utilities that don’t need to be accessible from a web browser.
 
 - Powered by `CLImate <http://climate.thephpleague.com/>`_
+
+
+Console Commands
+^^^^^^^^^^^^^^^^
+
+Console command is a class defining a route and an event handler.
+
+.. code-block:: php
+
+    use WebinoAppLib\Console\AbstractConsoleCommand;
+
+    class MyConsoleCommand extends AbstractConsoleCommand
+    {
+        public function configure(Console $console)
+        {
+            $console
+                ->setRoute('my-command')
+                ->setTitle('My command title')
+                ->setDescription('My command description.');
+        }
+
+        public function handle(ConsoleEvent $event)
+        {
+            // obtaining console service
+            $cli = $event->getCli();
+
+            // obtaining command parameters
+            $event->getParam('myCommandArgument');
+
+            // doing something...
+            $cli->out('My console command example!');
+        }
+    }
+
+
+Adding custom console command into application configuration.
+
+.. code-block:: php
+
+    use WebinoAppLib\Feature\Config;
+
+    new Config([
+        new MyConsoleCommand,
+    ]);
+
+
+.. seealso::
+   `Console Command Example <http://demo.webino.org/console-command>`_ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_
+
+
+Console Bind
+------------
+
+It is also possible to configure console command routes particularly.
+
+.. code-block:: php
+
+    use WebinoAppLib\Feature\Config;
+    use WebinoAppLib\Feature\Route\Console;
+
+    new Config([
+        (new Console('my-command'))
+            ->setRoute('my-command')
+            ->setTitle('My command title')
+            ->setDescription('My command description.'),
+    ]);
+
+
+You can attach code to any console command execution.
+
+.. code-block:: php
+
+    use WebinoAppLib\Event\ConsoleEvent;
+
+    $app->bindConsole('my-command', function (ConsoleEvent $event) {
+        // obtaining console service
+        $cli = $event->getCli();
+
+        // obtaining command parameters
+        $event->getParam('myCommandArgument');
+
+        // doing something...
+    });
+
+
+Performing action on a default console command execution.
+
+.. code-block:: php
+
+    use WebinoAppLib\Console\ConsoleDefault;
+    use WebinoAppLib\Event\ConsoleEvent;
+
+    $app->bindConsole(ConsoleDefault::class, function (ConsoleEvent $event) {
+        // do something...
+    });
+
+
+.. seealso::
+   :ref:`api-console-bind-console` ●
+   `Console Bind Example <http://demo.webino.org/console-bind>`_
+
+
+Command Parameters
+------------------
+
+Obtaining command parameters.
+
+.. code-block:: php
+
+    /** @var \WebinoAppLib\Event\ConsoleEvent $event */
+    $value = $event->getParam('myCommandArgument');
+
+
+---------
+Arguments
+---------
+
+Arguments are expected to appear on the command line exactly the way they are spelled in the route.
+
+Providing required argument alternatives.
+
+.. code-block:: php
+
+    'my-command (requiredArgumentA|requiredArgumentB)'
+
+
+Required and optional argument values.
+
+.. code-block:: php
+
+    'my-command <requiredArgumentValue> [<optionalArgumentValue>]'
+
+
+Providing optional argument alternatives.
+
+.. code-block:: php
+
+    'my-command [optionalArgumentA|optionalArgumentB]'
+
+
+-------
+Options
+-------
+
+You can define any number of optional and required options. The order of options is ignored. They can be defined
+in any order and the user can provide them in any other order.
+
+
+Providing required option alternatives.
+
+.. code-block:: php
+
+    'my-command (--requiredOptionA|--requiredOptionB)'
+
+
+Optional option and its short alternative.
+
+.. code-block:: php
+
+    'my-command [--optionalOption|-o]'
+
+
+Options can digest text-based values.
+
+.. code-block:: php
+
+    'my-command --requiredOptionValue= [--optionalOptionValue=]'
+
+
+|vspace|
+
+.. seealso::
+   `Console Command Example <http://demo.webino.org/console-command>`_ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_
+
+
+Console Config
+^^^^^^^^^^^^^^
+
+.. include:: /guide/config/console.rst.inc
 
 
 .. _api-console:
@@ -24,852 +208,99 @@ Console Interface
     :local:
 
 
-.. _api-console-bind-console:
-
-$app->bindConsole()
--------------------
-
-Binding to console commands.
-
-.. code-block:: php
-
-    use WebinoAppLib\Event\ConsoleEvent;
-    use WebinoAppLib\Console\ConsoleDefault;
-
-    $app->bindConsole(ConsoleDefault::class, function (ConsoleEvent $event) {
-        $cli = $event->getCli();
-        // do something...
-    });
-
-.. seealso::
-   :ref:`Config Console <config-console>` ●
-   `Console Example <http://demo.webino.org/console>`_
-
-
-$event->getCli()
-----------------
-
-Obtaining the console service from the console event object.
-
-.. code-block:: php
-
-    use WebinoAppLib\Event\ConsoleEvent;
-
-    $consoleEventHandler = function (ConsoleEvent $event) {
-        $cli = $event->getCli();
-    };
-
-
-Fluent interface:
-
-.. code-block:: php
-
-    // Method chaining
-    $cli->red('Red text!')->green('Green text!');
-
-    // If you prefer, you can also simply chain
-    // the color method and continue using out.
-    $cli->blue()->out('Blue? Wow!');
-
-
-Colors
-------
-
-.. contents::
-    :depth: 1
-    :local:
-
-
-.. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
-
-|vspace|
-
--------------
-$cli->black()
--------------
-
-Printing console text in black color.
-
-.. code-block:: php
-
-    $cli->black('Black text!');
-
-
------------
-$cli->red()
------------
-
-Printing console text in red color.
-
-.. code-block:: php
-
-    $cli->red('Red text!');
-
-
--------------
-$cli->green()
--------------
-
-Printing console text in green color.
-
-.. code-block:: php
-
-    $cli->green('Green text!');
-
-
---------------
-$cli->yellow()
---------------
-
-Printing console text in yellow color.
-
-.. code-block:: php
-
-    $cli->yellow('Yellow text!');
-
-
-------------
-$cli->blue()
-------------
-
-Printing console text in blue color.
-
-.. code-block:: php
-
-    $cli->blue('Blue text!');
-
-
----------------
-$cli->magenta()
----------------
-
-Printing console text in magenta color.
-
-.. code-block:: php
-
-    $cli->magenta('Magenta text!');
-
-
-------------
-$cli->cyan()
-------------
-
-Printing console text in cyan color.
-
-.. code-block:: php
-
-    $cli->cyan('Cyan text!');
-
-
------------------
-$cli->lightGray()
------------------
-
-Printing console text in light gray color.
-
-.. code-block:: php
-
-    $cli->lightGray('Light gray text!');
-
-
-----------------
-$cli->darkGray()
-----------------
-
-Printing console text in dark gray color.
-
-.. code-block:: php
-
-    $cli->darkGray('Dark gray text!');
-
-
-----------------
-$cli->lightRed()
-----------------
-
-Printing console text in light red color.
-
-.. code-block:: php
-
-    $cli->lightRed('Light red text!');
-
-
-------------------
-$cli->lightGreen()
-------------------
-
-Printing console text in light green color.
-
-.. code-block:: php
-
-    $cli->lightGreen('Light green text!');
-
-
--------------------
-$cli->lightYellow()
--------------------
-
-Printing console text in light yellow color.
-
-.. code-block:: php
-
-    $cli->lightYellow('Light yellow text!');
-
-
------------------
-$cli->lightBlue()
------------------
-
-Printing console text in light blue color.
-
-.. code-block:: php
-
-    $cli->lightBlue('Light blue text!');
-
-
---------------------
-$cli->lightMagenta()
---------------------
-
-Printing console text in light magenta color.
-
-.. code-block:: php
-
-    $cli->lightMagenta('Light magenta text!');
-
-
------------------
-$cli->lightCyan()
------------------
-
-Printing console text in light cyan color.
-
-.. code-block:: php
-
-    $cli->lightCyan('Light cyan text!');
-
-
--------------
-$cli->white()
--------------
-
-Printing console text in white color.
-
-.. code-block:: php
-
-    $cli->white('White text!');
-
-
-Background Colors
------------------
-
-.. contents::
-    :depth: 1
-    :local:
-
-
-.. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
-
-|vspace|
-
------------------------
-$cli->backgroundBlack()
------------------------
-
-Printing console text on black background color.
-
-.. code-block:: php
-
-    $cli->backgroundBlack('Text on black background!');
-
-
----------------------
-$cli->backgroundRed()
----------------------
-
-Printing console text on red background color.
-
-.. code-block:: php
-
-    $cli->backgroundRed('Text on red background!');
-
-
------------------------
-$cli->backgroundGreen()
------------------------
-
-Printing console text on green background color.
-
-.. code-block:: php
-
-    $cli->backgroundGreen('Text on green background!');
-
-
-------------------------
-$cli->backgroundYellow()
-------------------------
-
-Printing console text on yellow background color.
-
-.. code-block:: php
-
-    $cli->backgroundYellow('Text on yellow background!');
-
-
-----------------------
-$cli->backgroundBlue()
-----------------------
-
-Printing console text on blue background color.
-
-.. code-block:: php
-
-    $cli->backgroundBlue('Text on blue background!');
-
-
--------------------------
-$cli->backgroundMagenta()
--------------------------
-
-Printing console text on magenta background color.
-
-.. code-block:: php
-
-    $cli->backgroundMagenta('Text on magenta background!');
-
-
-----------------------
-$cli->backgroundCyan()
-----------------------
-
-Printing console text on cyan background color.
-
-.. code-block:: php
-
-    $cli->backgroundCyan('Text on cyan background!');
-
-
----------------------------
-$cli->backgroundLightGray()
----------------------------
-
-Printing console text on light gray background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightGray('Text on light gray background!');
-
-
---------------------------
-$cli->backgroundDarkGray()
---------------------------
-
-Printing console text on dark gray background color.
-
-.. code-block:: php
-
-    $cli->backgroundDarkGray('Text on dark gray background!');
-
-
---------------------------
-$cli->backgroundLightRed()
---------------------------
-
-Printing console text on light red background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightRed('Text on light red background!');
-
-
-----------------------------
-$cli->backgroundLightGreen()
-----------------------------
-
-Printing console text on light green background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightGreen('Text on light green background!');
-
-
------------------------------
-$cli->backgroundLightYellow()
------------------------------
-
-Printing console text on light yellow background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightYellow('Text on light yellow background!');
-
-
----------------------------
-$cli->backgroundLightBlue()
----------------------------
-
-Printing console text on light blue background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightBlue('Text on light blue background!');
-
-
-------------------------------
-$cli->backgroundLightMagenta()
-------------------------------
-
-Printing console text on light magenta background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightMagenta('Text on light magenta background!');
-
-
----------------------------
-$cli->backgroundLightCyan()
----------------------------
-
-Printing console text on light cyan background color.
-
-.. code-block:: php
-
-    $cli->backgroundLightCyan('Text on light cyan background!');
-
-
------------------------
-$cli->backgroundWhite()
------------------------
-
-Printing console text on white background color.
-
-.. code-block:: php
-
-    $cli->backgroundWhite('Text on white background!');
-
-
-Text Style
-----------
-
-.. contents::
-    :depth: 1
-    :local:
-
-
-.. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
-
-|vspace|
-
-------------
-$cli->bold()
-------------
-
-Printing console bold text.
-
-.. code-block:: php
-
-    $cli->bold('Bold text!');
-
-
------------
-$cli->dim()
------------
-
-Printing console dim text.
-
-.. code-block:: php
-
-    $cli->dim('Dim text!');
-
-
------------------
-$cli->underline()
------------------
-
-Printing console underlined text.
-
-.. code-block:: php
-
-    $cli->underline('Underlined text!');
-
-
---------------
-$cli->invert()
---------------
-
-Printing console inverted text.
-
-.. code-block:: php
-
-    $cli->invert('Inverted text!');
-
-
-Style Commands
---------------
-
-.. contents::
-    :depth: 1
-    :local:
-
-
-.. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
-
-|vspace|
-
-------------
-$cli->info()
-------------
-
-Printing console text in an info style.
-
-.. code-block:: php
-
-    $cli->info('Info text style!');
-
-
----------------
-$cli->comment()
----------------
-
-Printing console text in a comment style.
-
-.. code-block:: php
-
-    $cli->comment('Comment text style!');
-
-
----------------
-$cli->whisper()
----------------
-
-Printing console text in a whisper style.
-
-.. code-block:: php
-
-    $cli->whisper('Whisper text style!');
-
-
--------------
-$cli->shout()
--------------
-
-Printing console text in a shout style.
-
-.. code-block:: php
-
-    $cli->shout('Shout text style!');
-
-
--------------
-$cli->error()
--------------
-
-Printing console text in an error style.
-
-.. code-block:: php
-
-    $cli->error('Error text style!');
-
-
-Functions
----------
-
-.. contents::
-    :depth: 1
-    :local:
-
-
------------
-$cli->out()
------------
-
-Printing console text.
-
-.. code-block:: php
-
-    $cli->out('Console text!');
-
-
---------------
-$cli->inline()
---------------
-
-Printing console text inline, without ending line break.
-
-.. code-block:: php
-
-    $cli->inline('Inline console text!');
-
-
----------------
-$cli->columns()
----------------
-
-List out an array of data so that it is easily readable.
-
-.. code-block:: php
-
-    $data = [
-        '12 Monkeys',
-        '12 Years a Slave',
-        'A River Runs Through It',
-        'Across the Tracks',
-        'Babel',
-        'Being John Malkovich',
-        'Burn After Reading',
-        'By the Sea',
-        'Confessions of a Dangerous Mind',
-        'Contact',
-        'Cool World',
-        'Cutting Class',
-        'Fight Club',
-        'Fury',
-        'Happy Feet Two',
-        'Happy Together',
-        'Hunk',
-        'Inglourious Basterds',
-        'Interview with the Vampire',
-        'Johnny Suede',
-        'Kalifornia',
-        'Killing Them Softly',
-        'Legends of the Fall',
-        'Less Than Zero',
-        'Meet Joe Black',
-        'Megamind',
-        'Moneyball',
-    ];
-
-    $cli->columns($data);
-
-
-Specify the number of columns by passing in a second parameter.
-
-.. code-block:: php
-
-    $cli->columns($data, 4);
-
-
-.. note::
-    Console service will try to figure out how the content best fits in your terminal by default.
-
-
-Specify the columns via an array of arrays.
-
-.. code-block:: php
-
-    $data = [
-        ['Gary', 'Mary', 'Larry', 'Terry'],
-        [1.2, 4.3, 0.1, 3.0],
-        [6.6, 4.4, 5.5, 3.3],
-        [9.1, 8.2, 7.3, 6.4],
-    ];
-
-    $cli->columns($data);
-
-
--------------
-$cli->table()
--------------
-
-Make table out of an array of data so that it is easily readable.
-
-.. code-block:: php
-
-    $data = [
-        [
-          'Walter White',
-          'Father',
-          'Teacher',
-        ],
-        [
-          'Skyler White',
-          'Mother',
-          'Accountant',
-        ],
-        [
-          'Walter White Jr.',
-          'Son',
-          'Student',
-        ],
-    ];
-
-    $cli->table($data);
-
-
-If you pass in an array of associative arrays or objects, the keys will automatically become the header of the table.
-
-.. code-block:: php
-
-    $data = [
-        [
-            'name'       => 'Walter White',
-            'role'       => 'Father',
-            'profession' => 'Teacher',
-        ],
-        [
-            'name'       => 'Skyler White',
-            'role'       => 'Mother',
-            'profession' => 'Accountant',
-        ],
-        [
-            'name'       => 'Walter White Jr.',
-            'role'       => 'Son',
-            'profession' => 'Student',
-        ],
-    ];
-
-    $cli->table($data);
-
-
-------------
-$cli->json()
-------------
-
-TODO...
-
-
-----------
-$cli->br()
-----------
-
-TODO...
-
-
------------
-$cli->tab()
------------
-
-TODO...
-
-
-------------
-$cli->draw()
-------------
-
-TODO...
-
-
---------------
-$cli->border()
---------------
-
-TODO...
-
-
-------------
-$cli->dump()
-------------
-
-TODO...
-
-
--------------
-$cli->flank()
--------------
-
-TODO...
-
-
-----------------
-$cli->progress()
-----------------
-
-TODO...
-
-
----------------
-$cli->padding()
----------------
-
-TODO...
-
-
--------------
-$cli->input()
--------------
-
-TODO...
-
-
----------------
-$cli->confirm()
----------------
-
-TODO...
-
-
-----------------
-$cli->password()
-----------------
-
-TODO...
-
-
-------------------
-$cli->checkboxes()
-------------------
-
-TODO...
-
-
--------------
-$cli->radio()
--------------
-
-TODO...
-
-
------------------
-$cli->animation()
------------------
-
-TODO...
-
-
---------------
-$cli->addArt()
---------------
-
-TODO...
-
-
--------------
-$cli->clear()
--------------
-
-TODO...
-
-
-Console Config
-^^^^^^^^^^^^^^
-
-.. contents::
-    :depth: 1
-    :local:
-
-.. include:: /guide/config/console.rst.inc
-
-
-.. _config-console-commands:
-
-Console Commands
-^^^^^^^^^^^^^^^^
-
-A filter blocks a message from being written to the log.
-
-.. contents::
-    :depth: 1
-    :local:
+.. include:: /guide/api/console.rst.inc
 
 
 Commands Schedule
 ^^^^^^^^^^^^^^^^^
 
 TODO...
+
+
+Advanced Styling
+^^^^^^^^^^^^^^^^
+
+.. contents::
+    :depth: 1
+    :local:
+
+
+Combinations
+------------
+
+Chaining any of the style to get what you want.
+
+.. code-block:: php
+
+    $cli->backgroundBlue()->green()->bold()->out('Fusce eget faucibus eros.');
+
+
+Combining styles into one method.
+
+.. code-block:: php
+
+    $cli->backgroundBlueGreenBold('Fusce eget faucibus eros.');
+
+
+You can apply more than one format to an output, but only one foreground and one background color.
+
+
+Tags
+----
+
+Applying a color/background color/format to just part of an output.
+
+.. code-block:: php
+
+    $cli->blue('Please <light_red>remember</light_red> to <bold><yellow>restart</yellow></bold> the server.');
+
+
+You can use any of the color or formatting keywords (snake cased) as tags.
+
+Prepend the color with ``background_`` to use a background color tag.
+
+.. code-block:: php
+
+    $cli->blue('Please <background_light_red>remember</background_light_red> to restart the server.');
+
+
+Custom Styles
+-------------
+
+Adding your own custom colors.
+
+.. code-block:: php
+
+    $cli->style->addColor('lilac', 38);
+
+
+Once you’ve added the color, you can use it like any of the other colors.
+
+.. code-block:: php
+
+    $cli->lilac('What a pretty color.');
+    $cli->backgroundLilac()->out('This background is a pretty color.');
+    $cli->out('Just this <lilac>word</lilac> is a pretty color.');
+    $cli->out('Just this <background_lilac>word</background_lilac> is a pretty color.');
+
+
+Adding your own commands using either a string or an array of styles, just make sure that the style is defined already.
+
+.. code-block:: php
+
+    $cli->style->addCommand('rage', 'cyan');
+    $cli->rage('SOMETHING IS MESSED UP.');
+
+    $cli->style->addCommand('holler', ['underline', 'green', 'bold']);
+    $cli->holler('Yo, what up.');
+
+
+It is possible to override any existing command.
+
+.. code-block:: php
+
+    $cli->style->addCommand('error', 'light_blue');
+    $cli->error('Whelp. That did not turn out so well.');
 
 
 .. include:: /guide/cookbook/console.rst.inc

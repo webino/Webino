@@ -1,6 +1,6 @@
 <?php
 /**
- * Console
+ * Console Formatting
  * Webino example
  */
 
@@ -24,6 +24,10 @@ class ConsoleFormatsExample extends AbstractConsoleCommand
             ->setTitle('Run console formats example');
     }
 
+    /**
+     * The console
+     * formatting example.
+     */
     public function handle(ConsoleEvent $event)
     {
         $cli = $event->getCli();
@@ -94,8 +98,7 @@ $app = Webino::application($config)->bootstrap();
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
         new TextHtml('Use Command Line Interface!'),
-        new TextHtml('Console output preview:'),
-        new ConsolePreviewHtml('preview.jpg'),
+        (new ConsolePreviewHtml('preview.jpg'))->setHeight(400),
         new SourcePreview(__FILE__),
     ]);
 });

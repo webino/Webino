@@ -17,7 +17,6 @@ $app = Webino::application()->bootstrap();
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
         new TextHtml('Use Command Line Interface!'),
-        new TextHtml('Console output preview:'),
         new ConsolePreviewHtml('preview.jpg'),
         new SourcePreview(__FILE__),
     ]);

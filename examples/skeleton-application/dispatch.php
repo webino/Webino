@@ -66,7 +66,7 @@ $app->bindRoute('something', function (RouteEvent $event) {
 
 //    dd($event->getRouteParam('paramtest'));
 
-    $event->setResponseContent('<p>Default Something X ' . $event->getRouteParam('paramtest') . '</p>');
+    $event->setResponseContent('<p>Default Something X ' . $event->getParam('paramtest') . '</p>');
 }, AppEvent::FINISH);
 
 $app->bindRoute('something', function (RouteEvent $event) use ($app) {

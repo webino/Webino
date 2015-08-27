@@ -6,6 +6,7 @@ Event System Architecture
     :depth: 1
     :local:
 
+
 The Webino™ architecture is event driven, thus extensible. We can attach listeners to events,
 performing other operations as they trigger.
 
@@ -120,7 +121,7 @@ The listener aggregate is a class that registers other listeners in a batch.
     $app->bind(new MyListenerAggregate);
 
 
-Registering a listener aggregate via application config.
+Registering listener aggregates via application config.
 
 .. code-block:: php
 

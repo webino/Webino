@@ -25,4 +25,14 @@ class ScrollBoxHtml extends AbstractHtml
     {
         return 'div';
     }
+
+    /**
+     * @param int $height Height in pixels
+     * @return $this
+     */
+    public function setHeight($height)
+    {
+        $this->setStyle(['height' => $height . 'px']);
+        return $this;
+    }
 }

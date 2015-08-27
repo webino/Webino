@@ -1,6 +1,6 @@
 <?php
 /**
- * Console Utils Table
+ * Console Progress Manually
  * Webino example
  */
 
@@ -10,6 +10,8 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route\Console;
+use WebinoExamplesLib\Html\ConsolePreviewHtml;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -21,30 +23,35 @@ class MyConsoleCommand extends AbstractConsoleCommand
     }
 
     /**
-     * The console table
-     * utility example.
+     * The console progress
+     * manually example.
      */
     public function handle(ConsoleEvent $event)
     {
-        $data = [
-            [
-              'Walter White',
-              'Father',
-              'Teacher',
-            ],
-            [
-              'Skyler White',
-              'Mother',
-              'Accountant',
-            ],
-            [
-              'Walter White Jr.',
-              'Son',
-              'Student',
-            ],
-        ];
+        $cli = $event->getCli();
+        $progress = $cli->progress(20);
 
-        $event->getCli()->table($data)->br();
+        // simulate something happening
+        sleep(1);
+
+        $progress->advance();
+
+        // simulate something happening
+        sleep(4);
+
+        $progress->advance(10);
+
+        // simulate something happening
+        sleep(2);
+
+        $progress->advance(5, 'Still going.');
+
+        // simulate something happening
+        sleep(1);
+
+        $progress->advance(4);
+
+        $cli->br();
     }
 }
 
@@ -56,7 +63,8 @@ $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        'Use Command Line Interface!',
+        new TextHtml('Use Command Line Interface!'),
+        new ConsolePreviewHtml('preview.gif'),
         new SourcePreview(__FILE__),
     ]);
 });

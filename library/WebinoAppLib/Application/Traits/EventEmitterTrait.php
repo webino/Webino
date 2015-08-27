@@ -76,7 +76,7 @@ trait EventEmitterTrait
      */
     public function bind($event, $callback = null, $priority = 1)
     {
-        $aggregate = $this->resolveListenerAggregate($event);
+        $aggregate = (null === $callback) ? $this->resolveListenerAggregate($event) : null;
 
         if ($aggregate instanceof ListenerAggregateInterface) {
             $this->log(Log\AttachAggregateListener::class, [$aggregate]);
@@ -109,7 +109,7 @@ trait EventEmitterTrait
      */
     public function unbind($event = null, $callback = null, $priority = null)
     {
-        $aggregate = $this->resolveListenerAggregate($event);
+        $aggregate = (null === $callback) ? $this->resolveListenerAggregate($event) : null;
 
         if ($aggregate instanceof ListenerAggregateInterface) {
             $this->log(Log\DetachAggregateListener::class, [$aggregate]);

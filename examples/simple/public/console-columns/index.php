@@ -1,14 +1,17 @@
 <?php
 /**
- * Console Utils Columns
+ * Console Columns
  * Webino example
  */
 
+use WebinoAppLib\Console\AbstractConsoleCommand;
 use WebinoAppLib\Event\ConsoleEvent;
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route\Console;
+use WebinoExamplesLib\Html\ConsolePreviewHtml;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -20,11 +23,13 @@ class MyConsoleCommand extends AbstractConsoleCommand
     }
 
     /**
-     * The console columns
-     * utility example.
+     * The console
+     * columns example.
      */
     public function handle(ConsoleEvent $event)
     {
+        $cli = $event->getCli();
+
         $data = [
             '12 Monkeys',
             '12 Years a Slave',
@@ -55,7 +60,17 @@ class MyConsoleCommand extends AbstractConsoleCommand
             'Moneyball',
         ];
 
-        $event->getCli()->columns($data)->br();
+        $cli->columns($data)->br();
+
+
+        $data = [
+            ['Gary', 'Mary', 'Larry', 'Terry'],
+            [1.2, 4.3, 0.1, 3.0],
+            [6.6, 4.4, 5.5, 3.3],
+            [9.1, 8.2, 7.3, 6.4],
+        ];
+
+        $cli->columns($data)->br();
     }
 }
 
@@ -67,7 +82,8 @@ $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        'Use Command Line Interface!',
+        new TextHtml('Use Command Line Interface!'),
+        (new ConsolePreviewHtml('preview.jpg'))->setHeight(400),
         new SourcePreview(__FILE__),
     ]);
 });

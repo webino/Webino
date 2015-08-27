@@ -26,6 +26,7 @@ class SendResponseEvent extends BaseSendResponseEvent implements
 
     /**
      * @return RequestInterface
+     * @TODO implement
      */
     public function getRequest()
     {

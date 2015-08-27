@@ -31,16 +31,4 @@ class ConsoleEvent extends AbstractRouteEvent
     {
         return $this->getApp()->get(Console::class);
     }
-
-    /**
-     * Return command argument value
-     *
-     * @param string $name Argument name
-     * @param string|null $default Default value
-     * @return string Argument value
-     */
-    public function getArgument($name, $default = null)
-    {
-        return $this->getRouteParam($name, $default);
-    }
 }

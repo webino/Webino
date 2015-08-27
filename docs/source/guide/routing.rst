@@ -246,11 +246,20 @@ This event is emitted at beginning of application dispatch when route can't be m
 Route Event
 ^^^^^^^^^^^
 
-Following methods are provided by route event object.
-
 .. contents::
     :depth: 1
     :local:
+
+
+$event->getParam()
+------------------
+
+*Accessing route parameters.*
+
+.. code-block:: php
+
+    /** @var \WebinoAppLib\Event\RouteEvent $event */
+    $myParam = $event->getParam('myParam');
 
 
 $event->getRouteMatch()
@@ -263,17 +272,6 @@ $event->getRouteMatch()
     /** @var \WebinoAppLib\Event\RouteEvent $event */
     /** @var \Zend\Mvc\Router\Http\RouteMatch $routeMatch */
     $routeMatch = $event->getRouteMatch();
-
-
-$event->getRouteParam()
------------------------
-
-*Accessing route parameters.*
-
-.. code-block:: php
-
-    /** @var \WebinoAppLib\Event\RouteEvent $event */
-    $myParam = $event->getRouteParam('myParam');
 
 
 .. include:: /guide/cookbook/routing.rst.inc

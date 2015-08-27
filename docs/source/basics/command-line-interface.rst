@@ -7,23 +7,21 @@ Command Line Interface
     :local:
 
 
-Besides the rich features for building web applications, Webino™ has also full featured support for console
-applications.
+Webino™ has also full featured support for console applications.
 
 
 Usage
 =====
 
-You execute a command line action running application index file:
+Executing command line actions running application index file.
 
 .. code-block:: bash
 
     php index.php
 
 
-That shows a list of all available commands.
-
 .. seealso::
+   That shows a list of all available commands ●
    `Console Example <http://demo.webino.org/console>`_
 
 
@@ -31,7 +29,7 @@ Help Command
 ============
 
 Every command also includes a help screen which displays and describes the command's available arguments and options.
-To view a help screen, simply precede the name of the command with ``help``:
+Simply precede the name of the command with ``help`` to view a help screen.
 
 .. code-block:: bash
 
@@ -49,6 +47,19 @@ an interactive console. You can start the interactive console using:
     php index.php console
 
 
+Then you can interact with application objects.
+
+.. code-block:: bash
+
+    # calling custom methods
+    # on the application object
+    $app->file()->put('test.txt', 'Writing a test file from the runtime console.');
+
+    # calling custom methods
+    # on the console object
+    $cli->out('Test console message.');
+
+
 .. note::
     Runtime developer console is powered by `PsySH <http://psysh.org/>`_.
 
@@ -56,7 +67,7 @@ an interactive console. You can start the interactive console using:
 Script Version
 ==============
 
-You may also view the current version of your Webino™ installation using the ``version`` command:
+You may also view the current version of your Webino™ installation using the ``version`` command.
 
 .. code-block:: bash
 
@@ -66,7 +77,7 @@ You may also view the current version of your Webino™ installation using the `
 Custom Commands
 ===============
 
-The best practice to define a console command is as a class. For example:
+Creating custom console commands.
 
 .. code-block:: php
 
@@ -92,7 +103,7 @@ The best practice to define a console command is as a class. For example:
     }
 
 
-Add a custom console command into application configuration.
+Adding custom console command into application configuration.
 
 .. code-block:: php
 
@@ -105,4 +116,6 @@ Add a custom console command into application configuration.
 
 
 .. seealso::
-   `Console Command Example <http://demo.webino.org/console-command>`_
+   :ref:`Application Console Guide <guide-console>` ●
+   `Console Command Example <http://demo.webino.org/console-command>`_ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_

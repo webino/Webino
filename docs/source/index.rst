@@ -14,13 +14,13 @@
 Why Use Webino?
 ===============
 
-- clean code
+- event-driven architecture
 
-- easy to learn / develop / deploy
+- easy to learn, develop and deploy
 
-- modular architecture
+- configurable and modular
 
-- well tested
+- well tested clean code
 
 
 Who Uses Webino?
@@ -39,16 +39,15 @@ TODO...
     :hidden:
 
     installation
-
+    
     basics/basic-usage
+    basics/application
+    basics/configuration
+    basics/services
+    basics/events
     basics/application-modules
     basics/skeleton-application
     basics/command-line-interface
-
-    architecture/application
-    architecture/config
-    architecture/services
-    architecture/events
 
     guide/config
     guide/services

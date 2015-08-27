@@ -1480,3 +1480,198 @@
 <logEntry><timestamp>2015-08-23T13:25:27+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event route.xmlLog</message><extra><route.xmlLog/></extra></logEntry>
 
 
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event bootstrap</message><extra><bootstrap/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event configure</message><extra><configure/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Configuring application</message></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\DebuggerListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleDefault]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleHelp]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleRuntime]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleVersion]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\RoutingListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\RequestListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\ResponseListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\ViewListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event bootstrap</message><extra><bootstrap/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Test info log message!</message></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>7</priority><priorityName>DEBUG</priorityName><message>Test debug log message paramOne paramTwo</message><extra><paramOne/><paramTwo/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event route.xmlLog with priority 1</message><extra><route.xmlLog/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event WebinoAppLib\Router\DefaultRoute with priority 1</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event dispatch</message><extra><dispatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event routeMatch with priority 1</message><extra><routeMatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event routeMatch</message><extra><routeMatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event WebinoAppLib\Router\DefaultRoute</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:33+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event WebinoAppLib\Event\SendResponseEvent</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event bootstrap</message><extra><bootstrap/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event configure</message><extra><configure/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Configuring application</message></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\DebuggerListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleDefault]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleHelp]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleRuntime]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleVersion]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\RoutingListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\RequestListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\ResponseListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\ViewListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event bootstrap</message><extra><bootstrap/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Test info log message!</message></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>7</priority><priorityName>DEBUG</priorityName><message>Test debug log message paramOne paramTwo</message><extra><paramOne/><paramTwo/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event route.xmlLog with priority 1</message><extra><route.xmlLog/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event WebinoAppLib\Router\DefaultRoute with priority 1</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event dispatch</message><extra><dispatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event routeMatch with priority 1</message><extra><routeMatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event routeMatch</message><extra><routeMatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T20:59:35+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event route.xmlLog</message><extra><route.xmlLog/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event bootstrap</message><extra><bootstrap/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event configure</message><extra><configure/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Configuring application</message></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\DebuggerListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleDefault]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleHelp]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleRuntime]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Console\ConsoleVersion]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\RoutingListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\RequestListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\ResponseListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching aggregate listener [object WebinoAppLib\Listener\ViewListener]</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event bootstrap</message><extra><bootstrap/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Test info log message!</message></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>7</priority><priorityName>DEBUG</priorityName><message>Test debug log message paramOne paramTwo</message><extra><paramOne/><paramTwo/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event route.xmlLog with priority 1</message><extra><route.xmlLog/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event WebinoAppLib\Router\DefaultRoute with priority 1</message><extra/></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event dispatch</message><extra><dispatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Attaching [object Closure] to an event routeMatch with priority 1</message><extra><routeMatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event routeMatch</message><extra><routeMatch/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event route.xmlLog</message><extra><route.xmlLog/></extra></logEntry>
+
+
+<logEntry><timestamp>2015-08-26T21:00:00+02:00</timestamp><priority>6</priority><priorityName>INFO</priorityName><message>Event WebinoAppLib\Event\SendResponseEvent</message><extra/></logEntry>
+
+

@@ -28,7 +28,7 @@ class ConsoleHelp extends AbstractConsoleCommand
     {
         $routes = $event->getApp()->getConfig('console')->router->routes;
 
-        $requiredCommand = $event->getArgument('command');
+        $requiredCommand = $event->getParam('command');
 
         // find route
         foreach ($routes as $route) {
@@ -50,16 +50,38 @@ class ConsoleHelp extends AbstractConsoleCommand
             ? $route->options->defaults->description
             : null;
 
+        $argumentsDescription = isset($route->options->defaults->argumentsDescription)
+            ? $route->options->defaults->argumentsDescription
+            : [];
+        
+        $optionsDescription = isset($route->options->defaults->optionsDescription)
+            ? $route->options->defaults->optionsDescription
+            : [];
+
+        $newArgumentsDescription = [];
+        foreach ($argumentsDescription as $key => $value) {
+            $newArgumentsDescription[" <green>$key</green>"] = '- ' . $value;
+        }
+
+        $newOptionsDescription = [];
+        foreach ($optionsDescription as $key => $value) {
+            $newOptionsDescription[" <green>--$key</green>"] = '- ' . $value;
+        }
+
         $cli = $event->getCli();
 
         $cli
-            ->out('<bold>' . $title . '</bold>')
-            ->green('Usage:')
-            ->backgroundBlack(' php index.php ' . $route->options->route . ' ');
+            ->invert(" $title ")->br()
+            ->yellowBold('Usage:')
+            ->backgroundBlack($route->options->route)->br();
 
         empty($description)
-            or $cli->green('Description:')->out($description);
+            or $cli->yellowBold('Description:')->out(' ' . str_replace(PHP_EOL, PHP_EOL . ' ', $description))->br();
 
-        $cli->br();
+        empty($argumentsDescription)
+            or $cli->yellowBold('Arguments:')->columns($newArgumentsDescription)->br();
+
+        empty($argumentsDescription)
+            or $cli->yellowBold('Options:')->columns($newOptionsDescription)->br();
     }
 }
