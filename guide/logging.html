@@ -61,9 +61,9 @@
 <h1>Application Logging<a class="headerlink" href="#application-logging" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#logger-interface" id="id20">Logger Interface</a></li>
-<li><a class="reference internal" href="#psr-3-logger-interface" id="id21">PSR-3 Logger Interface</a></li>
-<li><a class="reference internal" href="#logging-config" id="id22">Logging Config</a></li>
+<li><a class="reference internal" href="#logging-config" id="id20">Logging Config</a></li>
+<li><a class="reference internal" href="#logging-interface" id="id21">Logging Interface</a></li>
+<li><a class="reference internal" href="#psr-3-logger-interface" id="id22">PSR-3 Logger Interface</a></li>
 <li><a class="reference internal" href="#logging-filters" id="id23">Logging Filters</a></li>
 <li><a class="reference internal" href="#log-message-classes" id="id24">Log Message Classes</a></li>
 <li><a class="reference internal" href="#logging-cookbook" id="id25">Logging Cookbook</a></li>
@@ -74,16 +74,142 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 <ul class="simple">
 <li>Powered by <a class="reference external" href="https://github.com/zendframework/zend-log">Zend Log</a></li>
 </ul>
-<div class="section" id="logger-interface">
-<span id="api-logging"></span><h2><a class="toc-backref" href="#id20">Logger Interface</a><a class="headerlink" href="#logger-interface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="logging-config">
+<h2><a class="toc-backref" href="#id20">Logging Config</a><a class="headerlink" href="#logging-config" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
-<li><a class="reference internal" href="#app-getlogger" id="id26">$app-&gt;getLogger()</a></li>
-<li><a class="reference internal" href="#app-log" id="id27">$app-&gt;log()</a></li>
+<li><a class="reference internal" href="#log" id="id26">Log</a></li>
+<li><a class="reference internal" href="#logger" id="id27">Logger</a></li>
+<li><a class="reference internal" href="#chromephplog" id="id28">ChromePhpLog</a></li>
+<li><a class="reference internal" href="#firephplog" id="id29">FirePhpLog</a></li>
+</ul>
+</div>
+<div class="section" id="log">
+<span id="config-logging-log"></span><h3><a class="toc-backref" href="#id26">Log</a><a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h3>
+<p>Configuring app file logger writer, <code class="docutils literal"><span class="pre">data/log/app.log</span></code> by default.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="c1">// Enabling default logging</span>
+    <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
+    <span class="c1">// Overriding default logging file</span>
+    <span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-logging"><span>Logging Interface</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message">Log Message Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-PSR-3">PSR-3 Logger Example</a></p>
+</div>
+<p>Configuring file logger formatting.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="c1">// Simple format</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setSimpleFormat</span><span class="p">(</span><span class="s1">&#39;%timestamp% %priorityName% (%priority%): %message% %extra%&#39;</span><span class="p">),</span>
+
+    <span class="c1">// XML format</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log.xml&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setXmlFormat</span><span class="p">(),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-XML">Log XML Format Example</a></p>
+</div>
+<div class="section" id="forking-logger">
+<span id="config-logging-forking"></span><h4>Forking Logger<a class="headerlink" href="#forking-logger" title="Permalink to this headline">¶</a></h4>
+<p>Creating new logger writer instead of overriding the default.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/my-app.log&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;my&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#config-logging-filters"><span>Logging Filters</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-priority">Logger Priority Filter Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-filters-regex">Logger Regex Filter Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="logger">
+<span id="config-logging-logger"></span><h3><a class="toc-backref" href="#id27">Logger</a><a class="headerlink" href="#logger" title="Permalink to this headline">¶</a></h3>
+<p>Configuring custom logger.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Logger</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">Logger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
+        <span class="c1">// etc.</span>
+    <span class="p">]),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-get-logger"><span>$app-&gt;getLogger()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a> ●
+<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
+</div>
+</div>
+<div class="section" id="chromephplog">
+<h3><a class="toc-backref" href="#id28">ChromePhpLog</a><a class="headerlink" href="#chromephplog" title="Permalink to this headline">¶</a></h3>
+<p>Configuring app ChromePHP logger writer.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ChromePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">ChromePhpLog</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-ChromePHP">Chrome Logger Example</a></p>
+</div>
+</div>
+<div class="section" id="firephplog">
+<h3><a class="toc-backref" href="#id29">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Permalink to this headline">¶</a></h3>
+<p>Configuring app FirePHP logger writer.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">FirePhpLog</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/logger-FirePHP">Firefox Logger Example</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="logging-interface">
+<span id="api-logging"></span><h2><a class="toc-backref" href="#id21">Logging Interface</a><a class="headerlink" href="#logging-interface" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#app-getlogger" id="id30">$app-&gt;getLogger()</a></li>
+<li><a class="reference internal" href="#app-log" id="id31">$app-&gt;log()</a></li>
 </ul>
 </div>
 <div class="section" id="app-getlogger">
-<span id="api-logging-app-get-logger"></span><h3><a class="toc-backref" href="#id26">$app-&gt;getLogger()</a><a class="headerlink" href="#app-getlogger" title="Permalink to this headline">¶</a></h3>
+<span id="api-logging-app-get-logger"></span><h3><a class="toc-backref" href="#id30">$app-&gt;getLogger()</a><a class="headerlink" href="#app-getlogger" title="Permalink to this headline">¶</a></h3>
 <p>Obtaining logger service.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoLogLib\LoggerInterface $logger */</span>
 <span class="nv">$logger</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">();</span>
@@ -107,7 +233,7 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 </div>
 </div>
 <div class="section" id="app-log">
-<span id="api-logging-app-log"></span><h3><a class="toc-backref" href="#id27">$app-&gt;log()</a><a class="headerlink" href="#app-log" title="Permalink to this headline">¶</a></h3>
+<span id="api-logging-app-log"></span><h3><a class="toc-backref" href="#id31">$app-&gt;log()</a><a class="headerlink" href="#app-log" title="Permalink to this headline">¶</a></h3>
 <p>Writing messages to a log.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// creating a debug message class</span>
 <span class="k">use</span> <span class="nx">WebinoLogLib\Message\AbstractDebugMessage</span><span class="p">;</span>
@@ -156,10 +282,9 @@ as well as for auditing the correct usage of the system. The PSR-Logger interfac
 </div>
 </div>
 <div class="monospace-topic section" id="psr-3-logger-interface">
-<span id="api-logging-psr-3"></span><h2><a class="toc-backref" href="#id21">PSR-3 Logger Interface</a><a class="headerlink" href="#psr-3-logger-interface" title="Permalink to this headline">¶</a></h2>
+<span id="api-logging-psr-3"></span><h2><a class="toc-backref" href="#id22">PSR-3 Logger Interface</a><a class="headerlink" href="#psr-3-logger-interface" title="Permalink to this headline">¶</a></h2>
 <p>Calling the <code class="docutils literal"><span class="pre">$app-&gt;log()</span></code> method without arguments returns the standard PSR-3 logger object,
 on which we can call standard logging methods.</p>
-<p><strong>Example:</strong></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// just text</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emergency</span><span class="p">(</span><span class="s1">&#39;Something really bad happened.&#39;</span><span class="p">);</span>
 
@@ -172,175 +297,49 @@ on which we can call standard logging methods.</p>
 </div>
 <p><div class="vspace"></div></p>
 <p>Available methods:</p>
-<div class="contents local topic" id="id2">
+<div class="contents local topic" id="id8">
 <ul class="simple">
-<li><a class="reference internal" href="#app-log-emergency" id="id28">$app-&gt;log()-&gt;emergency()</a></li>
-<li><a class="reference internal" href="#app-log-alert" id="id29">$app-&gt;log()-&gt;alert()</a></li>
-<li><a class="reference internal" href="#app-log-critical" id="id30">$app-&gt;log()-&gt;critical()</a></li>
-<li><a class="reference internal" href="#app-log-error" id="id31">$app-&gt;log()-&gt;error()</a></li>
-<li><a class="reference internal" href="#app-log-warning" id="id32">$app-&gt;log()-&gt;warning()</a></li>
-<li><a class="reference internal" href="#app-log-notice" id="id33">$app-&gt;log()-&gt;notice()</a></li>
-<li><a class="reference internal" href="#app-log-info" id="id34">$app-&gt;log()-&gt;info()</a></li>
-<li><a class="reference internal" href="#app-log-debug" id="id35">$app-&gt;log()-&gt;debug()</a></li>
+<li><a class="reference internal" href="#app-log-emergency" id="id32">$app-&gt;log()-&gt;emergency()</a></li>
+<li><a class="reference internal" href="#app-log-alert" id="id33">$app-&gt;log()-&gt;alert()</a></li>
+<li><a class="reference internal" href="#app-log-critical" id="id34">$app-&gt;log()-&gt;critical()</a></li>
+<li><a class="reference internal" href="#app-log-error" id="id35">$app-&gt;log()-&gt;error()</a></li>
+<li><a class="reference internal" href="#app-log-warning" id="id36">$app-&gt;log()-&gt;warning()</a></li>
+<li><a class="reference internal" href="#app-log-notice" id="id37">$app-&gt;log()-&gt;notice()</a></li>
+<li><a class="reference internal" href="#app-log-info" id="id38">$app-&gt;log()-&gt;info()</a></li>
+<li><a class="reference internal" href="#app-log-debug" id="id39">$app-&gt;log()-&gt;debug()</a></li>
 </ul>
 </div>
 <div class="section" id="app-log-emergency">
-<h3><a class="toc-backref" href="#id28">$app-&gt;log()-&gt;emergency()</a><a class="headerlink" href="#app-log-emergency" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id32">$app-&gt;log()-&gt;emergency()</a><a class="headerlink" href="#app-log-emergency" title="Permalink to this headline">¶</a></h3>
 <p><em>Emergency, the system is unusable.</em></p>
 </div>
 <div class="section" id="app-log-alert">
-<h3><a class="toc-backref" href="#id29">$app-&gt;log()-&gt;alert()</a><a class="headerlink" href="#app-log-alert" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id33">$app-&gt;log()-&gt;alert()</a><a class="headerlink" href="#app-log-alert" title="Permalink to this headline">¶</a></h3>
 <p><em>Alert, immediate action is required.</em></p>
 </div>
 <div class="section" id="app-log-critical">
-<h3><a class="toc-backref" href="#id30">$app-&gt;log()-&gt;critical()</a><a class="headerlink" href="#app-log-critical" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id34">$app-&gt;log()-&gt;critical()</a><a class="headerlink" href="#app-log-critical" title="Permalink to this headline">¶</a></h3>
 <p><em>Critical, critical conditions.</em></p>
 </div>
 <div class="section" id="app-log-error">
-<h3><a class="toc-backref" href="#id31">$app-&gt;log()-&gt;error()</a><a class="headerlink" href="#app-log-error" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id35">$app-&gt;log()-&gt;error()</a><a class="headerlink" href="#app-log-error" title="Permalink to this headline">¶</a></h3>
 <p><em>Error, errors that do not require immediate attention but should be monitored.</em></p>
 </div>
 <div class="section" id="app-log-warning">
-<h3><a class="toc-backref" href="#id32">$app-&gt;log()-&gt;warning()</a><a class="headerlink" href="#app-log-warning" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id36">$app-&gt;log()-&gt;warning()</a><a class="headerlink" href="#app-log-warning" title="Permalink to this headline">¶</a></h3>
 <p><em>Warning, unusual or undesirable occurrences that are not errors.</em></p>
 </div>
 <div class="section" id="app-log-notice">
-<h3><a class="toc-backref" href="#id33">$app-&gt;log()-&gt;notice()</a><a class="headerlink" href="#app-log-notice" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id37">$app-&gt;log()-&gt;notice()</a><a class="headerlink" href="#app-log-notice" title="Permalink to this headline">¶</a></h3>
 <p><em>Notice, normal but significant events.</em></p>
 </div>
 <div class="section" id="app-log-info">
-<h3><a class="toc-backref" href="#id34">$app-&gt;log()-&gt;info()</a><a class="headerlink" href="#app-log-info" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id38">$app-&gt;log()-&gt;info()</a><a class="headerlink" href="#app-log-info" title="Permalink to this headline">¶</a></h3>
 <p><em>Info, interesting events.</em></p>
 </div>
 <div class="section" id="app-log-debug">
-<h3><a class="toc-backref" href="#id35">$app-&gt;log()-&gt;debug()</a><a class="headerlink" href="#app-log-debug" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id39">$app-&gt;log()-&gt;debug()</a><a class="headerlink" href="#app-log-debug" title="Permalink to this headline">¶</a></h3>
 <p><em>Debug, detailed information for debugging purposes.</em></p>
-</div>
-</div>
-<div class="section" id="logging-config">
-<h2><a class="toc-backref" href="#id22">Logging Config</a><a class="headerlink" href="#logging-config" title="Permalink to this headline">¶</a></h2>
-<div class="contents local topic" id="id3">
-<ul class="simple">
-<li><a class="reference internal" href="#log" id="id36">Log</a></li>
-<li><a class="reference internal" href="#logger" id="id37">Logger</a></li>
-<li><a class="reference internal" href="#chromephplog" id="id38">ChromePhpLog</a></li>
-<li><a class="reference internal" href="#firephplog" id="id39">FirePhpLog</a></li>
-</ul>
-</div>
-<div class="section" id="log">
-<span id="config-logging-log"></span><h3><a class="toc-backref" href="#id36">Log</a><a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h3>
-<p>Configuring app file logger writer, <code class="docutils literal"><span class="pre">data/log/app.log</span></code> by default.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="c1">// Enabling default logging</span>
-    <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
-    <span class="c1">// Overriding default logging file</span>
-    <span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log&#39;</span><span class="p">),</span>
-<span class="p">]);</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-logging"><span>Logger Interface</span></a> ●
-<a class="reference external" href="http://demo.webino.org/logger-message">Log Message Example</a> ●
-<a class="reference external" href="http://demo.webino.org/logger-message-class">Log Message Class Example</a> ●
-<a class="reference external" href="http://demo.webino.org/logger-PSR-3">PSR-3 Logger Example</a></p>
-</div>
-<p>Configuring file logger formatting.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="c1">// Simple format</span>
-    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setSimpleFormat</span><span class="p">(</span><span class="s1">&#39;%timestamp% %priorityName% (%priority%): %message% %extra%&#39;</span><span class="p">),</span>
-
-    <span class="c1">// XML format</span>
-    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/app.log.xml&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setXmlFormat</span><span class="p">(),</span>
-<span class="p">]);</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
-<a class="reference external" href="http://demo.webino.org/logger-XML">Log XML Format Example</a></p>
-</div>
-<div class="section" id="forking-logger">
-<span id="config-logging-forking"></span><h4>Forking Logger<a class="headerlink" href="#forking-logger" title="Permalink to this headline">¶</a></h4>
-<p>Creating new logger writer instead of overriding the default.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="p">(</span><span class="k">new</span> <span class="nx">Log</span><span class="p">(</span><span class="s1">&#39;my/folder/my-app.log&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;my&#39;</span><span class="p">),</span>
-<span class="p">]);</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#config-logging-filters"><span>Logging Filters</span></a> ●
-<a class="reference external" href="http://demo.webino.org/logger-filters-priority">Logger Priority Filter Example</a> ●
-<a class="reference external" href="http://demo.webino.org/logger-filters-regex">Logger Regex Filter Example</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="logger">
-<span id="config-logging-logger"></span><h3><a class="toc-backref" href="#id37">Logger</a><a class="headerlink" href="#logger" title="Permalink to this headline">¶</a></h3>
-<p>Configuring custom logger.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Log</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Logger</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-    <span class="k">new</span> <span class="nx">Logger</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="p">[</span>
-        <span class="k">new</span> <span class="nx">Log</span><span class="p">,</span>
-        <span class="c1">// etc.</span>
-    <span class="p">]),</span>
-<span class="p">]);</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-logging-app-get-logger"><span>$app-&gt;getLogger()</span></a> ●
-<a class="reference external" href="http://demo.webino.org/logger-custom">Custom Logger Example</a> ●
-<a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
-</div>
-</div>
-<div class="section" id="chromephplog">
-<h3><a class="toc-backref" href="#id38">ChromePhpLog</a><a class="headerlink" href="#chromephplog" title="Permalink to this headline">¶</a></h3>
-<p>Configuring app ChromePHP logger writer.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ChromePhpLog</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="k">new</span> <span class="nx">ChromePhpLog</span><span class="p">,</span>
-<span class="p">]);</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
-<a class="reference external" href="http://demo.webino.org/logger-ChromePHP">Chrome Logger Example</a></p>
-</div>
-</div>
-<div class="section" id="firephplog">
-<h3><a class="toc-backref" href="#id39">FirePhpLog</a><a class="headerlink" href="#firephplog" title="Permalink to this headline">¶</a></h3>
-<p>Configuring app FirePHP logger writer.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\FirePhpLog</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
-    <span class="k">new</span> <span class="nx">FirePhpLog</span><span class="p">,</span>
-<span class="p">]);</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-logging-app-log"><span>$app-&gt;log()</span></a> ●
-<a class="reference external" href="http://demo.webino.org/logger-FirePHP">Firefox Logger Example</a></p>
-</div>
 </div>
 </div>
 <div class="section" id="logging-filters">
@@ -568,7 +567,7 @@ with the following contents:</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../architecture/services.html#architecture-services-factory"><span>Service Factory</span></a> ●
+<p class="last"><a class="reference internal" href="../basics/services.html#architecture-services-factory"><span>Service Factory</span></a> ●
 <a class="reference internal" href="#config-logging-log"><span>Config Logger</span></a> ●
 <a class="reference external" href="http://demo.webino.org/logger-aware">Logger Aware Example</a></p>
 </div>
@@ -674,7 +673,7 @@ with the following contents:</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../architecture/services.html#architecture-services-factory"><span>Service Factory</span></a> ●
+<p class="last"><a class="reference internal" href="../basics/services.html#architecture-services-factory"><span>Service Factory</span></a> ●
 <a class="reference internal" href="#config-logging-logger"><span>Config Custom Logger</span></a> ●
 <a class="reference external" href="http://demo.webino.org/logger-aware-custom">Custom Logger Aware Example</a></p>
 </div>
@@ -713,38 +712,31 @@ with the following contents:</p>
             <a href="../basics/basic-usage.html">Basic Usage</a>
         </li>
         <li>
+            <a href="../basics/application.html">Application Architecture</a>
+        </li>
+        <li>
+            <a href="../basics/configuration.html">Configuration Basics</a>
+        </li>
+        <li>
+            <a href="../basics/services.html">Services Architecture</a>
+        </li>
+        <li>
+            <a href="../basics/events.html">Event System</a>
+        </li>
+        <li>
             <a href="../basics/application-modules.html">Application Modules</a>
         </li>
         <li>
             <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
         </li>
         <li>
-            <a href="../basics/request-responding.html">Request Responding [TODO]</a>
-        </li>
-        <li>
-            <a href="../basics/templates.html">Templates [TODO]</a>
+            <a href="../basics/view-templates.html">View Templates [TODO]</a>
         </li>
         <li>
             <a href="../basics/public-assets.html">Public Assets [TODO]</a>
         </li>
         <li>
             <a href="../basics/command-line-interface.html">Command Line Interface</a>
-        </li>
-    </ul>
-
-    <h2>Architecture</h2>
-    <ul>
-        <li>
-            <a href="../architecture/application.html">Application</a>
-        </li>
-        <li>
-            <a href="../architecture/config.html">Configuration</a>
-        </li>
-        <li>
-            <a href="../architecture/services.html">Services</a>
-        </li>
-        <li>
-            <a href="../architecture/events.html">Event System</a>
         </li>
     </ul>
 

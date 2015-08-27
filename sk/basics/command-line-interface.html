@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
-    <link rel="next" title="Application Architecture" href="../architecture/application.html" />
+    <link rel="next" title="Application Config" href="../guide/config.html" />
     <link rel="prev" title="Webino Skeleton Application" href="skeleton-application.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
@@ -41,7 +41,7 @@
           <a href="skeleton-application.html" title="Previous document">Webino Skeleton Application</a>
         </li>
         <li>
-          <a href="../architecture/application.html" title="Next document">Application Architecture</a>
+          <a href="../guide/config.html" title="Next document">Application Config</a>
           &rarr;
         </li>
     </ul>
@@ -69,24 +69,23 @@
 <li><a class="reference internal" href="#custom-commands" id="id5">Custom Commands</a></li>
 </ul>
 </div>
-<p>Besides the rich features for building web applications, Webino™ has also full featured support for console
-applications.</p>
+<p>Webino™ has also full featured support for console applications.</p>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#id1">Usage</a><a class="headerlink" href="#usage" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>You execute a command line action running application index file:</p>
+<p>Executing command line actions running application index file.</p>
 <div class="highlight-bash"><div class="highlight"><pre>php index.php
 </pre></div>
 </div>
-<p>That shows a list of all available commands.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">Viď aj</p>
-<p class="last"><a class="reference external" href="http://demo.webino.org/console">Console Example</a></p>
+<p class="last">That shows a list of all available commands ●
+<a class="reference external" href="http://demo.webino.org/console">Console Example</a></p>
 </div>
 </div>
 <div class="section" id="help-command">
 <h2><a class="toc-backref" href="#id2">Help Command</a><a class="headerlink" href="#help-command" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <p>Every command also includes a help screen which displays and describes the command&#8217;s available arguments and options.
-To view a help screen, simply precede the name of the command with <code class="docutils literal"><span class="pre">help</span></code>:</p>
+Simply precede the name of the command with <code class="docutils literal"><span class="pre">help</span></code> to view a help screen.</p>
 <div class="highlight-bash"><div class="highlight"><pre>php index.php <span class="nb">help</span> &lt;<span class="nb">command</span>&gt;
 </pre></div>
 </div>
@@ -98,6 +97,16 @@ an interactive console. You can start the interactive console using:</p>
 <div class="highlight-bash"><div class="highlight"><pre>php index.php console
 </pre></div>
 </div>
+<p>Then you can interact with application objects.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># calling custom methods</span>
+<span class="c"># on the application object</span>
+<span class="nv">$app</span>-&gt;file<span class="o">()</span>-&gt;put<span class="o">(</span><span class="s1">&#39;test.txt&#39;</span>, <span class="s1">&#39;Writing a test file from the runtime console.&#39;</span><span class="o">)</span><span class="p">;</span>
+
+<span class="c"># calling custom methods</span>
+<span class="c"># on the console object</span>
+<span class="nv">$cli</span>-&gt;out<span class="o">(</span><span class="s1">&#39;Test console message.&#39;</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Poznámka</p>
 <p class="last">Runtime developer console is powered by <a class="reference external" href="http://psysh.org/">PsySH</a>.</p>
@@ -105,14 +114,14 @@ an interactive console. You can start the interactive console using:</p>
 </div>
 <div class="section" id="script-version">
 <h2><a class="toc-backref" href="#id4">Script Version</a><a class="headerlink" href="#script-version" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>You may also view the current version of your Webino™ installation using the <code class="docutils literal"><span class="pre">version</span></code> command:</p>
+<p>You may also view the current version of your Webino™ installation using the <code class="docutils literal"><span class="pre">version</span></code> command.</p>
 <div class="highlight-bash"><div class="highlight"><pre>php index.php version
 </pre></div>
 </div>
 </div>
 <div class="section" id="custom-commands">
 <h2><a class="toc-backref" href="#id5">Custom Commands</a><a class="headerlink" href="#custom-commands" title="Trvalý odkaz na tento nadpis">¶</a></h2>
-<p>The best practice to define a console command is as a class. For example:</p>
+<p>Creating custom console commands.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">MyPackage\Console</span><span class="p">;</span>
 
 <span class="k">use</span> <span class="nx">WebinoAppLib\Console\AbstractConsoleCommand</span><span class="p">;</span>
@@ -135,7 +144,7 @@ an interactive console. You can start the interactive console using:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Add a custom console command into application configuration.</p>
+<p>Adding custom console command into application configuration.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">MyPackage\Console\MyConsoleCommand</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
 
@@ -146,7 +155,9 @@ an interactive console. You can start the interactive console using:</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">Viď aj</p>
-<p class="last"><a class="reference external" href="http://demo.webino.org/console-command">Console Command Example</a></p>
+<p class="last"><a class="reference internal" href="../guide/console.html#guide-console"><span>Application Console Guide</span></a> ●
+<a class="reference external" href="http://demo.webino.org/console-command">Console Command Example</a> ●
+<a class="reference external" href="http://demo.webino.org/modules-console-command">Module Console Command Example</a></p>
 </div>
 </div>
 </div>
@@ -182,38 +193,31 @@ an interactive console. You can start the interactive console using:</p>
             <a href="basic-usage.html">Basic Usage</a>
         </li>
         <li>
+            <a href="application.html">Application Architecture</a>
+        </li>
+        <li>
+            <a href="configuration.html">Configuration Basics</a>
+        </li>
+        <li>
+            <a href="services.html">Services Architecture</a>
+        </li>
+        <li>
+            <a href="events.html">Event System</a>
+        </li>
+        <li>
             <a href="application-modules.html">Application Modules</a>
         </li>
         <li>
             <a href="skeleton-application.html">Skeleton Application [TODO]</a>
         </li>
         <li>
-            <a href="request-responding.html">Request Responding [TODO]</a>
-        </li>
-        <li>
-            <a href="templates.html">Templates [TODO]</a>
+            <a href="view-templates.html">View Templates [TODO]</a>
         </li>
         <li>
             <a href="public-assets.html">Public Assets [TODO]</a>
         </li>
         <li>
             <a href="#">Command Line Interface</a>
-        </li>
-    </ul>
-
-    <h2>Architecture</h2>
-    <ul>
-        <li>
-            <a href="../architecture/application.html">Application</a>
-        </li>
-        <li>
-            <a href="../architecture/config.html">Configuration</a>
-        </li>
-        <li>
-            <a href="../architecture/services.html">Services</a>
-        </li>
-        <li>
-            <a href="../architecture/events.html">Event System</a>
         </li>
     </ul>
 
@@ -316,7 +320,7 @@ an interactive console. You can start the interactive console using:</p>
           <a href="skeleton-application.html" title="Previous document">Webino Skeleton Application</a>
         </li>
         <li>
-          <a href="../architecture/application.html" title="Next document">Application Architecture</a>
+          <a href="../guide/config.html" title="Next document">Application Config</a>
           &rarr;
         </li>
     </ul>
