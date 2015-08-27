@@ -9,21 +9,54 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Feature\Config;
 use WebinoAppLib\Feature\Modules;
 use WebinoAppLib\Feature\Service;
+use WebinoAppLib\Module\AbstractModule;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
+use WebinoHtmlLib\TextHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
 /**
  * Custom module
  */
-class MyModule
+class MyModule extends AbstractModule
 {
-    public function __invoke(AbstractApplication $app)
+    const VERSION = '0.1.0';
+
+    protected function init(AbstractApplication $app)
     {
         /**
          * Binding to default route
          * from the custom module.
+         */
+        $app->bind(DefaultRoute::class, function (RouteEvent $event) {
+            $event->setResponseContent(new TextHtml($event->getApp()->getConfig('myModuleResponseText')));
+        });
+    }
+
+    /**
+     * This method will be called only when
+     * the application configuration
+     * is not loaded from a cache.
+     */
+    public function getConfig()
+    {
+        return ['myModuleResponseText' => 'My custom module response text!'];
+    }
+
+
+}
+
+/**
+ * Custom module invokable
+ */
+class MyInvokableModule
+{
+    public function __invoke(AbstractApplication $app)
+    {
+        /**
+         * Binding to default route from
+         * the custom invokable module.
          */
         $app->bind(DefaultRoute::class, function (RouteEvent $event) {
             /**
@@ -58,7 +91,7 @@ class MyModuleService
 {
     public function doSomething()
     {
-        return 'My custom module response text!';
+        return new TextHtml('My custom module service response text!');
     }
 }
 
@@ -69,6 +102,7 @@ $config = Webino::config([
      */
     new Modules([
         MyModule::class,
+        MyInvokableModule::class,
     ]),
 ]);
 

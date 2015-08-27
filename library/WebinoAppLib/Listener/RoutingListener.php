@@ -38,7 +38,7 @@ final class RoutingListener extends AbstractListener
         }
 
         $routeEvent = $this->createRouteEvent($event);
-        $routeEvent->setParam(RouteEvent::ROUTE_MATCH, $routeMatch);
+        $routeEvent->setEventParam(RouteEvent::ROUTE_MATCH, $routeMatch);
 
         // binding to a route match to emit matched route event
         $app->bind(RouteEvent::MATCH, function (AbstractRouteEvent $event) use ($app, $routeMatch) {
