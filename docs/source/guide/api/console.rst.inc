@@ -1039,6 +1039,11 @@ Getting text from a user.
     Multi-line input will wait for ``CTRL+D`` before returning.
 
 
+.. seealso::
+   `Console Input Example <http://demo.webino.org/console-input>`_ ●
+   `Console Input Multi-Line Example <http://demo.webino.org/console-input-multi-line>`_
+
+
 Specifying certain answers from the user you only want to accept (case insensitive).
 
 .. code-block:: php
@@ -1080,12 +1085,21 @@ Passing a closure into the ``accept`` method.
     $result = $input->prompt();
 
 
+.. seealso::
+   `Console Input Accept Example <http://demo.webino.org/console-input-accept>`_ ●
+   `Console Input Accept Closure Example <http://demo.webino.org/console-input-accept-closure>`_
+
+
 Specifying a default response for when the user simply presses ``enter`` without typing anything in.
 
 .. code-block:: php
 
     $input  = $cli->input('How you doin?')->defaultTo('Great!');
     $result = $input->prompt();
+
+
+.. seealso::
+   `Console Input Default Example <http://demo.webino.org/console-input-default>`_
 
 
 ---------------
@@ -1103,6 +1117,10 @@ Prompting the user for ``y`` or ``n`` (strict).
     }
 
 
+.. seealso::
+   `Console Confirm Example <http://demo.webino.org/console-confirm>`_
+
+
 ----------------
 $cli->password()
 ----------------
@@ -1113,6 +1131,10 @@ Hiding text the user is typing.
 
     $input = $cli->password('Please enter password:');
     $pwd   = $input->prompt();
+
+
+.. seealso::
+   `Console Password Example <http://demo.webino.org/console-password>`_
 
 
 ------------------
@@ -1140,6 +1162,9 @@ Presenting the user with a set of interactive options. The user can select multi
 You will get an array back with the checked options (an empty array in the case of no checked options). If you
 provide an associative array as the options, an array of the selected keys will be provided as the result.
 
+.. seealso::
+   `Console Checkboxes Example <http://demo.webino.org/console-checkboxes>`_
+
 
 -------------
 $cli->radio()
@@ -1150,8 +1175,20 @@ Presenting the user with a set of interactive options. The user can only select 
 .. code-block:: php
 
     $options = ['Ice Cream', 'Mixtape', 'Teddy Bear', 'Pizza', 'Puppies'];
+    // or as associative array
+    $options = [
+        'option1' => 'Ice Cream',
+        'option2' => 'Mixtape',
+        'option3' => 'Teddy Bear',
+        'option4' => 'Pizza',
+        'option5' => 'Puppies'
+    ];
+
     $input   = $cli->radio('Please send me one of the following:', $options);
     $result  = $input->prompt();
 
 
 The result will be a string, not an array (the selected key in the case of an associative array).
+
+.. seealso::
+   `Console Radio Example <http://demo.webino.org/console-radio>`_

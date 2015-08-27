@@ -1,0 +1,9 @@
+<blue>     ( )</blue>
+<blue>      H</blue>
+<blue>      H</blue>
+<blue>     _H_</blue>
+<blue>  .-'-.-'-.</blue>
+<blue> /         \</blue>
+<blue>|           |</blue>
+<blue>|   .-------'._</blue>
+<blue>|  /<white>/  '.' '.</white> \</blue>
