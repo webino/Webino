@@ -16,11 +16,11 @@ Why Use Webino?
 
 - event-driven architecture
 
-- easy to learn, develop and deploy
+- easy to learn, develop and deploy [TODO]
 
 - configurable and modular
 
-- well tested clean code
+- well tested clean code [TODO]
 
 
 Who Uses Webino?
@@ -28,11 +28,28 @@ Who Uses Webino?
 
 Nobody is currently using this version of Webino™, it's a prototype.
 
+.. note::
+    This version of Webino™ is experimental and intended for play.
+
+
+If it will be proved by its authors, it will be used by enterprise web applications.
+
 
 How Do I Get Started?
 =====================
 
-TODO...
+Copy a prototype branch of the `Webino repository <https://github.com/webino/Webino>`_ to your local machine.
+
+.. code-block:: bash
+
+    git clone https://github.com/webino/Webino.git
+    git checkout prototype
+
+
+Or download `Webino as ZIP <https://github.com/webino/Webino/archive/prototype.zip>`_ file. Then play with examples.
+
+.. note::
+    You can preview live examples at `demo.webino.org <http://demo.webino.org>`_
 
 
 .. toctree::

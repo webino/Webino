@@ -1150,6 +1150,11 @@ speed.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Multi-line input will wait for <code class="docutils literal"><span class="pre">CTRL+D</span></code> before returning.</p>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-input">Console Input Example</a> ●
+<a class="reference external" href="http://demo.webino.org/console-input-multi-line">Console Input Multi-Line Example</a></p>
+</div>
 <p>Specifying certain answers from the user you only want to accept (case insensitive).</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">([</span><span class="s1">&#39;Fine&#39;</span><span class="p">,</span> <span class="s1">&#39;Ok&#39;</span><span class="p">]);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
@@ -1182,10 +1187,19 @@ speed.</p>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-input-accept">Console Input Accept Example</a> ●
+<a class="reference external" href="http://demo.webino.org/console-input-accept-closure">Console Input Accept Closure Example</a></p>
+</div>
 <p>Specifying a default response for when the user simply presses <code class="docutils literal"><span class="pre">enter</span></code> without typing anything in.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">defaultTo</span><span class="p">(</span><span class="s1">&#39;Great!&#39;</span><span class="p">);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-input-default">Console Input Default Example</a></p>
 </div>
 </div>
 <div class="section" id="cli-confirm">
@@ -1198,6 +1212,10 @@ speed.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-confirm">Console Confirm Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-password">
 <h4><a class="toc-backref" href="#id142">$cli-&gt;password()</a><a class="headerlink" href="#cli-password" title="Permalink to this headline">¶</a></h4>
@@ -1205,6 +1223,10 @@ speed.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">(</span><span class="s1">&#39;Please enter password:&#39;</span><span class="p">);</span>
 <span class="nv">$pwd</span>   <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-password">Console Password Example</a></p>
 </div>
 </div>
 <div class="section" id="cli-checkboxes">
@@ -1226,16 +1248,33 @@ speed.</p>
 </div>
 <p>You will get an array back with the checked options (an empty array in the case of no checked options). If you
 provide an associative array as the options, an array of the selected keys will be provided as the result.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-checkboxes">Console Checkboxes Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-radio">
 <h4><a class="toc-backref" href="#id144">$cli-&gt;radio()</a><a class="headerlink" href="#cli-radio" title="Permalink to this headline">¶</a></h4>
 <p>Presenting the user with a set of interactive options. The user can only select one of them.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixtape&#39;</span><span class="p">,</span> <span class="s1">&#39;Teddy Bear&#39;</span><span class="p">,</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;Puppies&#39;</span><span class="p">];</span>
+<span class="c1">// or as associative array</span>
+<span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;option1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;option2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Mixtape&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;option3&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Teddy Bear&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;option4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;option5&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Puppies&#39;</span>
+<span class="p">];</span>
+
 <span class="nv">$input</span>   <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">radio</span><span class="p">(</span><span class="s1">&#39;Please send me one of the following:&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
 <span class="nv">$result</span>  <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>The result will be a string, not an array (the selected key in the case of an associative array).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-radio">Console Radio Example</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -1338,7 +1377,10 @@ provide an associative array as the options, an array of the selected keys will 
             <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../demo-application.html">Demo Application [TODO]</a>
+            <a href="../requirements.html">Introduction</a>
+        </li>
+        <li>
+            <a href="../examples.html">Examples [TODO]</a>
         </li>
         <li>
             <a href="../installation.html">Installation [TODO]</a>
@@ -1372,7 +1414,7 @@ provide an associative array as the options, an array of the selected keys will 
             <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
         </li>
         <li>
-            <a href="../basics/view-templates.html">View Templates [TODO]</a>
+            <a href="../basics/templates.html">Templates [TODO]</a>
         </li>
         <li>
             <a href="../basics/public-assets.html">Public Assets [TODO]</a>
@@ -1418,10 +1460,10 @@ provide an associative array as the options, an array of the selected keys will 
             <a href="sessions.html">Sessions [TODO]</a>
         </li>
         <li>
-            <a href="mail.html">Mail [TODO]</a>
+            <a href="database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="data.html">Data [TODO]</a>
+            <a href="mail.html">Mail [TODO]</a>
         </li>
         <li>
             <a href="templates.html">Templates [TODO]</a>
