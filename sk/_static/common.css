@@ -65,7 +65,7 @@ h1:first-child {
 }
 .console-preview {
     display: block;
-    margin: 10px 0 !important;
+    margin: 10px 0 20px !important;
     background: #300a24;
 }
 .console-preview .highlight-bash .nv,

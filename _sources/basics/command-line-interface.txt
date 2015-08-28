@@ -53,6 +53,7 @@ Then you can interact with application objects like following:
 
     .. image:: ../_static/media/WebinoAppLib.console.runtime.gif
 
+You have direct access to the ``$app`` and ``$cli`` objects.
 
 .. container:: console-preview
 
