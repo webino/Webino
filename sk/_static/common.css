@@ -63,6 +63,17 @@ h1:first-child {
     display: block;
     margin: 40px auto;
 }
+.console-preview {
+    display: block;
+    margin: 10px 0 !important;
+    background: #300a24;
+}
+.console-preview .highlight-bash .nv,
+.console-preview .highlight-bash .o,
+.console-preview .highlight-bash .s1,
+.console-preview .highlight-bash pre {
+    color: #fff !important;
+}
 .vspace {
     position: relative;
     overflow: hidden;

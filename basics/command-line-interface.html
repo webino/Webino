@@ -96,15 +96,20 @@ an interactive console. You can start the interactive console using:</p>
 <div class="highlight-bash"><div class="highlight"><pre>php index.php console
 </pre></div>
 </div>
-<p>Then you can interact with application objects.</p>
+<p>Then you can interact with application objects like following:</p>
+<div class="console-preview container">
+<img alt="../_images/WebinoAppLib.console.runtime.gif" src="../_images/WebinoAppLib.console.runtime.gif" />
+</div>
+<div class="console-preview container">
 <div class="highlight-bash"><div class="highlight"><pre><span class="c"># calling custom methods</span>
 <span class="c"># on the application object</span>
-<span class="nv">$app</span>-&gt;file<span class="o">()</span>-&gt;put<span class="o">(</span><span class="s1">&#39;test.txt&#39;</span>, <span class="s1">&#39;Writing a test file from the runtime console.&#39;</span><span class="o">)</span><span class="p">;</span>
+&gt;&gt;&gt; <span class="nv">$app</span>-&gt;file<span class="o">()</span>-&gt;put<span class="o">(</span><span class="s1">&#39;test.txt&#39;</span>, <span class="s1">&#39;Writing a test file from the runtime console.&#39;</span><span class="o">)</span><span class="p">;</span>
 
 <span class="c"># calling custom methods</span>
 <span class="c"># on the console object</span>
-<span class="nv">$cli</span>-&gt;out<span class="o">(</span><span class="s1">&#39;Test console message.&#39;</span><span class="o">)</span><span class="p">;</span>
+&gt;&gt;&gt; <span class="nv">$cli</span>-&gt;out<span class="o">(</span><span class="s1">&#39;Test console message.&#39;</span><span class="o">)</span><span class="p">;</span>
 </pre></div>
+</div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
