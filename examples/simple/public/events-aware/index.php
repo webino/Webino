@@ -11,8 +11,8 @@ use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoHtmlLib\TextHtml;
 use WebinoEventLib\Event;
-use WebinoEventLib\EventManagerAwareInterface;
-use WebinoEventLib\EventManagerAwareTrait;
+use WebinoEventLib\EventsAwareInterface;
+use WebinoEventLib\EventsAwareTrait;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -48,9 +48,9 @@ class MyServiceEvent extends Event
 /**
  * Custom events aware
  */
-class MyService implements EventManagerAwareInterface
+class MyService implements EventsAwareInterface
 {
-    use EventManagerAwareTrait;
+    use EventsAwareTrait;
 
     public function doSomething()
     {
@@ -59,7 +59,7 @@ class MyService implements EventManagerAwareInterface
          * custom event.
          */
         $params = ['responseText' => 'Hello'];
-        $this->getEventManager()->trigger(__FUNCTION__, $this, $params);
+        $this->getEvents()->trigger(__FUNCTION__, $this, $params);
     }
 
     public function doSomethingDifferent()
@@ -70,7 +70,7 @@ class MyService implements EventManagerAwareInterface
          */
         $event = new MyServiceEvent(__FUNCTION__, $this);
         $event->setResponseText('Webino!');
-        $this->getEventManager()->trigger($event);
+        $this->getEvents()->trigger($event);
     }
 }
 
@@ -91,7 +91,7 @@ $myService = $app->get(MyService::class);
  * Binding to
  * custom event.
  */
-$myService->getEventManager()->attach('doSomething', function (Event $event) use ($app) {
+$myService->getEvents()->attach('doSomething', function (Event $event) use ($app) {
     $app->set('responseText', new TextHtml($event->getParam('responseText')));
 });
 
@@ -99,7 +99,7 @@ $myService->getEventManager()->attach('doSomething', function (Event $event) use
  * Binding to custom
  * event object.
  */
-$myService->getEventManager()->attach('doSomethingDifferent', function (MyServiceEvent $event) use ($app) {
+$myService->getEvents()->attach('doSomethingDifferent', function (MyServiceEvent $event) use ($app) {
     $app->get('responseText')->setValue('%s ' . $event->getResponseText());
 });
 

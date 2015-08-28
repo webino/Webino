@@ -4,7 +4,6 @@ namespace WebinoAppLib\Factory;
 
 use WebinoAppLib\Application;
 use WebinoAppLib\Exception;
-use WebinoAppLib\Service\Router;
 use WebinoBaseLib\Service\SimpleServiceContainer;
 use Zend\Log\Exception\InvalidArgumentException;
 use Zend\Mvc\Service\RoutePluginManagerFactory;

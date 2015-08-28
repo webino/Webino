@@ -4,7 +4,8 @@ namespace WebinoAppLib\Feature;
 
 use WebinoAppLib\Application;
 use WebinoAppLib\Factory\RouterFactory;
-use WebinoAppLib\Listener\RoutingListener;
+use WebinoAppLib\Listener\ConsoleRoutingListener;
+use WebinoAppLib\Listener\HttpRoutingListener;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\FeatureInterface;
 use WebinoConfigLib\Feature\Route;
@@ -27,7 +28,8 @@ class DefaultRouter extends Config implements
     {
         parent::__construct([
             new DefaultRoute,
-            new Listener(RoutingListener::class),
+            new HttpListener(HttpRoutingListener::class),
+            new ConsoleListener(ConsoleRoutingListener::class),
             new Service(Application::ROUTER, RouterFactory::class),
         ]);
     }

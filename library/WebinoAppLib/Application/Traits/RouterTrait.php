@@ -26,6 +26,11 @@ trait RouterTrait
     private $routes;
 
     /**
+     * @return bool
+     */
+    abstract public function isHttp();
+
+    /**
      * {@inheritdoc}
      */
     abstract public function bind($event, $callback = null, $priority = 1);
@@ -81,10 +86,8 @@ trait RouterTrait
      */
     public function bindRoute($name, $callback = null, $priority = 1)
     {
-        if (Console::isConsole()) {
-            return null;
-        }
-
-        return $this->bind(call_user_func(RouteEventNameResolver::getInstance(), $name), $callback, $priority);
+        return $this->isHttp()
+            ? $this->bind(call_user_func(RouteEventNameResolver::getInstance(), $name), $callback, $priority)
+            : null;
     }
 }

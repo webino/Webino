@@ -10,9 +10,9 @@ use WebinoBaseLib\Service\SimpleServiceContainer;
 use Zend\Log\Exception\InvalidArgumentException;
 
 /**
- * Class FilesystemFactory
+ * Class FilesystemsFactory
  */
-class FilesystemFactory extends AbstractFactory
+class FilesystemsFactory extends AbstractFactory
 {
     /**
      * Application configuration key

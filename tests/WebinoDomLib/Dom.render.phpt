@@ -28,7 +28,7 @@ $cfg->set('test-body')->setLocator('body')->setValue('Hello Webino!');
 
 $state = new Dom\State($cfg->toArray());
 
-$events = $renderer->getEventManager();
+$events = $renderer->getEvents();
 
 // setting a value
 $events->attach('render', function ($event) {

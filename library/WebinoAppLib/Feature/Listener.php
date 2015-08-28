@@ -9,7 +9,7 @@ use WebinoConfigLib\Feature\AbstractFeature;
  */
 class Listener extends AbstractFeature
 {
-     /**
+    /**
      * Configure an application listener
      *
      * @param string|array $listener Listener class name or an array like [ListenerAlias => ListenerClass]

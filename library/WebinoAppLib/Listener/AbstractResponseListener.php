@@ -2,7 +2,6 @@
 
 namespace WebinoAppLib\Listener;
 
-use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Event\DispatchEvent;
 use WebinoAppLib\Event\SendResponseEvent;
 use WebinoAppLib\Response\OnResponseInterface;
@@ -10,21 +9,25 @@ use WebinoEventLib\AbstractListener;
 use Zend\Mvc\ResponseSender;
 
 /**
- * Class ResponseListener
+ * Class AbstractResponseListener
  */
-final class ResponseListener extends AbstractListener
+abstract class AbstractResponseListener extends AbstractListener
 {
+    /**
+     * @param DispatchEvent $event
+     * @return void
+     */
+    abstract public function createResponse(DispatchEvent $event);
+
     /**
      * Initialize listener
      */
     public function init()
     {
-        $this->listen(AppEvent::DISPATCH, [$this, 'sendResponse'], AppEvent::FINISH * 999);
+        $this->listen(DispatchEvent::DISPATCH, [$this, 'createResponse'], DispatchEvent::BEGIN * 999);
+        $this->listen(DispatchEvent::DISPATCH, [$this, 'sendResponse'], DispatchEvent::FINISH * 999);
         $this->listen(SendResponseEvent::class, [$this, 'onResponse'], SendResponseEvent::BEGIN * 999);
-
         $this->listen(SendResponseEvent::class, new ResponseSender\SimpleStreamResponseSender);
-        $this->listen(SendResponseEvent::class, new ResponseSender\HttpResponseSender);
-        $this->listen(SendResponseEvent::class, new ResponseSender\ConsoleResponseSender);
     }
 
     /**

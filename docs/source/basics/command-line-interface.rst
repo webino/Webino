@@ -47,17 +47,24 @@ an interactive console. You can start the interactive console using:
     php index.php console
 
 
-Then you can interact with application objects.
+Then you can interact with application objects like following:
 
-.. code-block:: bash
+.. container:: console-preview
 
-    # calling custom methods
-    # on the application object
-    $app->file()->put('test.txt', 'Writing a test file from the runtime console.');
+    .. image:: ../_static/media/WebinoAppLib.console.runtime.gif
 
-    # calling custom methods
-    # on the console object
-    $cli->out('Test console message.');
+
+.. container:: console-preview
+
+    .. code-block:: bash
+
+        # calling custom methods
+        # on the application object
+        >>> $app->file()->put('test.txt', 'Writing a test file from the runtime console.');
+
+        # calling custom methods
+        # on the console object
+        >>> $cli->out('Test console message.');
 
 
 .. note::

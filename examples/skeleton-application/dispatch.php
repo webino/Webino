@@ -271,7 +271,7 @@ $app->bind(AppEvent::DISPATCH, function (DispatchEvent $event) {
             return;
         }
 
-        $events = $event->getTarget()->getEventManager();
+        $events = $event->getTarget()->getEvents();
 
         if (class_exists($options['component'])) {
             $events->trigger($options['component'], $event);

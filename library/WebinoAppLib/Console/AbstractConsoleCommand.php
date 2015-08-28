@@ -3,7 +3,7 @@
 namespace WebinoAppLib\Console;
 
 use WebinoAppLib\Event\ConsoleEvent;
-use WebinoAppLib\Feature\Listener;
+use WebinoAppLib\Feature\ConsoleListener;
 use WebinoAppLib\Listener\ConsoleListenerTrait;
 use WebinoConfigLib\Feature\FeatureInterface;
 use WebinoConfigLib\Feature\Route\Console;
@@ -54,6 +54,6 @@ abstract class AbstractConsoleCommand implements
      */
     public function toArray()
     {
-        return (new Listener(static::class))->toArray() + $this->createRoute()->toArray();
+        return (new ConsoleListener(static::class))->toArray() + $this->createRoute()->toArray();
     }
 }

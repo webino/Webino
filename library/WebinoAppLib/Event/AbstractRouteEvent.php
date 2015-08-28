@@ -29,7 +29,7 @@ abstract class AbstractRouteEvent extends DispatchEvent implements
         $this->parentEvent = $event;
         parent::__construct($event->getApp());
         $this->setName($this::MATCH);
-        $this->setEventParam($this::REQUEST, $event->getRequest());
+        $this->setRequest($event->getRequest());
     }
 
     /**

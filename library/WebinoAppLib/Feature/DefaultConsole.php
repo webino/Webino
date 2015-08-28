@@ -16,6 +16,11 @@ class DefaultConsole extends AbstractConfig implements
     FeatureInterface
 {
     /**
+     * Application config key
+     */
+    const KEY = 'console';
+
+    /**
      * Register Console config feature
      */
     public function __construct()

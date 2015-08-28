@@ -28,15 +28,14 @@ trait RouteListenerTrait
      */
     protected function listenRoute($name, $callback = null, $priority = 1)
     {
-        if (Console::isConsole()) {
-            return $this;
+        if (!Console::isConsole()) {
+            $this->listen(
+                call_user_func(new RouteEventNameResolver, $name),
+                $callback,
+                $priority
+            );
         }
 
-        $this->listen(
-            call_user_func(new RouteEventNameResolver, $name),
-            $callback,
-            $priority
-        );
         return $this;
     }
 }

@@ -8,6 +8,16 @@ namespace WebinoAppLib\Contract;
 interface ConsoleInterface
 {
     /**
+     * @return bool
+     */
+    public function isHttp();
+
+    /**
+     * @return bool
+     */
+    public function isConsole();
+
+    /**
      * Binding listener to a console route
      *
      * @param string $name Route name

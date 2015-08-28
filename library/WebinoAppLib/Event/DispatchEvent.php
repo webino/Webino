@@ -4,7 +4,6 @@ namespace WebinoAppLib\Event;
 
 use WebinoAppLib\Application\AbstractApplication;
 use WebinoAppLib\Application\ConfiguredApplicationInterface;
-use WebinoAppLib\Factory\ResponseFactory;
 use Zend\Http\AbstractMessage;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
@@ -33,18 +32,21 @@ class DispatchEvent extends AppEvent implements
     }
 
     /**
+     * @param RequestInterface $request
+     * @return self
+     */
+    public function setRequest(RequestInterface $request)
+    {
+        $this->setEventParam($this::REQUEST, $request);
+        return $this;
+    }
+
+    /**
      * @return ResponseInterface|AbstractMessage
      */
     public function getResponse()
     {
-        $response = $this->getEventParam($this::RESPONSE);
-        if (empty($response)) {
-            /** @var ResponseFactory $factory */
-            $factory  = $this->getApp()->get(ResponseFactory::class);
-            $response = $factory->createResponse();
-            $this->setResponse($response);
-        }
-        return $response;
+        return $this->getEventParam($this::RESPONSE);
     }
 
     /**

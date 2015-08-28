@@ -2,29 +2,19 @@
 
 namespace WebinoAppLib\Factory;
 
+use WebinoAppLib\Event\AppEvent;
+use WebinoEventLib\EventManager;
+
 /**
  * Class EventsFactory
  */
-class EventsFactory extends AbstractFactory
+final class EventsFactory extends AbstractFactory
 {
-    /**
-     * Events engine
-     */
-    const ENGINE = 'ZfEvents';
-
-    /**
-     * Event object class
-     */
-    const EVENT_CLASS = 'WebinoAppLib\Event\AppEvent';
-
     /**
      * {@inheritdoc}
      */
     protected function create()
     {
-        /** @var \Zend\EventManager\EventManager $events */
-        $events = $this->requireService($this::ENGINE);
-        $events->setEventClass($this::EVENT_CLASS);
-        return $events;
+        return (new EventManager)->setEventClass(AppEvent::class);
     }
 }

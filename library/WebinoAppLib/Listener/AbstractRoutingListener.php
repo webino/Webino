@@ -4,16 +4,13 @@ namespace WebinoAppLib\Listener;
 
 use WebinoAppLib\Event\AbstractRouteEvent;
 use WebinoAppLib\Event\AppEvent;
-use WebinoAppLib\Event\ConsoleEvent;
 use WebinoAppLib\Event\DispatchEvent;
-use WebinoAppLib\Event\RouteEvent;
 use WebinoEventLib\AbstractListener;
-use Zend\Console\Console;
 
 /**
- * Class RoutingListener
+ * Class AbstractRoutingListener
  */
-final class RoutingListener extends AbstractListener
+abstract class AbstractRoutingListener extends AbstractListener
 {
     /**
      * Initialize listener
@@ -33,15 +30,15 @@ final class RoutingListener extends AbstractListener
         /** @var \Zend\Mvc\Router\Http\RouteMatch $routeMatch */
         $routeMatch = $app->getRouter()->match($event->getRequest());
         if (empty($routeMatch)) {
-            $app->emit(RouteEvent::NO_MATCH, $event);
+            $app->emit(AbstractRouteEvent::NO_MATCH, $event);
             return;
         }
 
         $routeEvent = $this->createRouteEvent($event);
-        $routeEvent->setEventParam(RouteEvent::ROUTE_MATCH, $routeMatch);
+        $routeEvent->setEventParam(AbstractRouteEvent::ROUTE_MATCH, $routeMatch);
 
         // binding to a route match to emit matched route event
-        $app->bind(RouteEvent::MATCH, function (AbstractRouteEvent $event) use ($app, $routeMatch) {
+        $app->bind(AbstractRouteEvent::MATCH, function (AbstractRouteEvent $event) use ($app, $routeMatch) {
             $routeEvent = clone $event;
             $routeEvent->setName($routeMatch->getMatchedRouteName());
 
@@ -57,8 +54,5 @@ final class RoutingListener extends AbstractListener
      * @param DispatchEvent $event
      * @return \WebinoAppLib\Event\AbstractRouteEvent
      */
-    private function createRouteEvent(DispatchEvent $event)
-    {
-        return Console::isConsole() ? new ConsoleEvent($event) : new RouteEvent($event);
-    }
+    abstract protected function createRouteEvent(DispatchEvent $event);
 }

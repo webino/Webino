@@ -4,15 +4,15 @@ namespace WebinoDomLib\Dom;
 
 use WebinoDomLib\Dom;
 use WebinoDomLib\State\Spec;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerAwareTrait;
+use WebinoEventLib\EventsAwareInterface;
+use WebinoEventLib\EventsAwareTrait;
 
 /**
  * Class Renderer
  */
-class Renderer implements EventManagerAwareInterface
+class Renderer implements EventsAwareInterface
 {
-    use EventManagerAwareTrait;
+    use EventsAwareTrait;
 
     /**
      * @param Dom $doc
@@ -28,7 +28,7 @@ class Renderer implements EventManagerAwareInterface
             $nodes = $doc->locate($spec->getLocator());
             foreach ($nodes as $node) {
                 // TODO DomEvent
-                $this->getEventManager()->trigger(__FUNCTION__, $this, ['node' => $node, 'spec' => $spec]);
+                $this->getEvents()->trigger(__FUNCTION__, $this, ['node' => $node, 'spec' => $spec]);
             }
         }
     }
