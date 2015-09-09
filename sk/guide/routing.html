@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
-    <link rel="next" title="Application Console" href="console.html" />
+    <link rel="next" title="Application Mailer" href="mailer.html" />
     <link rel="prev" title="Application Filesystem" href="filesystem.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
@@ -41,7 +41,7 @@
           <a href="filesystem.html" title="Previous document">Application Filesystem</a>
         </li>
         <li>
-          <a href="console.html" title="Next document">Application Console</a>
+          <a href="mailer.html" title="Next document">Application Mailer</a>
           &rarr;
         </li>
     </ul>
@@ -62,15 +62,70 @@
 <h1>Application Routing<a class="headerlink" href="#application-routing" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#routing-methods" id="id7">Routing Methods</a></li>
+<li><a class="reference internal" href="#routing-interface" id="id7">Routing Interface</a></li>
 <li><a class="reference internal" href="#routing-config" id="id8">Routing Config</a></li>
 <li><a class="reference internal" href="#routing-events" id="id9">Routing Events</a></li>
-<li><a class="reference internal" href="#route-event" id="id10">Route Event</a></li>
+<li><a class="reference internal" href="#route-event-interface" id="id10">Route Event Interface</a></li>
 <li><a class="reference internal" href="#routing-cookbook" id="id11">Routing Cookbook</a></li>
 </ul>
 </div>
-<div class="monospace-topic section" id="routing-methods">
-<h2><a class="toc-backref" href="#id7">Routing Methods</a><a class="headerlink" href="#routing-methods" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>The router lets you define routes that triggers events you can handle by listeners. A route is basically a path which
+is matched against request.</p>
+<ul class="simple">
+<li>Powered by <a class="reference external" href="https://github.com/zendframework/zend-mvc">Zend Router</a></li>
+</ul>
+<img alt="../_images/WebinoAppLib.Routing.Flowchart_h400.png" class="centered" src="../_images/WebinoAppLib.Routing.Flowchart_h400.png" />
+<p><strong>Explanation:</strong></p>
+<p><strong>1)</strong> Matching a route against request.</p>
+<ul class="simple">
+<li>Request made to your application contains a path to the &#8220;resource&#8221; the client is requesting.</li>
+<li>That request path is matched against available routes until one matches if any.</li>
+</ul>
+<p><strong>2)</strong> Emitting no route match event.</p>
+<ul class="simple">
+<li>When no route was matched, the no route event is emitted to which you can bind like following:</li>
+</ul>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\DispatchEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
+
+<span class="sd">/** @var WebinoAppLib\Application\AbstractApplication $app */</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">RouteEvent</span><span class="o">::</span><span class="na">NO_MATCH</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">DispatchEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>3)</strong> Emitting route match event.</p>
+<ul class="simple">
+<li>On a route match, the route match event is emitted to which you can bind like following:</li>
+</ul>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
+
+<span class="sd">/** @var WebinoAppLib\Application\AbstractApplication $app */</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">RouteEvent</span><span class="o">::</span><span class="na">MATCH</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>4)</strong> Emitting route event.</p>
+<ul class="simple">
+<li>The matched route event is emitted to which you can bind like following:</li>
+</ul>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
+
+<span class="sd">/** @var WebinoAppLib\Application\AbstractApplication $app */</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="nx">MyRoute</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+
+<span class="c1">// or via string</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="s1">&#39;my-route&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="monospace-topic section" id="routing-interface">
+<h2><a class="toc-backref" href="#id7">Routing Interface</a><a class="headerlink" href="#routing-interface" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
 <li><a class="reference internal" href="#app-getrouter" id="id12">$app-&gt;getRouter()</a></li>
@@ -82,7 +137,7 @@
 <div class="section" id="app-getrouter">
 <h3><a class="toc-backref" href="#id12">$app-&gt;getRouter()</a><a class="headerlink" href="#app-getrouter" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Accessing router service.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var Zend\Mvc\Router\RouteStackInterface $router */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Mvc\Router\RouteStackInterface $router */</span>
 <span class="nv">$router</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getRouter</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -90,35 +145,32 @@
 <div class="section" id="app-route">
 <h3><a class="toc-backref" href="#id13">$app-&gt;route()</a><a class="headerlink" href="#app-route" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Adding routes.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
+<span class="nv">$route</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">(</span><span class="nx">MyRoute</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="c1">// or via string</span>
 <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/my/route/path&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p><em>Adding routes via class.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Router\DefaultRoute</span><span class="p">;</span>
-
-<span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
-<span class="nv">$route</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">(</span><span class="nx">DefaultRoute</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setLiteral</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-bindroute">
 <span id="api-routing-app-bindroute"></span><h3><a class="toc-backref" href="#id14">$app-&gt;bindRoute()</a><a class="headerlink" href="#app-bindroute" title="Trvalý odkaz na tento nadpis">¶</a></h3>
-<p><em>Binding to routes.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
-
-<span class="sd">/** @var WebinoAppLib\Application\AbstractApplication $app */</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something...</span>
-<span class="p">});</span>
-</pre></div>
-</div>
 <p><em>Binding to routes via class.</em></p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\RouteEvent</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Router\DefaultRoute</span><span class="p">;</span>
 
-<span class="sd">/** @var WebinoAppLib\Application\AbstractApplication $app */</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">DefaultRoute</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+<span class="sd">/** @var \WebinoAppLib\Application\AbstractApplication $app */</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="nx">MyRoute</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+
+<span class="c1">// or</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nx">MyRoute</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something...</span>
+<span class="p">});</span>
+
+<span class="c1">// or via string</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindRoute</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// do something...</span>
 <span class="p">});</span>
 </pre></div>
@@ -127,20 +179,17 @@
 <div class="section" id="app-url">
 <span id="api-routing-app-url"></span><h3><a class="toc-backref" href="#id15">$app-&gt;url()</a><a class="headerlink" href="#app-url" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Generating URLs.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoAppLib\Router\UrlInterface $url */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Router\UrlInterface $url */</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="nx">MyRoute</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="c1">// or via string</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><em>Generating URLs via class.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Router\DefaultRoute</span><span class="p">;</span>
-
-<span class="sd">/** @var WebinoAppLib\Router\UrlInterface $url */</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="nx">DefaultRoute</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
-</pre></div>
-</div>
 <p><em>Generating URLs HTML.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */</span>
-<span class="nv">$urlHtml</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;myRoute&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;My Route Label&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */</span>
+<span class="nv">$urlHtml</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="nx">MyRoute</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;My Route Label&#39;</span><span class="p">);</span>
+<span class="c1">// or via string</span>
+<span class="nv">$urlHtml</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;my-route&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;My Route Label&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><div class="vspace"></div></p>
@@ -165,13 +214,13 @@
 <h4><a class="toc-backref" href="#id17">$route-&gt;setSegment()</a><a class="headerlink" href="#route-setsegment" title="Trvalý odkaz na tento nadpis">¶</a></h4>
 <p><em>Matching any segment of a URI path. Segments are denoted using a colon, followed by alphanumeric characters.
 If a segment is optional, it should be surrounded by brackets.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
 <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">setSegment</span><span class="p">(</span><span class="s1">&#39;/:requiredParam[/:optionalParam]&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><em>Each segment may have constraints associated with it. Each constraint should simply be a regular expression
 expressing the conditions under which that segment should match.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
 <span class="nv">$route</span>
     <span class="o">-&gt;</span><span class="na">setSegment</span><span class="p">(</span><span class="s1">&#39;/:requiredParam[/:optionalParam]&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">setConstraints</span><span class="p">([</span><span class="nx">TODO</span><span class="o">...</span><span class="p">]);</span>
@@ -179,20 +228,21 @@ expressing the conditions under which that segment should match.</em></p>
 </div>
 <p><em>Also, as you can in other routes, you may provide defaults to use. These are particularly useful when using
 optional segments.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
 <span class="nv">$route</span>
     <span class="o">-&gt;</span><span class="na">setSegment</span><span class="p">(</span><span class="s1">&#39;/:requiredParam[/:optionalParam]&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span><span class="s1">&#39;optionalParam&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;defaultValue&#39;</span><span class="p">]);</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>see: <a class="reference external" href="http://demo.webino.org/route-segment">Segment Route Example</a></li>
-</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">Viď aj</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/route-segment">Segment Route Example</a></p>
+</div>
 </div>
 <div class="section" id="route-setdefaults">
 <h4><a class="toc-backref" href="#id18">$route-&gt;setDefaults()</a><a class="headerlink" href="#route-setdefaults" title="Trvalý odkaz na tento nadpis">¶</a></h4>
 <p><em>Setting default route parameters.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
 <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span><span class="s1">&#39;optionalParam&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;defaultValue&#39;</span><span class="p">]);</span>
 </pre></div>
 </div>
@@ -201,7 +251,7 @@ optional segments.</em></p>
 <h4><a class="toc-backref" href="#id19">$route-&gt;setConstraints()</a><a class="headerlink" href="#route-setconstraints" title="Trvalý odkaz na tento nadpis">¶</a></h4>
 <p><em>Setting route parameters constraints.</em></p>
 <p>TODO.....</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var WebinoConfigLib\Feature\Route $route */</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoConfigLib\Feature\Route $route */</span>
 <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">setConstraints</span><span class="p">([</span><span class="s1">&#39;optionalParam&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;TODO...&#39;</span><span class="p">]);</span>
 </pre></div>
 </div>
@@ -228,8 +278,8 @@ optional segments.</em></p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">Viď aj</p>
-<p class="last"><a class="reference internal" href="#api-routing-app-url"><span>$app-&gt;url()</span></a> |
-<a class="reference internal" href="#api-routing-app-bindroute"><span>$app-&gt;bindRoute()</span></a> |
+<p class="last"><a class="reference internal" href="#api-routing-app-url"><span>$app-&gt;url()</span></a> ●
+<a class="reference internal" href="#api-routing-app-bindroute"><span>$app-&gt;bindRoute()</span></a> ●
 <a class="reference external" href="http://demo.webino.org/route-config">Route Config Example</a></p>
 </div>
 </div>
@@ -265,8 +315,8 @@ optional segments.</em></p>
 </div>
 </div>
 </div>
-<div class="section" id="route-event">
-<h2><a class="toc-backref" href="#id10">Route Event</a><a class="headerlink" href="#route-event" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<div class="section" id="route-event-interface">
+<h2><a class="toc-backref" href="#id10">Route Event Interface</a><a class="headerlink" href="#route-event-interface" title="Trvalý odkaz na tento nadpis">¶</a></h2>
 <div class="contents local topic" id="id5">
 <ul class="simple">
 <li><a class="reference internal" href="#event-getparam" id="id23">$event-&gt;getParam()</a></li>
@@ -371,6 +421,9 @@ optional segments.</em></p>
             <a href="../basics/events.html">Event System</a>
         </li>
         <li>
+            <a href="../basics/application-context.html">Application Context</a>
+        </li>
+        <li>
             <a href="../basics/application-modules.html">Application Modules</a>
         </li>
         <li>
@@ -417,7 +470,7 @@ optional segments.</em></p>
             <a href="requests.html">Requests [TODO]</a>
         </li>
         <li>
-            <a href="responses.html">Responses [TODO]</a>
+            <a href="responses.html">Responses</a>
         </li>
         <li>
             <a href="sessions.html">Sessions [TODO]</a>
@@ -426,7 +479,7 @@ optional segments.</em></p>
             <a href="database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="mail.html">Mail [TODO]</a>
+            <a href="mailer.html">Mailer</a>
         </li>
         <li>
             <a href="templates.html">Templates [TODO]</a>
@@ -486,7 +539,7 @@ optional segments.</em></p>
           <a href="filesystem.html" title="Previous document">Application Filesystem</a>
         </li>
         <li>
-          <a href="console.html" title="Next document">Application Console</a>
+          <a href="mailer.html" title="Next document">Application Mailer</a>
           &rarr;
         </li>
     </ul>

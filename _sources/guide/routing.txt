@@ -9,187 +9,83 @@ Application Routing
     :local:
 
 
+The router lets you define routes that triggers events you can handle by listeners. A route is basically a path which
+is matched against request.
+
+- Powered by `Zend Router <https://github.com/zendframework/zend-mvc>`_
+
+
+.. image:: ../_static/media/WebinoAppLib.Routing.Flowchart_h400.png
+    :class: centered
+
+**Explanation:**
+
+**1)** Matching a route against request.
+
+- Request made to your application contains a path to the "resource" the client is requesting.
+
+- That request path is matched against available routes until one matches if any.
+
+**2)** Emitting no route match event.
+
+- When no route was matched, the no route event is emitted to which you can bind like following:
+
+.. code-block:: php
+
+    use WebinoAppLib\Event\DispatchEvent;
+    use WebinoAppLib\Event\RouteEvent;
+
+    /** @var WebinoAppLib\Application\AbstractApplication $app */
+    $app->bind(RouteEvent::NO_MATCH, function (DispatchEvent $event) {
+        // do something...
+    });
+
+
+**3)** Emitting route match event.
+
+- On a route match, the route match event is emitted to which you can bind like following:
+
+.. code-block:: php
+
+    use WebinoAppLib\Event\RouteEvent;
+
+    /** @var WebinoAppLib\Application\AbstractApplication $app */
+    $app->bind(RouteEvent::MATCH, function (RouteEvent $event) {
+        // do something...
+    });
+
+
+**4)** Emitting route event.
+
+- The matched route event is emitted to which you can bind like following:
+
+.. code-block:: php
+
+    use WebinoAppLib\Event\RouteEvent;
+
+    /** @var WebinoAppLib\Application\AbstractApplication $app */
+    $app->bindRoute(MyRoute::class, function (RouteEvent $event) {
+        // do something...
+    });
+
+    // or via string
+
+    $app->bindRoute('my-route', function (RouteEvent $event) {
+        // do something...
+    });
+
+
 .. rst-class:: monospace-topic
 
-Routing Methods
-^^^^^^^^^^^^^^^
+Routing Interface
+^^^^^^^^^^^^^^^^^
 
 .. contents::
     :depth: 1
     :local:
 
 
-$app->getRouter()
------------------
-
-*Accessing router service.*
-
-.. code-block:: php
-
-    /** @var Zend\Mvc\Router\RouteStackInterface $router */
-    $router = $app->getRouter();
-
-
-$app->route()
--------------
-
-*Adding routes.*
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route = $app->route('myRoute')->setLiteral('/my/route/path');
-
-
-*Adding routes via class.*
-
-.. code-block:: php
-
-    use WebinoAppLib\Router\DefaultRoute;
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route = $app->route(DefaultRoute::class)->setLiteral('/');
-
-
-.. _api-routing-app-bindRoute:
-
-$app->bindRoute()
------------------
-
-*Binding to routes.*
-
-.. code-block:: php
-
-    use WebinoAppLib\Event\RouteEvent;
-
-    /** @var WebinoAppLib\Application\AbstractApplication $app */
-    $app->bindRoute('myRoute', function (RouteEvent $event) {
-        // do something...
-    });
-
-
-*Binding to routes via class.*
-
-.. code-block:: php
-
-    use WebinoAppLib\Event\RouteEvent;
-    use WebinoAppLib\Router\DefaultRoute;
-
-    /** @var WebinoAppLib\Application\AbstractApplication $app */
-    $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-        // do something...
-    });
-
-
-.. _api-routing-app-url:
-
-$app->url()
------------
-
-*Generating URLs.*
-
-.. code-block:: php
-
-    /** @var WebinoAppLib\Router\UrlInterface $url */
-    $url = $app->url('myRoute');
-
-
-*Generating URLs via class.*
-
-.. code-block:: php
-
-    use WebinoAppLib\Router\DefaultRoute;
-
-    /** @var WebinoAppLib\Router\UrlInterface $url */
-    $url = $app->url(DefaultRoute::class);
-
-
-*Generating URLs HTML.*
-
-.. code-block:: php
-
-    /** @var WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */
-    $urlHtml = $app->url('myRoute')->html('My Route Label');
-
-
-|vspace|
-
-Available route methods:
-
-.. contents::
-    :depth: 1
-    :local:
-
-
-$route->setLiteral()
-++++++++++++++++++++
-
-*Exact matching of the URI path. Configuration is solely the path you want to match.*
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route->setLiteral('/route/path');
-
-
-$route->setSegment()
-++++++++++++++++++++
-
-*Matching any segment of a URI path. Segments are denoted using a colon, followed by alphanumeric characters.
-If a segment is optional, it should be surrounded by brackets.*
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route->setSegment('/:requiredParam[/:optionalParam]');
-
-
-*Each segment may have constraints associated with it. Each constraint should simply be a regular expression
-expressing the conditions under which that segment should match.*
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route
-        ->setSegment('/:requiredParam[/:optionalParam]')
-        ->setConstraints([TODO...]);
-
-
-*Also, as you can in other routes, you may provide defaults to use. These are particularly useful when using
-optional segments.*
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route
-        ->setSegment('/:requiredParam[/:optionalParam]')
-        ->setDefaults(['optionalParam' => 'defaultValue']);
-
-
-- see: `Segment Route Example <http://demo.webino.org/route-segment>`_
-
-$route->setDefaults()
-+++++++++++++++++++++
-
-*Setting default route parameters.*
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route->setDefaults(['optionalParam' => 'defaultValue']);
-
-
-$route->setConstraints()
-++++++++++++++++++++++++
-
-*Setting route parameters constraints.*
-
-TODO.....
-
-.. code-block:: php
-
-    /** @var WebinoConfigLib\Feature\Route $route */
-    $route->setConstraints(['optionalParam' => 'TODO...']);
+.. include:: /guide/api/routing.rst.inc
 
 
 .. rst-class:: body-font
@@ -243,8 +139,8 @@ This event is emitted at beginning of application dispatch when route can't be m
     $app->bind(RouteEvent::NO_MATCH, function (DispatchEvent $event) {});
 
 
-Route Event
-^^^^^^^^^^^
+Route Event Interface
+^^^^^^^^^^^^^^^^^^^^^
 
 .. contents::
     :depth: 1

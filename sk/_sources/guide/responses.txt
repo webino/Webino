@@ -9,8 +9,13 @@ Application Responses
 
 TODO...
 
+.. image:: ../_static/media/WebinoAppLib.Responses.Flowchart_h340.png
+    :class: centered
 
-File Download
-=============
+**Explanation:**
 
-TODO...
+**1)** TODO...
+
+**2)** TODO...
+
+**3)** TODO...
