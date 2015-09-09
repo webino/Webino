@@ -3,7 +3,7 @@
 namespace WebinoAppLib\Util;
 
 use WebinoAppLib\Event\RouteEvent;
-use WebinoBaseLib\Util\SingletonTrait;
+use WebinoBaseLib\SingletonTrait;
 
 /**
  * Class RouteEventNameResolver

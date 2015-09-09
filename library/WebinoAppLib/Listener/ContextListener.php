@@ -21,7 +21,6 @@ class ContextListener extends AbstractListener
     public function init()
     {
         $this->listen(AppEvent::BOOTSTRAP, 'setupContext', AppEvent::BEFORE);
-        $this->listen(ContextEvent::class, 'bindListeners', AppEvent::BEGIN * 999);
     }
 
     /**
@@ -31,11 +30,13 @@ class ContextListener extends AbstractListener
     public function setupContext(AppEvent $event)
     {
         $app = $event->getApp();
-        $cfg = $app->getConfig()->get(AbstractContext::KEY);
+        $cfg = $app->getConfig()->get(AbstractContext::CONTEXT);
 
         if (null === $cfg) {
             return;
         }
+
+        $contexts = [];
 
         /** @var \WebinoAppLib\Application\Config $context */
         foreach ($cfg as $key => $context) {
@@ -55,24 +56,17 @@ class ContextListener extends AbstractListener
             }
 
             $app->log(Log\ContextMatched::class, [$key]);
-            $app->emit(new ContextEvent($key, $context, $app));
-        }
-    }
 
-    /**
-     * @param ContextEvent $event
-     */
-    public function bindListeners(ContextEvent $event)
-    {
-        $context = $event->getContextConfig();
-        if (empty($context->listeners)) {
-            return;
+            if (isset($context->listeners)) {
+                foreach ($context->listeners as $listenerClass) {
+                    $listener = $app->get($listenerClass);
+                    $listener and $app->bind($listener);
+                }
+            }
+
+            $contexts[$key] = $context;
         }
 
-        $app = $event->getApp();
-        foreach ($context->listeners as $listenerClass) {
-            $listener = $app->get($listenerClass);
-            $listener and $app->bind($listener);
-        }
+        $app->emit(new ContextEvent($app, $contexts));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Application\Traits;
 
-use WebinoAppLib\Application\AbstractApplicationInterface;
+use WebinoAppLib\Application;
 use WebinoAppLib\Exception\DomainException;
 use Zend\Cache\Storage\Adapter\BlackHole;
 use Zend\Cache\Storage\StorageInterface;
@@ -18,10 +18,11 @@ trait CacheTrait
     private $cache;
 
     /**
-     * @param string $name
-     * @param mixed $service
+     * Set optional service from services into application
+     *
+     * @param string $service Service name
      */
-//    abstract protected function setServicesService($name, $service);
+    abstract protected function optionalService($service);
 
     /**
      * {@inheritdoc}
@@ -29,13 +30,15 @@ trait CacheTrait
     public function getCache($key = null)
     {
         if (null === $this->cache) {
-            $this->setCache(new BlackHole);
+            $this->optionalService(Application::CACHE);
+            if (null === $this->cache) {
+                $this->setCache(new BlackHole);
+            }
         }
 
         if ($key) {
             return $this->cache->getItem($key);
         }
-
         return $this->cache;
     }
 

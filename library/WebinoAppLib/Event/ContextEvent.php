@@ -3,7 +3,7 @@
 namespace WebinoAppLib\Event;
 
 use WebinoAppLib\Application\AbstractApplication;
-use Zend\Config\Config;
+use WebinoAppLib\Exception;
 
 /**
  * Class ContextEvent
@@ -11,41 +11,41 @@ use Zend\Config\Config;
 class ContextEvent extends AppEvent
 {
     /**
-     * @var string
+     * @var \Zend\Config\Config[]
      */
-    private $context;
+    private $contexts;
 
     /**
-     * @var Config
-     */
-    private $contextConfig;
-
-    /**
-     * @param string $context
-     * @param Config $contextConfig
      * @param AbstractApplication $app
+     * @param \Zend\Config\Config[] $contexts
      */
-    public function __construct($context, Config $contextConfig, AbstractApplication $app)
+    public function __construct(AbstractApplication $app, array $contexts)
     {
         parent::__construct(self::class);
         $this->setApp($app);
-        $this->context = (string) $context;
-        $this->contextConfig = $contextConfig;
+        $this->contexts = $contexts;
     }
 
     /**
+     * @param string $name
+     * @return bool
+     */
+    public function hasContext($name)
+    {
+        return isset($this->contexts[$name]);
+    }
+
+    /**
+     * @param string $name
      * @return string
      */
-    public function getContext()
+    public function getContext($name)
     {
-        return $this->context;
-    }
+        if (empty($this->contexts[$name])) {
+            throw (new Exception\OutOfBoundsException('Context %s not set; %s'))
+                ->format($name, array_keys($this->contexts));
+        }
 
-    /**
-     * @return Config
-     */
-    public function getContextConfig()
-    {
-        return $this->contextConfig;
+        return $this->contexts[$name];
     }
 }

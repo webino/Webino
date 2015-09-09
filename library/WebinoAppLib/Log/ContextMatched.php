@@ -15,6 +15,6 @@ class ContextMatched extends AbstractInfoMessage
      */
     public function getMessage(Parameters $args)
     {
-        return '`{0}` context matched';
+        return 'Matching context {0}';
     }
 }

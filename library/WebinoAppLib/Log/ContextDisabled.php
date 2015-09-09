@@ -15,6 +15,6 @@ class ContextDisabled extends AbstractInfoMessage
      */
     public function getMessage(Parameters $args)
     {
-        return '`{0}` context disabled, missing class option';
+        return 'Disabling context (no class option) {0}';
     }
 }

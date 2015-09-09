@@ -16,10 +16,9 @@ interface ConfigInterface
 
     /**
      * @param array|\WebinoAppLib\Application\Config|object $config
-     * @param bool $setService
      * @throws \WebinoAppLib\Exception\DomainException Disallowed config modifications
      */
-    public function setConfig($config, $setService = true);
+    public function setConfig($config);
 
     /**
      * Return core config object or its value

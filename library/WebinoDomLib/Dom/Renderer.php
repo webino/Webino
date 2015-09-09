@@ -3,7 +3,7 @@
 namespace WebinoDomLib\Dom;
 
 use WebinoDomLib\Dom;
-use WebinoDomLib\State\Spec;
+use WebinoDomLib\Event\RenderEvent;
 use WebinoEventLib\EventsAwareInterface;
 use WebinoEventLib\EventsAwareTrait;
 
@@ -16,19 +16,18 @@ class Renderer implements EventsAwareInterface
 
     /**
      * @param Dom $doc
-     * @param State $state
+     * @param State $cfg
      */
-    public function render(Dom $doc, State $state)
+    public function render(Dom $doc, Config $cfg)
     {
         /** @var Spec $spec */
-        foreach ($state->getQueue() as $spec) {
+        foreach ($cfg->getQueue() as $spec) {
 
             // TODO skip if locator or node owner document empty
 
             $nodes = $doc->locate($spec->getLocator());
             foreach ($nodes as $node) {
-                // TODO DomEvent
-                $this->getEvents()->trigger(__FUNCTION__, $this, ['node' => $node, 'spec' => $spec]);
+                $this->getEvents()->trigger(new RenderEvent($this, $node, $spec));
             }
         }
     }

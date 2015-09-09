@@ -13,11 +13,16 @@ use WebinoEventLib\AbstractListener;
 abstract class AbstractRoutingListener extends AbstractListener
 {
     /**
+     * Priority of the route match handler
+     */
+    const MATCH_ROUTE_PRIORITY = AppEvent::BEFORE * 999;
+
+    /**
      * Initialize listener
      */
     public function init()
     {
-        $this->listen(AppEvent::DISPATCH, [$this, 'matchRoute'], AppEvent::BEFORE * 999);
+        $this->listen(AppEvent::DISPATCH, [$this, 'matchRoute'], $this::MATCH_ROUTE_PRIORITY);
     }
 
     /**

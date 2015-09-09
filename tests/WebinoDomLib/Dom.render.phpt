@@ -3,6 +3,7 @@
 use Tester\Assert;
 
 use WebinoDomLib\Dom;
+use WebinoDomLib\Event\RenderEvent;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -19,27 +20,24 @@ $doc = new Dom($code);
 
 $renderer = new Dom\Renderer;
 
-$cfg = new \WebinoDomLib\State\Config;
+$cfg = new Dom\Config;
+
 
 $cfg->set('test-body')->setLocator('body')->setValue('Hello Webino!');
 
 // TODO
 // $spec->set('test-spec.test-subspec.etc')->setPriority()->setLocator()->setValue();
 
-$state = new Dom\State($cfg->toArray());
-
 $events = $renderer->getEvents();
 
 // setting a value
-$events->attach('render', function ($event) {
-
-    $node = $event->getParam('node');
-    $spec = $event->getParam('spec');
-
+$events->attach(RenderEvent::class, function (RenderEvent $event) {
+    $node = $event->getNode();
+    $spec = $event->getSpec();
     $node->setValue($spec->getValue());
 });
 
-$renderer->render($doc, $state);
+$renderer->render($doc, $cfg);
 
 
 Assert::same($expected, $doc->save());

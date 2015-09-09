@@ -2,6 +2,8 @@
 
 namespace WebinoAppLib\Feature;
 
+use WebinoAppLib\Context\ConsoleContext;
+
 /**
  * Class ConsoleListener
  */
@@ -12,6 +14,6 @@ class ConsoleListener extends AbstractContextListener
      */
     protected function getKey()
     {
-        return 'console';
+        return ConsoleContext::class;
     }
 }

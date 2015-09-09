@@ -245,7 +245,7 @@ $app->bind(AppEvent::DISPATCH, function (DispatchEvent $event) {
         empty($value) or $node->setValue($value);
     });
 
-    // setting a value
+    // setting an html
     $events->attach('render', function ($event) {
 
         $node = $event->getParam('node');

@@ -10,19 +10,6 @@ use WebinoAppLib\Event\AppEvent;
 class HttpContext extends AbstractContext
 {
     /**
-     * Context key
-     */
-    const KEY = 'http';
-
-    /**
-     * @return string
-     */
-    protected function getKey()
-    {
-        return $this::KEY;
-    }
-
-    /**
      * Returns true for HTTP environment
      *
      * @param AppEvent $event

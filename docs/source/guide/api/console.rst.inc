@@ -1184,8 +1184,8 @@ Presenting the user with a set of interactive options. The user can only select 
         'option5' => 'Puppies'
     ];
 
-    $input   = $cli->radio('Please send me one of the following:', $options);
-    $result  = $input->prompt();
+    $input  = $cli->radio('Please send me one of the following:', $options);
+    $result = $input->prompt();
 
 
 The result will be a string, not an array (the selected key in the case of an associative array).

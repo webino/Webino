@@ -14,18 +14,13 @@ abstract class AbstractContext implements
     /**
      * Config key
      */
-    const KEY = 'context';
-
-    /**
-     * @return string
-     */
-    abstract protected function getKey();
+    const CONTEXT = 'context';
 
     /**
      * @return array
      */
     public function toArray()
     {
-        return [self::KEY => [$this->getKey() => ['class' => static::class]]];
+        return [self::CONTEXT => [static::class => ['class' => static::class]]];
     }
 }

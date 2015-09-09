@@ -103,8 +103,7 @@ trait ServiceProviderTrait
      */
     protected function optionalService($service)
     {
-        $this->services->has($service)
-        and $this->setService($service);
+        $this->services->has($service) and $this->setService($service);
     }
 
     /**

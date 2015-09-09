@@ -23,24 +23,33 @@ trait DebuggerTrait
     abstract protected function setServicesService($name, $service);
 
     /**
+     * Set optional service from services into application
+     *
+     * @param string $service Service name
+     */
+    abstract protected function optionalService($service);
+
+    /**
      * @return object|DebuggerInterface
      */
     public function getDebugger()
     {
         if (null === $this->debugger) {
-            $this->setDebugger(new NullDebugger);
+            $this->optionalService(Application::DEBUGGER);
+            if (null === $this->debugger) {
+                $this->setDebugger(new NullDebugger);
+            }
+            $this->setServicesService(Application::DEBUGGER, $this->debugger);
         }
         return $this->debugger;
     }
 
     /**
      * @param object|DebuggerInterface $debugger
-     * @param bool $setService
      */
-    protected function setDebugger(DebuggerInterface $debugger, $setService = true)
+    protected function setDebugger(DebuggerInterface $debugger)
     {
         $this->debugger = $debugger;
-        $setService and $this->setServicesService(Application::DEBUGGER, $debugger);
     }
 
     /**

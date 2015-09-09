@@ -3,6 +3,7 @@
 namespace WebinoAppLib\Application\Traits;
 
 use ArrayObject;
+use WebinoAppLib\Application;
 use WebinoAppLib\Router\Url;
 use WebinoAppLib\Service\Router;
 use WebinoAppLib\Util\RouteEventNameResolver;
@@ -36,11 +37,22 @@ trait RouterTrait
     abstract public function bind($event, $callback = null, $priority = 1);
 
     /**
+     * Require service from services into application
+     *
+     * @param string $service Service name
+     * @throws DomainException Unable to get service
+     */
+    abstract protected function requireService($service);
+
+    /**
      * @see \WebinoAppLib\Contract\RouterInterface::getRouter()
      * @return RouteStackInterface
      */
     public function getRouter()
     {
+        if (null === $this->router) {
+            $this->requireService(Application::ROUTER);
+        }
         return $this->router;
     }
 

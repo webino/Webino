@@ -10,19 +10,6 @@ use WebinoAppLib\Event\AppEvent;
 class ConsoleContext extends AbstractContext
 {
     /**
-     * Context key
-     */
-    const KEY = 'console';
-
-    /**
-     * @return string
-     */
-    protected function getKey()
-    {
-        return $this::KEY;
-    }
-
-    /**
      * Returns true for CLI environment
      *
      * @param AppEvent $event

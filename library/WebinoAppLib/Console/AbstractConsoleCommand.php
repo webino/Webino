@@ -4,7 +4,7 @@ namespace WebinoAppLib\Console;
 
 use WebinoAppLib\Event\ConsoleEvent;
 use WebinoAppLib\Feature\ConsoleListener;
-use WebinoAppLib\Listener\ConsoleListenerTrait;
+use WebinoAppLib\Listener\Console\ConsoleListenerTrait;
 use WebinoConfigLib\Feature\FeatureInterface;
 use WebinoConfigLib\Feature\Route\Console;
 use WebinoEventLib\ListenerAggregateTrait;

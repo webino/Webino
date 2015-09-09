@@ -8,6 +8,16 @@ namespace WebinoAppLib\Application;
 interface AbstractApplicationInterface
 {
     /**
+     * Application core configuration service name
+     */
+    const CORE_CONFIG = 'CoreConfig';
+
+    /**
+     * Application configuration service name
+     */
+    const CONFIG = 'Config';
+
+    /**
      * Application service name
      */
     const SERVICE = 'Application';
@@ -43,12 +53,7 @@ interface AbstractApplicationInterface
     const ROUTER = 'Router';
 
     /**
-     * Application core configuration service name
+     * Application mailer service name
      */
-    const CORE_CONFIG = 'CoreConfig';
-
-    /**
-     * Application configuration service name
-     */
-    const CONFIG = 'Config';
+    const MAILER = 'Mailer';
 }

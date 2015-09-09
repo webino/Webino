@@ -2,7 +2,7 @@
 
 namespace WebinoHtmlLib;
 
-use WebinoBaseLib\Util\SingletonTrait;
+use WebinoBaseLib\SingletonTrait;
 use Zend\Escaper\Escaper as BaseEscaper;
 
 /**

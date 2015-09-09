@@ -3,10 +3,9 @@
 namespace WebinoAppLib\Application\Traits;
 
 use WebinoAppLib\Application;
-use WebinoAppLib\Application\AbstractApplicationInterface;
 use WebinoAppLib\Application\Config;
 use WebinoAppLib\Event\AppEvent;
-use WebinoAppLib\Exception\DomainException;
+use WebinoAppLib\Exception;
 
 /**
  * Trait Config
@@ -27,6 +26,12 @@ trait ConfigTrait
     abstract public function get($service);
 
     /**
+     * @param string $name
+     * @param mixed $service
+     */
+    abstract protected function setServicesService($name, $service);
+
+    /**
      * Attach a listener to an event
      *
      * @param string|\Zend\EventManager\ListenerAggregateInterface $event
@@ -38,10 +43,12 @@ trait ConfigTrait
     abstract public function bind($event, $callback = null, $priority = 1);
 
     /**
-     * @param string $name
-     * @param mixed $service
+     * Require service from services into application
+     *
+     * @param string $service Service name
+     * @throws DomainException Unable to get service
      */
-    abstract protected function setServicesService($name, $service);
+    abstract protected function requireService($service);
 
     /**
      * @param string|null $name
@@ -50,33 +57,37 @@ trait ConfigTrait
      */
     public function getConfig($name = null, $default = null)
     {
+        if (null === $this->config) {
+            $this->requireService(Application::CONFIG);
+            $this->setServicesService(Application::CONFIG, $this->config);
+        }
         return $name ? $this->config->get($name, $default) : $this->config;
     }
 
     /**
      * @param array|Config|object $config
-     * @param bool $setService
-     * @throws DomainException Disallowed config modifications
+     * @throws Exception\InvalidArgumentException Expected config as array|Config
+     * @throws Exception\DomainException Disallowed config modifications
      */
-    public function setConfig($config, $setService = true)
+    public function setConfig($config)
     {
         if (is_array($config)) {
             $this->getConfig()->mergeConfig($config);
             return;
         }
 
-        if (!($config  instanceof Config)) {
-            // TODO exception
+        if (!($config instanceof Config)) {
+            throw (new Exception\InvalidArgumentException('Expected config of type %s but got %s'))
+                ->format(Config::class, $config);
         }
 
         if ($this->config && $this->config->isReadOnly()) {
-            throw new DomainException(
+            throw new Exception\DomainException(
                 'Unable to set new application configuration; restricted to read only'
             );
         }
 
         $this->config = $config;
-        $setService and $this->setServicesService(AbstractApplicationInterface::CONFIG, $config);
     }
 
     /**

@@ -62,6 +62,7 @@ Or download `Webino as ZIP <https://github.com/webino/Webino/archive/prototype.z
     basics/configuration
     basics/services
     basics/events
+    basics/application-context
     basics/application-modules
     basics/skeleton-application
     basics/command-line-interface
@@ -74,4 +75,5 @@ Or download `Webino as ZIP <https://github.com/webino/Webino/archive/prototype.z
     guide/caching
     guide/filesystem
     guide/routing
+    guide/mailer
     guide/console

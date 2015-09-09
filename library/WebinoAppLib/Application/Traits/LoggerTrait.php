@@ -2,6 +2,7 @@
 
 namespace WebinoAppLib\Application\Traits;
 
+use WebinoAppLib\Application;
 use WebinoConfigLib\Feature\AbstractLog;
 use WebinoLogLib\LoggerInterface;
 use WebinoLogLib\Factory;
@@ -39,12 +40,23 @@ trait LoggerTrait
     abstract public function getConfig($name = null, $default = null);
 
     /**
+     * Require service from services into application
+     *
+     * @param string $service Service name
+     * @throws DomainException Unable to get service
+     */
+    abstract protected function requireService($service);
+
+    /**
      * @param string $name
      * @return object|LoggerInterface
      */
     public function getLogger($name = null)
     {
         if (null === $name) {
+            if (null === $this->logger) {
+                $this->requireService(Application::LOGGER);
+            }
             return $this->logger;
         }
         return $this->resolveLogger($name);

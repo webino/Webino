@@ -19,7 +19,8 @@ abstract class AbstractApplication implements
     Contract\LoggerInterface,
     Contract\CacheInterface,
     Contract\FilesystemInterface,
-    Contract\RouterInterface
+    Contract\RouterInterface,
+    Contract\MailerInterface
 {
     use Traits\ConsoleTrait;
     use Traits\DebuggerTrait;
@@ -30,34 +31,12 @@ abstract class AbstractApplication implements
     use Traits\CacheTrait;
     use Traits\FilesystemTrait;
     use Traits\RouterTrait;
+    use Traits\MailerTrait;
 
     /**
      * Application bootstrap service name
      */
     const BOOTSTRAP = 'Bootstrap';
-
-    /**
-     * Required services
-     *
-     * @var array
-     */
-    private $requiredServices = [
-        self::CONFIG,
-        self::EVENTS,
-    ];
-
-    /**
-     * Optional services
-     *
-     * @var array
-     */
-    private $optionalServices = [
-        self::DEBUGGER,
-        self::LOGGER,
-        self::CACHE,
-        self::FILESYSTEMS,
-        self::ROUTER,
-    ];
 
     /**
      * @var Bootstrap
@@ -70,13 +49,6 @@ abstract class AbstractApplication implements
     public function __construct(ServiceManager $services)
     {
         $this->services = $services;
-        foreach ($this->requiredServices as $service) {
-            $this->requireService($service);
-        }
-
-        foreach ($this->optionalServices as $service) {
-            $this->optionalService($service);
-        }
     }
 
     /**

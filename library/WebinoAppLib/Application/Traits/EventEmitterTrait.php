@@ -2,6 +2,7 @@
 
 namespace WebinoAppLib\Application\Traits;
 
+use WebinoAppLib\Application;
 use WebinoAppLib\Log;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
@@ -50,10 +51,21 @@ trait EventEmitterTrait
     abstract public function log($level = null, ...$args);
 
     /**
+     * Require service from services into application
+     *
+     * @param string $service Service name
+     * @throws DomainException Unable to get service
+     */
+    abstract protected function requireService($service);
+
+    /**
      * @return EventManagerInterface
      */
     public function getEvents()
     {
+        if (null === $this->events) {
+            $this->requireService(Application::EVENTS);
+        }
         return $this->events;
     }
 

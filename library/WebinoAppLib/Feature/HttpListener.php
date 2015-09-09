@@ -2,6 +2,8 @@
 
 namespace WebinoAppLib\Feature;
 
+use WebinoAppLib\Context\HttpContext;
+
 /**
  * Class HttpListener
  */
@@ -12,6 +14,6 @@ class HttpListener extends AbstractContextListener
      */
     protected function getKey()
     {
-        return 'http';
+        return HttpContext::class;
     }
 }

@@ -21,6 +21,6 @@ abstract class AbstractContextListener extends Listener
     {
         $cfg = parent::toArray();
         return [Config::SERVICES => $cfg[Config::SERVICES]]
-            + [AbstractContext::KEY => [$this->getKey() => [Config::LISTENERS => $cfg[Config::LISTENERS]]]];
+            + [AbstractContext::CONTEXT => [$this->getKey() => [Config::LISTENERS => $cfg[Config::LISTENERS]]]];
     }
 }

@@ -4,7 +4,6 @@ use org\bovigo\vfs\vfsStream;
 use Psr\Log\LoggerInterface;
 use Tester\Assert;
 use WebinoAppLib\Application;
-use WebinoAppLib\Factory;
 use WebinoConfigLib\Feature\Log;
 use WebinoLogLib\Message\AbstractInfoMessage;
 use WebinoLogLib\Message\AbstractWarningMessage;
@@ -37,11 +36,11 @@ createVfs([
 
 $logFile = vfsStream::url('root/data/log/app.log');
 
-$config = new Application\CoreConfig([
+$config = Webino::config([
     new Log($logFile),
 ]);
 
-$app = (new Factory)->create($config)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 
 $app->log(MyLogMessageOne::class);

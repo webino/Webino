@@ -3,6 +3,7 @@
 namespace WebinoAppLib\Application\Traits;
 
 use BsbFlysystem\Service\FilesystemManager;
+use WebinoAppLib\Application;
 use WebinoAppLib\Exception\InvalidArgumentException;
 use WebinoAppLib\Filesystem\LocalFiles;
 
@@ -17,10 +18,21 @@ trait FilesystemTrait
     private $filesystems;
 
     /**
+     * Require service from services into application
+     *
+     * @param string $service Service name
+     * @throws DomainException Unable to get service
+     */
+    abstract protected function requireService($service);
+
+    /**
      * @return FilesystemManager|mixed
      */
     public function getFilesystems()
     {
+        if (null === $this->filesystems) {
+            $this->requireService(Application::FILESYSTEMS);
+        }
         return $this->filesystems;
     }
 

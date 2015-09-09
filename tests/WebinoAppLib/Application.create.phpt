@@ -14,7 +14,7 @@ use Zend\Config\Config;
 require __DIR__ . '/../bootstrap.php';
 
 
-$appCore = (new Factory)->create();
+$appCore = Webino::application();
 
 $app = $appCore->bootstrap();
 
