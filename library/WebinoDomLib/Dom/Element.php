@@ -67,11 +67,15 @@ class Element extends \DOMElement implements
         $frag = $this->ownerDocument->createDocumentFragment();
         $frag->appendXml($html);
 
+        // TODO refactor
         if ($frag->firstChild) {
             $this->appendChild($frag);
         } else {
+            /** @var Element $node */
             foreach ((new Dom($html))->locate('body') as $node) {
-                $this->appendChild($this->ownerDocument->importNode($node, true));
+                foreach ($node->childNodes as $child) {
+                    $this->appendChild($this->ownerDocument->importNode($child, true));
+                }
             }
         }
 
@@ -159,9 +163,23 @@ class Element extends \DOMElement implements
 
         $frag = $this->ownerDocument->createDocumentFragment();
         $frag->appendXML($html);
-        $node = $this->parentNode->insertBefore($frag, $this);
-        $this->remove();
 
+        // TODO refactor
+        if ($frag->firstChild) {
+            $node = $this->parentNode->insertBefore($frag, $this);
+        } else {
+            $nodes = [];
+            /** @var Element $node */
+            foreach ((new Dom($html))->locate('body') as $subNode) {
+                foreach ($subNode->childNodes as $child) {
+                    // TODO add node to node list
+                    $nodes[] = $this->parentNode->insertBefore($this->ownerDocument->importNode($child, true), $this);
+                }
+            }
+            $node = new NodeList($nodes);
+        }
+
+        $this->remove();
         return $node;
     }
 

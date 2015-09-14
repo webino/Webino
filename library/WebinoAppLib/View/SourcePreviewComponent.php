@@ -32,6 +32,6 @@ class SourcePreviewComponent extends AbstractBaseViewComponent
         $node
             ->setLocator('source-preview')
             ->setPriority(-100)
-            ->setHtml(new SourcePreview($this->filePath));
+            ->setReplace(new SourcePreview($this->filePath));
     }
 }
