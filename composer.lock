@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "06ed4c00a07f9945e39df20187aaff91",
+    "hash": "edd26d4291007edda3ed10e109b4207d",
     "packages": [
         {
             "name": "bushbaby/flysystem",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bushbaby/BsbFlysystem.git",
-                "reference": "ea66f3534e675758341666cac6be1d3c8ce3e303"
+                "reference": "ba14038131c8350f729197a04eb85f3cfd6c3654"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bushbaby/BsbFlysystem/zipball/ea66f3534e675758341666cac6be1d3c8ce3e303",
-                "reference": "ea66f3534e675758341666cac6be1d3c8ce3e303",
+                "url": "https://api.github.com/repos/bushbaby/BsbFlysystem/zipball/ba14038131c8350f729197a04eb85f3cfd6c3654",
+                "reference": "ba14038131c8350f729197a04eb85f3cfd6c3654",
                 "shasum": ""
             },
             "require": {
@@ -29,7 +29,6 @@
                 "zendframework/zend-stdlib": "~2.2"
             },
             "require-dev": {
-                "league/flysystem-aws-s3-v2": "~1.0",
                 "league/flysystem-azure": "~1.0",
                 "league/flysystem-cached-adapter": "~1.0",
                 "league/flysystem-copy": "~1.0",
@@ -73,7 +72,7 @@
                 }
             ],
             "description": "Zend Framework 2 module bridge for flysystem filesystem.",
-            "time": "2015-06-15 19:35:19"
+            "time": "2015-09-08 19:46:23"
         },
         {
             "name": "ccampbell/chromephp",
@@ -398,16 +397,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "c16222fdc02467eaa12cb6d6d0e65527741f6040"
+                "reference": "7323424a9d39c24e597ed3f2144419dfbb52e086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/c16222fdc02467eaa12cb6d6d0e65527741f6040",
-                "reference": "c16222fdc02467eaa12cb6d6d0e65527741f6040",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/7323424a9d39c24e597ed3f2144419dfbb52e086",
+                "reference": "7323424a9d39c24e597ed3f2144419dfbb52e086",
                 "shasum": ""
             },
             "require": {
@@ -475,7 +474,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-07-28 20:41:58"
+            "time": "2015-09-05 12:06:41"
         },
         {
             "name": "league/flysystem-memory",
@@ -833,16 +832,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e"
+                "reference": "9ff9032151186bd66ecee727d728f1319f52d1d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/d6cf02fe73634c96677e428f840704bfbcaec29e",
-                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/9ff9032151186bd66ecee727d728f1319f52d1d8",
+                "reference": "9ff9032151186bd66ecee727d728f1319f52d1d8",
                 "shasum": ""
             },
             "require": {
@@ -886,20 +885,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-07-28 15:18:12"
+            "time": "2015-09-03 11:40:38"
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "e8903ebba5eb019f5886ffce739ea9e3b7519579"
+                "reference": "b39221998ff5fc26ba63f96d2b833dfddc233d57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e8903ebba5eb019f5886ffce739ea9e3b7519579",
-                "reference": "e8903ebba5eb019f5886ffce739ea9e3b7519579",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b39221998ff5fc26ba63f96d2b833dfddc233d57",
+                "reference": "b39221998ff5fc26ba63f96d2b833dfddc233d57",
                 "shasum": ""
             },
             "require": {
@@ -945,7 +944,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-07-28 15:18:12"
+            "time": "2015-08-31 12:28:11"
         },
         {
             "name": "tracy/tracy",
@@ -1419,20 +1418,20 @@
         },
         {
             "name": "zendframework/zend-form",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-form.git",
-                "reference": "a3b9151013e419e4401f66726746abdba174ed21"
+                "reference": "576ef1010c36f657135ada7b124220f4cf0f56bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-form/zipball/a3b9151013e419e4401f66726746abdba174ed21",
-                "reference": "a3b9151013e419e4401f66726746abdba174ed21",
+                "url": "https://api.github.com/repos/zendframework/zend-form/zipball/576ef1010c36f657135ada7b124220f4cf0f56bf",
+                "reference": "576ef1010c36f657135ada7b124220f4cf0f56bf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.5",
                 "zendframework/zend-inputfilter": "~2.5",
                 "zendframework/zend-stdlib": "~2.5"
             },
@@ -1487,20 +1486,20 @@
                 "form",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:01"
+            "time": "2015-09-09 17:10:58"
         },
         {
             "name": "zendframework/zend-http",
-            "version": "2.5.2",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-http.git",
-                "reference": "abe2e56464cd467214489672f103669957047548"
+                "reference": "21174ba162cfda8d0b1d172d9f80a8bea0b767be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/abe2e56464cd467214489672f103669957047548",
-                "reference": "abe2e56464cd467214489672f103669957047548",
+                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/21174ba162cfda8d0b1d172d9f80a8bea0b767be",
+                "reference": "21174ba162cfda8d0b1d172d9f80a8bea0b767be",
                 "shasum": ""
             },
             "require": {
@@ -1537,31 +1536,31 @@
                 "http",
                 "zf2"
             ],
-            "time": "2015-08-05 15:47:13"
+            "time": "2015-09-14 15:58:07"
         },
         {
             "name": "zendframework/zend-inputfilter",
-            "version": "2.5.4",
+            "version": "2.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-inputfilter.git",
-                "reference": "3b9d3efbca7fbb34037bbc41fbf49c0f268554b7"
+                "reference": "3208cddbb92df029230cde676a5c8e5a22b531c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-inputfilter/zipball/3b9d3efbca7fbb34037bbc41fbf49c0f268554b7",
-                "reference": "3b9d3efbca7fbb34037bbc41fbf49c0f268554b7",
+                "url": "https://api.github.com/repos/zendframework/zend-inputfilter/zipball/3208cddbb92df029230cde676a5c8e5a22b531c6",
+                "reference": "3208cddbb92df029230cde676a5c8e5a22b531c6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
                 "zendframework/zend-filter": "~2.5",
                 "zendframework/zend-stdlib": "~2.5",
-                "zendframework/zend-validator": "~2.5"
+                "zendframework/zend-validator": "^2.5.3"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "^4.5",
                 "zendframework/zend-i18n": "~2.5",
                 "zendframework/zend-servicemanager": "~2.5"
             },
@@ -1589,7 +1588,7 @@
                 "inputfilter",
                 "zf2"
             ],
-            "time": "2015-08-11 16:01:27"
+            "time": "2015-09-03 22:31:38"
         },
         {
             "name": "zendframework/zend-json",
@@ -1755,20 +1754,20 @@
         },
         {
             "name": "zendframework/zend-mail",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-mail.git",
-                "reference": "684ca1af4b3ae75be52dff4857d98366c1293e0b"
+                "reference": "68b1357c6389d476d80c050a75bf3091e873202c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-mail/zipball/684ca1af4b3ae75be52dff4857d98366c1293e0b",
-                "reference": "684ca1af4b3ae75be52dff4857d98366c1293e0b",
+                "url": "https://api.github.com/repos/zendframework/zend-mail/zipball/68b1357c6389d476d80c050a75bf3091e873202c",
+                "reference": "68b1357c6389d476d80c050a75bf3091e873202c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.5",
                 "zendframework/zend-crypt": "~2.5",
                 "zendframework/zend-loader": "~2.5",
                 "zendframework/zend-mime": "~2.5",
@@ -1806,7 +1805,7 @@
                 "mail",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:02"
+            "time": "2015-09-10 18:21:00"
         },
         {
             "name": "zendframework/zend-math",
@@ -1970,20 +1969,20 @@
         },
         {
             "name": "zendframework/zend-mvc",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-mvc.git",
-                "reference": "a22422d1d17f3afa031de2be5453f45109e4b7f4"
+                "reference": "076b0c8cef37da91427aa43957e9e93fb67370e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-mvc/zipball/a22422d1d17f3afa031de2be5453f45109e4b7f4",
-                "reference": "a22422d1d17f3afa031de2be5453f45109e4b7f4",
+                "url": "https://api.github.com/repos/zendframework/zend-mvc/zipball/076b0c8cef37da91427aa43957e9e93fb67370e1",
+                "reference": "076b0c8cef37da91427aa43957e9e93fb67370e1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.5",
                 "zendframework/zend-eventmanager": "~2.5",
                 "zendframework/zend-form": "~2.5",
                 "zendframework/zend-servicemanager": "~2.5",
@@ -2025,7 +2024,6 @@
                 "zendframework/zend-modulemanager": "Zend\\ModuleManager component",
                 "zendframework/zend-serializer": "Zend\\Serializer component",
                 "zendframework/zend-session": "Zend\\Session component for FlashMessenger, PRG, and FPRG plugins",
-                "zendframework/zend-stdlib": "Zend\\Stdlib component",
                 "zendframework/zend-text": "Zend\\Text component",
                 "zendframework/zend-uri": "Zend\\Uri component",
                 "zendframework/zend-validator": "Zend\\Validator component",
@@ -2053,7 +2051,7 @@
                 "mvc",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:02"
+            "time": "2015-09-14 15:20:45"
         },
         {
             "name": "zendframework/zend-serializer",
@@ -2263,16 +2261,16 @@
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.5.2",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "6b1e4bb249a00603ebbf4023b4b42c867aa79336"
+                "reference": "53e567a58c8952a03da0b8edf0f075303a5ac5d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/6b1e4bb249a00603ebbf4023b4b42c867aa79336",
-                "reference": "6b1e4bb249a00603ebbf4023b4b42c867aa79336",
+                "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/53e567a58c8952a03da0b8edf0f075303a5ac5d1",
+                "reference": "53e567a58c8952a03da0b8edf0f075303a5ac5d1",
                 "shasum": ""
             },
             "require": {
@@ -2325,7 +2323,7 @@
                 "validator",
                 "zf2"
             ],
-            "time": "2015-07-16 19:29:35"
+            "time": "2015-09-03 19:06:11"
         },
         {
             "name": "zendframework/zend-version",
@@ -2385,7 +2383,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6"
+        "php": ">=5.6",
+        "ext-intl": "*",
+        "ext-mbstring": "*"
     },
     "platform-dev": []
 }

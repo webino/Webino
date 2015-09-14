@@ -78,9 +78,7 @@ $config = Webino::config([
     ]),
 ]);
 
-$debugger = Webino::debugger(Webino::debuggerOptions()->setDevMode()->setBar());
-
-$app = Webino::application($config, $debugger)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     /**
