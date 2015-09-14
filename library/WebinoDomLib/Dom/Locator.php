@@ -1,6 +1,7 @@
 <?php
 
 namespace WebinoDomLib\Dom;
+
 use WebinoDomLib\Exception\InvalidArgumentException;
 use WebinoDomLib\Factory\LocatorStrategyFactory;
 

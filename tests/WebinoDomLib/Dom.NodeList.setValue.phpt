@@ -19,4 +19,4 @@ $doc = new Dom($code);
 $doc->locate('body')->setValue('Example body text.');
 
 
-Assert::same($expected, $doc->save());
+Assert::same($expected, (string) $doc);

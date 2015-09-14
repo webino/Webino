@@ -25,6 +25,11 @@ class Config extends AbstractConfig implements
     private $queue;
 
     /**
+     * @var array
+     */
+    private $toMerge = [];
+
+    /**
      * @param array $items
      */
     public function __construct(array $items = [])
@@ -34,7 +39,19 @@ class Config extends AbstractConfig implements
 
     /**
      * @param string $name Spec name.
-     * @return SpecConfig
+     * @return Config\SpecConfig
+     */
+    public function get($name)
+    {
+        if (empty($this->items[$name])) {
+            return $this->set($name);
+        }
+        return $this->items[$name];
+    }
+
+    /**
+     * @param string $name Spec name.
+     * @return Config\SpecConfig
      */
     public function set($name)
     {
@@ -56,8 +73,8 @@ class Config extends AbstractConfig implements
     {
         if (null === $this->queue) {
             $queue = new PriorityQueue;;
-            foreach ($this->toArray() as $item) {
-                $spec = new Config\Spec($item);
+            foreach ($this->toArray() as $name => $item) {
+                $spec = new Config\Spec($item, $name);
                 $queue->insert($spec, $spec->getPriority());
             }
             $this->setQueue($queue);
@@ -74,6 +91,16 @@ class Config extends AbstractConfig implements
     }
 
     /**
+     * @param array $cfg
+     * @return $this
+     */
+    public function setToMerge(array $cfg)
+    {
+        $this->toMerge = array_replace_recursive($this->toMerge, $cfg);
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -87,6 +114,6 @@ class Config extends AbstractConfig implements
                 $result[$name] = $item;
             }
         }
-        return $result;
+        return array_replace_recursive($result, $this->toMerge);
     }
 }

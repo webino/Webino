@@ -39,7 +39,7 @@ $equal[1] = $doc->locate('body')->getInnerHtml();
 
 Assert::type(Dom\NodeList::class, $node[0]);
 
-Assert::same($expected, $doc->save());
+Assert::same($expected, (string) $doc);
 
 Assert::false($isEmpty[0]);
 

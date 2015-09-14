@@ -9,6 +9,7 @@ class CoreService extends Service
 {
     /**
      * Configure an application core service
+     *
      * {@inheritDoc}
      */
     public function __construct($service, $factoryClass = null)

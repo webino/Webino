@@ -25,7 +25,7 @@ class NodeList extends AbstractNodeList
 
     /**
      * @param array|DOMNodeList $nodes DOMNodes in array or DOMNodelist.
-     * @return NodeList
+     * @return $this
      */
     public function create($nodes)
     {
@@ -34,7 +34,7 @@ class NodeList extends AbstractNodeList
 
     /**
      * @param string|array $locator
-     * @return self
+     * @return $this
      */
     public function locate($locator)
     {
@@ -49,7 +49,7 @@ class NodeList extends AbstractNodeList
 
     /**
      * @param callable $callback function (\WebinoDomLib\Dom\NodeInterface $node) {}
-     * @return self
+     * @return $this
      */
     public function each(callable $callback)
     {
@@ -64,7 +64,7 @@ class NodeList extends AbstractNodeList
     /**
      * @param array $items
      * @param callable|null $callback
-     * @return self
+     * @return $this
      */
     public function loop(array $items, callable $callback = null)
     {
@@ -82,7 +82,7 @@ class NodeList extends AbstractNodeList
     /**
      * @param string $value Node value.
      * @param callable|null $callback function ($value, \WebinoDomLib\Dom\NodeInterface $node) {}
-     * @return self
+     * @return $this
      */
     public function setValue($value, callable $callback = null)
     {
@@ -100,7 +100,7 @@ class NodeList extends AbstractNodeList
     /**
      * @param array $attributes
      * @param callable|null $callback
-     * @return self
+     * @return $this
      */
     public function setAttributes(array $attributes, callable $callback = null)
     {
@@ -121,9 +121,21 @@ class NodeList extends AbstractNodeList
     }
 
     /**
+     * @param string $name
+     * @param string $value
+     * @param callable|null $callback
+     * @return $this
+     */
+    public function setAttribute($name, $value, callable $callback = null)
+    {
+        $this->setAttributes([$name => $value], $callback);
+        return $this;
+    }
+
+    /**
      * @param string $html Valid XHTML code.
      * @param callable|null $callback function ($html, \WebinoDomLib\Dom\NodeInterface $node) {}
-     * @return self
+     * @return $this
      */
     public function setHtml($html, callable $callback = null)
     {
@@ -181,7 +193,7 @@ class NodeList extends AbstractNodeList
 
     /**
      * @param NodeList $children
-     * @return self
+     * @return $this
      */
     public function appendChild(NodeList $children)
     {
@@ -196,6 +208,10 @@ class NodeList extends AbstractNodeList
         return $this->create($nodes);
     }
 
+    /**
+     * @param NodeList $children
+     * @return $this
+     */
     public function appendNext(NodeList $children)
     {
         $nodes = [];
@@ -209,8 +225,20 @@ class NodeList extends AbstractNodeList
 
         return $this->create($nodes);
     }
+
     /**
      * @return self
+     */
+    public function rename($nodeName)
+    {
+        $this->each(function (Element $node) use ($nodeName) {
+            $node->rename($nodeName);
+        });
+        return $this;
+    }
+    
+    /**
+     * @return $this
      */
     public function remove()
     {
@@ -221,7 +249,7 @@ class NodeList extends AbstractNodeList
     }
 
     /**
-     * @return self Clone.
+     * @return $this Clone.
      */
     public function detach()
     {

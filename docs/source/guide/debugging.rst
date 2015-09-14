@@ -14,8 +14,8 @@ Application Debugging
 
 .. rst-class:: monospace-topic
 
-Debugging Methods
-^^^^^^^^^^^^^^^^^
+Debugger Interface
+^^^^^^^^^^^^^^^^^^
 
 .. contents::
     :depth: 1

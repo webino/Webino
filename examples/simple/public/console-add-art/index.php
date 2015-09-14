@@ -28,7 +28,7 @@ class MyConsoleCommand extends AbstractConsoleCommand
      */
     public function handle(ConsoleEvent $event)
     {
-        $event->getCli()->addArt(__DIR__ . '/art')->greenDraw('hemp');
+        $event->getCli()->addArt(__DIR__ . '/art')->greenView('hemp');
     }
 }
 

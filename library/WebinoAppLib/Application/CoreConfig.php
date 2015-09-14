@@ -7,7 +7,7 @@ use WebinoAppLib\Context;
 use WebinoAppLib\Factory;
 use WebinoAppLib\Feature;
 use WebinoAppLib\Listener;
-use WebinoAppLib\Listener\ContextListener;
+use WebinoAppLib\Service;
 use WebinoLogLib\Factory as LoggerFactory;
 
 /**
@@ -25,6 +25,7 @@ class CoreConfig extends Feature\Config
             new Feature\DefaultConsole,
             new Feature\DefaultFilesystem,
             new Feature\DefaultRouting,
+            new Feature\DefaultView,
 
             new Feature\CoreService(Application::BOOTSTRAP, Factory\BootstrapFactory::class),
             new Feature\CoreService(Application::SERVICE, Factory\ApplicationFactory::class),
@@ -35,10 +36,12 @@ class CoreConfig extends Feature\Config
 
             new Feature\CoreService(LoggerFactory::class),
 
+            new Feature\ServiceInitializer(Service\Initializer\RoutingAwareInitializer::class),
+
             new Context\HttpContext,
             new Context\ConsoleContext,
 
-            new Feature\Listener(ContextListener::class),
+            new Feature\Listener(Listener\ContextListener::class),
 
             new Feature\HttpListener(Listener\Http\HttpRequestListener::class),
             new Feature\HttpListener(Listener\Http\HttpResponseListener::class),

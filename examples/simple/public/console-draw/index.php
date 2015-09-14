@@ -1,6 +1,6 @@
 <?php
 /**
- * Console Draw
+ * Console View
  * Webino example
  */
 
@@ -24,11 +24,11 @@ class MyConsoleCommand extends AbstractConsoleCommand
 
     /**
      * The console
-     * draw example.
+     * View example.
      */
     public function handle(ConsoleEvent $event)
     {
-        $event->getCli()->draw('bender')->br();
+        $event->getCli()->View('bender')->br();
     }
 }
 

@@ -15,19 +15,43 @@ class Renderer implements EventsAwareInterface
     use EventsAwareTrait;
 
     /**
-     * @param Dom $doc
+     * @param NodeLocatorInterface $doc
      * @param State $cfg
      */
-    public function render(Dom $doc, Config $cfg)
+    public function render(NodeLocatorInterface $doc, Config $cfg, RenderEvent $parentEvent = null, callable $callback = null)
     {
-        /** @var Spec $spec */
+        /** @var Config\Spec $spec */
         foreach ($cfg->getQueue() as $spec) {
-
             // TODO skip if locator or node owner document empty
 
-            $nodes = $doc->locate($spec->getLocator());
+            $events = $this->getEvents();
+            $nodes  = $doc->locate($spec->getLocator());
+
+            $callback and call_user_func($callback, $spec, $nodes);
+
+            /** @var NodeInterface $node */
             foreach ($nodes as $node) {
-                $this->getEvents()->trigger(new RenderEvent($this, $node, $spec));
+
+                $event = new RenderEvent($this, $node, $spec, $parentEvent);
+
+                $events->attach(RenderEvent::class, function (RenderEvent $subEvent) use ($spec, $event) {
+                    $view = $spec->getView();
+                    if (empty($view)) {
+                        return;
+                    }
+
+                    $this->render(
+                        $subEvent->getNode(),
+                        new Config($view),
+                        $event,
+                        function(Config\Spec $spec, NodeList $nodes) use ($subEvent) {
+                            $subEvent->setNode($nodes, $spec->getKey());
+                        }
+                    );
+                }, RenderEvent::FINISH);
+
+
+                $events->trigger($event);
             }
         }
     }

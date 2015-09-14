@@ -11,6 +11,11 @@ class Spec extends AbstractOptions implements
     SpecInterface
 {
     /**
+     * @var string
+     */
+    private $key;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -34,6 +39,44 @@ class Spec extends AbstractOptions implements
      * @var string
      */
     private $html;
+
+    /**
+     * @var array
+     */
+    private $attribs;
+
+    /**
+     * @var string
+     */
+    private $rename;
+
+    /**
+     * @var string
+     */
+    private $replace;
+
+    /**
+     * @var SpecConfig[]
+     */
+    private $view;
+
+    /**
+     * @param array $options
+     * @param string|null $key
+     */
+    public function __construct(array $options = [], $key = null)
+    {
+        parent::__construct($options);
+        $this->key = $key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
 
     /**
      * @param string $name
@@ -107,7 +150,6 @@ class Spec extends AbstractOptions implements
         $this->priority = (int) $priority;
         return $this;
     }
-
     /**
      * @return string
      */
@@ -141,6 +183,87 @@ class Spec extends AbstractOptions implements
     public function setHtml($html)
     {
         $this->html = (string) $html;
+        return $this;
+    }
+
+    /**
+     * @param string $name Attribute name.
+     * @param string $value Attribute value.
+     * @return self
+     */
+    public function setAttribute($name, $value)
+    {
+        $this->attribs[(string) $name] = (string) $value;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttribs()
+    {
+        return $this->attribs;
+    }
+
+    /**
+     * @param array $attribs
+     */
+    public function setAttribs(array $attribs)
+    {
+        $this->attribs = $attribs;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRename()
+    {
+        return $this->rename;
+    }
+
+    /**
+     * @param string $newName
+     * @return self
+     */
+    public function setRename($newName)
+    {
+        $this->rename = (string) $newName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReplace()
+    {
+        return $this->replace;
+    }
+
+    /**
+     * @param string $html
+     * @return self
+     */
+    public function setReplace($html)
+    {
+        $this->replace = (string) $html;
+        return $this;
+    }
+
+    /**
+     * @return SpecConfig[]
+     */
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    /**
+     * @param SpecConfig[] $view
+     */
+    public function setView(array $view)
+    {
+        $this->view = $view;
         return $this;
     }
 }

@@ -15,15 +15,10 @@ use Zend\Mvc\Service\RouterFactory as BaseRouterFactory;
 class RouterFactory extends AbstractFactory
 {
     /**
-     * Application configuration key
-     */
-    const KEY = 'filesystem';
-
-    /**
-     * Create a filesystem
+     * Create a router
      *
-     * @return \BsbFlysystem\Service\AdapterManager
-     * @throws Exception\InvalidArgumentException Unable to create a logger
+     * @return \Zend\Mvc\Router\RouteStackInterface
+     * @throws Exception\InvalidArgumentException Unable to create a router
      */
     protected function create()
     {

@@ -57,7 +57,6 @@ abstract class AbstractBaseApplication extends AbstractApplication
         // configure application
         $bootstrap->configure();
 
-
         $detachedListeners = $this->detachListeners($listeners);
         $bootstrap->attachListeners()->detachCoreListeners();
 

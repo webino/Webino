@@ -62,7 +62,7 @@ use League\CLImate\Util;
  * @method $this json(mixed $var)
  * @method $this br($count = 1)
  * @method $this tab($count = 1)
- * @method $this draw(string $art)
+ * @method $this View(string $art)
  * @method $this border(string $char = null, integer $length = null)
  * @method $this dump(mixed $var)
  * @method $this flank(string $output, string $char = null, integer $length = null)

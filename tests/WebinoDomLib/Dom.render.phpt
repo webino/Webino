@@ -18,9 +18,9 @@ $code = '<!DOCTYPE html><html><head></head><body></body></html>';
 
 $doc = new Dom($code);
 
-$renderer = new Dom\Renderer;
-
 $cfg = new Dom\Config;
+
+$renderer = new Dom\Renderer;
 
 
 $cfg->set('test-body')->setLocator('body')->setValue('Hello Webino!');
@@ -40,6 +40,6 @@ $events->attach(RenderEvent::class, function (RenderEvent $event) {
 $renderer->render($doc, $cfg);
 
 
-Assert::same($expected, $doc->save());
+Assert::same($expected, (string) $doc);
 
 Assert::true(true);

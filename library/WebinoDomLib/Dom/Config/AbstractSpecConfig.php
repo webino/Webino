@@ -63,4 +63,14 @@ abstract class AbstractSpecConfig extends AbstractConfig implements
         $this->mergeArray(['options' => $options]);
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        // set default locator by component name
+        $this->getData()->offsetExists('locator') or $this->setLocator($this->getName());
+        return parent::toArray();
+    }
 }

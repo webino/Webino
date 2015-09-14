@@ -1,13 +1,13 @@
 <?php
 
-namespace WebinoDrawLib\Feature;
+namespace WebinoViewLib\Feature;
 
-use WebinoDomLib\State\AbstractSpecConfig;
+use WebinoDomLib\Dom\Config\AbstractSpecConfig;
 
 /**
- * Class TableDraw
+ * Class TableView
  */
-class TableDraw extends AbstractSpecConfig
+class TableView extends AbstractSpecConfig
 {
     /**
      * {@inheritdoc}

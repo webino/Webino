@@ -61,7 +61,7 @@
       "WebinoLogLib\\": "library/",
       "WebinoDomLib\\": "library/",
       "WebinoDevLib\\": "library/",
-      "WebinoDrawLib\\": "library/",
+      "WebinoViewLib\\": "library/",
       "WebinoHtmlLib\\": "library/",
       "WebinoBaseLib\\": "library/",
       "WebinoAppLib\\": "library/",

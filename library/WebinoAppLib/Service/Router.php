@@ -31,13 +31,18 @@ final class Router implements RouteStackInterface
     private $supportedRouteTypes = [];
 
     /**
+     * @var RouteMatch
+     */
+    private $routeMatch;
+
+    /**
      * @param RouteStackInterface $router
      * @param ArrayObject $deferredRoutes
      */
-    public function __construct(RouteStackInterface $router, ArrayObject $deferredRoutes)
+    public function __construct(RouteStackInterface $router, ArrayObject $deferredRoutes = null)
     {
         $this->router = $router;
-        $this->deferredRoutes = $deferredRoutes;
+        $this->deferredRoutes = $deferredRoutes ? $deferredRoutes : new ArrayObject;
     }
 
     /**
@@ -48,7 +53,6 @@ final class Router implements RouteStackInterface
         if ($this->router instanceof SimpleRouteStack) {
             return $this->router->getRoutes();
         }
-
         return [];
     }
 
@@ -77,7 +81,7 @@ final class Router implements RouteStackInterface
             $this->deferredRoutes = null;
         }
 
-        return $this->router->match($request);
+        return $this->routeMatch = $this->router->match($request);
     }
 
     /**
@@ -89,6 +93,11 @@ final class Router implements RouteStackInterface
      */
     public function assemble(array $params = [], array $options = [])
     {
+        // TODO refactor
+        if ($this->routeMatch) {
+            empty($options['name']) and $options['name'] = $this->routeMatch->getMatchedRouteName();
+        }
+
         isset($options['name']) and $this->addDeferredRoute($options['name']);
         return $this->router->assemble($params, $options);
     }
@@ -141,6 +150,15 @@ final class Router implements RouteStackInterface
     {
         $this->router->setRoutes($routes);
         return $this;
+    }
+
+    // TODO interface
+    public function deferRoute($name)
+    {
+        if (empty($this->routes[$name])) {
+            $this->routes[$name] = new Route($name);
+        }
+        return $this->routes[$name];
     }
 
     /**

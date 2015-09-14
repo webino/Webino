@@ -23,8 +23,8 @@ class Document extends \DOMDocument
         parent::__construct($version, $encoding);
 
         $this->registerNodeClass('DOMElement', Element::class);
-//        $this->registerNodeClass('DOMText', 'WebinoDraw\Dom\Text');
-//        $this->registerNodeClass('DOMAttr', 'WebinoDraw\Dom\Attr');
+//        $this->registerNodeClass('DOMText', 'WebinoView\Dom\Text');
+//        $this->registerNodeClass('DOMAttr', 'WebinoView\Dom\Attr');
     }
 
     /**

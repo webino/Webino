@@ -30,11 +30,22 @@ final class Url implements UrlInterface
      * @param array $params
      * @param array $options
      */
-    public function __construct($router, array $params, array $options)
+    public function __construct(RouteStackInterface $router, array $params, array $options)
     {
         $this->router  = $router;
         $this->params  = $params;
         $this->options = $options;
+    }
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @return $this
+     */
+    public function setOption($name, $value)
+    {
+        $this->options[$name] = $value;
+        return $this;
     }
 
     /**

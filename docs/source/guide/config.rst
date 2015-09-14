@@ -8,13 +8,14 @@ Application Config
     :depth: 1
     :local:
 
+
 Use application config API to modify and access application configuration.
 
 
 .. rst-class:: monospace-topic
 
-Config Methods
-==============
+Config Interface
+================
 
 .. note::
     The configuration is read-only after application is fully bootstrapped.
@@ -22,6 +23,7 @@ Config Methods
 .. contents::
     :depth: 1
     :local:
+
 
 .. _api-config-app-get-config:
 
@@ -38,6 +40,7 @@ Accessing application configuration.
 
 .. note::
     It is possible to set configuration values before application is fully bootstrapped.
+
 
 Setting configuration value.
 

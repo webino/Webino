@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Response;
 
-use WebinoAppLib\Event\SendResponseEvent;
+use WebinoAppLib\Event\DispatchEvent;
 
 /**
  * Interface OnResponseInterface
@@ -10,7 +10,7 @@ use WebinoAppLib\Event\SendResponseEvent;
 interface OnResponseInterface
 {
     /**
-     * @param SendResponseEvent $event
+     * @param DispatchEvent $event
      */
-    public function onResponse(SendResponseEvent $event);
+    public function onResponse(DispatchEvent $event);
 }

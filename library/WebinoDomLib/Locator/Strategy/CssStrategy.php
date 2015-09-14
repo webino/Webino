@@ -2,7 +2,7 @@
 
 namespace WebinoDomLib\Locator\Strategy;
 
-//use WebinoDraw\Dom\Locator\TransformatorInterface;
+//use WebinoView\Dom\Locator\TransformatorInterface;
 use Zend\Dom\Document\Query as DomQuery;
 
 /**

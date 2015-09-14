@@ -169,5 +169,11 @@ class Factory
                 $services->setFactory($name, $service);
             }
         }
+
+        if (!empty($config[CoreConfig::INITIALIZERS])) {
+            foreach ($config[CoreConfig::INITIALIZERS] as $initializer) {
+                $services->addInitializer($initializer);
+            }
+        }
     }
 }

@@ -8,18 +8,20 @@ Application Filesystem
     :depth: 1
     :local:
 
+
 The Webino™ filesystem provides simple to use drivers for working with local filesystems, Azure, Amazon S3,
 Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchive. [**TODO**]
 
 - Powered by `Flysystem <http://flysystem.thephpleague.com>`_
 
 
-Filesystem Methods
-^^^^^^^^^^^^^^^^^^
+Filesystem Interface
+^^^^^^^^^^^^^^^^^^^^sss
 
 .. contents::
     :depth: 1
     :local:
+
 
 .. note::
     All paths used by Filesystem API are relative to its adapter root directory.

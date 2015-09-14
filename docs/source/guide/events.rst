@@ -8,10 +8,11 @@ Application Event System
     :depth: 1
     :local:
 
+
 .. rst-class:: monospace-topic
 
-Event Emitter Methods
-^^^^^^^^^^^^^^^^^^^^^
+Event Emitter Interface
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Application can emit events and bind listeners to them.
 

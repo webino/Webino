@@ -7,7 +7,6 @@ use WebinoAppLib\Application;
 use WebinoAppLib\Router\Url;
 use WebinoAppLib\Service\Router;
 use WebinoAppLib\Util\RouteEventNameResolver;
-use WebinoConfigLib\Feature\Route;
 use Zend\Console\Console;
 use Zend\Mvc\Router\RouteStackInterface;
 
@@ -17,19 +16,18 @@ use Zend\Mvc\Router\RouteStackInterface;
 trait RouterTrait
 {
     /**
-     * @var RouteStackInterface
-     */
-    private $router;
-
-    /**
-     * @var ArrayObject<Routes>
-     */
-    private $routes;
-
-    /**
      * @return bool
      */
     abstract public function isHttp();
+
+    /**
+     * Return registered service
+     *
+     * @param string $service Service name
+     * @return mixed
+     * @throws \WebinoAppLib\Exception\UnknownServiceException
+     */
+    abstract public function get($service);
 
     /**
      * {@inheritdoc}
@@ -37,32 +35,19 @@ trait RouterTrait
     abstract public function bind($event, $callback = null, $priority = 1);
 
     /**
-     * Require service from services into application
-     *
-     * @param string $service Service name
-     * @throws DomainException Unable to get service
-     */
-    abstract protected function requireService($service);
-
-    /**
      * @see \WebinoAppLib\Contract\RouterInterface::getRouter()
      * @return RouteStackInterface
      */
     public function getRouter()
     {
-        if (null === $this->router) {
-            $this->requireService(Application::ROUTER);
+        if ($this->has(Router::class)) {
+            return $this->get(Router::class);
         }
-        return $this->router;
-    }
 
-    /**
-     * @param RouteStackInterface $router
-     */
-    protected function setRouter(RouteStackInterface $router)
-    {
-        $this->routes = new ArrayObject;
-        $this->router = new Router($router, $this->routes);
+        $router = new Router($this->get(Application::ROUTER));
+        $this->set(Router::class, $router);
+
+        return $router;
     }
 
     /**
@@ -71,9 +56,9 @@ trait RouterTrait
      * @param array $params
      * @return \WebinoAppLib\Router\UrlInterface
      */
-    public function url($name, array $params = [])
+    public function url($name = null, array $params = [])
     {
-        return new Url($this->router, $params, ['name' => $name]);
+        return new Url($this->getRouter(), $params, ['name' => $name]);
     }
 
     /**
@@ -83,10 +68,8 @@ trait RouterTrait
      */
     public function route($name)
     {
-        if (empty($this->routes[$name])) {
-            $this->routes[$name] = new Route($name);
-        }
-        return $this->routes[$name];
+        // TODO interface
+        return $this->getRouter()->deferRoute($name);
     }
 
     /**

@@ -2,12 +2,15 @@
 
 namespace WebinoDomLib\Dom;
 
+use WebinoDomLib\Dom;
 use WebinoHtmlLib\EscaperAwareTrait;
 
 /**
  * Class Element
  */
-class Element extends \DOMElement implements NodeInterface
+class Element extends \DOMElement implements
+    NodeInterface,
+    NodeLocatorInterface
 {
     use EscaperAwareTrait;
     use LocatorAwareTrait;
@@ -26,7 +29,7 @@ class Element extends \DOMElement implements NodeInterface
 
     /**
      * @param string $value Node value.
-     * @return self
+     * @return $this
      */
     public function setValue($value)
     {
@@ -37,24 +40,41 @@ class Element extends \DOMElement implements NodeInterface
     /**
      * @param string $name
      * @param string $value
-     * @return self
+     * @return $this
      */
     public function setAttribute($name, $value)
     {
+        if (empty($value)) {
+            $this->removeAttribute($name);
+            return $this;
+        }
+
         parent::setAttribute($name, htmlspecialchars($value, ENT_QUOTES));
         return $this;
     }
 
     /**
      * @param string $html Valid XHTML code.
-     * @return self
+     * @return $this
      */
     public function setHtml($html)
     {
+        if (empty($html)) {
+            return $this;
+        }
+
         $this->nodeValue = '';
         $frag = $this->ownerDocument->createDocumentFragment();
         $frag->appendXml($html);
-        $this->appendChild($frag);
+
+        if ($frag->firstChild) {
+            $this->appendChild($frag);
+        } else {
+            foreach ((new Dom($html))->locate('body') as $node) {
+                $this->appendChild($this->ownerDocument->importNode($node, true));
+            }
+        }
+
         return $this;
     }
 
@@ -105,7 +125,48 @@ class Element extends \DOMElement implements NodeInterface
     }
 
     /**
+     * @param string $nodeName New node name.
      * @return self
+     */
+    public function rename($nodeName)
+    {
+        /** @var self $node */
+        $node = $this->ownerDocument->createElement($nodeName);
+
+        $html = $this->getInnerHtml();
+        $html and $node->setHtml($html);
+
+        foreach ($this->attributes as $attrib) {
+            $node->setAttributeNode($attrib);
+        }
+
+        $this->parentNode->insertBefore($node, $this);
+        $this->remove();
+
+        return $node;
+    }
+
+    /**
+     * @param string $html.
+     * @return self
+     */
+    public function replace($html)
+    {
+        if (empty($html)) {
+            $this->remove();
+            return $this;
+        }
+
+        $frag = $this->ownerDocument->createDocumentFragment();
+        $frag->appendXML($html);
+        $node = $this->parentNode->insertBefore($frag, $this);
+        $this->remove();
+
+        return $node;
+    }
+
+    /**
+     * @return $this
      */
     public function remove()
     {

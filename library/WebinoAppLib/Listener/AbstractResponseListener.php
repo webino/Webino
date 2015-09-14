@@ -25,8 +25,8 @@ abstract class AbstractResponseListener extends AbstractListener
     public function init()
     {
         $this->listen(DispatchEvent::DISPATCH, [$this, 'createResponse'], DispatchEvent::BEGIN * 999);
+        $this->listen(DispatchEvent::DISPATCH, [$this, 'onResponse'], DispatchEvent::AFTER);
         $this->listen(DispatchEvent::DISPATCH, [$this, 'sendResponse'], DispatchEvent::FINISH * 999);
-        $this->listen(SendResponseEvent::class, [$this, 'onResponse'], SendResponseEvent::BEGIN * 999);
         $this->listen(SendResponseEvent::class, new ResponseSender\SimpleStreamResponseSender);
     }
 
@@ -42,9 +42,9 @@ abstract class AbstractResponseListener extends AbstractListener
     }
 
     /**
-     * @param SendResponseEvent $event
+     * @param DispatchEvent $event
      */
-    public function onResponse(SendResponseEvent $event)
+    public function onResponse(DispatchEvent $event)
     {
         $response = $event->getResponse();
         $response instanceof OnResponseInterface and $response->onResponse($event);

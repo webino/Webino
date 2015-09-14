@@ -2,16 +2,14 @@
 
 namespace WebinoDomLib;
 
-use WebinoDomLib\Dom\LocatorAwareTrait;
-
 /**
  * Class DomHtml
  *
  * @package WebinoDomLib
  */
-class Dom
+class Dom implements Dom\NodeLocatorInterface
 {
-    use LocatorAwareTrait;
+    use Dom\LocatorAwareTrait;
 
     /**
      * @var Dom\Document
@@ -48,7 +46,7 @@ class Dom
     /**
      * @return string
      */
-    public function save()
+    public function __toString()
     {
         // TODO resolve ->doc->isXml()
         return $this->doc->isXml ? $this->doc->saveXml() : $this->doc->saveHtml();

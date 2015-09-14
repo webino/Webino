@@ -28,6 +28,11 @@ interface ConfigInterface
     const FACTORIES = 'factories';
 
     /**
+     * Service initializers config node key
+     */
+    const INITIALIZERS = 'initializers';
+
+    /**
      * Listeners config node key
      */
     const LISTENERS = 'listeners';
