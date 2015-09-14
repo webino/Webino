@@ -5,13 +5,12 @@
  */
 
 use WebinoAppLib\Event\RouteEvent;
-use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Response\ViewResponse;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoAppLib\View\SourcePreviewComponent;
-use WebinoConfigLib\Feature\Route;
 use WebinoDomLib\Event\RenderEvent;
 use WebinoViewLib\Component\AbstractViewComponent;
+use WebinoViewLib\Component\Stylesheet;
 use WebinoViewLib\Feature\CommonView;
 use WebinoViewLib\Feature\NodeView;
 
@@ -31,17 +30,20 @@ class CounterComponent extends AbstractViewComponent
     {
         $node
             ->setLocator('counter')
-            ->setReplace('<div><display/><plus/> | <minus/></div>')
+            ->setReplace('<div class="btn-group"><display/><plus/><minus/></div>')
             ->setView([
                 (new NodeView('display'))
-                    ->setRename('p'),
+                    ->setRename('span')
+                    ->setAddClass('btn btn-default disabled'),
 
                 (new NodeView('plus'))
                     ->setRename('a')
+                    ->setAddClass('btn btn-info')
                     ->setValue('+'),
 
                 (new NodeView('minus'))
                     ->setRename('a')
+                    ->setAddClass('btn btn-info')
                     ->setValue('-'),
             ]);
     }
@@ -67,11 +69,12 @@ class CounterComponent extends AbstractViewComponent
 
 $config = Webino::config([
     new CommonView([
+        new Stylesheet\BootstrapV3,
         new SourcePreviewComponent(__FILE__),
 
         (new NodeView('content'))
             ->setLocator('body')
-            ->setHtml('<counter/><source-preview/>'),
+            ->setHtml('<div class="container jumbotron"><counter/></div><source-preview/>'),
 
         new CounterComponent,
     ]),
@@ -80,10 +83,6 @@ $config = Webino::config([
 $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    /**
-     * Responding
-     * using view.
-     */
     $event->setResponse(new ViewResponse);
 });
 

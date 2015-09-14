@@ -81,10 +81,6 @@ $config = Webino::config([
 $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    /**
-     * Responding
-     * using view.
-     */
     $event->setResponse(new ViewResponse);
 });
 
