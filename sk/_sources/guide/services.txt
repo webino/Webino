@@ -14,8 +14,8 @@ directly from it.
 
 .. rst-class:: monospace-topic
 
-Services Methods
-^^^^^^^^^^^^^^^^
+Services Interface
+^^^^^^^^^^^^^^^^^^
 
 .. contents::
     :depth: 1
