@@ -61,32 +61,10 @@
 <h1>Application Filesystem<a class="headerlink" href="#application-filesystem" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#app-getfilesystems" id="id3">$app-&gt;getFilesystems()</a></li>
-<li><a class="reference internal" href="#app-file" id="id4">$app-&gt;file()</a></li>
-<li><a class="reference internal" href="#app-file-write" id="id5">$app-&gt;file()-&gt;write()</a></li>
-<li><a class="reference internal" href="#app-file-update" id="id6">$app-&gt;file()-&gt;update()</a></li>
-<li><a class="reference internal" href="#app-file-put" id="id7">$app-&gt;file()-&gt;put()</a></li>
-<li><a class="reference internal" href="#app-file-read" id="id8">$app-&gt;file()-&gt;read()</a></li>
-<li><a class="reference internal" href="#app-file-has" id="id9">$app-&gt;file()-&gt;has()</a></li>
-<li><a class="reference internal" href="#app-file-delete" id="id10">$app-&gt;file()-&gt;delete()</a></li>
-<li><a class="reference internal" href="#app-file-readanddelete" id="id11">$app-&gt;file()-&gt;readAndDelete()</a></li>
-<li><a class="reference internal" href="#app-file-rename" id="id12">$app-&gt;file()-&gt;rename()</a></li>
-<li><a class="reference internal" href="#app-file-copy" id="id13">$app-&gt;file()-&gt;copy()</a></li>
-<li><a class="reference internal" href="#app-file-getmimetype" id="id14">$app-&gt;file()-&gt;getMimetype()</a></li>
-<li><a class="reference internal" href="#app-file-gettimestamp" id="id15">$app-&gt;file()-&gt;getTimestamp()</a></li>
-<li><a class="reference internal" href="#app-file-getsize" id="id16">$app-&gt;file()-&gt;getSize()</a></li>
-<li><a class="reference internal" href="#app-file-createdir" id="id17">$app-&gt;file()-&gt;createDir()</a></li>
-<li><a class="reference internal" href="#app-file-deletedir" id="id18">$app-&gt;file()-&gt;deleteDir()</a></li>
-<li><a class="reference internal" href="#app-file-emptydir" id="id19">$app-&gt;file()-&gt;emptyDir()</a></li>
-<li><a class="reference internal" href="#app-file-listcontents" id="id20">$app-&gt;file()-&gt;listContents()</a></li>
-<li><a class="reference internal" href="#app-file-listpaths" id="id21">$app-&gt;file()-&gt;listPaths()</a></li>
-<li><a class="reference internal" href="#app-file-listfiles" id="id22">$app-&gt;file()-&gt;listFiles()</a></li>
-<li><a class="reference internal" href="#app-file-writestream" id="id23">$app-&gt;file()-&gt;writeStream()</a></li>
-<li><a class="reference internal" href="#app-file-updatestream" id="id24">$app-&gt;file()-&gt;updateStream()</a></li>
-<li><a class="reference internal" href="#app-file-putstream" id="id25">$app-&gt;file()-&gt;putStream()</a></li>
-<li><a class="reference internal" href="#app-file-readstream" id="id26">$app-&gt;file()-&gt;readStream()</a></li>
-<li><a class="reference internal" href="#defaultfilesystem" id="id27">DefaultFilesystem</a></li>
-<li><a class="reference internal" href="#memoryfilesystem" id="id28">MemoryFilesystem</a></li>
+<li><a class="reference internal" href="#filesystem-interface" id="id3">Filesystem Interface</a></li>
+<li><a class="reference internal" href="#filesystem-config" id="id4">Filesystem Config</a></li>
+<li><a class="reference internal" href="#configuring-filesystem" id="id5">Configuring Filesystem</a></li>
+<li><a class="reference internal" href="#working-with-streams" id="id6">Working With Streams</a></li>
 </ul>
 </div>
 <p>The Webino™ filesystem provides simple to use drivers for working with local filesystems, Azure, Amazon S3,
@@ -94,36 +72,34 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 <ul class="simple">
 <li>Powered by <a class="reference external" href="http://flysystem.thephpleague.com">Flysystem</a></li>
 </ul>
-<p>Filesystem Interface
-^^^^^^^^^^^^^^^^^^^^sss</p>
+<div class="section" id="filesystem-interface">
+<h2><a class="toc-backref" href="#id3">Filesystem Interface</a><a class="headerlink" href="#filesystem-interface" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
-<li><a class="reference internal" href="#app-getfilesystems" id="id29">$app-&gt;getFilesystems()</a></li>
-<li><a class="reference internal" href="#app-file" id="id30">$app-&gt;file()</a></li>
-<li><a class="reference internal" href="#app-file-write" id="id31">$app-&gt;file()-&gt;write()</a></li>
-<li><a class="reference internal" href="#app-file-update" id="id32">$app-&gt;file()-&gt;update()</a></li>
-<li><a class="reference internal" href="#app-file-put" id="id33">$app-&gt;file()-&gt;put()</a></li>
-<li><a class="reference internal" href="#app-file-read" id="id34">$app-&gt;file()-&gt;read()</a></li>
-<li><a class="reference internal" href="#app-file-has" id="id35">$app-&gt;file()-&gt;has()</a></li>
-<li><a class="reference internal" href="#app-file-delete" id="id36">$app-&gt;file()-&gt;delete()</a></li>
-<li><a class="reference internal" href="#app-file-readanddelete" id="id37">$app-&gt;file()-&gt;readAndDelete()</a></li>
-<li><a class="reference internal" href="#app-file-rename" id="id38">$app-&gt;file()-&gt;rename()</a></li>
-<li><a class="reference internal" href="#app-file-copy" id="id39">$app-&gt;file()-&gt;copy()</a></li>
-<li><a class="reference internal" href="#app-file-getmimetype" id="id40">$app-&gt;file()-&gt;getMimetype()</a></li>
-<li><a class="reference internal" href="#app-file-gettimestamp" id="id41">$app-&gt;file()-&gt;getTimestamp()</a></li>
-<li><a class="reference internal" href="#app-file-getsize" id="id42">$app-&gt;file()-&gt;getSize()</a></li>
-<li><a class="reference internal" href="#app-file-createdir" id="id43">$app-&gt;file()-&gt;createDir()</a></li>
-<li><a class="reference internal" href="#app-file-deletedir" id="id44">$app-&gt;file()-&gt;deleteDir()</a></li>
-<li><a class="reference internal" href="#app-file-emptydir" id="id45">$app-&gt;file()-&gt;emptyDir()</a></li>
-<li><a class="reference internal" href="#app-file-listcontents" id="id46">$app-&gt;file()-&gt;listContents()</a></li>
-<li><a class="reference internal" href="#app-file-listpaths" id="id47">$app-&gt;file()-&gt;listPaths()</a></li>
-<li><a class="reference internal" href="#app-file-listfiles" id="id48">$app-&gt;file()-&gt;listFiles()</a></li>
-<li><a class="reference internal" href="#app-file-writestream" id="id49">$app-&gt;file()-&gt;writeStream()</a></li>
-<li><a class="reference internal" href="#app-file-updatestream" id="id50">$app-&gt;file()-&gt;updateStream()</a></li>
-<li><a class="reference internal" href="#app-file-putstream" id="id51">$app-&gt;file()-&gt;putStream()</a></li>
-<li><a class="reference internal" href="#app-file-readstream" id="id52">$app-&gt;file()-&gt;readStream()</a></li>
-<li><a class="reference internal" href="#defaultfilesystem" id="id53">DefaultFilesystem</a></li>
-<li><a class="reference internal" href="#memoryfilesystem" id="id54">MemoryFilesystem</a></li>
+<li><a class="reference internal" href="#app-getfilesystems" id="id7">$app-&gt;getFilesystems()</a></li>
+<li><a class="reference internal" href="#app-file" id="id8">$app-&gt;file()</a></li>
+<li><a class="reference internal" href="#app-file-write" id="id9">$app-&gt;file()-&gt;write()</a></li>
+<li><a class="reference internal" href="#app-file-update" id="id10">$app-&gt;file()-&gt;update()</a></li>
+<li><a class="reference internal" href="#app-file-put" id="id11">$app-&gt;file()-&gt;put()</a></li>
+<li><a class="reference internal" href="#app-file-read" id="id12">$app-&gt;file()-&gt;read()</a></li>
+<li><a class="reference internal" href="#app-file-has" id="id13">$app-&gt;file()-&gt;has()</a></li>
+<li><a class="reference internal" href="#app-file-delete" id="id14">$app-&gt;file()-&gt;delete()</a></li>
+<li><a class="reference internal" href="#app-file-readanddelete" id="id15">$app-&gt;file()-&gt;readAndDelete()</a></li>
+<li><a class="reference internal" href="#app-file-rename" id="id16">$app-&gt;file()-&gt;rename()</a></li>
+<li><a class="reference internal" href="#app-file-copy" id="id17">$app-&gt;file()-&gt;copy()</a></li>
+<li><a class="reference internal" href="#app-file-getmimetype" id="id18">$app-&gt;file()-&gt;getMimetype()</a></li>
+<li><a class="reference internal" href="#app-file-gettimestamp" id="id19">$app-&gt;file()-&gt;getTimestamp()</a></li>
+<li><a class="reference internal" href="#app-file-getsize" id="id20">$app-&gt;file()-&gt;getSize()</a></li>
+<li><a class="reference internal" href="#app-file-createdir" id="id21">$app-&gt;file()-&gt;createDir()</a></li>
+<li><a class="reference internal" href="#app-file-deletedir" id="id22">$app-&gt;file()-&gt;deleteDir()</a></li>
+<li><a class="reference internal" href="#app-file-emptydir" id="id23">$app-&gt;file()-&gt;emptyDir()</a></li>
+<li><a class="reference internal" href="#app-file-listcontents" id="id24">$app-&gt;file()-&gt;listContents()</a></li>
+<li><a class="reference internal" href="#app-file-listpaths" id="id25">$app-&gt;file()-&gt;listPaths()</a></li>
+<li><a class="reference internal" href="#app-file-listfiles" id="id26">$app-&gt;file()-&gt;listFiles()</a></li>
+<li><a class="reference internal" href="#app-file-writestream" id="id27">$app-&gt;file()-&gt;writeStream()</a></li>
+<li><a class="reference internal" href="#app-file-updatestream" id="id28">$app-&gt;file()-&gt;updateStream()</a></li>
+<li><a class="reference internal" href="#app-file-putstream" id="id29">$app-&gt;file()-&gt;putStream()</a></li>
+<li><a class="reference internal" href="#app-file-readstream" id="id30">$app-&gt;file()-&gt;readStream()</a></li>
 </ul>
 </div>
 <div class="admonition note">
@@ -131,7 +107,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 <p class="last">All paths used by Filesystem API are relative to its adapter root directory.</p>
 </div>
 <div class="section" id="app-getfilesystems">
-<h2><a class="toc-backref" href="#id29">$app-&gt;getFilesystems()</a><a class="headerlink" href="#app-getfilesystems" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id7">$app-&gt;getFilesystems()</a><a class="headerlink" href="#app-getfilesystems" title="Permalink to this headline">¶</a></h3>
 <p>Accessing filesystem manager service.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\ServiceManager\ServiceLocatorInterface $filesystems */</span>
 <span class="nv">$filesystems</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getFilesystems</span><span class="p">();</span>
@@ -139,7 +115,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="app-file">
-<span id="api-filesystem-app-file"></span><h2><a class="toc-backref" href="#id30">$app-&gt;file()</a><a class="headerlink" href="#app-file" title="Permalink to this headline">¶</a></h2>
+<span id="api-filesystem-app-file"></span><h3><a class="toc-backref" href="#id8">$app-&gt;file()</a><a class="headerlink" href="#app-file" title="Permalink to this headline">¶</a></h3>
 <p>Obtaining filesystem instance.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Filesystem\LocalFiles</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Filesystem\InMemoryFiles</span><span class="p">;</span>
@@ -155,91 +131,91 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="app-file-write">
-<h2><a class="toc-backref" href="#id31">$app-&gt;file()-&gt;write()</a><a class="headerlink" href="#app-file-write" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id9">$app-&gt;file()-&gt;write()</a><a class="headerlink" href="#app-file-write" title="Permalink to this headline">¶</a></h3>
 <p>Write files, throws an exception if the file already exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-update">
-<h2><a class="toc-backref" href="#id32">$app-&gt;file()-&gt;update()</a><a class="headerlink" href="#app-file-update" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id10">$app-&gt;file()-&gt;update()</a><a class="headerlink" href="#app-file-update" title="Permalink to this headline">¶</a></h3>
 <p>Update files, throws an exception if the file does not exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example updated.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-put">
-<h2><a class="toc-backref" href="#id33">$app-&gt;file()-&gt;put()</a><a class="headerlink" href="#app-file-put" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id11">$app-&gt;file()-&gt;put()</a><a class="headerlink" href="#app-file-put" title="Permalink to this headline">¶</a></h3>
 <p>Write or update files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;File content example.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-read">
-<h2><a class="toc-backref" href="#id34">$app-&gt;file()-&gt;read()</a><a class="headerlink" href="#app-file-read" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id12">$app-&gt;file()-&gt;read()</a><a class="headerlink" href="#app-file-read" title="Permalink to this headline">¶</a></h3>
 <p>Read files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-has">
-<h2><a class="toc-backref" href="#id35">$app-&gt;file()-&gt;has()</a><a class="headerlink" href="#app-file-has" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id13">$app-&gt;file()-&gt;has()</a><a class="headerlink" href="#app-file-has" title="Permalink to this headline">¶</a></h3>
 <p>Check if a file exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$exists</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-delete">
-<h2><a class="toc-backref" href="#id36">$app-&gt;file()-&gt;delete()</a><a class="headerlink" href="#app-file-delete" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id14">$app-&gt;file()-&gt;delete()</a><a class="headerlink" href="#app-file-delete" title="Permalink to this headline">¶</a></h3>
 <p>Delete files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-readanddelete">
-<h2><a class="toc-backref" href="#id37">$app-&gt;file()-&gt;readAndDelete()</a><a class="headerlink" href="#app-file-readanddelete" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id15">$app-&gt;file()-&gt;readAndDelete()</a><a class="headerlink" href="#app-file-readanddelete" title="Permalink to this headline">¶</a></h3>
 <p>Read and delete files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">readAndDelete</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-rename">
-<h2><a class="toc-backref" href="#id38">$app-&gt;file()-&gt;rename()</a><a class="headerlink" href="#app-file-rename" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id16">$app-&gt;file()-&gt;rename()</a><a class="headerlink" href="#app-file-rename" title="Permalink to this headline">¶</a></h3>
 <p>Rename files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">rename</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;path/to/new-file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-copy">
-<h2><a class="toc-backref" href="#id39">$app-&gt;file()-&gt;copy()</a><a class="headerlink" href="#app-file-copy" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id17">$app-&gt;file()-&gt;copy()</a><a class="headerlink" href="#app-file-copy" title="Permalink to this headline">¶</a></h3>
 <p>Copy files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;path/to/file-copy.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-getmimetype">
-<h2><a class="toc-backref" href="#id40">$app-&gt;file()-&gt;getMimetype()</a><a class="headerlink" href="#app-file-getmimetype" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id18">$app-&gt;file()-&gt;getMimetype()</a><a class="headerlink" href="#app-file-getmimetype" title="Permalink to this headline">¶</a></h3>
 <p>Get MIME types.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$mimetype</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getMimetype</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-gettimestamp">
-<h2><a class="toc-backref" href="#id41">$app-&gt;file()-&gt;getTimestamp()</a><a class="headerlink" href="#app-file-gettimestamp" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id19">$app-&gt;file()-&gt;getTimestamp()</a><a class="headerlink" href="#app-file-gettimestamp" title="Permalink to this headline">¶</a></h3>
 <p>Get timestamps.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$timestamp</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getTimestamp</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-getsize">
-<h2><a class="toc-backref" href="#id42">$app-&gt;file()-&gt;getSize()</a><a class="headerlink" href="#app-file-getsize" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id20">$app-&gt;file()-&gt;getSize()</a><a class="headerlink" href="#app-file-getsize" title="Permalink to this headline">¶</a></h3>
 <p>Get file sizes.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$size</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getSize</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-createdir">
-<h2><a class="toc-backref" href="#id43">$app-&gt;file()-&gt;createDir()</a><a class="headerlink" href="#app-file-createdir" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id21">$app-&gt;file()-&gt;createDir()</a><a class="headerlink" href="#app-file-createdir" title="Permalink to this headline">¶</a></h3>
 <p>Create directories.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDir</span><span class="p">(</span><span class="s1">&#39;path/to/new/directory&#39;</span><span class="p">);</span>
 </pre></div>
@@ -250,21 +226,21 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="app-file-deletedir">
-<h2><a class="toc-backref" href="#id44">$app-&gt;file()-&gt;deleteDir()</a><a class="headerlink" href="#app-file-deletedir" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id22">$app-&gt;file()-&gt;deleteDir()</a><a class="headerlink" href="#app-file-deletedir" title="Permalink to this headline">¶</a></h3>
 <p>Delete directories.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">deleteDir</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-emptydir">
-<h2><a class="toc-backref" href="#id45">$app-&gt;file()-&gt;emptyDir()</a><a class="headerlink" href="#app-file-emptydir" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id23">$app-&gt;file()-&gt;emptyDir()</a><a class="headerlink" href="#app-file-emptydir" title="Permalink to this headline">¶</a></h3>
 <p>Empty directories.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">emptyDir</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-listcontents">
-<h2><a class="toc-backref" href="#id46">$app-&gt;file()-&gt;listContents()</a><a class="headerlink" href="#app-file-listcontents" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id24">$app-&gt;file()-&gt;listContents()</a><a class="headerlink" href="#app-file-listcontents" title="Permalink to this headline">¶</a></h3>
 <p>List contents, returns array of info of the files and folders.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">listContents</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">false</span><span class="p">);</span>
 
@@ -274,7 +250,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="app-file-listpaths">
-<h2><a class="toc-backref" href="#id47">$app-&gt;file()-&gt;listPaths()</a><a class="headerlink" href="#app-file-listpaths" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id25">$app-&gt;file()-&gt;listPaths()</a><a class="headerlink" href="#app-file-listpaths" title="Permalink to this headline">¶</a></h3>
 <p>List paths, returns array of paths of the files and folders.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$paths</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">listPaths</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">false</span><span class="p">);</span>
 
@@ -284,7 +260,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="app-file-listfiles">
-<h2><a class="toc-backref" href="#id48">$app-&gt;file()-&gt;listFiles()</a><a class="headerlink" href="#app-file-listfiles" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id26">$app-&gt;file()-&gt;listFiles()</a><a class="headerlink" href="#app-file-listfiles" title="Permalink to this headline">¶</a></h3>
 <p>List files, returns array of paths of the files.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$files</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">listFiles</span><span class="p">(</span><span class="s1">&#39;path/to/directory&#39;</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">false</span><span class="p">);</span>
 
@@ -294,38 +270,44 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="app-file-writestream">
-<h2><a class="toc-backref" href="#id49">$app-&gt;file()-&gt;writeStream()</a><a class="headerlink" href="#app-file-writestream" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id27">$app-&gt;file()-&gt;writeStream()</a><a class="headerlink" href="#app-file-writestream" title="Permalink to this headline">¶</a></h3>
 <p>Write files using stream, throws an exception if the file already exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">writeStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="nv">$stream</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-updatestream">
-<h2><a class="toc-backref" href="#id50">$app-&gt;file()-&gt;updateStream()</a><a class="headerlink" href="#app-file-updatestream" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id28">$app-&gt;file()-&gt;updateStream()</a><a class="headerlink" href="#app-file-updatestream" title="Permalink to this headline">¶</a></h3>
 <p>Update files using stream, throws an exception if the file does not exists.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">updateStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="nv">$stream</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-putstream">
-<h2><a class="toc-backref" href="#id51">$app-&gt;file()-&gt;putStream()</a><a class="headerlink" href="#app-file-putstream" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id29">$app-&gt;file()-&gt;putStream()</a><a class="headerlink" href="#app-file-putstream" title="Permalink to this headline">¶</a></h3>
 <p>Write or update files using stream.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">putStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">,</span> <span class="nv">$stream</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-file-readstream">
-<h2><a class="toc-backref" href="#id52">$app-&gt;file()-&gt;readStream()</a><a class="headerlink" href="#app-file-readstream" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id30">$app-&gt;file()-&gt;readStream()</a><a class="headerlink" href="#app-file-readstream" title="Permalink to this headline">¶</a></h3>
 <p>Read files using stream.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$stream</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">readStream</span><span class="p">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="section" id="filesystem-config">
-<h3>Filesystem Config<a class="headerlink" href="#filesystem-config" title="Permalink to this headline">¶</a></h3>
 </div>
+</div>
+<div class="section" id="filesystem-config">
+<h2><a class="toc-backref" href="#id4">Filesystem Config</a><a class="headerlink" href="#filesystem-config" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#defaultfilesystem" id="id31">DefaultFilesystem</a></li>
+<li><a class="reference internal" href="#memoryfilesystem" id="id32">MemoryFilesystem</a></li>
+</ul>
 </div>
 <div class="section" id="defaultfilesystem">
-<h2><a class="toc-backref" href="#id53">DefaultFilesystem</a><a class="headerlink" href="#defaultfilesystem" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id31">DefaultFilesystem</a><a class="headerlink" href="#defaultfilesystem" title="Permalink to this headline">¶</a></h3>
 <p>Overriding default local working dir filesystem.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\DefaultFilesystem</span><span class="p">;</span>
@@ -342,7 +324,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 </div>
 </div>
 <div class="section" id="memoryfilesystem">
-<h2><a class="toc-backref" href="#id54">MemoryFilesystem</a><a class="headerlink" href="#memoryfilesystem" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id32">MemoryFilesystem</a><a class="headerlink" href="#memoryfilesystem" title="Permalink to this headline">¶</a></h3>
 <p>Configuring temporary filesystem in the memory.</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryFilesystem</span><span class="p">;</span>
@@ -357,14 +339,15 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 <p class="last"><a class="reference internal" href="#api-filesystem-app-file"><span>$app-&gt;file()</span></a> |
 <a class="reference external" href="http://demo.webino.org/filesystem-config">Filesystem Config Example</a></p>
 </div>
+</div>
+</div>
 <div class="section" id="configuring-filesystem">
-<h3>Configuring Filesystem<a class="headerlink" href="#configuring-filesystem" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id5">Configuring Filesystem</a><a class="headerlink" href="#configuring-filesystem" title="Permalink to this headline">¶</a></h2>
 <p>TODO...</p>
 </div>
 <div class="section" id="working-with-streams">
-<h3>Working With Streams<a class="headerlink" href="#working-with-streams" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id6">Working With Streams</a><a class="headerlink" href="#working-with-streams" title="Permalink to this headline">¶</a></h2>
 <p>TODO...</p>
-</div>
 </div>
 </div>
 

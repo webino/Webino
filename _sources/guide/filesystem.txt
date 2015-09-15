@@ -16,7 +16,7 @@ Copy.com, Dropbox, (S)FTP, GridFS, Memory, Rackspace, WebDAV, PHPCR and ZipArchi
 
 
 Filesystem Interface
-^^^^^^^^^^^^^^^^^^^^sss
+^^^^^^^^^^^^^^^^^^^^
 
 .. contents::
     :depth: 1
