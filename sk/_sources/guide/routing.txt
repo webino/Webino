@@ -70,7 +70,7 @@ is matched against request.
 
     // or via string
 
-    $app->bindRoute('my-route', function (RouteEvent $event) {
+    $app->bindRoute('myRoute', function (RouteEvent $event) {
         // do something...
     });
 
