@@ -73,7 +73,7 @@ $app->url()
     /** @var \WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */
     $urlHtml = $app->url(MyRoute::class)->html('My Route Label');
     // or via string
-    $urlHtml = $app->url('my-route')->html('My Route Label');
+    $urlHtml = $app->url('myRoute')->html('My Route Label');
 
 
 |vspace|
