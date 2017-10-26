@@ -20,7 +20,7 @@ class MyConfigFeature extends AbstractFeature
 
     public function __construct()
     {
-        $this->mergeArray([
+        parent::__construct([
             $this::RESPONSE_TEXT => 'Hello Webino!',
         ]);
     }
