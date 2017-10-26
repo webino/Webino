@@ -12,17 +12,25 @@ use WebinoConfigLib\Feature\Route;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example routes
+ */
+abstract class MyRoutes
+{
+    const JSON_TEST = 'jsonTest';
+}
+
 $config = Webino::config([
     /**
      * Configuring JSON
      * response route.
      */
-    (new Route('jsonTest'))->setLiteral('/json-test'),
+    (new Route(MyRoutes::JSON_TEST))->setLiteral('/json-test'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
 
-$app->bindRoute('jsonTest', function (RouteEvent $event) {
+$app->bindRoute(MyRoutes::JSON_TEST, function (RouteEvent $event) {
     /**
      * Responding
      * using JSON.
@@ -32,7 +40,7 @@ $app->bindRoute('jsonTest', function (RouteEvent $event) {
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        $event->getApp()->url('jsonTest')->html('View JSON!'),
+        $event->getApp()->url(MyRoutes::JSON_TEST)->html('View JSON!'),
         new SourcePreview(__FILE__),
     ]);
 });

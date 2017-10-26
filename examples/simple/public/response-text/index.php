@@ -12,17 +12,25 @@ use WebinoConfigLib\Feature\Route;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example routes
+ */
+abstract class MyRoutes
+{
+    const TEXT_TEST = 'textTest';
+}
+
 $config = Webino::config([
     /**
      * Configuring plain text
      * response route.
      */
-    (new Route('textTest'))->setLiteral('/text-test'),
+    (new Route(MyRoutes::TEXT_TEST))->setLiteral('/text-test'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
 
-$app->bindRoute('textTest', function (RouteEvent $event) {
+$app->bindRoute(MyRoutes::TEXT_TEST, function (RouteEvent $event) {
     /**
      * Responding using
      * plain text.
@@ -32,7 +40,7 @@ $app->bindRoute('textTest', function (RouteEvent $event) {
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        $event->getApp()->url('textTest')->html('View plain text!'),
+        $event->getApp()->url(MyRoutes::TEXT_TEST)->html('View plain text!'),
         new SourcePreview(__FILE__),
     ]);
 });

@@ -13,17 +13,25 @@ use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example routes
+ */
+abstract class MyRoutes
+{
+    const XML_TEST = 'xmlTest';
+}
+
 $config = Webino::config([
     /**
      * Configuring XML
      * response route.
      */
-    (new Route('xmlTest'))->setLiteral('/xml-test'),
+    (new Route(MyRoutes::XML_TEST))->setLiteral('/xml-test'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
 
-$app->bindRoute('xmlTest', function (RouteEvent $event) {
+$app->bindRoute(MyRoutes::XML_TEST, function (RouteEvent $event) {
     /**
      * Responding
      * using XML.
@@ -33,7 +41,7 @@ $app->bindRoute('xmlTest', function (RouteEvent $event) {
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        $event->getApp()->url('xmlTest')->html('View XML!'),
+        $event->getApp()->url(MyRoutes::XML_TEST)->html('View XML!'),
         new SourcePreview(__FILE__),
     ]);
 });

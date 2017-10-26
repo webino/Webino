@@ -15,12 +15,20 @@ use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example routes
+ */
+abstract class MyRoutes
+{
+    const VIEW_TEST = 'viewTest';
+}
+
 $config = Webino::config([
     /**
      * Configuring view
      * response route.
      */
-    (new Route('viewTest'))->setLiteral('/view-test'),
+    (new Route(MyRoutes::VIEW_TEST))->setLiteral('/view-test'),
 
     new CommonView([
         (new NodeView('test-body'))
@@ -31,7 +39,7 @@ $config = Webino::config([
 
 $app = Webino::application($config)->bootstrap();
 
-$app->bindRoute('viewTest', function (RouteEvent $event) {
+$app->bindRoute(MyRoutes::VIEW_TEST, function (RouteEvent $event) {
     /**
      * Responding
      * using view.
@@ -62,7 +70,7 @@ $app->bindRoute('viewTest', function (RouteEvent $event) {
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        $event->getApp()->url('viewTest')->html('View response!'),
+        $event->getApp()->url(MyRoutes::VIEW_TEST)->html('View response!'),
         new SourcePreview(__FILE__),
     ]);
 });
