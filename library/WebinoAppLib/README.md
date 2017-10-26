@@ -1,10 +1,10 @@
 # WebinoAppLib - Webino™ Application Core Library
 
-The Zend Framework 2 request responder.
+The HTTP and CLI request responder.
 
 ## QuickUse
 
-The basic concept is to bootstrap the services and to respond to the client request.
+The basic concept is to bootstrap services and to respond to the client request.
 
     <?php
     
@@ -16,7 +16,7 @@ The basic concept is to bootstrap the services and to respond to the client requ
 
 ## Application Architecture
 
-The Webino application architecture is based around Zend Frameowrk 2 but simplified, everything is a service,
+The Webino application architecture is based around Zend Framework 2 but simplified, everything is a service,
 listeners too.
 
 ### Application Lifecycle

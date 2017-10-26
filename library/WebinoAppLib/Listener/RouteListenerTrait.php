@@ -30,7 +30,7 @@ trait RouteListenerTrait
     {
         if (!Console::isConsole()) {
             $this->listen(
-                call_user_func(new RouteEventNameResolver, $name),
+                RouteEventNameResolver::getEventName($name),
                 $callback,
                 $priority
             );

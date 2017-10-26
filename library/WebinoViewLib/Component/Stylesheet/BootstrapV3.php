@@ -9,6 +9,6 @@ class BootstrapV3 extends AbstractBootstrap
 {
     public function __construct()
     {
-        parent::__construct('//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
+        parent::__construct('//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css');
     }
 }

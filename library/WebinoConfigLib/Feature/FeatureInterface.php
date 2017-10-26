@@ -2,7 +2,7 @@
 
 namespace WebinoConfigLib\Feature;
 
-use WebinoBaseLib\ToArrayInterface;
+use WebinoBaseLib\Util\ToArrayInterface;
 
 /**
  * Interface FeatureInterface

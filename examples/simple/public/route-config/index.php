@@ -9,7 +9,7 @@ use WebinoAppLib\Feature\Listener;
 use WebinoAppLib\Listener\RouteListenerTrait;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TextHtml;
+use WebinoHtmlLib\Html;
 use WebinoConfigLib\Feature\Route;
 use WebinoEventLib\AbstractListener;
 
@@ -29,7 +29,7 @@ class MyListener extends AbstractListener
          */
         $this->listen(DefaultRoute::class, function (RouteEvent $event) {
             $event->setResponseContent([
-                new TextHtml('Hello Webino!'),
+                new Html\Text('Hello Webino!'),
                 $event->getApp()->url('myRoute')->html('Go to MyRoute'),
                 new SourcePreview(__FILE__),
             ]);
@@ -40,7 +40,7 @@ class MyListener extends AbstractListener
          */
         $this->listenRoute('myRoute', function (RouteEvent $event) {
             $event->setResponseContent([
-                new TextHtml('My Route Example!'),
+                new Html\Text('My Route Example!'),
                 $event->getApp()->url(DefaultRoute::class)->html('Go Home'),
             ]);
         });

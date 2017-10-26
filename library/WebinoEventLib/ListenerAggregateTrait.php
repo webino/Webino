@@ -25,7 +25,7 @@ trait ListenerAggregateTrait
      * @param string $event
      * @param string|callable $callback
      * @param int $priority
-     * @return self
+     * @return $this
      */
     protected function listen($event, $callback = null, $priority = 1)
     {

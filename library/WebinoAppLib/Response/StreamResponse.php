@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Response;
 
-use WebinoAppLib\Event\SendResponseEvent;
+use WebinoAppLib\Event\DispatchEvent;
 use Zend\Http\Response\Stream;
 
 /**
@@ -41,9 +41,11 @@ class StreamResponse extends Stream implements
     }
 
     /**
-     * @param SendResponseEvent $event
+     * Handle response
+     *
+     * @param DispatchEvent $event
      */
-    public function onResponse(SendResponseEvent $event)
+    public function onResponse(DispatchEvent $event)
     {
         $this->filePath and $this->setStream($event->getApp()->file()->readStream($this->filePath));
     }

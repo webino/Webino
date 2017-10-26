@@ -7,9 +7,8 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoExamplesLib\Html\ScrollBoxHtml;
-use WebinoHtmlLib\TextHtml;
-use WebinoConfigLib\Feature\FirePhpLog;
+use WebinoExamplesLib\Html\ScrollBox;
+use WebinoHtmlLib\Html;
 use WebinoConfigLib\Feature\Log;
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -46,9 +45,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'Error log:',
-        new ScrollBoxHtml(nl2br(new TextHtml($errLog))),
+        new ScrollBox(nl2br(new Html\Text($errLog))),
         'Application log:',
-        new ScrollBoxHtml(nl2br(new TextHtml($log))),
+        new ScrollBox(nl2br(new Html\Text($log))),
         new SourcePreview(__FILE__),
     ]);
 });

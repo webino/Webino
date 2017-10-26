@@ -7,7 +7,6 @@ use WebinoAppLib\Exception\DomainException;
 use WebinoAppLib\Exception\InvalidArgumentException;
 use WebinoAppLib\Service\Bootstrap;
 use Zend\Config\Config;
-use Zend\ServiceManager;
 
 /**
  * Class AbstractBaseApplication
@@ -16,17 +15,12 @@ abstract class AbstractBaseApplication extends AbstractApplication
     implements BaseApplicationInterface
 {
     /**
-     * @var \Zend\EventManager\ListenerAggregateInterface[]
-     */
-    private $detachedListeners = [];
-
-    /**
      * {@inheritDoc}
      */
     public function bootstrap()
     {
         if ($this->getConfig()->isReadOnly()) {
-            throw new DomainException('The application is already bootstrapped');
+            throw new DomainException('Application is already bootstrapped');
         }
 
         return $this->internalBootstrap(
@@ -64,7 +58,7 @@ abstract class AbstractBaseApplication extends AbstractApplication
         call_user_func($trigger);
 
         $bootstrap->attachCoreListeners();
-        $this->attachDetachedListeners($detachedListeners);
+        $this->attachListeners($detachedListeners);
 
         // lock config
         $this->getConfig()->setReadOnly();
@@ -92,11 +86,11 @@ abstract class AbstractBaseApplication extends AbstractApplication
     }
 
     /**
-     * Attach previously detached event listeners
+     * Attach event listeners
      *
      * @param \Zend\EventManager\ListenerAggregateInterface[] $listeners
      */
-    private function attachDetachedListeners(array $listeners)
+    private function attachListeners(array $listeners)
     {
         foreach ($listeners as $listener) {
             $this->bind($listener);
@@ -107,13 +101,13 @@ abstract class AbstractBaseApplication extends AbstractApplication
      * Merge config into application config.
      *
      * @param array|Config|null $config
-     * @return self
+     * @return $this
      * @throws InvalidArgumentException
      */
     public function mergeConfig($config = null)
     {
         if (empty($config)) {
-            return;
+            return $this;
         }
 
         if (is_object($config) && method_exists($config, 'toArray')) {
@@ -129,5 +123,6 @@ abstract class AbstractBaseApplication extends AbstractApplication
         }
 
         $this->getConfig()->merge($config);
+        return $this;
     }
 }

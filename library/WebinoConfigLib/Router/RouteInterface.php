@@ -31,43 +31,43 @@ interface RouteInterface
 
     /**
      * @param string $type Route type.
-     * @return self
+     * @return $this
      */
     public function setType($type = self::LITERAL);
 
     /**
      * @param string $name Route name.
-     * @return self
+     * @return $this
      */
     public function setName($name);
 
     /**
      * @param string $route Route path.
-     * @return self
+     * @return $this
      */
     public function setRoute($route);
 
     /**
      * @param bool $mayTerminate
-     * @return self
+     * @return $this
      */
     public function setMayTerminate($mayTerminate = true);
 
     /**
      * @param array $defaults
-     * @return self
+     * @return $this
      */
     public function setDefaults(array $defaults);
 
     /**
      * @param self[] $routes
-     * @return self
+     * @return $this
      */
     public function setChild(array $routes);
 
     /**
      * @param self[] $routes
-     * @return self
+     * @return $this
      */
     public function chain(array $routes);
 }

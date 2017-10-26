@@ -38,7 +38,7 @@ final class Locator
 
     /**
      * @param LocatorStrategyFactory $factory
-     * @return self
+     * @return $this
      */
     public function setStrategyFactory(LocatorStrategyFactory $factory)
     {

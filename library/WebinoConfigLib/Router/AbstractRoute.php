@@ -75,7 +75,7 @@ abstract class AbstractRoute extends AbstractConfig implements
 
     /**
      * @param string $route
-     * @return self
+     * @return $this
      */
     protected function setRouteOption($route)
     {
@@ -153,7 +153,7 @@ abstract class AbstractRoute extends AbstractConfig implements
 
     /**
      * @param array $handlers
-     * @return self
+     * @return $this
      */
     protected function setHandlers(array $handlers)
     {
@@ -167,7 +167,7 @@ abstract class AbstractRoute extends AbstractConfig implements
     /**
      * @param string $section
      * @param self $route
-     * @return self
+     * @return $this
      */
     protected function appendRoute($section, self $route)
     {
@@ -187,7 +187,7 @@ abstract class AbstractRoute extends AbstractConfig implements
 
     /**
      * @param RouteInterface $route
-     * @return self
+     * @return $this
      */
     protected function appendChildRoute(RouteInterface $route)
     {

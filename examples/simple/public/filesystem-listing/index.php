@@ -7,7 +7,7 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\HorizontalLineHtml;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -42,10 +42,10 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
         'Directory contents:',
         $event->getApp()->debug($list, true),
-        new HorizontalLineHtml,
+        new Html\HorizontalLine,
         'Directory paths:',
         $event->getApp()->debug($paths, true),
-        new HorizontalLineHtml,
+        new Html\HorizontalLine,
         'Directory files:',
         $event->getApp()->debug($files, true),
         new SourcePreview(__FILE__),

@@ -9,6 +9,7 @@ use WebinoViewLib\ViewTemplates;
 
 /**
  * Class ViewResponse
+ * @TODO redesign
  */
 class ViewResponse extends HtmlResponse implements
     OnResponseInterface
@@ -90,6 +91,7 @@ class ViewResponse extends HtmlResponse implements
 
     /**
      * @param string $layout
+     * @return $this
      */
     public function setLayout($layout)
     {

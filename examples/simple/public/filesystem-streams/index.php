@@ -8,8 +8,7 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Response\StreamResponse;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\LineBreakHtml;
-use WebinoHtmlLib\TextHtml;
+use WebinoHtmlLib\Html;
 use WebinoConfigLib\Feature\Route;
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -77,7 +76,7 @@ $app->bindRoute('streamExampleDownload', function (RouteEvent $event) {
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
         $event->getApp()->url('streamExample')->html('Click me!'),
-        new LineBreakHtml,
+        new Html\LineBreak,
         $event->getApp()->url('streamExampleDownload')->html('Download me!'),
         new SourcePreview(__FILE__),
     ]);

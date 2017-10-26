@@ -36,6 +36,13 @@ final class Router implements RouteStackInterface
     private $routeMatch;
 
     /**
+     * Deferred routes
+     *
+     * @var array
+     */
+    private $routes;
+
+    /**
      * @param RouteStackInterface $router
      * @param ArrayObject $deferredRoutes
      */
@@ -64,6 +71,7 @@ final class Router implements RouteStackInterface
      */
     public static function factory($options = [])
     {
+        return false;
     }
 
     /**

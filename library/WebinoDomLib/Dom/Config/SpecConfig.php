@@ -19,6 +19,14 @@ class SpecConfig extends AbstractSpecConfig implements
     }
 
     /**
+     * @return string
+     */
+    public function getHtml()
+    {
+        return (string) $this->getData()->offsetGet('html');
+    }
+
+    /**
      * @param string $html Valid XHTML code.
      * @return $this
      */
@@ -81,7 +89,7 @@ class SpecConfig extends AbstractSpecConfig implements
     }
 
     /**
-     * @param string $html
+     * @param array $cfg
      * @return $this
      */
     public function setView(array $cfg)
@@ -96,8 +104,10 @@ class SpecConfig extends AbstractSpecConfig implements
     /**
      * @TODO concept
      * @param string $name
-     * @param string $template
+     * @param $func
+     * @param $args
      * @return $this
+     * @internal param string $template
      */
     public function setVar($name, $func, $args)
     {

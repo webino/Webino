@@ -4,7 +4,6 @@ namespace WebinoAppLib\Factory;
 
 use BsbFlysystem\Service\Factory\AdapterManagerFactory;
 use BsbFlysystem\Service\FilesystemManager;
-use WebinoAppLib\Application;
 use WebinoAppLib\Exception;
 use WebinoBaseLib\Service\SimpleServiceContainer;
 use Zend\Log\Exception\InvalidArgumentException;
@@ -22,7 +21,7 @@ class FilesystemsFactory extends AbstractFactory
     /**
      * Create a filesystem
      *
-     * @return \BsbFlysystem\Service\AdapterManager
+     * @return FilesystemManager
      * @throws Exception\InvalidArgumentException Unable to create a logger
      */
     protected function create()

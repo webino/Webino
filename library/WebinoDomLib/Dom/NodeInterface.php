@@ -47,13 +47,13 @@ interface NodeInterface
 
     /**
      * @param string $nodeName New node name.
-     * @return self
+     * @return $this
      */
     public function rename($nodeName);
 
     /**
      * @param string $html.
-     * @return self
+     * @return $this
      */
     public function replace($html);
 

@@ -7,7 +7,7 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TextHtml;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -30,7 +30,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'Hello Webino!',
-        new TextHtml('Elapsed time: ' . $elapsed),
+        new Html\Text('Elapsed time: ' . $elapsed),
         new SourcePreview(__FILE__),
     ]);
 });

@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Router;
 
-use WebinoHtmlLib\UrlHtmlInterface;
+use WebinoHtmlLib\Html;
 
 /**
  * Interface UrlInterface
@@ -11,7 +11,7 @@ interface UrlInterface
 {
     /**
      * @param string $label
-     * @return UrlHtmlInterface
+     * @return Html\UrlInterface
      */
     public function html($label = '');
 }

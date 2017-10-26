@@ -47,7 +47,7 @@ class Bootstrap
 
     /**
      * @param string $key
-     * @return self
+     * @return $this
      */
     public function setCacheKey($key)
     {
@@ -61,7 +61,7 @@ class Bootstrap
      * Returns cached early if any.
      *
      * @triggers configure
-     * @return self
+     * @return $this
      */
     public function configure()
     {
@@ -90,7 +90,7 @@ class Bootstrap
     /**
      * Configure application services
      *
-     * @return self
+     * @return $this
      */
     protected function configureServices()
     {
@@ -107,7 +107,7 @@ class Bootstrap
     /**
      * Attach core listeners
      *
-     * @return self
+     * @return $this
      */
     public function attachCoreListeners()
     {
@@ -118,7 +118,7 @@ class Bootstrap
     /**
      * Detach core listeners
      *
-     * @return self
+     * @return $this
      */
     public function detachCoreListeners()
     {
@@ -129,7 +129,7 @@ class Bootstrap
     /**
      * Attach application listeners
      * 
-     * @return self
+     * @return $this
      */
     public function attachListeners()
     {

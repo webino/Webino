@@ -7,7 +7,7 @@
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TextHtml;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -36,9 +36,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $size = $event->getApp()->file()->getSize('my/folder/test.txt');
 
     $event->setResponseContent([
-        new TextHtml('MIME type: ' . $mimetype),
-        new TextHtml('Timestamp: ' . $timestamp),
-        new TextHtml('Size: ' . $size),
+        new Html\Text('MIME type: ' . $mimetype),
+        new Html\Text('Timestamp: ' . $timestamp),
+        new Html\Text('Size: ' . $size),
         new SourcePreview(__FILE__),
     ]);
 });

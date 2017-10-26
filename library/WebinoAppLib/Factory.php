@@ -2,7 +2,6 @@
 
 namespace WebinoAppLib;
 
-use WebinoAppLib\Application;
 use WebinoAppLib\Application\AbstractApplication;
 use WebinoAppLib\Application\Config;
 use WebinoAppLib\Application\CoreConfig;
@@ -29,7 +28,7 @@ class Factory
     /**
      * @param array|object $config
      * @param DebuggerInterface $debugger
-     * @return Application\AbstractBaseApplication
+     * @return Application\AbstractApplication
      */
     public function create($config = null, DebuggerInterface $debugger = null)
     {

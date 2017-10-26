@@ -4,6 +4,7 @@ namespace WebinoAppLib\Event;
 
 use WebinoAppLib\Application\AbstractApplication;
 use WebinoAppLib\Application\ConfiguredApplicationInterface;
+use WebinoBaseLib\Util\ToString;
 use Zend\Http\AbstractMessage;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
@@ -33,7 +34,7 @@ class DispatchEvent extends AppEvent implements
 
     /**
      * @param RequestInterface $request
-     * @return self
+     * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
@@ -51,7 +52,7 @@ class DispatchEvent extends AppEvent implements
 
     /**
      * @param ResponseInterface $response
-     * @return self
+     * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
@@ -63,7 +64,7 @@ class DispatchEvent extends AppEvent implements
      * Append the content to a response
      *
      * @param string|array $content
-     * @return self
+     * @return $this
      */
     public function setResponseContent($content)
     {
@@ -76,7 +77,7 @@ class DispatchEvent extends AppEvent implements
      * Set the content of a response
      *
      * @param string|array $content
-     * @return self
+     * @return $this
      */
     public function resetResponseContent($content = null)
     {
@@ -90,6 +91,6 @@ class DispatchEvent extends AppEvent implements
      */
     private function normalizeResponseContent($content)
     {
-        return (is_array($content) ? join(null, $content) : $content);
+        return ToString::value($content);
     }
 }

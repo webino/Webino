@@ -4,12 +4,11 @@
  * Webino example
  */
 
-use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TextHtml;
+use WebinoHtmlLib\Html;
 use WebinoEventLib\Event;
 use WebinoEventLib\EventsAwareInterface;
 use WebinoEventLib\EventsAwareTrait;
@@ -92,7 +91,7 @@ $myService = $app->get(MyService::class);
  * custom event.
  */
 $myService->getEvents()->attach('doSomething', function (Event $event) use ($app) {
-    $app->set('responseText', new TextHtml($event->getParam('responseText')));
+    $app->set('responseText', new Html\Text($event->getParam('responseText')));
 });
 
 /**

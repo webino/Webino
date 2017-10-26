@@ -3,7 +3,7 @@
 namespace WebinoConfigLib;
 
 use ArrayObject;
-use WebinoBaseLib\ToArrayInterface;
+use WebinoBaseLib\Util\ToArrayInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -38,7 +38,7 @@ class AbstractConfig implements ToArrayInterface
 
     /**
      * @param ToArrayInterface $merge
-     * @return self
+     * @return $this
      */
     protected function merge(ToArrayInterface $merge)
     {
@@ -48,7 +48,7 @@ class AbstractConfig implements ToArrayInterface
 
     /**
      * @param array $merge
-     * @return self
+     * @return $this
      */
     protected function mergeArray(array $merge)
     {

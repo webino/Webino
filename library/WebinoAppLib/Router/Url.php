@@ -2,7 +2,7 @@
 
 namespace WebinoAppLib\Router;
 
-use WebinoHtmlLib\UrlHtml;
+use WebinoHtmlLib\Html;
 use Zend\Mvc\Router\RouteStackInterface;
 
 /**
@@ -53,7 +53,7 @@ final class Url implements UrlInterface
      */
     public function html($label = '')
     {
-        return new UrlHtml($this->__toString(), $label);
+        return new Html\Url($this->__toString(), $label);
     }
 
     /**

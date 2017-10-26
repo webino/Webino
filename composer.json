@@ -44,13 +44,15 @@
     "league/flysystem-memory": "1.*",
     "bushbaby/flysystem": "1.*",
     "tracy/tracy": "2.*",
-    "nette/tester": "1.*",
-    "mikey179/vfsStream": "1.*",
     "psr/log": "1.0.*",
     "firephp/firephp-core": "0.*",
     "ccampbell/chromephp": "4.*",
     "league/climate": "3.*",
     "psy/psysh": "0.*"
+  },
+  "require-dev": {
+    "nette/tester": "1.*",
+    "mikey179/vfsStream": "1.*"
   },
   "autoload": {
     "psr-0": {

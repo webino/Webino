@@ -28,7 +28,7 @@ trait RouteConstructorTrait
 
     /**
      * @param string $type Route type.
-     * @return self
+     * @return $this
      */
     abstract public function setType($type = RouteInterface::LITERAL);
 

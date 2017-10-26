@@ -23,7 +23,7 @@ class TableView extends AbstractSpecConfig
 
     /**
      * @param string $html Valid XHTML code.
-     * @return self
+     * @return $this
      */
     public function setHtml($html)
     {

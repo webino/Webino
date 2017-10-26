@@ -2,11 +2,9 @@
 
 namespace WebinoAppLib\Service;
 
-use Tracy\Bar;
 use Tracy\Debugger as Tracy;
 use Tracy\IBarPanel;
 use WebinoAppLib\Options\DebuggerOptions;
-use WebinoBaseLib\Tracy\Workaround\DisabledBar;
 
 /**
  * Class Debugger
@@ -32,20 +30,16 @@ class Debugger implements DebuggerInterface
             return;
         }
 
-        // TODO issue https://github.com/nette/tracy/pull/83
-        if (!$_options->hasBar() && !class_exists(Bar::class, false)) {
-            class_alias(DisabledBar::class, Bar::class);
-        }
-
         Tracy::enable(
             $_options->getMode(),
             $_options->getLog(),
             $_options->getEmail()
         );
 
+        Tracy::$showBar    = $_options->hasBar();
         Tracy::$strictMode = $_options->isStrict();
         Tracy::$maxDepth   = $_options->getMaxDepth();
-        Tracy::$maxLen     = $_options->getMaxLen();
+        Tracy::$maxLength  = $_options->getMaxLen();
     }
 
     /**

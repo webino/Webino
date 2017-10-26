@@ -21,7 +21,7 @@ interface DebuggingInterface
     /**
      * @param object|IBarPanel $panel
      * @param string|null $id
-     * @return self
+     * @return $this
      */
     public function setBarPanel(IBarPanel $panel, $id = null);
 

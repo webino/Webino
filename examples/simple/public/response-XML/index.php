@@ -9,7 +9,7 @@ use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Response\XmlResponse;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route;
-use WebinoHtmlLib\TagHtml;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -28,7 +28,7 @@ $app->bindRoute('xmlTest', function (RouteEvent $event) {
      * Responding
      * using XML.
      */
-    $event->setResponse(new XmlResponse(new TagHtml('root', 'Hello Webino!')));
+    $event->setResponse(new XmlResponse(new Html\Tag('root', 'Hello Webino!')));
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {

@@ -13,23 +13,23 @@ abstract class AbstractApplication implements
     AbstractApplicationInterface,
     Contract\ConsoleInterface,
     Contract\DebuggerInterface,
-    Contract\ServiceProviderInterface,
+    Contract\ServicesInterface,
     Contract\ConfigInterface,
-    Contract\EventEmitterInterface,
+    Contract\EventsInterface,
     Contract\LoggerInterface,
     Contract\CacheInterface,
-    Contract\FilesystemInterface,
+    Contract\FilesInterface,
     Contract\RouterInterface,
     Contract\MailerInterface
 {
     use Traits\ConsoleTrait;
     use Traits\DebuggerTrait;
-    use Traits\ServiceProviderTrait;
+    use Traits\ServicesTrait;
     use Traits\ConfigTrait;
-    use Traits\EventEmitterTrait;
+    use Traits\EventsTrait;
     use Traits\LoggerTrait;
     use Traits\CacheTrait;
-    use Traits\FilesystemTrait;
+    use Traits\FilesTrait;
     use Traits\RouterTrait;
     use Traits\MailerTrait;
 

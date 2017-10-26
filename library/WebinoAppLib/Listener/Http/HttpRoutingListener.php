@@ -13,7 +13,7 @@ final class HttpRoutingListener extends AbstractRoutingListener
 {
     /**
      * @param DispatchEvent $event
-     * @return self
+     * @return $this
      */
     protected function createRouteEvent(DispatchEvent $event)
     {

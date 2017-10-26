@@ -7,7 +7,6 @@ use WebinoAppLib\Event\DispatchEvent;
 use WebinoAppLib\Feature\HttpListener;
 use WebinoConfigLib\Feature\FeatureInterface;
 use WebinoDomLib\Dom\Config\SpecConfigAggregateInterface;
-use WebinoDomLib\Dom\NodeInterface;
 use WebinoDomLib\Event\RenderEvent;
 use WebinoEventLib\ListenerAggregateTrait;
 use WebinoViewLib\Feature\NodeView;

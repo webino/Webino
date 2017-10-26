@@ -19,7 +19,7 @@ class RouteEvent extends AbstractRouteEvent
      */
     public function setName($name)
     {
-        $this->name = call_user_func(RouteEventNameResolver::getInstance(), $name);
+        $this->name = RouteEventNameResolver::getEventName($name);
         return $this;
     }
 }

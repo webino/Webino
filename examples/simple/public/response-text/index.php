@@ -9,7 +9,6 @@ use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Response\TextResponse;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route;
-use WebinoHtmlLib\TagHtml;
 
 require __DIR__ . '/../../vendor/autoload.php';
 

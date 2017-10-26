@@ -227,7 +227,7 @@ class NodeList extends AbstractNodeList
     }
 
     /**
-     * @return self
+     * @return $this
      */
     public function rename($nodeName)
     {

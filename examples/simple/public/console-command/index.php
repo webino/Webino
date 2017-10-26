@@ -10,8 +10,8 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
 use WebinoConfigLib\Feature\Route\Console;
-use WebinoExamplesLib\Html\ConsolePreviewHtml;
-use WebinoHtmlLib\TextHtml;
+use WebinoExamplesLib\Html\ConsolePreview;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -117,10 +117,10 @@ $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        new TextHtml('Use Command Line Interface!'),
-        new ConsolePreviewHtml('preview.jpg'),
-        new ConsolePreviewHtml('preview-command-help.jpg', 'Console command help preview:'),
-        new ConsolePreviewHtml('preview-command.jpg', 'Console command preview:'),
+        new Html\Text('Use Command Line Interface!'),
+        new ConsolePreview('preview.jpg'),
+        new ConsolePreview('preview-command-help.jpg', 'Console command help preview:'),
+        new ConsolePreview('preview-command.jpg', 'Console command preview:'),
         new SourcePreview(__FILE__),
     ]);
 });

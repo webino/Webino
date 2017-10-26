@@ -2,8 +2,9 @@
 
 namespace WebinoDomLib\Dom;
 
+use WebinoBaseLib\Util\ToString;
 use WebinoDomLib\Dom;
-use WebinoHtmlLib\EscaperAwareTrait;
+use WebinoHtmlLib\Html\EscaperAwareTrait;
 
 /**
  * Class Element
@@ -54,11 +55,12 @@ class Element extends \DOMElement implements
     }
 
     /**
-     * @param string $html Valid XHTML code.
+     * @param string|array $html Valid XHTML code.
      * @return $this
      */
     public function setHtml($html)
     {
+        $html = $this->normalizeHtml($html);
         if (empty($html)) {
             return $this;
         }
@@ -130,7 +132,7 @@ class Element extends \DOMElement implements
 
     /**
      * @param string $nodeName New node name.
-     * @return self
+     * @return $this
      */
     public function rename($nodeName)
     {
@@ -151,11 +153,12 @@ class Element extends \DOMElement implements
     }
 
     /**
-     * @param string $html.
-     * @return self
+     * @param string|array $html
+     * @return $this
      */
     public function replace($html)
     {
+        $html = $this->normalizeHtml($html);
         if (empty($html)) {
             $this->remove();
             return $this;
@@ -190,5 +193,14 @@ class Element extends \DOMElement implements
     {
         $this->parentNode->removeChild($this);
         return $this;
+    }
+
+    /**
+     * @param string|array $html
+     * @return string
+     */
+    private function normalizeHtml($html)
+    {
+        return ToString::value($html);
     }
 }

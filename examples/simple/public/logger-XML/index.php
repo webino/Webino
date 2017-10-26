@@ -8,8 +8,7 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Response\XmlResponse;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TagHtml;
-use WebinoHtmlLib\UrlHtml;
+use WebinoHtmlLib\Html;
 use WebinoConfigLib\Feature\Log;
 use WebinoConfigLib\Feature\Route;
 
@@ -47,7 +46,7 @@ $app->bindRoute('xmlLog', function (RouteEvent $event) {
      */
     $log = $event->getApp()->file()->read('app.log.xml');
 
-    $event->setResponse(new XmlResponse(new TagHtml('root', $log)));
+    $event->setResponse(new XmlResponse(new Html\Tag('root', $log)));
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {

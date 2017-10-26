@@ -107,7 +107,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param array $options
-     * @return self
+     * @return $this
      */
     public function setOptions(array $options)
     {
@@ -125,7 +125,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param string $locator
-     * @return self
+     * @return $this
      */
     public function setLocator($locator)
     {
@@ -143,7 +143,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param int $priority
-     * @return self
+     * @return $this
      */
     public function setPriority($priority)
     {
@@ -160,7 +160,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param string $value
-     * @return self
+     * @return $this
      */
     public function setValue($value)
     {
@@ -178,7 +178,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param string $html Valid XHTML code.
-     * @return self
+     * @return $this
      */
     public function setHtml($html)
     {
@@ -189,7 +189,7 @@ class Spec extends AbstractOptions implements
     /**
      * @param string $name Attribute name.
      * @param string $value Attribute value.
-     * @return self
+     * @return $this
      */
     public function setAttribute($name, $value)
     {
@@ -224,7 +224,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param string $newName
-     * @return self
+     * @return $this
      */
     public function setRename($newName)
     {
@@ -242,7 +242,7 @@ class Spec extends AbstractOptions implements
 
     /**
      * @param string $html
-     * @return self
+     * @return $this
      */
     public function setReplace($html)
     {

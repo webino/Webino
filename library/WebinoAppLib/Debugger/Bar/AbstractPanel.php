@@ -3,9 +3,7 @@
 namespace WebinoAppLib\Debugger\Bar;
 
 use Tracy\IBarPanel;
-use WebinoAppLib\Exception;
-use WebinoHtmlLib\ImgHtml;
-use WebinoHtmlLib\InlineTextHtml;
+use WebinoHtmlLib\Html;
 
 /**
  * Class AbstractPanel
@@ -66,7 +64,7 @@ abstract class AbstractPanel implements IBarPanel
      */
     public function getTab()
     {
-        return (new InlineTextHtml($this->getLabel()))
+        return (new Html\InlineText($this->getLabel()))
             ->setTitle($this->getTitle())
             ->setClass('tracy-label');
     }
@@ -74,13 +72,13 @@ abstract class AbstractPanel implements IBarPanel
     /**
      * @param string $name
      * @param array $style
-     * @return ImgHtml
+     * @return Html\Img
      */
     protected function createIcon($name, array $style = [])
     {
         $data   = file_get_contents($this->getDir() . '/' . $name . '.png');
         $base64 = 'data:image/png;base64,' . base64_encode($data);
-        return (new ImgHtml($base64))->setStyle($style);
+        return (new Html\Img($base64))->setStyle($style);
     }
 
     /**

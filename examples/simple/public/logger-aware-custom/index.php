@@ -4,14 +4,13 @@
  * Webino example
  */
 
-use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Factory\AbstractFactory;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TextHtml;
-use WebinoExamplesLib\Html\ScrollBoxHtml;
+use WebinoHtmlLib\Html;
+use WebinoExamplesLib\Html\ScrollBox;
 use WebinoConfigLib\Feature\Log;
 use WebinoConfigLib\Feature\Logger;
 use WebinoLogLib\LoggerAwareInterface;
@@ -138,9 +137,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'My log:',
-        new ScrollBoxHtml(nl2br(new TextHtml($myLog))),
+        new ScrollBox(nl2br(new Html\Text($myLog))),
         'Application log:',
-        new ScrollBoxHtml(nl2br(new TextHtml($log))),
+        new ScrollBox(nl2br(new Html\Text($log))),
         new SourcePreview(__FILE__),
     ]);
 });

@@ -25,7 +25,7 @@ trait LocatorAwareTrait
 
     /**
      * @param Locator $locator
-     * @return self
+     * @return $this
      */
     public function setLocator(Locator $locator)
     {

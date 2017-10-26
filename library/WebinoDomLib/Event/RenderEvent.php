@@ -62,6 +62,7 @@ class RenderEvent extends Event
     }
 
     /**
+     * @param string|null $name
      * @return Element
      */
     public function getNode($name = null)
@@ -74,6 +75,8 @@ class RenderEvent extends Event
 
     /**
      * @param NodeInterface $node
+     * @param string|null $name
+     * @return $this
      */
     public function setNode($node, $name = null)
     {

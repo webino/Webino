@@ -40,7 +40,7 @@ class Document extends \DOMDocument
 
     /**
      * @param DOMXpath $xpath
-     * @return self
+     * @return $this
      */
     public function setXpath(DOMXpath $xpath)
     {

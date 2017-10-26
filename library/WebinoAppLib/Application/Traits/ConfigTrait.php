@@ -46,7 +46,7 @@ trait ConfigTrait
      * Require service from services into application
      *
      * @param string $service Service name
-     * @throws DomainException Unable to get service
+     * @throws Exception\DomainException Unable to get service
      */
     abstract protected function requireService($service);
 

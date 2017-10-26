@@ -6,10 +6,9 @@
 
 use WebinoAppLib\Debugger\Bar\AbstractPanel;
 use WebinoAppLib\Event\RouteEvent;
-use WebinoAppLib\Feature\DebugBarPanel;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\TitleHtml;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -42,7 +41,7 @@ class MyDebugBarPanel extends AbstractPanel
 
     public function getPanel()
     {
-        return new TitleHtml('My Debugger Bar Panel Example');
+        return new Html\Title('My Debugger Bar Panel Example');
     }
 }
 

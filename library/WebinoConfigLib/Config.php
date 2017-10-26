@@ -23,7 +23,7 @@ class Config extends AbstractConfig
 
     /**
      * @param FeatureInterface[] $features
-     * @return self
+     * @return $this
      */
     public function addFeatures(array $features)
     {

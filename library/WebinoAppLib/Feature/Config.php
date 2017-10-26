@@ -29,7 +29,7 @@ class Config extends AbstractConfig
 
     /**
      * @param array $merge
-     * @return self
+     * @return $this
      */
     protected function mergeArray(array $merge)
     {

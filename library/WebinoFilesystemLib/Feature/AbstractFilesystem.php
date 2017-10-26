@@ -28,7 +28,7 @@ abstract class AbstractFilesystem extends AbstractFeature
      * @param string $name Name of adapter service.
      * @param string $type
      * @param array $options
-     * @return self
+     * @return $this
      */
     protected function configureAdapter($name, $type, array $options = [])
     {
@@ -53,7 +53,7 @@ abstract class AbstractFilesystem extends AbstractFeature
      *                           locator. Defaults to false.
      * @param string|bool $eventable When true returns an EventableFilesystem instance.
      * @param array $plugins List of FQCN to the plugin you wish to register for this filesystem.
-     * @return self
+     * @return $this
      */
     protected function configureFilesystem($name, $adapter, $cache = false, $eventable = false, array $plugins = [])
     {
@@ -75,7 +75,7 @@ abstract class AbstractFilesystem extends AbstractFeature
 
     /**
      * @param array $options
-     * @return self
+     * @return $this
      */
     private function configureAdapterMap(array $options)
     {
@@ -86,7 +86,7 @@ abstract class AbstractFilesystem extends AbstractFeature
     /**
      * @param string $name Adapter name
      * @param string $class Invokable adapter class
-     * @return self
+     * @return $this
      */
     protected function configureAdapterMapInvokable($name, $class)
     {

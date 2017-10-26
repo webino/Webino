@@ -4,16 +4,15 @@
  * Webino example
  */
 
-use WebinoAppLib\Event\AppEvent;
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Factory\AbstractFactory;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoExamplesLib\Html\ScrollBoxHtml;
+use WebinoExamplesLib\Html\ScrollBox;
 use WebinoFilesystemLib\FilesystemAwareInterface;
 use WebinoFilesystemLib\FilesystemAwareTrait;
-use WebinoHtmlLib\TextHtml;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -77,7 +76,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponseContent([
         'File contents:',
-        new ScrollBoxHtml(nl2br(new TextHtml($file))),
+        new ScrollBox(nl2br(new Html\Text($file))),
         new SourcePreview(__FILE__),
     ]);
 });
