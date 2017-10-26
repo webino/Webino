@@ -14,15 +14,32 @@ use WebinoConfigLib\Feature\Route;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+
+/**
+ * Example routes
+ */
+abstract class MyRoutes
+{
+    const XML_LOG = 'xmlLog';
+}
+
+/**
+ * Example logs
+ */
+abstract class MyLogs
+{
+    const APP = 'app.log.xml';
+}
+
 $config = Webino::config([
     /**
      * Configuring app
      * log file XML.
      */
-    (new Log('app.log.xml'))->setXmlFormat(),
+    (new Log(MyLogs::APP))->setXmlFormat(),
 
     // configuring xml log preview route
-    (new Route('xmlLog'))->setLiteral('/app-xml-log'),
+    (new Route(MyRoutes::XML_LOG))->setLiteral('/app-xml-log'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -39,19 +56,19 @@ $app->log()->info('Test info log message!');
  */
 $app->log()->debug('Test debug log message {0} {1}', ['paramOne', 'paramTwo']);
 
-$app->bindRoute('xmlLog', function (RouteEvent $event) {
+$app->bindRoute(MyRoutes::XML_LOG, function (RouteEvent $event) {
     /**
      * Obtaining log
      * file contents.
      */
-    $log = $event->getApp()->file()->read('app.log.xml');
+    $log = $event->getApp()->file()->read(MyLogs::APP);
 
     $event->setResponse(new XmlResponse(new Html\Tag('root', $log)));
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponseContent([
-        $event->getApp()->url('xmlLog')->html('View XML log!'),
+        $event->getApp()->url(MyRoutes::XML_LOG)->html('View XML log!'),
         new SourcePreview(__FILE__),
     ]);
 });

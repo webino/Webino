@@ -13,14 +13,23 @@ use WebinoConfigLib\Feature\Log;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example logs
+ */
+abstract class MyLogs
+{
+    const APP = 'app.log';
+    const EVENTS = 'event.log';
+}
+
 $config = Webino::config([
     /**
      * Configuring app log
      * with priority filters.
      */
-    (new Log('app.log'))->filterRegex('~^Attach~'),
+    (new Log(MyLogs::APP))->filterRegex('~^Attach~'),
 
-    (new Log('event.log'))->setName('error')->filterRegex('~^Event~'),
+    (new Log(MyLogs::EVENTS))->setName('error')->filterRegex('~^Event~'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -39,9 +48,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      * Obtaining log
      * file contents.
      */
-    $log = $event->getApp()->file()->read('app.log');
+    $log = $event->getApp()->file()->read(MyLogs::APP);
 
-    $eventLog = $event->getApp()->file()->read('event.log');
+    $eventLog = $event->getApp()->file()->read(MyLogs::EVENTS);
 
     $event->setResponseContent([
         'Event log:',

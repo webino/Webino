@@ -15,12 +15,30 @@ use WebinoConfigLib\Feature\Logger;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example loggers
+ */
+class MyLogger extends Logger
+{
+    const NAME = 'myLogger';
+}
+
+/**
+ * Example logs
+ */
+abstract class MyLogs
+{
+    const APP = 'app.log';
+    const MY = 'my.log';
+}
+
+
 $config = Webino::config([
     /**
      * Configuring
      * app logger.
      */
-    new Log('app.log'),
+    new Log(MyLogs::APP),
 
     new FirePhpLog,
 
@@ -28,10 +46,8 @@ $config = Webino::config([
      * Configuring
      * custom logger.
      */
-    new Logger('myLogger', [
-
-        new Log('my.log'),
-
+    new MyLogger([
+        new Log(MyLogs::MY),
         new FirePhpLog,
     ]),
 ]);
@@ -42,20 +58,20 @@ $app = Webino::application($config)->bootstrap();
  * Obtaining custom logger service
  * and logging a message.
  */
-$app->getLogger('myLogger')->log()->info('My logger info message!');
+$app->getLogger(MyLogger::NAME)->log()->info('My logger info message!');
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     /**
      * Obtaining custom
      * log file contents.
      */
-    $myLog = $event->getApp()->file()->read('my.log');
+    $myLog = $event->getApp()->file()->read(MyLogs::MY);
 
     /**
      * Obtaining app
      * log file contents.
      */
-    $log = $event->getApp()->file()->read('app.log');
+    $log = $event->getApp()->file()->read(MyLogs::APP);
 
     $event->setResponseContent([
         'My log:',

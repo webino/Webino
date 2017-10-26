@@ -21,6 +21,24 @@ use Zend\Stdlib\Parameters;
 require __DIR__ . '/../../vendor/autoload.php';
 
 /**
+ * Example loggers
+ */
+class MyLogger extends Logger
+{
+    const NAME = 'myLogger';
+}
+
+
+/**
+ * Example logs
+ */
+abstract class MyLogs
+{
+    const APP = 'app.log';
+    const MY = 'my.log';
+}
+
+/**
  * Custom log message
  */
 class MyLogMessage extends AbstractWarningMessage
@@ -82,7 +100,7 @@ class MyServiceFactory extends AbstractFactory
          * Injecting logger
          * into custom service.
          */
-        $myService->setLogger($this->getApp()->getLogger('myLogger'));
+        $myService->setLogger($this->getApp()->getLogger(MyLogger::NAME));
 
         return $myService;
     }
@@ -93,14 +111,14 @@ $config = Webino::config([
      * Configuring app
      * log file.
      */
-    new Log('app.log'),
+    new Log(MyLogs::APP),
 
     /**
      * Configuring custom
      * log file.
      */
-    new Logger('myLogger', [
-        new Log('my.log'),
+    new MyLogger([
+        new Log(MyLogs::MY),
     ]),
 
     /**
@@ -127,13 +145,13 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      * Obtaining custom
      * log file contents.
      */
-    $myLog = $event->getApp()->file()->read('my.log');
+    $myLog = $event->getApp()->file()->read(MyLogs::MY);
 
     /**
      * Obtaining log
      * file contents.
      */
-    $log = $event->getApp()->file()->read('app.log');
+    $log = $event->getApp()->file()->read(MyLogs::APP);
 
     $event->setResponseContent([
         'My log:',

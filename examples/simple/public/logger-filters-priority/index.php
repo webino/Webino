@@ -13,14 +13,23 @@ use WebinoConfigLib\Feature\Log;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example logs
+ */
+abstract class MyLogs
+{
+    const APP = 'app.log';
+    const ERROR = 'app.log';
+}
+
 $config = Webino::config([
     /**
      * Configuring app log
      * with priority filters.
      */
-    (new Log('app.log'))->filterPriority(Log::INFO),
+    (new Log(MyLogs::APP))->filterPriority(Log::INFO),
 
-    (new Log('error.log'))->setName('error')->filterPriority(Log::ERROR),
+    (new Log(MyLogs::ERROR))->setName('error')->filterPriority(Log::ERROR),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -39,9 +48,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      * Obtaining log
      * file contents.
      */
-    $log = $event->getApp()->file()->read('app.log');
+    $log = $event->getApp()->file()->read(MyLogs::APP);
 
-    $errLog = $event->getApp()->file()->read('error.log');
+    $errLog = $event->getApp()->file()->read(MyLogs::ERROR);
 
     $event->setResponseContent([
         'Error log:',

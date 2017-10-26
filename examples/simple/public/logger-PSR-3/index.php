@@ -13,12 +13,20 @@ use WebinoConfigLib\Feature\Log;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Example logs
+ */
+abstract class MyLogs
+{
+    const APP = 'app.log';
+}
+
 $config = Webino::config([
     /**
      * Configuring app
      * log file.
      */
-    new Log('app.log'),
+    new Log(MyLogs::APP),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -40,7 +48,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      * Obtaining log
      * file contents.
      */
-    $log = $event->getApp()->file()->read('app.log');
+    $log = $event->getApp()->file()->read(MyLogs::APP);
 
     $event->setResponseContent([
         'Application log:',
