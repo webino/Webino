@@ -18,11 +18,26 @@ class MyConfigFeature extends AbstractFeature
 {
     const RESPONSE_TEXT = 'responseText';
 
+    /**
+     * @var string
+     */
+    private $responseText;
+
     public function __construct()
     {
         parent::__construct([
-            $this::RESPONSE_TEXT => 'Hello Webino!',
+            $this::RESPONSE_TEXT => $this->responseText,
         ]);
+    }
+
+    /**
+     * @param string $responseText
+     * @return $this
+     */
+    public function setResponseText($responseText)
+    {
+        $this->responseText = (string) $responseText;
+        return $this;
     }
 }
 
@@ -31,7 +46,7 @@ $config = Webino::config([
      * Adding custom
      * config feature.
      */
-    new MyConfigFeature,
+    (new MyConfigFeature)->setResponseText('Hello Webino!'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
