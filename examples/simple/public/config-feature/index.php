@@ -16,10 +16,12 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyConfigFeature extends AbstractFeature
 {
+    const RESPONSE_TEXT = 'responseText';
+
     public function __construct()
     {
         $this->mergeArray([
-            'responseText' => 'Hello Webino!',
+            $this::RESPONSE_TEXT => 'Hello Webino!',
         ]);
     }
 }
@@ -40,7 +42,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
          * Obtaining config
          * feature value.
          */
-        $event->getApp()->getConfig('responseText'),
+        $event->getApp()->getConfig(MyConfigFeature::RESPONSE_TEXT),
         new SourcePreview(__FILE__),
     ]);
 });
