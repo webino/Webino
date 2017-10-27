@@ -13,23 +13,43 @@ require __DIR__ . '/../bootstrap.php';
 
 class ExampleFeatureOne extends AbstractFeature
 {
+    /**
+     * @param string $argOne
+     * @param string $argTwo
+     */
     public function __construct($argOne, $argTwo)
     {
-        $this->mergeArray([
-            'some_settings' => [
-                'anything' => ['foo' => $argOne, 'bar' => $argTwo],
-            ],
+        parent::__construct([
+            [
+                'some_settings' => [
+                    'anything' => [
+                        'foo' => (string) $argOne,
+                        'bar' => (string) $argTwo,
+                    ],
+                ],
+            ]
         ]);
     }
 }
 
 class ExampleFeatureTwo extends AbstractFeature
 {
+    /**
+     * @param string $argOne
+     */
     public function __construct($argOne)
     {
-        $this->mergeArray([
-            'foo_bar' => $argOne,
-        ]);
+        parent::__construct([['foo_bar' => (string) $argOne]]);
+    }
+
+    /**
+     * @param string $argOne
+     * @return $this
+     */
+    public function setFooBaz($argOne)
+    {
+        $this->mergeArray(['foo_baz' => (string) $argOne]);
+        return $this;
     }
 }
 
@@ -92,9 +112,9 @@ $config = new Config([
 
     new ExampleFeatureOne('OPTION_ONE', 'OPTION_TWO'),
     new ExampleFeatureTwo('DEFAULT_OPTION'),
-    new ExampleFeatureTwo('DEFAULT_OPTION_OVERRIDDEN'),
 
-    // TODO add example feature method call test
+    (new ExampleFeatureTwo('DEFAULT_OPTION_OVERRIDDEN'))
+        ->setFooBaz('CUSTOM_OPTION'),
 
     new Service(MyInvokableService::class),
     new Service(['MyInvokableAlias' => MyInvokableService::class]),
@@ -118,6 +138,7 @@ $expected = [
         'anything' => ['foo' => 'OPTION_ONE', 'bar' => 'OPTION_TWO'],
     ],
     'foo_bar' => 'DEFAULT_OPTION_OVERRIDDEN',
+    'foo_baz' => 'CUSTOM_OPTION',
 
     'services' => [
         'invokables' => [
@@ -149,7 +170,7 @@ $expected = [
         ],
         'services' => [
             'invokables' => [
-                'MyCoreInvokableService' => 'MyCoreInvokableService',
+                'MyCoreInvokableService'  => 'MyCoreInvokableService',
                 'MyCoreInvokableListener' => 'MyCoreInvokableListener',
             ],
         ],

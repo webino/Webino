@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -10,7 +10,7 @@ use WebinoAppLib\Filesystem\LocalFiles;
 use WebinoAppLib\Filesystem\InMemoryFiles;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoConfigLib\Feature\Route;
+use WebinoHtmlLib\Html;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -22,16 +22,16 @@ $config = Webino::config([
     new MemoryFilesystem,
 ]);
 
-$app = Webino::application($config)->bootstrap();
+$app = Webino::application($config, Webino::debugger(Webino::debuggerOptions()->setDevMode()->setBar()))->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     /**
      * Obtaining local
      * filesystem service.
      */
-    $localFiles = $event->getApp()->file();
-    // or
-    $localFiles = $event->getApp()->file(LocalFiles::class);
+    $localFiles1 = $event->getApp()->file();
+    // or with adapter parameter
+    $localFiles2 = $event->getApp()->file(LocalFiles::class);
 
     /**
      * Obtaining memory
@@ -39,8 +39,14 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $memoryFiles = $event->getApp()->file(InMemoryFiles::class);
 
-    $event->setResponseContent([
-        'Hello Webino!',
+    // example memory file
+    $memoryFiles->put('example.txt', null);
+
+    $event->setResponse([
+        new Html\Text('Hello Webino!'),
+        new Html\FieldSet('Local Files 1:', $event->getApp()->debugR($localFiles1->listFiles())),
+        new Html\FieldSet('Local Files 2:', $event->getApp()->debugR($localFiles2->listFiles())),
+        new Html\FieldSet('Memory Files:', $event->getApp()->debugR($memoryFiles->listFiles())),
         new SourcePreview(__FILE__),
     ]);
 });

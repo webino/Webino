@@ -1,7 +1,7 @@
 <?php
 /**
  * Config Feature
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -52,7 +52,7 @@ $config = Webino::config([
 $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         /**
          * Obtaining config
          * feature value.

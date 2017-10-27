@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Application;
 
@@ -48,6 +56,8 @@ class CoreConfig extends Feature\Config
 
             new Feature\ConsoleListener(Listener\Console\ConsoleRequestListener::class),
             new Feature\ConsoleListener(Listener\Console\ConsoleResponseListener::class),
+
+            new Feature\Service(Service\Credits::class)
         ]);
 
         parent::__construct($config);

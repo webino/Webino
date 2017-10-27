@@ -1,7 +1,7 @@
 <?php
 /**
  * Segment Route
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -28,7 +28,7 @@ class MyListener extends AbstractListener
          * Handling default route.
          */
         $this->listen(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent([
+            $event->setResponse([
                 new Html\Text('Hello Webino!'),
                 $event->getApp()->url('myRoute')->html('Go to MyRoute with default param'),
                 new SourcePreview(__FILE__),
@@ -47,26 +47,26 @@ class MyListener extends AbstractListener
             $requiredParam = $event->getParam('requiredParam');
             $optionalParam = $event->getParam('optionalParam');
 
-            $event->setResponseContent([
+            $event->setResponse([
                 new Html\Text('My Route Example!'),
                 new Html\Text('Required parameter value: ' . $requiredParam),
             ]);
 
             if (isset($optionalParam)) {
-                $event->setResponseContent([
+                $event->setResponse([
                     new Html\Text('Optional parameter value: ' . $optionalParam),
                     $event->getApp()->url('myRoute', ['requiredParam' => 'custom-param'])
                         ->html('Go to MyRoute with custom param'),
                 ]);
 
             } elseif ('custom-param' !== $requiredParam) {
-                $event->setResponseContent(
+                $event->setResponse(
                     $event->getApp()->url('myRoute', ['optionalParam' => 'optional-param'])
                         ->html('Go to MyRoute with optional param')
                 );
             }
 
-            $event->setResponseContent([
+            $event->setResponse([
                 new Html\HorizontalLine,
                 $event->getApp()->url(DefaultRoute::class)->html('Go Home'),
             ]);

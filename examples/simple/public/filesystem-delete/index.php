@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Delete
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -37,7 +37,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $event->getApp()->file()->deleteDir('my');
 
-    $event->setResponseContent([
+    $event->setResponse([
         'File contents:',
         new ScrollBox(nl2br(new Html\Text($file))),
         new SourcePreview(__FILE__),

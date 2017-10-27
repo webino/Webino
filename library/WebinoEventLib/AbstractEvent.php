@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoEventLib;
 
@@ -8,25 +16,15 @@ use Zend\EventManager\Event as BaseEvent;
 /**
  * Class AbstractEvent
  */
-class AbstractEvent extends BaseEvent implements
-    EventInterface
+class AbstractEvent extends BaseEvent implements EventInterface
 {
     /**
      * {@inheritdoc}
      */
     public function __construct($name = null, $target = null, $params = null)
     {
-        if (null !== $name) {
-            $this->setName($name);
-        }
-
-        if (null !== $target) {
-            $this->setTarget($target);
-        }
-
-        if (null !== $params) {
-            $this->setEventParams($params);
-        }
+        parent::__construct($name, $target, null);
+        $params and $this->setEventParams($params);
     }
 
     /**
@@ -48,11 +46,12 @@ class AbstractEvent extends BaseEvent implements
      *
      * @param  string|int $name
      * @param  mixed $value
-     * @return Event
+     * @return $this
      */
     public function setEventParam($name, $value)
     {
-        return parent::setParam($name, $value);
+        parent::setParam($name, $value);
+        return $this;
     }
 
     /**
@@ -71,11 +70,12 @@ class AbstractEvent extends BaseEvent implements
      * Overwrites parameters
      *
      * @param  array|\ArrayAccess|object $params
-     * @return Event
+     * @return $this
      * @throws Exception\InvalidArgumentException
      */
     public function setEventParams($params)
     {
-        return parent::setParams($params);
+        parent::setParams($params);
+        return $this;
     }
 }

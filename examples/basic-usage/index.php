@@ -27,15 +27,15 @@ class MyCustomListener extends AbstractRouteListener
     public function init()
     {
         $this->listen(AppEvent::DISPATCH, function (DispatchEvent $event) {
-            $event->setResponseContent($event->getApp()->file()->read('docs/common.html'));
+            $event->setResponse($event->getApp()->file()->read('docs/common.html'));
         }, AppEvent::BEGIN);
 
         $this->listen(AppEvent::DISPATCH, function (DispatchEvent $event) {
-            $event->setResponseContent($event->getApp()->file()->read('docs/footer.html'));
+            $event->setResponse($event->getApp()->file()->read('docs/footer.html'));
         }, AppEvent::FINISH);
 
         $this->listen(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent([
+            $event->setResponse([
                 '<h1>Webino Application Basic Usage Example</h1>',
                 $event->getApp()->url('myRoute')->html('My Route Example'),
                 '<br />',
@@ -54,22 +54,22 @@ class MyCustomListener extends AbstractRouteListener
 
             if ($file->has($path)) {
                 $docs = $file->read($path);
-                $event->setResponseContent($docs);
+                $event->setResponse($docs);
             }
         }, RouteEvent::FINISH);
 
         $this->listen(RouteEvent::MATCH, function (RouteEvent $event) {
             if (DefaultRoute::class !== $event->getRouteMatch()->getMatchedRouteName()) {
-                $event->setResponseContent($event->getApp()->url(DefaultRoute::class)->html('Go Home'));
+                $event->setResponse($event->getApp()->url(DefaultRoute::class)->html('Go Home'));
             }
         }, RouteEvent::FINISH);
 
         $this->listenRoute('myRoute', function (RouteEvent $event) {
-            $event->setResponseContent('<h1>My Route Example Content</h1>');
+            $event->setResponse('<h1>My Route Example Content</h1>');
         });
 
         $this->listenRoute('myRuntimeRoute', function (RouteEvent $event) {
-            $event->setResponseContent([
+            $event->setResponse([
                 '<h1>My Runtime Route Example Content</h1>',
             ]);
         });

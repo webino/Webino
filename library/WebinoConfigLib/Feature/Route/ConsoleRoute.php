@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Feature\Route;
 
@@ -7,7 +15,7 @@ use WebinoConfigLib\Feature\Route as BaseRoute;
 /**
  * Class Console
  */
-class Console extends BaseRoute
+class ConsoleRoute extends BaseRoute
 {
     /**
      * {@inheritdoc}
@@ -19,12 +27,11 @@ class Console extends BaseRoute
     }
 
     /**
-     * @param string|array $route
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setRoute($route)
+    public function setPath($path)
     {
-        parent::setRoute(is_array($route) ? join(' ', $route) : $route);
+        parent::setPath(is_array($path) ? join(' ', $path) : $path);
         return $this;
     }
 
@@ -48,7 +55,10 @@ class Console extends BaseRoute
      */
     public function setDescription($description)
     {
-        $this->setDefaults(['description' => is_array($description) ? join(PHP_EOL, $description) : $description]);
+        is_array($description)
+            and $description = join(PHP_EOL, $description) ;
+
+        $this->setDefaults(['description' => $description]);
         return $this;
     }
 

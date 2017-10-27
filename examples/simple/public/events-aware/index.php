@@ -1,7 +1,7 @@
 <?php
 /**
  * Events Aware
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -110,7 +110,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) use ($myService) {
     $myService->doSomething();
     $myService->doSomethingDifferent();
 
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->get('responseText'),
         new SourcePreview(__FILE__),
     ]);

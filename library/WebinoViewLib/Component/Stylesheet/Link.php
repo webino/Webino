@@ -21,8 +21,8 @@ class Link extends AbstractBaseViewComponent
     private $name;
 
     /**
-     * @param string|null $href
-     * @param string|null $name
+     * @param string|null $href Stylesheet source URL
+     * @param string|null $name Config spec key name
      */
     public function __construct($href = null, $name = null)
     {

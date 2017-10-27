@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger Timer
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -28,7 +28,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     sleep(1);
     $elapsed = $event->getApp()->debug()->timer();
 
-    $event->setResponseContent([
+    $event->setResponse([
         'Hello Webino!',
         new Html\Text('Elapsed time: ' . $elapsed),
         new SourcePreview(__FILE__),

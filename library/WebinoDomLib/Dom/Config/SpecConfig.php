@@ -2,6 +2,8 @@
 
 namespace WebinoDomLib\Dom\Config;
 
+use WebinoBaseLib\Util\ToString;
+
 /**
  * Class SpecConfig
  */
@@ -9,12 +11,12 @@ class SpecConfig extends AbstractSpecConfig implements
     SpecInterface
 {
     /**
-     * @param string $value Node value.
+     * @param string|array $value Node value.
      * @return $this
      */
     public function setValue($value)
     {
-        $this->mergeArray(['value' => $value]);
+        $this->mergeArray(['value' => ToString::value($value)]);
         return $this;
     }
 
@@ -27,12 +29,12 @@ class SpecConfig extends AbstractSpecConfig implements
     }
 
     /**
-     * @param string $html Valid XHTML code.
+     * @param string|array $html Valid XHTML code.
      * @return $this
      */
     public function setHtml($html)
     {
-        $this->mergeArray(['html' => $html]);
+        $this->mergeArray(['html' => ToString::value($html)]);
         return $this;
     }
 
@@ -68,12 +70,12 @@ class SpecConfig extends AbstractSpecConfig implements
     }
 
     /**
-     * @param string $html
+     * @param string|array $html
      * @return $this
      */
     public function setReplace($html)
     {
-        $this->mergeArray(['replace' => $html]);
+        $this->mergeArray(['replace' => ToString::value($html)]);
         return $this;
     }
 

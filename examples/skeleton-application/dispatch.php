@@ -45,14 +45,14 @@ $app->route('something')
 
 
 $app->bind(RouteEvent::NO_MATCH, function (DispatchEvent $event) {
-    $event->setResponseContent('404 NOT FOUND');
+    $event->setResponse('404 NOT FOUND');
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) use ($app) {
 
-    $event->setResponseContent('<p>Default Route</p>');
+    $event->setResponse('<p>Default Route</p>');
 
-    $event->setResponseContent($app->url('something')->html('Test link to something'));
+    $event->setResponse($app->url('something')->html('Test link to something'));
 });
 
 
@@ -66,16 +66,16 @@ $app->bindRoute('something', function (RouteEvent $event) {
 
 //    dd($event->getRouteParam('paramtest'));
 
-    $event->setResponseContent('<p>Default Something X ' . $event->getParam('paramtest') . '</p>');
+    $event->setResponse('<p>Default Something X ' . $event->getParam('paramtest') . '</p>');
 }, AppEvent::FINISH);
 
 $app->bindRoute('something', function (RouteEvent $event) use ($app) {
-    $event->setResponseContent('<p>Default Something 2</p>');
-    $event->setResponseContent($app->url(DefaultRoute::class)->html('Test link to home')->setTitle('Bla bla bla')->setClass('x'));
+    $event->setResponse('<p>Default Something 2</p>');
+    $event->setResponse($app->url(DefaultRoute::class)->html('Test link to home')->setTitle('Bla bla bla')->setClass('x'));
 
 //    $app->ur
 
-//    $event->setResponseContent(
+//    $event->setResponse(
 //        sprintf('<a href="%s">Test link to home</a>', $app->url(DefaultRoute::class))
 //    );
 });
@@ -89,7 +89,7 @@ $app->bind(AppEvent::DISPATCH, function (DispatchEvent $event) use ($app) {
 //    dd($event->getRequest());
 //    dd($event->getResponse());
 //    dd(get_class($event->getRequest()));
-//    $event->setResponseContent('TOTO JE POKUS');
+//    $event->setResponse('TOTO JE POKUS');
 
 //    $stream = new \Zend\Http\Response\Stream;
 //    $stream->setStream(fopen(__FILE__, 'r'));
@@ -359,7 +359,7 @@ $app->bind(AppEvent::DISPATCH, function (DispatchEvent $event) {
     // TODO set rendered result as a response content
 
     // TODO ajax support
-    $event->resetResponseContent($doc->save());
+    $event->resetResponse($doc->save());
 
 }, AppEvent::FINISH * 99);
 

@@ -16,8 +16,8 @@ The basic concept is to bootstrap services and to respond to the client request.
 
 ## Application Architecture
 
-The Webino application architecture is based around Zend Framework 2 but simplified, everything is a service,
-listeners too.
+The Webino application architecture is composed of its own code and other useful open-source libraries, mainly
+Zend Framework.
 
 ### Application Lifecycle
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * View Component Coffee Machine
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -132,7 +132,7 @@ $app->bindRoute('viewTest', function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url('viewTest')->html('View response!'),
         new SourcePreview(__FILE__),
     ]);

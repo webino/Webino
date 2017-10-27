@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoFilesystemLib\Feature;
 
@@ -27,7 +35,7 @@ abstract class AbstractFilesystem extends AbstractFeature
     /**
      * @param string $name Name of adapter service.
      * @param string $type
-     * @param array $options
+     * @param array $opt$this->htmlions
      * @return $this
      */
     protected function configureAdapter($name, $type, array $options = [])

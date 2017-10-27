@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Aware
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -74,7 +74,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $file = $event->getApp()->file()->read('my/folder/test.txt');
 
-    $event->setResponseContent([
+    $event->setResponse([
         'File contents:',
         new ScrollBox(nl2br(new Html\Text($file))),
         new SourcePreview(__FILE__),

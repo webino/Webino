@@ -1,7 +1,7 @@
 <?php
 /**
  * Events Bind App Bootstrap Core
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\AppEvent;
@@ -24,7 +24,7 @@ $appCore->bind(AppEvent::BOOTSTRAP, function (AppEvent $event) {
 $app = $appCore->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->get('responseText'),
         new SourcePreview(__FILE__),
     ]);

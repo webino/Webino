@@ -121,8 +121,8 @@ class GeneralListener extends AbstractListener
         $node = $event->getNode()->rename($newName);
         $event->setNode($node);
 
-        // TODO common
-        $event->getParent()->setNode($node, $event->getSpec()->getKey());
+        $parent = $event->getParent();
+        $parent and $parent->setNode($node, $event->getSpec()->getKey());
     }
 
     /**

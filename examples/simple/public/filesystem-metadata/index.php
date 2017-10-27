@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Metadata
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -35,7 +35,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $size = $event->getApp()->file()->getSize('my/folder/test.txt');
 
-    $event->setResponseContent([
+    $event->setResponse([
         new Html\Text('MIME type: ' . $mimetype),
         new Html\Text('Timestamp: ' . $timestamp),
         new Html\Text('Size: ' . $size),

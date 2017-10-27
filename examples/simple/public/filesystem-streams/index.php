@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Streams
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -74,7 +74,7 @@ $app->bindRoute('streamExampleDownload', function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url('streamExample')->html('Click me!'),
         new Html\LineBreak,
         $event->getApp()->url('streamExampleDownload')->html('Download me!'),

@@ -1,7 +1,7 @@
 <?php
 /**
  * Modules Debugger
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Application\AbstractApplication;
@@ -31,7 +31,7 @@ class MyModule extends AbstractModule
          * from the custom module.
          */
         $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent([
+            $event->setResponse([
                 'Check out right bottom corner > TRACY!',
                 new SourcePreview(__FILE__),
             ]);

@@ -3,10 +3,13 @@
 namespace WebinoViewLib\Component\Stylesheet;
 
 /**
- * Class ResetV7
+ * Class NormalizeV7
  */
-class ResetV7 extends AbstractReset
+class NormalizeV7 extends AbstractReset
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         parent::__construct('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css');

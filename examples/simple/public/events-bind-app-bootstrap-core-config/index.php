@@ -1,7 +1,7 @@
 <?php
 /**
  * Events Bind App Bootstrap Core via Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\AppEvent;
@@ -18,6 +18,8 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyListener extends AbstractListener
 {
+    const RESPONSE_TEXT = 'responseText';
+
     protected function init()
     {
         /**
@@ -25,7 +27,7 @@ class MyListener extends AbstractListener
          * app bootstrap.
          */
         $this->listen(AppEvent::BOOTSTRAP, function (AppEvent $event) {
-            $event->getApp()->set('responseText', 'Hello Webino!');
+            $event->getApp()->set($this::RESPONSE_TEXT, 'Hello Webino!');
         });
     }
 }
@@ -41,8 +43,8 @@ $config = Webino::config([
 $app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
-        $event->getApp()->get('responseText'),
+    $event->setResponse([
+        $event->getApp()->get(MyListener::RESPONSE_TEXT),
         new SourcePreview(__FILE__),
     ]);
 });

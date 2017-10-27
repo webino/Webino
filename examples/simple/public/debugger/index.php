@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -19,7 +19,7 @@ $debugger = Webino::debugger(Webino::debuggerOptions()->setDevMode()->setBar());
 $app = Webino::application(null, $debugger)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         'Check out right bottom corner > TRACY!',
         new SourcePreview(__FILE__),
     ]);

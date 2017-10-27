@@ -1,14 +1,13 @@
 <?php
 /**
  * Logger PSR-3
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoExamplesLib\Html\ScrollBox;
-use WebinoHtmlLib\Html;
+use WebinoExamplesLib\Html\FieldSetScrollBox;
 use WebinoConfigLib\Feature\Log;
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -50,9 +49,8 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $log = $event->getApp()->file()->read(MyLogs::APP);
 
-    $event->setResponseContent([
-        'Application log:',
-        new ScrollBox(nl2br(new Html\Text($log))),
+    $event->setResponse([
+        new FieldSetScrollBox('Application log', $log),
         new SourcePreview(__FILE__),
     ]);
 });

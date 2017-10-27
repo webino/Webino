@@ -36,15 +36,15 @@ Simply precede the name of the command with ``help`` to view a help screen.
     php index.php help <command>
 
 
-Runtime Console
-===============
+Interactive Console
+===================
 
 The Webino™ application comes with a built in REPL (Read-Eval-Print Loop) that makes it easy to run PHP code in
 an interactive console. You can start the interactive console using:
 
 .. code-block:: bash
 
-    php index.php console
+    php index.php shell
 
 
 Then you can interact with application objects like following:
@@ -96,10 +96,10 @@ Creating custom console commands.
 
     class MyConsoleCommand extends AbstractConsoleCommand
     {
-        public function configure(Console $console)
+        public function configure(ConsoleRoute $route)
         {
-            $console
-                ->setRoute('my-command')
+            $route
+                ->setPath('my-command')
                 ->setTitle('My command title');
                 ->setDescription('My command description.');
         }

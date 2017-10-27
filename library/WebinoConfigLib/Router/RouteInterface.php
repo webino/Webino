@@ -1,8 +1,14 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Router;
-
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class AbstractRoute
@@ -30,7 +36,7 @@ interface RouteInterface
     const REGEX = 'regex';
 
     /**
-     * @param string $type Route type.
+     * @param string $type Route type
      * @return $this
      */
     public function setType($type = self::LITERAL);
@@ -42,10 +48,10 @@ interface RouteInterface
     public function setName($name);
 
     /**
-     * @param string $route Route path.
+     * @param string|array $route Route path
      * @return $this
      */
-    public function setRoute($route);
+    public function setPath($route);
 
     /**
      * @param bool $mayTerminate

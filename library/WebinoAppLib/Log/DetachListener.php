@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Log;
 
@@ -16,6 +24,7 @@ class DetachListener extends AbstractInfoMessage
      */
     public function getMessage(Parameters $args)
     {
+        // TODO remove CallbackHandler support, case deprecated by Zend
         if ($args[1] instanceof CallbackHandler) {
             $mData = $args[1]->getMetadata();
             $args->handler  = $args[1]->getCallback();

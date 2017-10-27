@@ -1,9 +1,16 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Event;
 
 use Zend\Mvc\Router\RouteMatch;
-use Zend\Stdlib\ResponseInterface;
 
 /**
  * Class AbstractRouteEvent
@@ -37,21 +44,16 @@ abstract class AbstractRouteEvent extends DispatchEvent implements
      */
     public function getResponse()
     {
-        $response = parent::getResponse();
-        if (null === $response) {
-            $response = $this->parentEvent->getResponse();
-            parent::setResponse($response);
-        }
-        return $response;
+        return $this->parentEvent->getResponse();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setResponse(ResponseInterface $response)
+    public function setResponse($response)
     {
         $this->parentEvent->setResponse($response);
-        return parent::setResponse($response);
+        return $this;
     }
 
     /**

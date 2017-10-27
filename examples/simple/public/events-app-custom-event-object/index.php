@@ -1,7 +1,7 @@
 <?php
 /**
  * Events App Custom Event Object
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\AppEvent;
@@ -66,7 +66,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $myEvent = new MyEvent($event);
     $event->getApp()->emit($myEvent);
 
-    $event->setResponseContent([
+    $event->setResponse([
         $myEvent->getResponseText(),
         new SourcePreview(__FILE__)
     ]);

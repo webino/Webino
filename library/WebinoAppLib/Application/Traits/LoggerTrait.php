@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Application\Traits;
 
@@ -43,13 +51,13 @@ trait LoggerTrait
      * Require service from services into application
      *
      * @param string $service Service name
-     * @throws DomainException Unable to get service
+     * @throws \WebinoAppLib\Exception\DomainException Unable to get service
      */
     abstract protected function requireService($service);
 
     /**
      * @param string $name
-     * @return object|LoggerInterface
+     * @return LoggerInterface|object
      */
     public function getLogger($name = null)
     {

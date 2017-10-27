@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Service;
 
@@ -21,25 +29,24 @@ class Debugger implements DebuggerInterface
      */
     public function __construct($options = null)
     {
-        $_options = !($options instanceof DebuggerOptions)
-            ? new DebuggerOptions((array) $options)
-            : $options;
+        $options instanceof DebuggerOptions
+            or $options = new DebuggerOptions((array) $options);
 
-        $this->options = $_options;
-        if ($_options->isDisabled() || Tracy::isEnabled()) {
+        $this->options = $options;
+        if ($options->isDisabled() || Tracy::isEnabled()) {
             return;
         }
 
         Tracy::enable(
-            $_options->getMode(),
-            $_options->getLog(),
-            $_options->getEmail()
+            $options->getMode(),
+            $options->getLog(),
+            $options->getEmail()
         );
 
-        Tracy::$showBar    = $_options->hasBar();
-        Tracy::$strictMode = $_options->isStrict();
-        Tracy::$maxDepth   = $_options->getMaxDepth();
-        Tracy::$maxLength  = $_options->getMaxLen();
+        Tracy::$showBar    = $options->hasBar();
+        Tracy::$strictMode = $options->isStrict();
+        Tracy::$maxDepth   = $options->getMaxDepth();
+        Tracy::$maxLength  = $options->getMaxLen();
     }
 
     /**

@@ -1,10 +1,17 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Router;
 
 use WebinoConfigLib\AbstractConfig;
 use WebinoConfigLib\Exception\InvalidArgumentException;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class AbstractRoute
@@ -20,7 +27,7 @@ abstract class AbstractRoute extends AbstractConfig implements
     /**
      * @var string
      */
-    private $route;
+    private $path;
 
     /**
      * @return bool
@@ -50,26 +57,26 @@ abstract class AbstractRoute extends AbstractConfig implements
     /**
      * @return bool
      */
-    protected function hasRoute()
+    protected function hasPath()
     {
-        return !is_null($this->route);
+        return !is_null($this->path);
     }
 
     /**
      * @return string
      */
-    protected function getRoute()
+    protected function getPath()
     {
-        return $this->route;
+        return $this->path;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setRoute($route)
+    public function setPath($path)
     {
-        $this->route = (string) $route;
-        $route and $this->setRouteOption($route);
+        $this->path = (string) $path;
+        $path and $this->setRouteOption($path);
         return $this;
     }
 

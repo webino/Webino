@@ -1,14 +1,13 @@
 <?php
 /**
  * Logger Filters Regex
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoExamplesLib\Html\ScrollBox;
-use WebinoHtmlLib\Html;
+use WebinoExamplesLib\Html\FieldSetScrollBox;
 use WebinoConfigLib\Feature\Log;
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -24,12 +23,11 @@ abstract class MyLogs
 
 $config = Webino::config([
     /**
-     * Configuring app log
+     * Configuring app logs
      * with priority filters.
      */
     (new Log(MyLogs::APP))->filterRegex('~^Attach~'),
-
-    (new Log(MyLogs::EVENTS))->setName('error')->filterRegex('~^Event~'),
+    (new Log(MyLogs::EVENTS))->filterRegex('~^Event~'),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -46,17 +44,14 @@ $app->log()->emergency('Test emergency log message!');
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     /**
      * Obtaining log
-     * file contents.
+     * files contents.
      */
     $log = $event->getApp()->file()->read(MyLogs::APP);
-
     $eventLog = $event->getApp()->file()->read(MyLogs::EVENTS);
 
-    $event->setResponseContent([
-        'Event log:',
-        new ScrollBox(nl2br(new Html\Text($eventLog))),
-        'Application log:',
-        new ScrollBox(nl2br(new Html\Text($log))),
+    $event->setResponse([
+        new FieldSetScrollBox('Event log', $eventLog),
+        new FieldSetScrollBox('Application log', $log),
         new SourcePreview(__FILE__),
     ]);
 });

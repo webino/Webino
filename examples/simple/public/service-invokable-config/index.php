@@ -1,7 +1,7 @@
 <?php
 /**
  * Invokable Service Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -18,7 +18,7 @@ class MyService
 {
     public function doSomething()
     {
-        return 'My Service Response Content!';
+        return 'My service response!';
     }
 }
 
@@ -39,7 +39,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $myService = $event->getApp()->get(MyService::class);
 
-    $event->setResponseContent([
+    $event->setResponse([
         $myService->doSomething(),
         new SourcePreview(__FILE__),
     ]);

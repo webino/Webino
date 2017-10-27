@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Application\Traits;
 
@@ -55,7 +63,7 @@ trait DebuggerTrait
     /**
      * Debug a variable
      *
-     * @param string|null $var Variable.
+     * @param mixed|null $var Variable to dump, or null to return debugger.
      * @param bool|false $return Return variable dump as string.
      * @return mixed|\WebinoAppLib\Debugger\DebuggingInterface
      */
@@ -65,5 +73,16 @@ trait DebuggerTrait
             return $this->getDebugger();
         }
         return $this->getDebugger()->dump($var, $return);
+    }
+
+    /**
+     * Returns variable dump
+     *
+     * @param mixed $var
+     * @return mixed|\WebinoAppLib\Debugger\DebuggingInterface
+     */
+    public function debugR($var)
+    {
+        return $this->debug($var, true);
     }
 }

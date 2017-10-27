@@ -1,7 +1,7 @@
 <?php
 /**
  * Route Bind Invokable Class
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -18,7 +18,7 @@ class MyListener
 {
     public function __invoke(RouteEvent $event)
     {
-        $event->setResponseContent(['Hello Webino!', new SourcePreview(__FILE__)]);
+        $event->setResponse(['Hello Webino!', new SourcePreview(__FILE__)]);
     }
 }
 

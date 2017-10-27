@@ -1,10 +1,18 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Console;
 
 use Webino;
 use WebinoAppLib\Event\ConsoleEvent;
-use WebinoConfigLib\Feature\Route\Console;
+use WebinoConfigLib\Feature\Route\ConsoleRoute;
 
 /**
  * Class ConsoleVersion
@@ -14,10 +22,10 @@ class ConsoleVersion extends AbstractConsoleCommand
     /**
      * {@inheritdoc}
      */
-    public function configure(Console $console)
+    public function configure(ConsoleRoute $route)
     {
-        $console
-            ->setRoute('version')
+        $route
+            ->setPath('version')
             ->setTitle('Show script version');
     }
 
@@ -26,6 +34,6 @@ class ConsoleVersion extends AbstractConsoleCommand
      */
     public function handle(ConsoleEvent $event)
     {
-        $event->getCli()->out(Webino::VERSION);
+        $event->getCli()->clear()->out(Webino::VERSION);
     }
 }

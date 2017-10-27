@@ -1,7 +1,7 @@
 <?php
 /**
  * View Component Counter Ajax
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;

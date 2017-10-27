@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Feature;
 
@@ -24,6 +32,8 @@ class Log extends AbstractLog
      */
     public function __construct($filePath = null)
     {
+        parent::__construct();
+
         if (null === $filePath && !$this::$useLastFilePath) {
             $filePath = $this::DEFAULT_FILE_PATH;
         } else {
@@ -31,6 +41,7 @@ class Log extends AbstractLog
         }
 
         $this->writer = new Writer\Stream($filePath);
+        $this->setWriterKey(basename($filePath));
         $this->setSimpleFormat();
     }
 

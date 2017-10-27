@@ -6,7 +6,7 @@ use WebinoConfigLib\Feature\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-$route[0] = (new Route\Console)
+$route[0] = (new Route\ConsoleRoute)
     ->setRoute('example command');
 
 

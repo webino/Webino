@@ -28,10 +28,10 @@ Console command is a class defining a route and an event handler.
 
     class MyConsoleCommand extends AbstractConsoleCommand
     {
-        public function configure(Console $console)
+        public function configure(ConsoleRoute $route)
         {
-            $console
-                ->setRoute('my-command')
+            $route
+                ->setPath('my-command')
                 ->setTitle('My command title')
                 ->setDescription('My command description.');
         }

@@ -1,10 +1,18 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Console;
 
 use Webino;
 use WebinoAppLib\Event\ConsoleEvent;
-use WebinoConfigLib\Feature\Route\Console;
+use WebinoConfigLib\Feature\Route\ConsoleRoute;
 
 /**
  * Class ConsoleDefault
@@ -23,29 +31,40 @@ class ConsoleDefault extends AbstractConsoleCommand
     /**
      * {@inheritdoc}
      */
-    public function configure(Console $console)
+    public function configure(ConsoleRoute $console)
     {
-        $console
-            ->setType('catchall')
-            // TODO remove, see https://github.com/zendframework/zend-mvc/issues/24
-            ->setDefaults([null => null]);
-    }
-
-    public function showSystemBanner(ConsoleEvent $event)
-    {
-        $event->getCli()->br()->out(sprintf('<background_green> Webino™ </background_green> version <yellow>%s</yellow>', Webino::VERSION))->br();
+        $console->setType('catchall');
     }
 
     /**
      * @param ConsoleEvent $event
-     * @todo refactor
+     */
+    public function showSystemBanner(ConsoleEvent $event)
+    {
+        $cli = $event->getCli();
+
+        $cli
+            ->br()
+            ->white()->greenBg()->inline(' Webino™ ')
+            ->inline(' version ')
+            ->yellow()->out(Webino::VERSION)
+            ->br();
+    }
+
+    /**
+     * @param ConsoleEvent $event
      */
     public function handle(ConsoleEvent $event)
     {
-        $routes = $event->getApp()->getConfig('console')->router->routes;
+        $cfg = $event->getApp()->getConfig('console');
+        if (empty($cfg->router->routes)) {
+            return;
+        }
 
-        $maxLen = 0;
+        $routes    = $cfg->router->routes;
+        $maxLen    = 0;
         $newRoutes = [];
+
         foreach ($routes as $route) {
             if ('catchall' === $route->type) {
                 continue;
@@ -57,8 +76,9 @@ class ConsoleDefault extends AbstractConsoleCommand
             $newRoutes[$route->options->route] = $route;
         }
 
-        ksort($newRoutes);
+        $cli = $event->getCli();
 
+        ksort($newRoutes);
         foreach ($newRoutes as $route) {
 
             $command = $this->resolveRouteCommand($route->options->route);
@@ -66,11 +86,18 @@ class ConsoleDefault extends AbstractConsoleCommand
                 ? $route->options->defaults->title
                 : null;
 
+            $cli->bold()->green()->inline($command);
+
+            if (empty($title)) {
+                $cli->br();
+                continue;
+            }
+
             $space = str_repeat(' ', $maxLen + 10 - strlen($command));
-            $event->getCli()->out(sprintf('<green><bold>%s</bold></green>%s - %s', $command, $space, $title));
+            $cli->out($space . ' - ' . $title);
         }
 
-        $event->getCli()->br();
+        $cli->br();
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger Panel
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Debugger\Bar\AbstractPanel;
@@ -60,7 +60,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $event->getApp()->debug()->setBarPanel(new MyDebugBarPanel, MyDebugBarPanel::NAME);
 
-    $event->setResponseContent([
+    $event->setResponse([
         'Check out right bottom corner > MyPanel!',
         new SourcePreview(__FILE__),
     ]);

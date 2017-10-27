@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Router;
 
@@ -11,23 +19,20 @@ trait RouteConstructorTrait
      * {@inheritdoc}
      * @see \WebinoConfigLib\Router\RouteConstructorInterface
      */
-    public function __construct($route = null)
+    public function __construct($path = null)
     {
-        $route and $this->setRoute($route);
-
-        $this
-            ->setType()
-            ->init();
+        $path and $this->setPath($path);
+        $this->setType()->init();
     }
 
     /**
-     * @param string $route
+     * @param string|array $path Route path
      * @return $this
      */
-    abstract protected function setRoute($route);
+    abstract protected function setPath($path);
 
     /**
-     * @param string $type Route type.
+     * @param string $type Route type
      * @return $this
      */
     abstract public function setType($type = RouteInterface::LITERAL);

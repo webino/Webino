@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib;
 
@@ -13,7 +21,7 @@ use Zend\ServiceManager\ServiceManager;
 /**
  * Class Factory
  */
-class Factory
+final class Factory
 {
     /**
      * Application debugger file path
@@ -51,7 +59,7 @@ class Factory
      * @param DebuggerInterface $debugger
      * @return mixed|DebuggerInterface|\WebinoAppLib\Service\NullDebugger
      */
-    protected function createDebugger(DebuggerInterface $debugger = null)
+    private function createDebugger(DebuggerInterface $debugger = null)
     {
         if (null !== $debugger) {
             return $debugger;
@@ -79,7 +87,7 @@ class Factory
      * @param array|Config $config
      * @return array
      */
-    protected function normalizeConfig($config)
+    private function normalizeConfig($config)
     {
         if (null === $config) {
             return [];
@@ -100,7 +108,7 @@ class Factory
      * @return Config
      * @throws InvalidArgumentException
      */
-    protected function createConfig($config)
+    private function createConfig($config)
     {
         if (null !== $config) {
             $normalized = $this->normalizeConfig($config);

@@ -1,7 +1,7 @@
 <?php
 /**
  * Route Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -14,6 +14,11 @@ use WebinoConfigLib\Feature\Route;
 use WebinoEventLib\AbstractListener;
 
 require __DIR__ . '/../../vendor/autoload.php';
+
+abstract class MyRoutes
+{
+    const MY = 'myRoute';
+}
 
 /**
  * Listener aggregate
@@ -28,9 +33,9 @@ class MyListener extends AbstractListener
          * Handling default route.
          */
         $this->listen(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent([
+            $event->setResponse([
                 new Html\Text('Hello Webino!'),
-                $event->getApp()->url('myRoute')->html('Go to MyRoute'),
+                $event->getApp()->url(MyRoutes::MY)->html('Go to MyRoute'),
                 new SourcePreview(__FILE__),
             ]);
         });
@@ -38,8 +43,8 @@ class MyListener extends AbstractListener
         /**
          * Handling custom route.
          */
-        $this->listenRoute('myRoute', function (RouteEvent $event) {
-            $event->setResponseContent([
+        $this->listenRoute(MyRoutes::MY, function (RouteEvent $event) {
+            $event->setResponse([
                 new Html\Text('My Route Example!'),
                 $event->getApp()->url(DefaultRoute::class)->html('Go Home'),
             ]);
@@ -53,7 +58,7 @@ $config = Webino::config([
      * Adding route
      * via config.
      */
-    (new Route('myRoute'))->setLiteral('/my-route'),
+    (new Route(MyRoutes::MY))->setLiteral('/my-route'),
 ]);
 
 Webino::application($config)->bootstrap()->dispatch();

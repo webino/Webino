@@ -6,7 +6,7 @@ use WebinoViewLib\Component\AbstractBaseViewComponent;
 use WebinoViewLib\Feature\NodeView;
 
 /**
- * Class Src
+ * Class ScriptSrc
  */
 class Src extends AbstractBaseViewComponent
 {
@@ -21,8 +21,8 @@ class Src extends AbstractBaseViewComponent
     private $name;
 
     /**
-     * @param string|null $src
-     * @param string|null $name
+     * @param string|null $src Javascript source URL
+     * @param string|null $name Config spec key name
      */
     public function __construct($src = null, $name = null)
     {
@@ -46,6 +46,6 @@ class Src extends AbstractBaseViewComponent
         $node
             ->setPriority(-110)
             ->setLocator('head')
-            ->setHtml('{$_innerHtml} <script src="' . $this->src . '" type="text/javascript"></script>');
+            ->setHtml('{$_innerHtml} <script src="' . $this->src . '"></script>');
     }
 }

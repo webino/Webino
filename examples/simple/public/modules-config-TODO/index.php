@@ -1,7 +1,7 @@
 <?php
 /**
  * Modules Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Application\AbstractApplication;
@@ -29,7 +29,7 @@ class MyModule extends AbstractModule
          * from the custom module.
          */
         $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent(new Html\Text($event->getApp()->getConfig('myModuleResponseText')));
+            $event->setResponse(new Html\Text($event->getApp()->getConfig('myModuleResponseText')));
         });
     }
 
@@ -64,7 +64,7 @@ class MyInvokableModule
              */
             $myService = $event->getApp()->get(MyModuleService::class);
 
-            $event->setResponseContent([
+            $event->setResponse([
                 $myService->doSomething(),
                 new SourcePreview(__FILE__),
             ]);

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Contract;
 
@@ -20,7 +28,7 @@ interface CacheInterface
     /**
      * Set cached value or cache service
      *
-     * @param object|StorageInterface|string $cacheOrKey
+     * @param string|object|StorageInterface $cacheOrKey
      * @param mixed|null $value
      */
     public function setCache($cacheOrKey, $value = null);

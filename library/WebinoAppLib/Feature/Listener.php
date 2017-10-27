@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Feature;
 
@@ -17,15 +25,20 @@ class Listener extends AbstractFeature
      */
     public function __construct($listener, $factoryClass = null)
     {
-        $_listener = is_array($listener) ? $listener : [$listener => $listener];
-        $key = current($_listener);
-        $service = is_null($factoryClass)
-            ? [Config::INVOKABLES => [$key => $key]]
-            : [Config::FACTORIES => [$key => $factoryClass]];
+        is_array($listener)
+            or $listener = [$listener => $listener];
 
-        $this->mergeArray([
-            Config::LISTENERS => $_listener,
-            Config::SERVICES  => $service,
+        $key = current($listener);
+
+        $service = is_null($factoryClass)
+                 ? [Config::INVOKABLES => [$key => $key]]
+                 : [Config::FACTORIES => [$key => $factoryClass]];
+
+        parent::__construct([
+            [
+                Config::LISTENERS => $listener,
+                Config::SERVICES  => $service,
+            ]
         ]);
     }
 }

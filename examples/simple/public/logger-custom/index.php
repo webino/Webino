@@ -1,14 +1,13 @@
 <?php
 /**
  * Logger Custom
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoExamplesLib\Html\ScrollBox;
-use WebinoHtmlLib\Html;
+use WebinoExamplesLib\Html\FieldSetScrollBox;
 use WebinoConfigLib\Feature\FirePhpLog;
 use WebinoConfigLib\Feature\Log;
 use WebinoConfigLib\Feature\Logger;
@@ -39,7 +38,6 @@ $config = Webino::config([
      * app logger.
      */
     new Log(MyLogs::APP),
-
     new FirePhpLog,
 
     /**
@@ -73,11 +71,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $log = $event->getApp()->file()->read(MyLogs::APP);
 
-    $event->setResponseContent([
-        'My log:',
-        new ScrollBox(nl2br(new Html\Text($myLog))),
-        'Application log:',
-        new ScrollBox(nl2br(new Html\Text($log))),
+    $event->setResponse([
+        new FieldSetScrollBox('My log', $myLog),
+        new FieldSetScrollBox('Application log', $log),
         new SourcePreview(__FILE__),
     ]);
 });

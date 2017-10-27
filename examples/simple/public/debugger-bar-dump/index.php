@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger Bar Dump
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -25,7 +25,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $event->getApp()->debug()->barDump($event);
 
-    $event->setResponseContent([
+    $event->setResponse([
         'Check out right bottom corner > dumps!',
         new SourcePreview(__FILE__),
     ]);

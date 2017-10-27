@@ -1,9 +1,17 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Console;
 
 use WebinoAppLib\Event\ConsoleEvent;
-use WebinoConfigLib\Feature\Route\Console;
+use WebinoConfigLib\Feature\Route\ConsoleRoute;
 
 /**
  * Class ConsoleHelp
@@ -13,50 +21,45 @@ class ConsoleHelp extends AbstractConsoleCommand
     /**
      * {@inheritdoc}
      */
-    public function configure(Console $console)
+    public function configure(ConsoleRoute $route)
     {
-        $console
-            ->setRoute('help <command>')
+        $route
+            ->setPath('help [<command>]')
             ->setTitle('Show command description');
     }
 
     /**
      * @param ConsoleEvent $event
-     * @todo refactor
      */
     public function handle(ConsoleEvent $event)
     {
-        $routes = $event->getApp()->getConfig('console')->router->routes;
+        $cfg = $event->getApp()->getConfig('console');
+        if (empty($cfg->router->routes)) {
+            return;
+        }
 
-        $requiredCommand = $event->getParam('command');
+        $routes = $cfg->router->routes;
+        $requiredCommand = $event->getParam('command', 'help');
 
         // find route
-        foreach ($routes as $route) {
-            if (0 === strpos($route->options->route, $requiredCommand)) {
+        $route = null;
+        foreach ($routes as $item) {
+            if (!empty($item->options) && 0 === strpos($item->options->route, $requiredCommand)) {
+                $route = $item;
                 break;
             }
         }
 
         if (empty($route)) {
-            // TODO command not found
+            // command not found
+            $event->getCli()->draw('404')->br();
             return;
         }
 
-        $title = isset($route->options->defaults->title)
-            ? $route->options->defaults->title
-            : null;
-
-        $description = isset($route->options->defaults->description)
-            ? $route->options->defaults->description
-            : null;
-
-        $argumentsDescription = isset($route->options->defaults->argumentsDescription)
-            ? $route->options->defaults->argumentsDescription
-            : [];
-        
-        $optionsDescription = isset($route->options->defaults->optionsDescription)
-            ? $route->options->defaults->optionsDescription
-            : [];
+        $title = (string) $route->options->defaults->title ?? null;
+        $description = (string) $route->options->defaults->description ?? null;
+        $argumentsDescription = (array) $route->options->defaults->argumentsDescription ?? [];
+        $optionsDescription = (array) $route->options->defaults->optionsDescription ?? [];
 
         $newArgumentsDescription = [];
         foreach ($argumentsDescription as $key => $value) {
@@ -71,17 +74,23 @@ class ConsoleHelp extends AbstractConsoleCommand
         $cli = $event->getCli();
 
         $cli
-            ->invert(" $title ")->br()
-            ->yellowBold('Usage:')
-            ->backgroundBlack($route->options->route)->br();
+            ->invert()->bold(" $title ")->br()
+            ->yellow()->bold('Usage:')
+            ->white()->blackBg(" {$route->options->route} ")->br();
 
-        empty($description)
-            or $cli->yellowBold('Description:')->out(' ' . str_replace(PHP_EOL, PHP_EOL . ' ', $description))->br();
+        $description
+            and $cli
+                ->yellow()->bold('Description:')
+                ->out(' ' . str_replace(PHP_EOL, PHP_EOL . ' ', $description))->br();
 
-        empty($argumentsDescription)
-            or $cli->yellowBold('Arguments:')->columns($newArgumentsDescription)->br();
+        $newArgumentsDescription
+            and $cli
+                ->yellow()->bold('Arguments:')
+                ->columns($newArgumentsDescription)->br();
 
-        empty($argumentsDescription)
-            or $cli->yellowBold('Options:')->columns($newOptionsDescription)->br();
+        $newOptionsDescription
+            and $cli
+                ->yellow()->bold('Options:')
+                ->columns($newOptionsDescription)->br();
     }
 }

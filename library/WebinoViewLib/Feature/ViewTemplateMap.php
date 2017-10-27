@@ -2,9 +2,8 @@
 
 namespace WebinoViewLib\Feature;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use RegexIterator;
+use WebinoBaseLib\Iterator\RecursiveDirectoryRegexIterator;
 use WebinoConfigLib\Config;
 use WebinoConfigLib\Feature\FeatureInterface;
 
@@ -62,10 +61,10 @@ class ViewTemplateMap extends Config implements
      */
     private function createDirIterator($dir)
     {
-        return new RegexIterator(
-            new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir)),
+        return new RecursiveDirectoryRegexIterator(
+            $dir,
             '/^.+\..{3,4}$/i',
-            RegexIterator::GET_MATCH
+            RecursiveDirectoryRegexIterator::GET_MATCH
         );
     }
 }

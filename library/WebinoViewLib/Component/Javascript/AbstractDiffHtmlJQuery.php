@@ -12,6 +12,6 @@ abstract class AbstractDiffHtmlJQuery extends Src
      */
     protected function getSpecName()
     {
-        return 'diffhtml-jquery-js';
+        return 'diff-html-jquery-js';
     }
 }

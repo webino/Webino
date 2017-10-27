@@ -4,6 +4,7 @@ namespace WebinoAppLib\Event;
 
 /**
  * Class HtmlRenderEvent
+ * TODO remove??, seems unused
  */
 class HtmlRenderEvent extends DispatchEvent
 {

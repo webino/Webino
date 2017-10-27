@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger Info via Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -30,7 +30,7 @@ $config = Webino::config([
 $app = Webino::application($config, $debugger)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         'Check out right bottom corner > System info!',
         new SourcePreview(__FILE__),
     ]);

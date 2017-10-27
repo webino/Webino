@@ -1,7 +1,7 @@
 <?php
 /**
  * Invokable Service Config Override
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -18,21 +18,21 @@ class MyService
 {
     public function doSomething()
     {
-        return 'My Service Response Content!';
+        return 'My service response!';
     }
 }
 
 $config = Webino::config([
     /**
-     * Registering example
+     * Registering custom
      * service via config.
      */
-    new Service(ArrayObject::class),
+    new Service(stdClass::class),
     /**
-     * Overriding example
+     * Overriding custom
      * service via config.
      */
-    new Service([ArrayObject::class => MyService::class]),
+    new Service([stdClass::class => MyService::class]),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -42,9 +42,9 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      * Obtaining example
      * service instance.
      */
-    $myService = $event->getApp()->get(ArrayObject::class);
+    $myService = $event->getApp()->get(stdClass::class);
 
-    $event->setResponseContent([
+    $event->setResponse([
         $myService->doSomething(),
         new SourcePreview(__FILE__),
     ]);

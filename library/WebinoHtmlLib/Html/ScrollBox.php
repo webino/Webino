@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoHtmlLib\Html;
 
@@ -7,14 +15,14 @@ namespace WebinoHtmlLib\Html;
  */
 class ScrollBox extends AbstractHtml
 {
+    use HeightStyleTrait;
+
     /**
-     * @param string|array $text
-     * @param bool $escape
+     * @param string|array|HtmlInterface $text
      */
-    public function __construct($text, $escape = false)
+    public function __construct($text)
     {
         $this->setValue($text);
-        $this->setEscape($escape);
         $this->setStyle(['overflow' => 'auto']);
     }
 
@@ -24,15 +32,5 @@ class ScrollBox extends AbstractHtml
     protected function getTagName()
     {
         return 'div';
-    }
-
-    /**
-     * @param int $height Height in pixels
-     * @return $this
-     */
-    public function setHeight($height)
-    {
-        $this->setStyle(['height' => $height . 'px']);
-        return $this;
     }
 }

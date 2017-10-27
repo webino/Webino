@@ -6,7 +6,7 @@ use WebinoConfigLib\Router\Route;
 require __DIR__ . '/../bootstrap.php';
 
 
-$route = new Route\Regex('<example>/.*', '%example%');
+$route = new Route\RegexRoute('<example>/.*', '%example%');
 
 
 Assert::null($route->getName());

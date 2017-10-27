@@ -1,7 +1,7 @@
 <?php
 /**
  * Service Factory Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -13,17 +13,34 @@ use WebinoAppLib\Router\DefaultRoute;
 require __DIR__ . '/../../vendor/autoload.php';
 
 /**
+ * Example service dependency
+ */
+class MySubService
+{
+    public function doSomething($msg)
+    {
+        return $msg;
+    }
+}
+
+/**
  * Custom service
  */
 class MyService
 {
-    public function __construct($someDependency)
+    /**
+     * @var MySubService
+     */
+    private $someDependency;
+
+    public function __construct(MySubService $someDependency)
     {
+        $this->someDependency = $someDependency;
     }
 
     public function doSomething()
     {
-        return 'My Service Response Content!';
+        return $this->someDependency->doSomething('My service response!');
     }
 }
 
@@ -34,7 +51,8 @@ class MyServiceFactory extends AbstractFactory
 {
     protected function create()
     {
-        $someDependency = 'example';
+        /** @var MySubService $someDependency */
+        $someDependency = $this->getServices()->get(MySubService::class);
         return new MyService($someDependency);
     }
 }
@@ -45,6 +63,9 @@ $config = Webino::config([
      * factory via config.
      */
     new Service(MyService::class, MyServiceFactory::class),
+
+    // registering example dependency
+    new Service(MySubService::class),
 ]);
 
 $app = Webino::application($config)->bootstrap();
@@ -56,7 +77,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $myService = $event->getApp()->get(MyService::class);
 
-    $event->setResponseContent([
+    $event->setResponse([
         $myService->doSomething(),
         new SourcePreview(__FILE__),
     ]);

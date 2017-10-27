@@ -1,7 +1,7 @@
 <?php
 /**
  * Service Factory Object
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Application\CoreConfig;
@@ -55,7 +55,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $myService = $event->getApp()->get(MyService::class);
 
-    $event->setResponseContent([
+    $event->setResponse([
         $myService->doSomething(),
         new SourcePreview(__FILE__),
     ]);

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Feature;
 
@@ -14,10 +22,12 @@ class NoopLog extends AbstractLog
      */
     public function __construct()
     {
-        $this->mergeArray([
-            $this::KEY => (new Writer([
-                (new Writer\Noop)->toArray(),
-            ]))->toArray(),
+        parent::__construct([
+            [
+                $this::KEY => (new Writer([
+                    (new Writer\Noop)->toArray(),
+                ]))->toArray(),
+            ]
         ]);
     }
 }

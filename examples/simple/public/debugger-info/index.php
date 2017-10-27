@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger Info
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -24,7 +24,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     // or as array
     $event->getApp()->debug()->setBarInfo(['Test Label 02' => 'Test Value02']);
 
-    $event->setResponseContent([
+    $event->setResponse([
         'Check out right bottom corner > System info!',
         new SourcePreview(__FILE__),
     ]);

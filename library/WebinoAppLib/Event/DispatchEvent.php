@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Event;
 
@@ -51,37 +59,41 @@ class DispatchEvent extends AppEvent implements
     }
 
     /**
-     * @param ResponseInterface $response
+     * Set response
+     *
+     * It sets response content when response is a string.
+     * It joins values to a string when response is an array.
+     * It converts to string when response is an object.
+     * It sets response object when response is an interface.
+     *
+     * @param string|array|ResponseInterface $response
      * @return $this
      */
-    public function setResponse(ResponseInterface $response)
+    public function setResponse($response)
     {
-        $this->setEventParam($this::RESPONSE, $response);
+        if ($response instanceof ResponseInterface) {
+            $this->setEventParam($this::RESPONSE, $response);
+            return $this;
+        }
+
+        $_response = $this->getResponse();
+        $_response->setContent($_response->getContent() . $this->normalizeResponseContent($response));
         return $this;
     }
 
     /**
-     * Append the content to a response
+     * Reset response
      *
-     * @param string|array $content
+     * @param string|array|ResponseInterface $response
      * @return $this
      */
-    public function setResponseContent($content)
+    public function resetResponse($response = null)
     {
-        $response = $this->getResponse();
-        $response->setContent($response->getContent() . $this->normalizeResponseContent($content));
-        return $this;
-    }
-
-    /**
-     * Set the content of a response
-     *
-     * @param string|array $content
-     * @return $this
-     */
-    public function resetResponseContent($content = null)
-    {
-        $this->getResponse()->setContent($this->normalizeResponseContent($content));
+        if ($response instanceof ResponseInterface) {
+            // TODO implement??
+            return $this;
+        }
+        $this->getResponse()->setContent($this->normalizeResponseContent($response));
         return $this;
     }
 

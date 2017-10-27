@@ -1,7 +1,7 @@
 <?php
 /**
  * Events Bind App Dispatch
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\AppEvent;
@@ -18,7 +18,7 @@ $app = Webino::application()->bootstrap();
  * app dispatch.
  */
 $app->bind(AppEvent::DISPATCH, function (AppEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         'Hello Webino!',
         new SourcePreview(__FILE__),
     ]);

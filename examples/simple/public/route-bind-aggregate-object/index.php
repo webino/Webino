@@ -1,7 +1,7 @@
 <?php
 /**
  * Route Bind Aggregate Object
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -22,7 +22,7 @@ class MyListener extends AbstractListener
          * Handling default route.
          */
         $this->listen(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent(['Hello Webino!', new SourcePreview(__FILE__)]);
+            $event->setResponse(['Hello Webino!', new SourcePreview(__FILE__)]);
         });
     }
 }

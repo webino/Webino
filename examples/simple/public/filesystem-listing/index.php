@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Listing
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -39,7 +39,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $files = $event->getApp()->file()->listFiles('my/folder', true);
 
-    $event->setResponseContent([
+    $event->setResponse([
         'Directory contents:',
         $event->getApp()->debug($list, true),
         new Html\HorizontalLine,

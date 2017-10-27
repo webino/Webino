@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Application\Traits;
 
@@ -63,7 +71,7 @@ trait ConsoleTrait
     public function bindConsole($name, $callback = null, $priority = 1)
     {
         return $this->isConsole()
-            ? $this->bind(call_user_func(ConsoleEventNameResolver::getInstance(), $name), $callback, $priority)
+            ? $this->bind(ConsoleEventNameResolver::getEventName($name), $callback, $priority)
             : null;
     }
 }

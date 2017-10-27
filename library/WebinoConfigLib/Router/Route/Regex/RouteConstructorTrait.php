@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Router\Route\Regex;
 
@@ -12,7 +20,7 @@ trait RouteConstructorTrait
     /**
      * @var string
      */
-    private $route;
+    private $path;
 
     /**
      * @var string
@@ -23,10 +31,10 @@ trait RouteConstructorTrait
      * {@inheritdoc}
      * @see \WebinoConfigLib\Router\Route\Regex\RouteConstructorInterface
      */
-    public function __construct($route, $spec = null)
+    public function __construct($path, $spec = null)
     {
         $this
-            ->setRoute($route)
+            ->setPath($path)
             ->setSpec($spec)
             ->setType(RouteInterface::REGEX)
             ->init();
@@ -56,18 +64,18 @@ trait RouteConstructorTrait
     /**
      * @return string
      */
-    protected function getRoute()
+    protected function getPath()
     {
-        return $this->route;
+        return $this->path;
     }
 
     /**
-     * @param string|null $route
+     * @param string|null $path
      * @return $this
      */
-    public function setRoute($route = null)
+    public function setPath($path = null)
     {
-        $this->route = (string) $route;
+        $this->path = (string) $path;
         return $this;
     }
     

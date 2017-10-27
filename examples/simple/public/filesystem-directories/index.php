@@ -1,7 +1,7 @@
 <?php
 /**
  * Filesystem Directories
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -34,7 +34,7 @@ $app->file()->emptyDir('my/folder');
 $app->file()->deleteDir('my/folder');
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         'Hello Webino!',
         new SourcePreview(__FILE__),
     ]);

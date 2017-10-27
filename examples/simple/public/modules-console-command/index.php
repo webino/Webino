@@ -1,7 +1,7 @@
 <?php
 /**
  * Modules Console Command
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Application\AbstractApplication;
@@ -11,7 +11,7 @@ use WebinoAppLib\Event\RouteEvent;
 use WebinoAppLib\Feature\Modules;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoConfigLib\Feature\Route\Console;
+use WebinoConfigLib\Feature\Route\ConsoleRoute;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -20,7 +20,7 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyConsoleCommand extends AbstractConsoleCommand
 {
-    public function configure(Console $console)
+    public function configure(ConsoleRoute $console)
     {
         $console
             ->setRoute('my-command')
@@ -41,7 +41,7 @@ class MyModule
     public function __invoke(AbstractApplication $app)
     {
         $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-            $event->setResponseContent([
+            $event->setResponse([
                 'Use Command Line Interface!',
                 new SourcePreview(__FILE__),
             ]);

@@ -1,7 +1,7 @@
 <?php
 /**
  * Logger ChromePHP
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -28,7 +28,7 @@ $app = Webino::application($config)->bootstrap();
 $app->log()->debug('Test log message!');
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         'Use Chrome Logger extension to view a log!',
         new SourcePreview(__FILE__),
     ]);

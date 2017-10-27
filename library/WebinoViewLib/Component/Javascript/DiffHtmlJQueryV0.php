@@ -7,16 +7,20 @@ namespace WebinoViewLib\Component\Javascript;
  */
 class DiffHtmlJQueryV0 extends AbstractDiffHtmlJQuery
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         parent::__construct('//cdn.rawgit.com/webino/diffhtml-jquery/develop/src/diffhtml.jquery.js');
     }
 
+    // TODO interface
     public function getDependencies()
     {
         return [
             new JQueryV1,
-            new DiffDomV0,
+            new DiffDomV2,
         ];
     }
 }

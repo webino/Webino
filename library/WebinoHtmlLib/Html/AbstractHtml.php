@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoHtmlLib\Html;
 
@@ -7,9 +15,10 @@ use WebinoBaseLib\Util\ToString;
 /**
  * Class AbstractHtml
  */
-abstract class AbstractHtml
+abstract class AbstractHtml implements HtmlInterface
 {
     use EscaperAwareTrait;
+    use FormatTrait;
 
     /**
      * @var string
@@ -22,32 +31,17 @@ abstract class AbstractHtml
     private $attribs = [];
 
     /**
-     * Escape HTML value
-     *
-     * @var bool
-     */
-    private $escape = true;
-
-    /**
-     * @var array
-     */
-    private $format = [];
-
-    /**
      * @return string
      */
     abstract protected function getTagName();
 
     /**
-     * @param string|array $value New value;current value placeholder is `%s`
+     * @param string|array|object $value New value;current value placeholder is `%s`
      * @return $this
      */
     public function setValue($value)
     {
-        $this->value = strtr(
-            ToString::value($value),
-            ['%s' => $this->value]
-        );
+        $this->value = strtr($this->normalizeValue($value), ['%s' => $this->value]);
         return $this;
     }
 
@@ -91,7 +85,7 @@ abstract class AbstractHtml
     {
         $styleData = [];
 
-        if (isset($this->attribs['style'])) {
+        if (!empty($this->attribs['style'])) {
             call_user_func(function () use (&$styleData) {
                 foreach (explode(';', $this->attribs['style']) as $pair) {
                     list($name, $value) = explode(':', $pair);
@@ -104,8 +98,12 @@ abstract class AbstractHtml
             foreach ($style as $name => $value) {
                 $styleData[$name] = $value;
             }
+
         } elseif (null !== $value) {
             $styleData[$style] = $value;
+
+        } elseif (isset($styleData[$style])) {
+            unset($styleData[$style]);
         }
 
         $stylePairs = [];
@@ -118,38 +116,35 @@ abstract class AbstractHtml
     }
 
     /**
-     * Set to escape a value
-     *
-     * @param bool $bool
-     * @return $this
+     * @param string|array|HtmlInterface $value
+     * @return string
      */
-    public function setEscape($bool = true)
+    private function normalizeValue($value)
     {
-        $this->escape = (bool) $bool;
-        return $this;
+        if ($value instanceof HtmlInterface) {
+            return ToString::value($value);
+        }
+
+        if (is_array($value)) {
+            $newValue = '';
+            foreach ($value as $subValue) {
+                $newValue .= $this->normalizeValue($subValue);
+            }
+            return $newValue;
+        }
+
+        return $this->getEscaper()->escapeHtml(ToString::value($value));
     }
 
     /**
-     * Set to no escape a value
-     *
-     * @return $this
+     * @param string $tag
+     * @param string $attribs
+     * @param string $value
+     * @return string
      */
-    public function setNoEscape()
+    protected function toStringInternal($tag, $attribs, $value)
     {
-        $this->escape = false;
-        return $this;
-    }
-
-    /**
-     * Set format values
-     *
-     * @param array $format
-     * @return $this
-     */
-    public function format(array $format)
-    {
-        $this->format = array_merge($this->format, $format);
-        return $this;
+        return $this->doFormat(sprintf('<%s %s>%s</%s>', $tag, $attribs, $value, $tag));
     }
 
     /**
@@ -170,20 +165,7 @@ abstract class AbstractHtml
                 );
         }
 
-        $tag   = $this->getTagName();
-        $value = $this->escape ? $escaper->escapeHtml($this->value) : $this->value;
-
-        return $this->toStringInternal($tag, join(' ', $attribs), $value);
-    }
-
-    /**
-     * @param string $tag
-     * @param string $attribs
-     * @param string $value
-     * @return string
-     */
-    protected function toStringInternal($tag, $attribs, $value)
-    {
-        return strtr(sprintf('<%s %s>%s</%s>', $tag, $attribs, $value, $tag), $this->format);
+        $tag = $this->getTagName();
+        return $this->toStringInternal($tag, join(' ', $attribs), $this->value);
     }
 }

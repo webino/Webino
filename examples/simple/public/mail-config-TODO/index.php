@@ -1,7 +1,7 @@
 <?php
 /**
  * Mail Config
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -41,7 +41,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     // TODO mail parse
 
-    $event->setResponseContent([
+    $event->setResponse([
         'Hello Webino!',
         new SourcePreview(__FILE__),
     ]);

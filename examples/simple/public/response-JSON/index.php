@@ -1,7 +1,7 @@
 <?php
 /**
  * Response JSON
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -39,7 +39,7 @@ $app->bindRoute(MyRoutes::JSON_TEST, function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url(MyRoutes::JSON_TEST)->html('View JSON!'),
         new SourcePreview(__FILE__),
     ]);

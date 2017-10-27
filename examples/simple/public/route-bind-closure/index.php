@@ -1,7 +1,7 @@
 <?php
 /**
  * Route Bind Closure
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -17,7 +17,7 @@ $app = Webino::application()->bootstrap();
  * route via closure.
  */
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent(['Hello Webino!', new SourcePreview(__FILE__)]);
+    $event->setResponse(['Hello Webino!', new SourcePreview(__FILE__)]);
 });
 
 $app->dispatch();

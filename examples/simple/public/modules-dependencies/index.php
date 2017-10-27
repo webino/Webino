@@ -1,7 +1,7 @@
 <?php
 /**
  * Modules Dependencies
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Application\AbstractApplication;
@@ -54,7 +54,7 @@ class MyModule extends AbstractModule
              */
             $myService = $event->getApp()->get(MyModuleService::class);
 
-            $event->setResponseContent([
+            $event->setResponse([
                 $myService->doSomething(),
                 new SourcePreview(__FILE__),
             ]);

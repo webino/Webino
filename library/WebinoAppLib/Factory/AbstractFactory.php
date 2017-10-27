@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Factory;
 
@@ -54,11 +62,13 @@ abstract class AbstractFactory implements FactoryInterface
     {
         if (null === $this->app) {
             $this->app = $this->services->get(Application::SERVICE);
+
             if (!($this->app instanceof Application\AbstractApplication)) {
                 throw (new InvalidArgumentException('Expected app as %s but got %s'))
                     ->format(Application\AbstractApplication::class, $this->app);
             }
         }
+
         return $this->app;
     }
 
@@ -70,10 +80,7 @@ abstract class AbstractFactory implements FactoryInterface
      */
     protected function getConfig($key = null)
     {
-        if ($key) {
-            return $this->config->get($key);
-        }
-        return $this->config;
+        return $key ? $this->config->get($key) : $this->config;
     }
 
     /**

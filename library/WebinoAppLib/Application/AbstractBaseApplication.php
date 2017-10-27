@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoAppLib\Application;
 
@@ -32,10 +40,10 @@ abstract class AbstractBaseApplication extends AbstractApplication
     }
 
     /**
-     * @triggers bootstrap
      * @param object|Bootstrap $bootstrap
      * @param callable $trigger
      * @return AbstractConfiguredApplication
+     * @triggers bootstrap
      */
     protected function internalBootstrap(Bootstrap $bootstrap, callable $trigger)
     {

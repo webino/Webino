@@ -1,7 +1,7 @@
 <?php
 /**
  * View Layout
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Application\AbstractApplication;
@@ -74,7 +74,7 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
 
     $event->setResponse($response);
 
-//    $event->setResponseContent([
+//    $event->setResponse([
 //        'Hello Webino!',
 //        new SourcePreview(__FILE__),
 //    ]);

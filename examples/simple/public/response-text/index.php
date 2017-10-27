@@ -1,7 +1,7 @@
 <?php
 /**
  * Response Text
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -39,7 +39,7 @@ $app->bindRoute(MyRoutes::TEXT_TEST, function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url(MyRoutes::TEXT_TEST)->html('View plain text!'),
         new SourcePreview(__FILE__),
     ]);

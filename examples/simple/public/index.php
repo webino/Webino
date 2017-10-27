@@ -67,7 +67,7 @@ class ExamplesComponent extends AbstractViewComponent implements OnDispatchInter
      */
     public function onRender(RenderEvent $event)
     {
-        $col = (new Html\Block(null, false))->setClass('col-md-4');
+        $col = (new Html\Block)->setClass('col-md-4');
 
         $event->getNode()->replace([
             (new Html\Block([
@@ -78,9 +78,9 @@ class ExamplesComponent extends AbstractViewComponent implements OnDispatchInter
             ]))->setClass('text-center'),
 
             new Html\HorizontalLine,
-            (clone $col)->setValue(new Html\Fieldset(new Html\Title2('API'), $this->api)),
-            (clone $col)->setValue(new Html\Fieldset(new Html\Title2('Cookbook'), 'TODO...')),
-            (clone $col)->setValue(new Html\Fieldset(new Html\Title2('Applications'), 'TODO...')),
+            (clone $col)->setValue(new Html\FieldSet(new Html\Title2('API'), new Html\Html($this->api))),
+            (clone $col)->setValue(new Html\FieldSet(new Html\Title2('Cookbook'), 'TODO...')),
+            (clone $col)->setValue(new Html\FieldSet(new Html\Title2('Applications'), 'TODO...')),
         ]);
     }
 }

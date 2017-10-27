@@ -12,6 +12,6 @@ abstract class AbstractDiffDom extends Src
      */
     protected function getSpecName()
     {
-        return 'diffdom-js';
+        return 'diff-dom-js';
     }
 }

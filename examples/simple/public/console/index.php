@@ -1,7 +1,7 @@
 <?php
 /**
  * Console
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -15,7 +15,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 $app = Webino::application()->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         new Text('Use Command Line Interface!'),
         new ConsolePreview('preview.jpg'),
         new SourcePreview(__FILE__),

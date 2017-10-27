@@ -1,7 +1,7 @@
 <?php
 /**
  * Logger Aware
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -9,8 +9,7 @@ use WebinoAppLib\Factory\AbstractFactory;
 use WebinoAppLib\Feature\Service;
 use WebinoAppLib\Response\Content\SourcePreview;
 use WebinoAppLib\Router\DefaultRoute;
-use WebinoHtmlLib\Html;
-use WebinoExamplesLib\Html\ScrollBox;
+use WebinoExamplesLib\Html\FieldSetScrollBox;
 use WebinoConfigLib\Feature\Log;
 use WebinoLogLib\LoggerAwareInterface;
 use WebinoLogLib\LoggerAwareTrait;
@@ -128,9 +127,8 @@ $app->bind(DefaultRoute::class, function (RouteEvent $event) {
      */
     $log = $event->getApp()->file()->read(MyLogs::APP);
 
-    $event->setResponseContent([
-        'Application log:',
-        new ScrollBox(nl2br(new Html\Text($log))),
+    $event->setResponse([
+        new FieldSetScrollBox('Application log', $log),
         new SourcePreview(__FILE__),
     ]);
 });

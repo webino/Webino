@@ -1,4 +1,12 @@
 <?php
+/**
+ * Webino (http://webino.sk)
+ *
+ * @link        https://github.com/webino for the canonical source repository
+ * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @author      Peter Bačinský <peter@bacinsky.sk>
+ * @license     BSD-3-Clause
+ */
 
 namespace WebinoConfigLib\Feature;
 
@@ -31,32 +39,32 @@ class Route extends AbstractFeature implements
      */
     public function __construct($name = null)
     {
-        $this->route = (new RouteConfig)
-            ->setName($name);
+        parent::__construct();
+        $this->route = (new RouteConfig)->setName($name);
     }
 
     /**
-     * @param string $route Literal route.
+     * @param string $route Literal route
      * @return $this
      */
     public function setLiteral($route)
     {
-        $this->setRoute($route)->setType($this::LITERAL);
+        $this->setPath($route)->setType($this::LITERAL);
         return $this;
     }
 
     /**
-     * @param string $route Segment route.
+     * @param string $route Segment route
      * @return $this
      */
     public function setSegment($route)
     {
-        $this->setRoute($route)->setType($this::SEGMENT);
+        $this->setPath($route)->setType($this::SEGMENT);
         return $this;
     }
 
     /**
-     * @param string $type Route type.
+     * @param string $type Route type
      * @return $this
      */
     public function setType($type = RouteInterface::LITERAL)
@@ -74,7 +82,7 @@ class Route extends AbstractFeature implements
     }
 
     /**
-     * @param string $name Route name.
+     * @param string $name Route name
      * @return $this
      */
     public function setName($name)
@@ -136,12 +144,14 @@ class Route extends AbstractFeature implements
     }
 
     /**
-     * @param string $route Route path
+     * Set route path
+     *
+     * @param string|array $path Route path
      * @return $this
      */
-    public function setRoute($route)
+    public function setPath($path)
     {
-        $this->route->setRoute($route);
+        $this->route->setPath($path);
         return $this;
     }
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Response View
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -69,7 +69,7 @@ $app->bindRoute(MyRoutes::VIEW_TEST, function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url(MyRoutes::VIEW_TEST)->html('View response!'),
         new SourcePreview(__FILE__),
     ]);

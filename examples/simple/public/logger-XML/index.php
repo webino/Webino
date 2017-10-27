@@ -1,7 +1,7 @@
 <?php
 /**
  * Logger Message
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -13,7 +13,6 @@ use WebinoConfigLib\Feature\Log;
 use WebinoConfigLib\Feature\Route;
 
 require __DIR__ . '/../../vendor/autoload.php';
-
 
 /**
  * Example routes
@@ -67,7 +66,7 @@ $app->bindRoute(MyRoutes::XML_LOG, function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url(MyRoutes::XML_LOG)->html('View XML log!'),
         new SourcePreview(__FILE__),
     ]);

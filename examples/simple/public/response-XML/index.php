@@ -1,7 +1,7 @@
 <?php
 /**
  * Response XML
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
@@ -40,7 +40,7 @@ $app->bindRoute(MyRoutes::XML_TEST, function (RouteEvent $event) {
 });
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
-    $event->setResponseContent([
+    $event->setResponse([
         $event->getApp()->url(MyRoutes::XML_TEST)->html('View XML!'),
         new SourcePreview(__FILE__),
     ]);

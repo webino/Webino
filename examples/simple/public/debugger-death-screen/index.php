@@ -1,7 +1,7 @@
 <?php
 /**
  * Debugger Death Screen
- * Webino example
+ * Webino Example
  */
 
 use WebinoAppLib\Event\RouteEvent;
