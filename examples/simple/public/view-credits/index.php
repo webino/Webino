@@ -95,8 +95,7 @@ $config = Webino::config([
 
         (new NodeView('intro'))
             ->setLocator('intro')
-            ->setRename('div')
-            ->setHtml('<div class="page-header text-center"><h1>Webino Credits</h1><copyright/></div><note/>')
+            ->setReplace('<div class="page-header text-center"><h1>Webino Credits</h1><copyright/></div><note/>')
             ->setView([
                 (new NodeView('copyright'))
                     ->setLocator('copyright')
@@ -131,8 +130,7 @@ $config = Webino::config([
     ]),
 ]);
 
-$debugger = Webino::debugger(Webino::debuggerOptions()->setDevMode()->setBar());
-$app = Webino::application($config, $debugger)->bootstrap();
+$app = Webino::application($config)->bootstrap();
 
 $app->bind(DefaultRoute::class, function (RouteEvent $event) {
     $event->setResponse(new ViewResponse);

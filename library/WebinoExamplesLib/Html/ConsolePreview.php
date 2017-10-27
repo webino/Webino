@@ -35,7 +35,7 @@ final class ConsolePreview extends Html\Block
                 'background' => 'white',
             ]);
 
-        parent::__construct($label . new Html\Img($imgSrc));
+        parent::__construct(new Html\Html($label . new Html\Img($imgSrc)));
 
         $this->setStyle([
             'position'   => 'relative',
