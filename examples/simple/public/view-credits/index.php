@@ -95,7 +95,8 @@ $config = Webino::config([
 
         (new NodeView('intro'))
             ->setLocator('intro')
-            ->setReplace('<div class="page-header text-center"><h1>Webino Credits</h1><copyright/></div><note/>')
+            ->setRename('div')
+            ->setHtml('<div class="page-header text-center"><h1>Webino Credits</h1><copyright/></div><note/>')
             ->setView([
                 (new NodeView('copyright'))
                     ->setLocator('copyright')
