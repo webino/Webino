@@ -16,7 +16,7 @@ Configuring debugger bar info.
 
 
 .. seealso::
-   `Debugger Bar Info Example <http://demo.webino.org/debugger-info-config>`__ |
+   `Debugger Bar Info Example <http://demo.webino.org/debugger-info-config>`__ ●
    :ref:`guide-cookbook-debugging-adding-debugger-bar-system-info`
 
 
@@ -38,5 +38,5 @@ Configuring debugger bar panel.
 
 
 .. seealso::
-   `Debugger Bar Panel Example <http://demo.webino.org/debugger-panel-config>`__ |
+   `Debugger Bar Panel Example <http://demo.webino.org/debugger-panel-config>`__ ●
    :ref:`guide-cookbook-debugging-creating-debugger-bar-panel`

@@ -75,6 +75,10 @@ $event->getParam()
     $value = $event->getParam('myCommandArgument');
 
 
+.. seealso::
+   `Console Command Example <http://demo.webino.org/console-command>`__
+
+
 $cli->out()
 -----------
 
@@ -236,6 +240,10 @@ Printing pretty-printed JSON to the terminal.
     ]);
 
 
+.. seealso::
+   `Console JSON Example <http://demo.webino.org/console-json>`__
+
+
 $cli->sp()
 ----------
 
@@ -284,6 +292,8 @@ Printing tabulators to the terminal.
     $cli->tab()->out('I am all sorts of indented.');
 
 
+.. _api-console-draw:
+
 $cli->draw()
 ------------
 
@@ -292,6 +302,16 @@ Drawing some ASCII art.
 .. code-block:: php
 
     $cli->draw('bender');
+
+
+.. note::
+   You can add custom ASCII art using the ``addArt`` method.
+
+
+.. seealso::
+   :ref:`$cli->addArt() <api-console-add-art>` ●
+   `Console Draw Example <http://demo.webino.org/console-draw>`__ ●
+   `Console Add Art Example <http://demo.webino.org/console-draw>`__
 
 
 $cli->border()
@@ -310,6 +330,10 @@ Inserting borders to break up output. Outputs a dashed border by default.
     $cli->border('*', 50);
 
 
+.. seealso::
+   `Console Border Example <http://demo.webino.org/console-border>`__
+
+
 $cli->dump()
 ------------
 
@@ -322,6 +346,10 @@ Dumping variables out to the terminal.
         'That',
         'Other Thing',
     ]);
+
+
+.. seealso::
+   `Console Dump Example <http://demo.webino.org/console-dump>`__
 
 
 $cli->flank()
@@ -338,6 +366,10 @@ Bringing a little more attention to text.
 
     // and how many flanking characters there should be
     $cli->flank('Look at me. Now.', '!', 5);
+
+
+.. seealso::
+   `Console Flank Example <http://demo.webino.org/console-flank>`__
 
 
 $cli->progress()
@@ -401,6 +433,10 @@ Pass a label into the ``current`` method if you’d like a more descriptive indi
     }
 
 
+.. seealso::
+   `Console Progress Example <http://demo.webino.org/console-progress>`__
+
+
 $cli->padding()
 ---------------
 
@@ -416,6 +452,12 @@ Padding out a string to a specified length, allowing for neatly organized data.
     $padding->label('Oatmeal')->result('4.99€');
     $padding->label('Bacon')->result('2.99€');
 
+
+.. seealso::
+   `Console Padding Example <http://demo.webino.org/console-padding>`__
+
+
+.. _api-console-animation:
 
 $cli->animation()
 -----------------
@@ -446,7 +488,19 @@ speed.
     ``50`` would make it slower by half, whereas ``200`` would make it run at twice the speed.
 
 
-You can create a directory of text files that represent each keyframe in an animation and just run it manually.
+You can create a directory of text files that represent each keyframe in an animation
+
+.. code-block:: bash
+
+    my/
+      folder/
+        animation/
+          custom-animation-01.txt
+          custom-animation-02.txt
+          custom-animation-03.txt
+
+
+and just run it manually.
 
 .. code-block:: php
 
@@ -457,6 +511,15 @@ You can create a directory of text files that represent each keyframe in an anim
 .. note::
     You can add custom ASCII art using the ``addArt`` method.
 
+
+.. seealso::
+   :ref:`$cli->draw() <api-console-draw>` ●
+   :ref:`$cli->animation() <api-console-add-art>` ●
+   `Console Animation Example <http://demo.webino.org/console-animation>`__ ●
+   `Custom Console Animation Example <http://demo.webino.org/console-animation-custom>`__
+
+
+.. _api-console-add-art:
 
 $cli->addArt()
 --------------
@@ -511,6 +574,12 @@ You can style your art using tags:
     <blue>'-.__   __.-'</blue>
     <blue>     """</blue>
 
+
+.. seealso::
+   :ref:`$cli->draw() <api-console-draw>` ●
+   :ref:`$cli->animation() <api-console-animation>` ●
+   `Console Add Art Example <http://demo.webino.org/console-add-art>`__ ●
+   `Console Draw Example <http://demo.webino.org/console-draw>`__
 
 
 $cli->clear()

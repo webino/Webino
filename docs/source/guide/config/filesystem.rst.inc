@@ -32,5 +32,5 @@ Configuring temporary filesystem in the memory.
 
 
 .. seealso::
-   :ref:`api-filesystem-app-file` |
+   :ref:`api-filesystem-app-file` ●
    `Filesystem Config Example <http://demo.webino.org/filesystem-config>`__

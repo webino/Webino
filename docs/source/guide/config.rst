@@ -83,7 +83,7 @@ Config features are registered into the configuration like following:
 
 
 .. seealso::
-   :ref:`api-config-app-get-config` |
+   :ref:`api-config-app-get-config` ●
    `Config Feature Example <http://demo.webino.org/config-feature>`__
 
 

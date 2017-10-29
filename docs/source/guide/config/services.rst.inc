@@ -17,8 +17,8 @@ Configuring services.
 
 
 .. seealso::
-   :ref:`api-services-app-get` |
-   :ref:`architecture-services-invokables` |
+   :ref:`api-services-app-get` ●
+   :ref:`architecture-services-invokables` ●
    :ref:`architecture-services-factory`
 
 
@@ -40,7 +40,7 @@ Application core service config feature.
 
 
 .. seealso::
-   :ref:`api-services-app-get` |
-   :ref:`architecture-services-core` |
-   :ref:`architecture-services-invokables` |
+   :ref:`api-services-app-get` ●
+   :ref:`architecture-services-core` ●
+   :ref:`architecture-services-invokables` ●
    :ref:`architecture-services-factory`
