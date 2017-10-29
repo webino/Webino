@@ -7,7 +7,7 @@ Application Architecture
     :local:
 
 
-The Webino™ application architecture is based around the Zend Frameowrk 2 but simplified and enhanced.
+The Webino™ application architecture is based around the Zend Framework but simplified and enhanced.
 It also brings some other useful open-source packages to make a web application devstack.
 
 
@@ -28,14 +28,14 @@ configure event.
 
 **Explanation:**
 
-**1)** Creating new application object, loading a configuration and a debugger.
+**1)** Creating new application object, loading configuration and debugger.
 
 .. code-block:: php
 
     /** @var \WebinoAppLib\Application\AbstractBaseApplication $appCore **/
     $appCore = Webino::application($config = null, $debugger = null);
 
-- There are two optional arguments, for a config and a debugger objects.
+- There are two optional arguments, for config and debugger objects.
 
   - If those arguments are not provided, the application factory tries to require them from
     files ``config/application.php`` and ``config/debugger.php`` in your include path,

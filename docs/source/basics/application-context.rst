@@ -24,11 +24,11 @@ Http
 
 TODO...
 
-.. code-block::
+.. code-block:: php
 
     use WebinoAppLib\Feature\HttpListener;
 
-    new Config([
+    Webino::config([
         new HttpListener(MyHttpListener::class),
     ]);
 
@@ -38,12 +38,12 @@ Console
 
 TODO...
 
-.. code-block::
+.. code-block:: php
 
     use WebinoAppLib\Feature\ConsoleListener;
 
-    new Config([
-        new HttpListener(MyHttpListener::class),
+    Webino::config([
+        new ConsoleListener(MyConsoleListener::class),
     ]);
 
 

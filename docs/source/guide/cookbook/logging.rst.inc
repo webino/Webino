@@ -40,7 +40,7 @@ with the following contents:
 
 .. seealso::
    :ref:`api-log-messages` ●
-   `Log Message Class Example <http://demo.webino.org/logger-message-class>`_
+   `Log Message Class Example <http://demo.webino.org/logger-message-class>`__
 
 
 Then you can log the message via application logger:
@@ -63,8 +63,8 @@ Or using custom logger, if you have configured one:
 
 .. seealso::
    :ref:`Config Custom Logger <config-logging-logger>` ●
-   `Custom Logger Example <http://demo.webino.org/logger-custom>`_ ●
-   `Custom Logger Aware Example <http://demo.webino.org/logger-aware-custom>`_
+   `Custom Logger Example <http://demo.webino.org/logger-custom>`__ ●
+   `Custom Logger Aware Example <http://demo.webino.org/logger-aware-custom>`__
 
 
 Creating Logger Aware Services
@@ -117,7 +117,7 @@ Then calling method on your service will write a message to the application log 
 .. seealso::
    :ref:`Service Factory <architecture-services-factory>` ●
    :ref:`Config Logger <config-logging-log>` ●
-   `Logger Aware Example <http://demo.webino.org/logger-aware>`_
+   `Logger Aware Example <http://demo.webino.org/logger-aware>`__
 
 
 Creating Custom Loggers
@@ -135,7 +135,7 @@ Then obtain your custom logger:
 
 .. seealso::
    :ref:`Config Custom Logger <config-logging-logger>` ●
-   `Custom Logger Example <http://demo.webino.org/logger-custom>`_
+   `Custom Logger Example <http://demo.webino.org/logger-custom>`__
 
 
 Creating Custom Logger Aware Services
@@ -190,5 +190,5 @@ Then calling method on your service will write a message to your custom log file
 .. seealso::
    :ref:`Service Factory <architecture-services-factory>` ●
    :ref:`Config Custom Logger <config-logging-logger>` ●
-   `Custom Logger Aware Example <http://demo.webino.org/logger-aware-custom>`_
+   `Custom Logger Aware Example <http://demo.webino.org/logger-aware-custom>`__
 

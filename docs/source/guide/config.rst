@@ -77,16 +77,14 @@ Config features are registered into the configuration like following:
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
-
-    new Config([
+    Webino::config([
         new SomeConfigFeature,
     ]);
 
 
 .. seealso::
    :ref:`api-config-app-get-config` |
-   `Config Feature Example <http://demo.webino.org/config-feature>`_
+   `Config Feature Example <http://demo.webino.org/config-feature>`__
 
 
 |vspace|
@@ -119,7 +117,9 @@ Logging
 
 Use logging config features to configure logging.
 
-.. include:: /guide/config/logging.rst.inc
+.. include:: /guide/config/logging/log.rst.inc
+.. include:: /guide/config/logging/forking.rst.inc
+.. include:: /guide/config/logging/logger.rst.inc
 
 
 Caching

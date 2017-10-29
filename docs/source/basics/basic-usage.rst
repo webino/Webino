@@ -12,7 +12,7 @@ The application is basically a configuration and an execution code.
 |vspace|
 
 .. seealso::
-    `Preview Live Examples <http://demo.webino.org>`_
+    `Preview Live Examples <http://demo.webino.org>`__
 
 
 Index File
@@ -36,7 +36,7 @@ The application object is configured, created, bootstrapped and dispatched in th
      * Create your custom configurators.
      */
 
-    $config = new CoreConfig([
+    $config = Webino::config([
         new ConfigFeature\Log,
         new ConfigFeature\FirePhpLog,
         new AppFeature\FilesystemCache,
@@ -82,10 +82,9 @@ Adding routes via configuration.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoConfigLib\Feature\Route;
 
-    new Config([
+    Webino::config([
         (new Route('myRoute'))->setLiteral('/my/route/path'),
     ]);
 

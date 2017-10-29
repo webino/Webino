@@ -235,72 +235,46 @@ Obtaining response instance.
 $event->setResponse()
 ---------------------
 
-Setting a response instance.
+Setting a response instance or appending text response to existing one.
 
 .. code-block:: php
 
     /** @var \WebinoAppLib\Event\DispatchEvent $event */
+
+    // setting a response instance
     /** @var \Zend\Stdlib\ResponseInterface $response */
     $event->setResponse($response);
+    // string response will be appended to existing output
+    $event->setResponse('Example response content.');
+    // array response will be joined to string and appended to existing output
+    $event->setResponse(['Example ', 'response ', 'content.']);
 
-
-$event->setResponseContent()
-----------------------------
-
-Setting a response text, it will appended to the already existing one.
-
-.. code-block:: php
-
-    /** @var \WebinoAppLib\Event\DispatchEvent $event */
-    $event->setResponseContent('Example response content.');
-
-
-Setting a response content as array, it will be joined to string.
-
-.. code-block:: php
-
-    /** @var \WebinoAppLib\Event\DispatchEvent $event */
-    $event->setResponseContent([
-        'Example',
-        ' response',
-        ' content.',
-    ]);
-
-
-$event->resetResponseContent()
-------------------------------
-
-Setting a response text, clearing the already existing one.
-
-.. code-block:: php
-
-    /** @var \WebinoAppLib\Event\DispatchEvent $event */
-    $event->resetResponseContent('Example response content.');
-
-
-Setting a response content as array, it will be joined to string.
-
-.. code-block:: php
-
-    /** @var \WebinoAppLib\Event\DispatchEvent $event */
-    $event->resetResponseContent([
-        'Example',
-        ' response',
-        ' content.',
-    ]);
-
-
-$event->setResponseStream()
----------------------------
 
 Setting a response stream.
 
 .. code-block:: php
 
+    use WebinoAppLib\Response\StreamResponse;
+
     /** @var \WebinoAppLib\Event\DispatchEvent $event */
-    /** @var resource $stream */
-    $stream = $event->getApp()->file()->readStream('path/to/file.txt');
-    $event->setResponseStream($stream);
+    // preview
+    $event->setResponse(new StreamResponse('path/to/file.txt'));
+    // download
+    $event->setResponse((new StreamResponse('path/to/file.txt'))->setForceDownload());
+
+
+$event->resetResponse()
+-----------------------
+
+Resetting response text, clearing the existing one.
+
+.. code-block:: php
+
+    /** @var \WebinoAppLib\Event\DispatchEvent $event */
+    // set new string response to the output
+    $event->resetResponse('Example response content.');
+    // array response will be joined to string
+    $event->resetResponse(['Example ', 'response ', 'content.']);
 
 
 .. _api-events-priority:

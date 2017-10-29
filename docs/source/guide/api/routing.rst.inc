@@ -22,10 +22,10 @@ $app->route()
     $route = $app->route('myRoute')->setLiteral('/my/route/path');
 
 
-.. _api-routing-app-bindRoute:
+.. _api-routing-app-bind:
 
-$app->bindRoute()
------------------
+$app->bind()
+------------
 
 *Binding to routes via class.*
 
@@ -34,18 +34,28 @@ $app->bindRoute()
     use WebinoAppLib\Event\RouteEvent;
 
     /** @var \WebinoAppLib\Application\AbstractApplication $app */
-    $app->bindRoute(MyRoute::class, function (RouteEvent $event) {
-        // do something...
-    });
-
-    // or
-
     $app->bind(MyRoute::class, function (RouteEvent $event) {
         // do something...
     });
 
-    // or via string
 
+.. _api-routing-app-bindRoute:
+
+$app->bindRoute()
+-----------------
+
+*Binding to routes via class or string.*
+
+.. code-block:: php
+
+    use WebinoAppLib\Event\RouteEvent;
+    /** @var \WebinoAppLib\Application\AbstractApplication $app */
+
+    // via class
+    $app->bindRoute(MyRoute::class, function (RouteEvent $event) {
+        // do something...
+    });
+    // via string
     $app->bindRoute('myRoute', function (RouteEvent $event) {
         // do something...
     });
@@ -61,6 +71,8 @@ $app->url()
 .. code-block:: php
 
     /** @var \WebinoAppLib\Router\UrlInterface $url */
+
+    // via class
     $url = $app->url(MyRoute::class);
     // or via string
     $url = $app->url('myRoute');
@@ -71,6 +83,8 @@ $app->url()
 .. code-block:: php
 
     /** @var \WebinoBaseLib\Html\UrlHtmlInterface $urlHtml */
+
+    // via class
     $urlHtml = $app->url(MyRoute::class)->html('My Route Label');
     // or via string
     $urlHtml = $app->url('myRoute')->html('My Route Label');
@@ -131,7 +145,7 @@ optional segments.*
 
 
 .. seealso::
-   `Segment Route Example <http://demo.webino.org/route-segment>`_
+   `Segment Route Example <http://demo.webino.org/route-segment>`__
 
 
 $route->setDefaults()

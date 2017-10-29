@@ -10,7 +10,7 @@ Configuring console command routes.
     use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\Route\Console;
 
-    new CoreConfig([
+    Webino::config([
 
         (new Console('my-basic-command'))
             ->setRoute('my-command')
@@ -34,6 +34,6 @@ Configuring console command routes.
 
 .. seealso::
    :ref:`api-console-bind-console` ●
-   `Console Bind Example <http://demo.webino.org/console-bind>`_ ●
-   `Console Command Example <http://demo.webino.org/console-command>`_ ●
-   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_
+   `Console Bind Example <http://demo.webino.org/console-bind>`__ ●
+   `Console Command Example <http://demo.webino.org/console-command>`__ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`__

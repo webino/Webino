@@ -20,10 +20,10 @@ require __DIR__ . '/../../vendor/autoload.php';
  */
 class MyConsoleCommand extends AbstractConsoleCommand
 {
-    public function configure(ConsoleRoute $console)
+    public function configure(ConsoleRoute $route)
     {
-        $console
-            ->setRoute('my-command')
+        $route
+            ->setPath('my-command')
             ->setTitle('My command title');
     }
 

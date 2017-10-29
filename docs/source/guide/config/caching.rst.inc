@@ -5,10 +5,9 @@ Toggling application config caching.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoConfigLib\Feature\ConfigCacheEnabled;
 
-    new Config([
+    Webino::config([
         // enable
         new ConfigCacheEnabled,
         // disable
@@ -27,10 +26,9 @@ Configuring filesystem cache.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\FilesystemCache;
 
-    new CoreConfig([
+    Webino::config([
         new FilesystemCache,
     ]);
 
@@ -42,10 +40,9 @@ Configuring in memory cache.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\MemoryCache;
 
-    new CoreConfig([
+    Webino::config([
         new MemoryCache,
     ]);
 

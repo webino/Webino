@@ -21,7 +21,7 @@ Binding to console commands.
 
 .. seealso::
    :ref:`Config Console <config-console>` ●
-   `Console Bind Example <http://demo.webino.org/console-bind>`_
+   `Console Bind Example <http://demo.webino.org/console-bind>`__
 
 
 Console Event
@@ -47,8 +47,8 @@ Obtaining the console service from the console event object.
     };
 
 .. seealso::
-   `Console Example <http://demo.webino.org/console>`_ ●
-   `Console Command Example <http://demo.webino.org/console>`_
+   `Console Example <http://demo.webino.org/console>`__ ●
+   `Console Command Example <http://demo.webino.org/console>`__
 
 
 Fluent interface:
@@ -161,7 +161,7 @@ Specify the columns via an array of arrays.
 
 
 .. seealso::
-   `Console Columns Example <http://demo.webino.org/console-columns>`_
+   `Console Columns Example <http://demo.webino.org/console-columns>`__
 
 
 $cli->table()
@@ -218,8 +218,8 @@ If you pass in an array of associative arrays or objects, the keys will automati
 
 
 .. seealso::
-   `Console Table Example <http://demo.webino.org/console-table>`_ ●
-   `Console Assoc Table Example <http://demo.webino.org/console-table-assoc>`_
+   `Console Table Example <http://demo.webino.org/console-table>`__ ●
+   `Console Assoc Table Example <http://demo.webino.org/console-table-assoc>`__
 
 
 $cli->json()
@@ -234,6 +234,22 @@ Printing pretty-printed JSON to the terminal.
         'age'  => 52,
         'job'  => 'Engineer',
     ]);
+
+
+$cli->sp()
+----------
+
+Printing spaces to the terminal.
+
+.. code-block:: php
+
+    $cli->sp();
+
+    // many at once
+    $cli->sp(3);
+
+    // method chaining
+    $cli->sp()->out('I have moved right a space.');
 
 
 $cli->br()
@@ -470,12 +486,12 @@ Now you can use anything in that directory.
 
     $cli->draw('dog');
     $cli->red()->draw('cat');
-    $cli->boldDraw('mug');
+    $cli->red()->bold()->draw('mug');
 
 
 You can style your art using tags:
 
-.. code-block:: txt
+.. code-block:: none
 
     <blue>     ( )</blue>
     <blue>      H</blue>
@@ -516,7 +532,7 @@ Colors
 
 
 .. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
+    `Console Formatting Example <http://demo.webino.org/console-formatting>`__
 
 |vspace|
 
@@ -705,184 +721,184 @@ Background Colors
 
 
 .. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
+    `Console Formatting Example <http://demo.webino.org/console-formatting>`__
 
 |vspace|
 
------------------------
-$cli->backgroundBlack()
------------------------
+---------------
+$cli->blackBg()
+---------------
 
 Printing text on black background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundBlack('Text on black background!');
+    $cli->blackBg('Text on black background!');
 
 
----------------------
-$cli->backgroundRed()
----------------------
+-------------
+$cli->redBg()
+-------------
 
 Printing text on red background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundRed('Text on red background!');
+    $cli->redBg('Text on red background!');
 
 
------------------------
-$cli->backgroundGreen()
------------------------
+---------------
+$cli->greenBg()
+---------------
 
 Printing text on green background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundGreen('Text on green background!');
+    $cli->greenBg('Text on green background!');
 
 
-------------------------
-$cli->backgroundYellow()
-------------------------
+----------------
+$cli->yellowBg()
+----------------
 
 Printing text on yellow background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundYellow('Text on yellow background!');
+    $cli->yellowBg('Text on yellow background!');
 
 
-----------------------
-$cli->backgroundBlue()
-----------------------
+--------------
+$cli->blueBg()
+--------------
 
 Printing text on blue background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundBlue('Text on blue background!');
+    $cli->blueBg('Text on blue background!');
 
 
--------------------------
-$cli->backgroundMagenta()
--------------------------
+-----------------
+$cli->magentaBg()
+-----------------
 
 Printing text on magenta background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundMagenta('Text on magenta background!');
+    $cli->magentaBg('Text on magenta background!');
 
 
-----------------------
-$cli->backgroundCyan()
-----------------------
+--------------
+$cli->cyanBg()
+--------------
 
 Printing text on cyan background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundCyan('Text on cyan background!');
+    $cli->cyanBg('Text on cyan background!');
 
 
----------------------------
-$cli->backgroundLightGray()
----------------------------
+--------------
+$cli->grayBg()
+--------------
 
 Printing text on light gray background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightGray('Text on light gray background!');
+    $cli->grayBg('Text on light gray background!');
 
 
---------------------------
-$cli->backgroundDarkGray()
---------------------------
+------------------
+$cli->darkGrayBg()
+------------------
 
 Printing text on dark gray background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundDarkGray('Text on dark gray background!');
+    $cli->darkGrayBg('Text on dark gray background!');
 
 
---------------------------
-$cli->backgroundLightRed()
---------------------------
+------------------
+$cli->lightRedBg()
+------------------
 
 Printing text on light red background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightRed('Text on light red background!');
+    $cli->lightRedBg('Text on light red background!');
 
 
-----------------------------
-$cli->backgroundLightGreen()
-----------------------------
+--------------------
+$cli->lightGreenBg()
+--------------------
 
 Printing text on light green background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightGreen('Text on light green background!');
+    $cli->lightGreenBg('Text on light green background!');
 
 
------------------------------
-$cli->backgroundLightYellow()
------------------------------
+---------------------
+$cli->lightYellowBg()
+---------------------
 
 Printing text on light yellow background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightYellow('Text on light yellow background!');
+    $cli->lightYellowBg('Text on light yellow background!');
 
 
----------------------------
-$cli->backgroundLightBlue()
----------------------------
+--------------
+$cli->blueBg()
+--------------
 
 Printing text on light blue background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightBlue('Text on light blue background!');
+    $cli->blueBg('Text on light blue background!');
 
 
-------------------------------
-$cli->backgroundLightMagenta()
-------------------------------
+-----------------
+$cli->magentaBg()
+-----------------
 
 Printing text on light magenta background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightMagenta('Text on light magenta background!');
+    $cli->magentaBg('Text on light magenta background!');
 
 
----------------------------
-$cli->backgroundLightCyan()
----------------------------
+--------------
+$cli->cyanBg()
+--------------
 
 Printing text on light cyan background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundLightCyan('Text on light cyan background!');
+    $cli->cyanBg('Text on light cyan background!');
 
 
------------------------
-$cli->backgroundWhite()
------------------------
+---------------
+$cli->whiteBg()
+---------------
 
 Printing text on white background color to the terminal.
 
 .. code-block:: php
 
-    $cli->backgroundWhite('Text on white background!');
+    $cli->whiteBg('Text on white background!');
 
 
 Text Style
@@ -894,7 +910,7 @@ Text Style
 
 
 .. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
+    `Console Formatting Example <http://demo.webino.org/console-formatting>`__
 
 |vspace|
 
@@ -935,11 +951,11 @@ Printing underlined text to the terminal.
 $cli->invert()
 --------------
 
-Printing inverted text to the terminal.
+Printing inverted colors text to the terminal.
 
 .. code-block:: php
 
-    $cli->invert('Inverted text!');
+    $cli->invert('Inverted colors text!');
 
 
 Style Commands
@@ -951,7 +967,7 @@ Style Commands
 
 
 .. seealso::
-    `Console Formatting Example <http://demo.webino.org/console-formatting>`_
+    `Console Formatting Example <http://demo.webino.org/console-formatting>`__
 
 |vspace|
 
@@ -1040,8 +1056,8 @@ Getting text from a user.
 
 
 .. seealso::
-   `Console Input Example <http://demo.webino.org/console-input>`_ ●
-   `Console Input Multi-Line Example <http://demo.webino.org/console-input-multi-line>`_
+   `Console Input Example <http://demo.webino.org/console-input>`__ ●
+   `Console Input Multi-Line Example <http://demo.webino.org/console-input-multi-line>`__
 
 
 Specifying certain answers from the user you only want to accept (case insensitive).
@@ -1086,8 +1102,8 @@ Passing a closure into the ``accept`` method.
 
 
 .. seealso::
-   `Console Input Accept Example <http://demo.webino.org/console-input-accept>`_ ●
-   `Console Input Accept Closure Example <http://demo.webino.org/console-input-accept-closure>`_
+   `Console Input Accept Example <http://demo.webino.org/console-input-accept>`__ ●
+   `Console Input Accept Closure Example <http://demo.webino.org/console-input-accept-closure>`__
 
 
 Specifying a default response for when the user simply presses ``enter`` without typing anything in.
@@ -1099,7 +1115,7 @@ Specifying a default response for when the user simply presses ``enter`` without
 
 
 .. seealso::
-   `Console Input Default Example <http://demo.webino.org/console-input-default>`_
+   `Console Input Default Example <http://demo.webino.org/console-input-default>`__
 
 
 ---------------
@@ -1118,7 +1134,7 @@ Prompting the user for ``y`` or ``n`` (strict).
 
 
 .. seealso::
-   `Console Confirm Example <http://demo.webino.org/console-confirm>`_
+   `Console Confirm Example <http://demo.webino.org/console-confirm>`__
 
 
 ----------------
@@ -1134,7 +1150,7 @@ Hiding text the user is typing.
 
 
 .. seealso::
-   `Console Password Example <http://demo.webino.org/console-password>`_
+   `Console Password Example <http://demo.webino.org/console-password>`__
 
 
 ------------------
@@ -1163,7 +1179,7 @@ You will get an array back with the checked options (an empty array in the case 
 provide an associative array as the options, an array of the selected keys will be provided as the result.
 
 .. seealso::
-   `Console Checkboxes Example <http://demo.webino.org/console-checkboxes>`_
+   `Console Checkboxes Example <http://demo.webino.org/console-checkboxes>`__
 
 
 -------------
@@ -1191,4 +1207,4 @@ Presenting the user with a set of interactive options. The user can only select 
 The result will be a string, not an array (the selected key in the case of an associative array).
 
 .. seealso::
-   `Console Radio Example <http://demo.webino.org/console-radio>`_
+   `Console Radio Example <http://demo.webino.org/console-radio>`__

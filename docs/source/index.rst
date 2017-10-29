@@ -38,7 +38,7 @@ If it will be proved by its authors, it will be used by enterprise web applicati
 How Do I Get Started?
 =====================
 
-Copy a prototype branch of the `Webino repository <https://github.com/webino/Webino>`_ to your local machine.
+Copy a prototype branch of the `Webino repository <https://github.com/webino/Webino>`__ to your local machine.
 
 .. code-block:: bash
 
@@ -46,10 +46,10 @@ Copy a prototype branch of the `Webino repository <https://github.com/webino/Web
     git checkout prototype
 
 
-Or download `Webino as ZIP <https://github.com/webino/Webino/archive/prototype.zip>`_ file. Then play with examples.
+Or download `Webino as ZIP <https://github.com/webino/Webino/archive/prototype.zip>`__ file. Then play with examples.
 
 .. note::
-    You can preview live examples at `demo.webino.org <http://demo.webino.org>`_
+    You can preview live examples at `demo.webino.org <http://demo.webino.org>`__
 
 
 .. toctree::

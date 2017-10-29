@@ -5,7 +5,7 @@ Add your service to the application via configuration.
     use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Service;
 
-    new Config([
+    Webino::config([
         new Service(MyService::class, MyServiceFactory::class),
     ]);
 

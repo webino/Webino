@@ -22,7 +22,7 @@ Executing command line actions running application index file.
 
 .. seealso::
    That shows a list of all available commands ●
-   `Console Example <http://demo.webino.org/console>`_
+   `Console Example <http://demo.webino.org/console>`__
 
 
 Help Command
@@ -69,7 +69,7 @@ You have direct access to the ``$app`` and ``$cli`` objects.
 
 
 .. note::
-    Runtime developer console is powered by `PsySH <http://psysh.org/>`_.
+    Runtime developer console is powered by `PsySH <http://psysh.org/>`__.
 
 
 Script Version
@@ -116,14 +116,13 @@ Adding custom console command into application configuration.
 .. code-block:: php
 
     use MyPackage\Console\MyConsoleCommand;
-    use WebinoAppLib\Feature\Config;
 
-    new Config([
+    Webino::config([
         new MyConsoleCommand,
     ]);
 
 
 .. seealso::
    :ref:`Application Console Guide <guide-console>` ●
-   `Console Command Example <http://demo.webino.org/console-command>`_ ●
-   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_
+   `Console Command Example <http://demo.webino.org/console-command>`__ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`__

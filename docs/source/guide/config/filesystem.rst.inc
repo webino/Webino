@@ -5,10 +5,9 @@ Overriding default local working dir filesystem.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\DefaultFilesystem;
 
-    new CoreConfig([
+    Webino::config([
         // optional
         new DefaultFilesystem('custom/root'),
     ]);
@@ -25,14 +24,13 @@ Configuring temporary filesystem in the memory.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\MemoryFilesystem;
 
-    new CoreConfig([
+    Webino::config([
         new MemoryFilesystem,
     ]);
 
 
 .. seealso::
    :ref:`api-filesystem-app-file` |
-   `Filesystem Config Example <http://demo.webino.org/filesystem-config>`_
+   `Filesystem Config Example <http://demo.webino.org/filesystem-config>`__

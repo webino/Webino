@@ -57,10 +57,9 @@ Registering an invokable service via application config.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Service;
 
-    new Config([
+    Webino::config([
         new Service(MyInvokableService::class),
     ]);
 
@@ -100,10 +99,9 @@ Registering a service created by factory via application config.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Service;
 
-    new Config([
+    Webino::config([
         new Service(MyService::class, MyServiceFactory::class),
     ]);
 
@@ -118,10 +116,9 @@ and write enabled. They are registered into the core section of the application 
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\CoreService;
 
-    new CoreConfig([
+    Webino::config([
         // invokable
         new CoreService(MyInvokableService::class),
         // factory

@@ -7,10 +7,9 @@ Configuring custom mailer.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoConfigLib\Feature\Log;
 
-    new CoreConfig([
+    Webino::config([
         // TODO...
         new DefaultMailer(FileMailer::class),
         new FileMailer(),
@@ -28,15 +27,14 @@ TODO...
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoConfigLib\Feature\Log;
 
-    new CoreConfig([
+    Webino::config([
         // TODO...
         new Mail(),
     ]);
 
 
 .. seealso::
-   :ref:`api-mail` ●
-   `Mail Example <http://demo.webino.org/mail-message>`_
+   :ref:`api-mailer` ●
+   `Mail Example <http://demo.webino.org/mail-message>`__

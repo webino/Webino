@@ -1,6 +1,6 @@
 <?php
 /**
- * Webino (http://webino.sk)
+ * Webino™ (http://webino.sk)
  *
  * @link        https://github.com/webino for the canonical source repository
  * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)

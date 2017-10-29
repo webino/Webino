@@ -14,7 +14,7 @@ Application Console
 This section provides an introduction into console service. Console tools are ideal for use in cron jobs,
 or command line based utilities that don’t need to be accessible from a web browser.
 
-- Powered by `CLImate <http://climate.thephpleague.com/>`_
+- Powered by `CLImate <http://climate.thephpleague.com/>`__
 
 
 Console Commands
@@ -25,6 +25,8 @@ Console command is a class defining a route and an event handler.
 .. code-block:: php
 
     use WebinoAppLib\Console\AbstractConsoleCommand;
+    use WebinoAppLib\Event\ConsoleEvent;
+    use WebinoConfigLib\Feature\Route\ConsoleRoute;
 
     class MyConsoleCommand extends AbstractConsoleCommand
     {
@@ -54,16 +56,14 @@ Adding custom console command into application configuration.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
-
-    new Config([
+    Webino::config([
         new MyConsoleCommand,
     ]);
 
 
 .. seealso::
-   `Console Command Example <http://demo.webino.org/console-command>`_ ●
-   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_
+   `Console Command Example <http://demo.webino.org/console-command>`__ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`__
 
 
 Console Bind
@@ -73,12 +73,11 @@ It is also possible to configure console command routes particularly.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
-    use WebinoAppLib\Feature\Route\Console;
+    use WebinoConfigLib\Feature\Route\ConsoleRoute;
 
-    new Config([
-        (new Console('my-command'))
-            ->setRoute('my-command')
+    Webino::config([
+        (new ConsoleRoute('my-command'))
+            ->setPath('my-command')
             ->setTitle('My command title')
             ->setDescription('My command description.'),
     ]);
@@ -115,7 +114,7 @@ Performing action on a default console command execution.
 
 .. seealso::
    :ref:`api-console-bind-console` ●
-   `Console Bind Example <http://demo.webino.org/console-bind>`_
+   `Console Bind Example <http://demo.webino.org/console-bind>`__
 
 
 Command Parameters
@@ -188,8 +187,8 @@ Options can digest text-based values.
 |vspace|
 
 .. seealso::
-   `Console Command Example <http://demo.webino.org/console-command>`_ ●
-   `Module Console Command Example <http://demo.webino.org/modules-console-command>`_
+   `Console Command Example <http://demo.webino.org/console-command>`__ ●
+   `Module Console Command Example <http://demo.webino.org/modules-console-command>`__
 
 
 Console Config
@@ -232,14 +231,7 @@ Chaining any of the style to get what you want.
 
 .. code-block:: php
 
-    $cli->backgroundBlue()->green()->bold()->out('Fusce eget faucibus eros.');
-
-
-Combining styles into one method.
-
-.. code-block:: php
-
-    $cli->backgroundBlueGreenBold('Fusce eget faucibus eros.');
+    $cli->blueBg()->green()->bold()->out('Fusce eget faucibus eros.');
 
 
 You can apply more than one format to an output, but only one foreground and one background color.
@@ -248,7 +240,7 @@ You can apply more than one format to an output, but only one foreground and one
 Tags
 ----
 
-Applying a color/background color/format to just part of an output.
+Applying a foreground/background color and format with tags, to just part of an output.
 
 .. code-block:: php
 
@@ -262,45 +254,6 @@ Prepend the color with ``background_`` to use a background color tag.
 .. code-block:: php
 
     $cli->blue('Please <background_light_red>remember</background_light_red> to restart the server.');
-
-
-Custom Styles
--------------
-
-Adding your own custom colors.
-
-.. code-block:: php
-
-    $cli->style->addColor('lilac', 38);
-
-
-Once you’ve added the color, you can use it like any of the other colors.
-
-.. code-block:: php
-
-    $cli->lilac('What a pretty color.');
-    $cli->backgroundLilac()->out('This background is a pretty color.');
-    $cli->out('Just this <lilac>word</lilac> is a pretty color.');
-    $cli->out('Just this <background_lilac>word</background_lilac> is a pretty color.');
-
-
-Adding your own commands using either a string or an array of styles, just make sure that the style is defined already.
-
-.. code-block:: php
-
-    $cli->style->addCommand('rage', 'cyan');
-    $cli->rage('SOMETHING IS MESSED UP.');
-
-    $cli->style->addCommand('holler', ['underline', 'green', 'bold']);
-    $cli->holler('Yo, what up.');
-
-
-It is possible to override any existing command.
-
-.. code-block:: php
-
-    $cli->style->addCommand('error', 'light_blue');
-    $cli->error('Whelp. That did not turn out so well.');
 
 
 .. include:: /guide/cookbook/console.rst.inc

@@ -11,7 +11,7 @@ Application Mailer
 
 TODO...
 
-- Powered by `Zend Mail <https://github.com/zendframework/zend-mail>`_
+- Powered by `Zend Mail <https://github.com/zendframework/zend-mail>`__
 
 
 Mailer Config
@@ -21,7 +21,7 @@ Mailer Config
     :depth: 1
     :local:
 
-.. include:: /guide/config/mail.rst.inc
+.. include:: /guide/config/mailer.rst.inc
 
 
 .. _api-mail:

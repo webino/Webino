@@ -5,10 +5,9 @@ Configuring listeners.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Listener;
 
-    new Config([
+    Webino::config([
         // invokable
         new Listener(MyExampleListener::class),
         // factory
@@ -18,7 +17,7 @@ Configuring listeners.
 
 .. seealso::
    :ref:`architecture-events-event-listeners` |
-   `Bootstrap Bind Config Example <http://demo.webino.org/events-bind-app-bootstrap-config>`_
+   `Bootstrap Bind Config Example <http://demo.webino.org/events-bind-app-bootstrap-config>`__
 
 
 CoreListener
@@ -28,10 +27,9 @@ Configuring core listeners.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\CoreListener;
 
-    new CoreConfig([
+    Webino::config([
         // invokable
         new CoreListener(MyExampleCoreListener::class),
         // factory
@@ -41,4 +39,4 @@ Configuring core listeners.
 
 .. seealso::
    :ref:`architecture-events-core-listeners` |
-   `Bootstrap Bind Core Config Example <http://demo.webino.org/events-bind-app-bootstrap-core-config>`_
+   `Bootstrap Bind Core Config Example <http://demo.webino.org/events-bind-app-bootstrap-core-config>`__

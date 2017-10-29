@@ -8,7 +8,7 @@ Configuring services.
     use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Service;
 
-    new Config([
+    Webino::config([
         // invokable
         new Service(MyService::class),
         // factory
@@ -29,10 +29,9 @@ Application core service config feature.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\CoreService;
 
-    new CoreConfig([
+    Webino::config([
         // invokable
         new CoreService(MyCoreService::class),
         // factory

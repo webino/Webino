@@ -1,6 +1,6 @@
 <?php
 /**
- * Webino (http://webino.sk)
+ * Webino™ (http://webino.sk)
  *
  * @link        https://github.com/webino for the canonical source repository
  * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
@@ -10,7 +10,7 @@
 
 namespace WebinoAppLib;
 
-use WebinoAppLib\Application\AbstractApplication;
+use WebinoAppLib\Application\AbstractBaseApplication;
 use WebinoAppLib\Application\Config;
 use WebinoAppLib\Application\CoreConfig;
 use WebinoAppLib\Exception\DomainException;
@@ -36,7 +36,7 @@ final class Factory
     /**
      * @param array|object $config
      * @param DebuggerInterface $debugger
-     * @return Application\AbstractApplication
+     * @return Application\AbstractBaseApplication
      */
     public function create($config = null, DebuggerInterface $debugger = null)
     {
@@ -47,9 +47,9 @@ final class Factory
         $services->setService(Application::DEBUGGER, $_debugger);
 
         $app = $services->get(Application::SERVICE);
-        if (!($app instanceof AbstractApplication)) {
+        if (!($app instanceof AbstractBaseApplication)) {
             throw (new DomainException('Expected application type %s but got %s'))
-                ->format(AbstractApplication::class, get_class($app));
+                ->format(AbstractBaseApplication::class, get_class($app));
         }
 
         return $app;

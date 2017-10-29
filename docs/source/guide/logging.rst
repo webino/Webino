@@ -12,7 +12,7 @@ Application Logging
 Logs are important for monitoring the security of your application and to track events if problems occur,
 as well as for auditing the correct usage of the system. The PSR-Logger interface standard is supported.
 
-- Powered by `Zend Log <https://github.com/zendframework/zend-log>`_
+- Powered by `Zend Log <https://github.com/zendframework/zend-log>`__
 
 
 Logging Config
@@ -22,7 +22,14 @@ Logging Config
     :depth: 1
     :local:
 
-.. include:: /guide/config/logging.rst.inc
+.. _config-logging-log:
+.. include:: /guide/config/logging/log.rst.inc
+
+.. _config-logging-forking:
+.. include:: /guide/config/logging/forking.rst.inc
+
+.. _config-logging-logger:
+.. include:: /guide/config/logging/logger.rst.inc
 
 
 .. _api-logging:
@@ -57,23 +64,19 @@ Configuring logger priority filter. Filters out all messages that are below requ
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoConfigLib\Feature\Log;
     use WebinoConfigLib\Feature\FirePhpLog;
 
-    new CoreConfig([
-
+    Webino::config([
         (new Log)->filterPriority(Log::EMERGENCY),
-
         (new FirePhpLog)->filterPriority(FirePhpLog::INFO),
-
         // etc.
     ]);
 
 
 .. seealso::
    :ref:`config-logging-forking` ●
-   `Logger Priority Filter Example <http://demo.webino.org/logger-filters-priority>`_
+   `Logger Priority Filter Example <http://demo.webino.org/logger-filters-priority>`__
 
 
 Regex filter
@@ -88,18 +91,15 @@ Configuring logger regex filter. Filters out all messages that do not match requ
     use WebinoConfigLib\Feature\FirePhpLog;
 
     new CoreConfig([
-
         (new Log)->filterRegex('~^Attach~'),
-
         (new FirePhpLog)->filterRegex('~^Event~'),
-
         // etc.
     ]);
 
 
 .. seealso::
    :ref:`config-logging-forking` ●
-   `Logger Regex Filter Example <http://demo.webino.org/logger-filters-regex>`_
+   `Logger Regex Filter Example <http://demo.webino.org/logger-filters-regex>`__
 
 
 .. _api-log-messages:
@@ -131,7 +131,7 @@ The best practice is to log messages via class.
 .. seealso::
    :ref:`api-logging-app-log` ●
    :ref:`cookbook-logger-messages` ●
-   `Log Message Class Example <http://demo.webino.org/logger-message-class>`_
+   `Log Message Class Example <http://demo.webino.org/logger-message-class>`__
 
 
 

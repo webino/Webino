@@ -21,13 +21,10 @@ a documentation we don't know what to type, so configurators are introduced.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoConfigLib\Feature\ConfigCacheEnabled;
 
-    return new CoreConfig([
-
+    Webino::config([
         new ConfigCacheEnabled,
-
     ]);
 
 
@@ -63,11 +60,11 @@ then when you create a configuration:
 
     use WebinoConfigLib\Config;
 
-    var_dump((new Config([
-
+    $config = new Config([
         new MyFeature('OPTION_ONE', 'OPTION_TWO'),
+    ]);
 
-    ]))->toArray());
+    var_dump($config->toArray());
 
 
 it will produce an array:
@@ -91,13 +88,9 @@ We can add or remove a feature from the config easily:
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
-
-    new Config([
-
+    Webino::config([
         new ExampleFeatureOne,
         new ExampleFeatureTwo('DEFAULT_OPTION'),
-
     ]);
 
 
@@ -105,14 +98,10 @@ adding another feature and changing the option:
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
-
-    new Config([
-
+    Webino::config([
         new ExampleFeatureOne,
         new ExampleFeatureTwo('MY_OPTION'),
         new ExampleFeatureThree,
-
     ]);
 
 
@@ -120,13 +109,9 @@ Calling a method on a configuration feature is easy:
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
-
-    new Config([
-
+    Webino::config([
         (new ExampleFeatureFoo('ANY_OPTION'))
             ->setSomething('anything'),
-
     ]);
 
 
@@ -140,23 +125,17 @@ With services configuration we can register invokables and factories to the appl
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Service;
 
-    new Config([
-
+    Webino::config([
         // registering invokable
         new Service(MyInvokableService::class),
-
         // invokable with alias
         new Service(['MyInvokableAlias' => MyInvokableService::class]),
-
         // registering service factory
         new Service(MyService::class, MyServiceFactory::class),
-
         // service with alias using factory
         new Service('MyServiceAlias', MyServiceFactory::class),
-
     ]);
 
 
@@ -167,23 +146,17 @@ We can configure an application listeners bindings.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Listener;
 
-    new Config([
-
+    Webino::config([
         // registering invokable listener
         new Listener(MyInvokableListener::class),
-
         // with alias
         new Listener(['MyListenerAlias' => MyInvokableListener::class]),
-
         // registering listener using factory
         new Listener(MyListener::class, MyListenerFactory::class),
-
         // listener alias using factory
         new Listener(['MyListenerAlias' => MyListener::class], MyListenerFactory::class),
-
     ]);
 
 
@@ -195,17 +168,13 @@ registered into the core section of a configuration.
 
 .. code-block:: php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature\CoreListener;
     use WebinoAppLib\Feature\CoreService;
 
-    new CoreConfig([
-
+    Webino::config([
         // registering a core service
         new CoreService(MyInvokableService::class),
-
         // registering a core listener
         new CoreListener(MyInvokableListener::class),
-
     ]);
 

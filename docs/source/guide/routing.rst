@@ -12,7 +12,7 @@ Application Routing
 The router lets you define routes that triggers events you can handle by listeners. A route is basically a path which
 is matched against request.
 
-- Powered by `Zend Router <https://github.com/zendframework/zend-mvc>`_
+- Powered by `Zend Router <https://github.com/zendframework/zend-mvc>`__
 
 
 .. image:: ../_static/media/WebinoAppLib.Routing.Flowchart_h400.png
@@ -62,14 +62,13 @@ is matched against request.
 .. code-block:: php
 
     use WebinoAppLib\Event\RouteEvent;
-
     /** @var WebinoAppLib\Application\AbstractApplication $app */
-    $app->bindRoute(MyRoute::class, function (RouteEvent $event) {
+
+    // via class
+    $app->bind(MyRoute::class, function (RouteEvent $event) {
         // do something...
     });
-
     // or via string
-
     $app->bindRoute('myRoute', function (RouteEvent $event) {
         // do something...
     });

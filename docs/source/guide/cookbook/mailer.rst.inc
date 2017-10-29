@@ -33,4 +33,4 @@ TODO...
 
 .. seealso::
    :ref:`api-mailer` ●
-   `Log Message Class Example <http://demo.webino.org/logger-message-class>`_
+   `Log Message Class Example <http://demo.webino.org/logger-message-class>`__

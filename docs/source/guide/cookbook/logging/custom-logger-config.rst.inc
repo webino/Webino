@@ -7,7 +7,7 @@ Add new logger feature to application configuration:
     use WebinoConfigLib\Feature\Log;
     use WebinoConfigLib\Feature\Logger
 
-    new Config([
+    Webino::config([
         new Logger('myLogger', [
             new Log('my.log'),
         ]),

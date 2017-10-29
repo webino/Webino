@@ -43,11 +43,10 @@ Application is configured in the OOP style, so instead of writing an array we ar
 
     <?php // config/application.php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature as AppFeature;
     use WebinoConfigLib\Feature as ConfigFeature;
 
-    return new CoreConfig([
+    return Webino::config([
         new ConfigFeature\Log,
         new ConfigFeature\FirePhpLog,
         new ConfigFeature\ConfigCacheEnabled,

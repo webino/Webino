@@ -1,6 +1,6 @@
 <?php
 /**
- * Webino (http://webino.sk)
+ * Webino™ (http://webino.sk)
  *
  * @link        https://github.com/webino for the canonical source repository
  * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
@@ -475,18 +475,6 @@ class Console
     }
 
     /**
-     * Blinking text
-     *
-     * @param string|null $str
-     * @return $this
-     */
-    public function blink($str = null)
-    {
-        $this->engine->blink($str);
-        return $this;
-    }
-
-    /**
      * Inverted text
      *
      * @param string|null $str
@@ -495,18 +483,6 @@ class Console
     public function invert($str = null)
     {
         $this->engine->invert($str);
-        return $this;
-    }
-
-    /**
-     * Hidden text
-     *
-     * @param string|null $str
-     * @return $this
-     */
-    public function hidden($str = null)
-    {
-        $this->engine->hidden($str);
         return $this;
     }
 

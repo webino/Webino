@@ -125,17 +125,13 @@ Registering listener aggregates via application config.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\Listener;
 
-    new Config([
-
+    Webino::config([
         // invokable
         new Listener(MyListenerAggregate::class),
-
         // factory
         new Listener(MyListenerAggregate::class, MyListenerAggregateFactory::class),
-
     ]);
 
 
@@ -154,15 +150,11 @@ Registering core listener aggregate via application config.
 
 .. code-block:: php
 
-    use WebinoAppLib\Feature\Config;
     use WebinoAppLib\Feature\CoreListener;
 
-    new Config([
-
+    Webino::config([
         // invokable
         new CoreListener(MyListenerAggregate::class),
-
         // factory
         new CoreListener(MyListenerAggregate::class, MyListenerAggregateFactory::class),
-
     ]);

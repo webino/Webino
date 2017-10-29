@@ -9,12 +9,13 @@ Webino™ is a platform for creating quality and modular web applications.
 It is built on [PHP](http://php.net/) with [Zend Framework](http://framework.zend.com/)
 and other useful open-source packages.
 
-- Demo [demo.webino.org](http://demo.webino.org)
+- Examples: [demo.webino.org](http://demo.webino.org) `Powered by Heroku`
+- Documentation: [docs.webino.org](http://docs.webino.org) `Powered by GitHub Pages`
 
 ## Goals
 
 The main goal of Webino™ is to be a platform for high quality, modular and scalable web applications. Providing tools
-for easing development, testing and building processes. Including documentation about continuous integration
+for rapid development, testing and building processes. Including support for continuous integration
 and continuous delivery.
 
 - **High quality code**
@@ -31,7 +32,7 @@ and continuous delivery.
 
 - **Low coupling**
 
-  - The computing code must be separated to a routines emitting events and to listeners.
+  - The computing code must be separated into routines emitting events and listeners.
 
 - **Testable**
 
@@ -45,8 +46,13 @@ and continuous delivery.
 
   - Continuous integration development and continuous delivery of minimized code.   
 
+## Requirements
 
-## Technologies
+- [PHP 7.1](http://php.net)
+- Web server: [Apache](https://www.apache.org) | [NGINX](https://nginx.org) [TODO]
+- Database: [MySQL](https://www.mysql.com) [TODO] | [MariaDB](https://mariadb.org) [TODO] | [PostgreSQL](https://www.postgresql.org) [TODO] `optional`
+
+## Architecture
 
 - Inversion of Control
 - Dependency Injection
@@ -54,8 +60,8 @@ and continuous delivery.
 - Object-Oriented Programming
 
 
-## Developer's manual
+## Addendum
 
-Learn how to develop Webino™ modules.
+Learn how to develop web applications with Webino™.
 
-[Read the Wiki](https://github.com/webino/Webino/wiki)
+[Read documentation](https://docs.webino.org)

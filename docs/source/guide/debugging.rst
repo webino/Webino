@@ -9,7 +9,7 @@ Application Debugging
     :local:
 
 
-- Powered by `Tracy <http://tracy.nette.org>`_
+- Powered by `Tracy <http://tracy.nette.org>`__
 
 
 .. rst-class:: monospace-topic
@@ -33,7 +33,7 @@ Accessing debugger service.
     $debugger = $app->getDebugger();
 
 
-- see: `Debugger Example <http://demo.webino.org/debugger>`_
+- see: `Debugger Example <http://demo.webino.org/debugger>`__
 
 
 $app->debug()
@@ -53,7 +53,7 @@ Returning output instead of printing it.
     $output = $app->debug($var, true);
 
 
-- see: `Debugger Dump Example <http://demo.webino.org/debugger-dump>`_
+- see: `Debugger Dump Example <http://demo.webino.org/debugger-dump>`__
 
 
 $app->debug()->barDump()
@@ -66,7 +66,7 @@ Dumping information about a variable into Tracy debugger bar.
     $app->debug()->barDump($var);
 
 
-- see: `Debugger Bar Dump Example <http://demo.webino.org/debugger-bar-dump>`_
+- see: `Debugger Bar Dump Example <http://demo.webino.org/debugger-bar-dump>`__
 
 
 $app->debug()->timer()
@@ -94,7 +94,7 @@ Setting information into Tracy debugger bar System info panel.
     $app->debug()->setBarInfo(['Test Label 02' => 'Test Value02']);
 
 
-- see: `Debugger Bar Info Example <http://demo.webino.org/debugger-info>`_
+- see: `Debugger Bar Info Example <http://demo.webino.org/debugger-info>`__
 
 
 $app->debug()->setBarPanel()
@@ -110,7 +110,7 @@ Setting custom debugger panel into Tracy bar.
     $app->debug()->setBarPanel($panel, 'myDebugBarPanel');
 
 
-- see: `Debugger Bar Panel Example <http://demo.webino.org/debugger-panel>`_
+- see: `Debugger Bar Panel Example <http://demo.webino.org/debugger-panel>`__
 
 
 Debugger Config
@@ -121,6 +121,5 @@ Debugger Config
     :local:
 
 .. include:: /guide/config/debugging.rst.inc
-
 
 .. include:: /guide/cookbook/debugging.rst.inc

@@ -12,7 +12,7 @@ Obtaining logger service.
 
 .. seealso::
    :ref:`Config Logger <config-logging-log>` ●
-   `Logger Aware Example <http://demo.webino.org/logger-aware>`_
+   `Logger Aware Example <http://demo.webino.org/logger-aware>`__
 
 
 Obtaining custom logger service.
@@ -25,8 +25,8 @@ Obtaining custom logger service.
 
 .. seealso::
    :ref:`Config Custom Logger <config-logging-logger>` ●
-   `Custom Logger Example <http://demo.webino.org/logger-custom>`_ ●
-   `Custom Logger Aware Example <http://demo.webino.org/logger-aware-custom>`_
+   `Custom Logger Example <http://demo.webino.org/logger-custom>`__ ●
+   `Custom Logger Aware Example <http://demo.webino.org/logger-aware-custom>`__
 
 
 .. _api-logging-app-log:
@@ -68,8 +68,8 @@ Writing messages to a log.
 
 .. seealso::
    :ref:`api-log-messages` ●
-   `Log Message Example <http://demo.webino.org/logger-message>`_ ●
-   `Log Message Class Example <http://demo.webino.org/logger-message-class>`_
+   `Log Message Example <http://demo.webino.org/logger-message>`__ ●
+   `Log Message Class Example <http://demo.webino.org/logger-message-class>`__
 
 
 Obtaining PSR-3 logger.
@@ -82,7 +82,7 @@ Obtaining PSR-3 logger.
 
 .. seealso::
    :ref:`api-logging-psr-3` ●
-   `PSR-3 Logger Example <http://demo.webino.org/logger-PSR-3>`_
+   `PSR-3 Logger Example <http://demo.webino.org/logger-PSR-3>`__
 
 
 .. _api-logging-psr-3:

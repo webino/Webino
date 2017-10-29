@@ -8,7 +8,7 @@ Adding routes via config.
     use WebinoAppLib\Feature\Config;
     use WebinoConfigLib\Feature\Route;
 
-    new Config([
+    Webino::config([
         (new Route('myRoute'))->setLiteral('/my/route/path'),
     ]);
 
@@ -16,4 +16,4 @@ Adding routes via config.
 .. seealso::
    :ref:`api-routing-app-url` ●
    :ref:`api-routing-app-bindRoute` ●
-   `Route Config Example <http://demo.webino.org/route-config>`_
+   `Route Config Example <http://demo.webino.org/route-config>`__
