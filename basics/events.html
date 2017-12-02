@@ -1,29 +1,28 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Event System Architecture &mdash; Webino 0.1.0alpha documentation</title>
-    
+    <title>Event System Architecture &#8212; Webino 0.1.0alpha documentation</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1.0alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Application Context" href="application-context.html" />
     <link rel="prev" title="Services Architecture" href="services.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -31,7 +30,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
   </head>
-  <body role="document">
+  <body>
   <div class="related top">
   <nav id="rellinks">
     <ul>
@@ -74,9 +73,9 @@ performing other operations as they trigger.</p>
 even the main action. Then we can listen to that event using priorities, if we want to act like a middleware.
 The event propagation could be stopped at any time.</p>
 <img alt="../_images/WebinoEventLib.Event.Lifecycle_h400.png" class="centered" src="../_images/WebinoEventLib.Event.Lifecycle_h400.png" />
-<p>Using events like <em>someEvent.pre</em> and <em>someEvent.post</em> or <em>someEvent.before</em>, <em>someEvent.after</em>, it doesn&#8217;t matter,
-is messy and not recommended, don&#8217;t do that. Give an event a unique name then attach listeners using priorities.
-Convenient way to do that is to use an event <a class="reference internal" href="../guide/events.html#api-events-priority"><span>priority constants</span></a>.</p>
+<p>Using events like <em>someEvent.pre</em> and <em>someEvent.post</em> or <em>someEvent.before</em>, <em>someEvent.after</em>, it doesn’t matter,
+is messy and not recommended, don’t do that. Give an event a unique name then attach listeners using priorities.
+Convenient way to do that is to use an event <a class="reference internal" href="../guide/events.html#api-events-priority"><span class="std std-ref">priority constants</span></a>.</p>
 </div>
 <div class="section" id="event-listeners">
 <span id="architecture-events-event-listeners"></span><h2><a class="toc-backref" href="#id3">Event Listeners</a><a class="headerlink" href="#event-listeners" title="Permalink to this headline">¶</a></h2>
@@ -92,7 +91,7 @@ It is allowed to register an event listeners in some different ways.</p>
 <div class="section" id="closure-listener">
 <h3><a class="toc-backref" href="#id5">Closure Listener</a><a class="headerlink" href="#closure-listener" title="Permalink to this headline">¶</a></h3>
 <p>The closure listener is the fastest created listener, but not the best practice at all.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="s1">&#39;someEvent&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// do something...</span>
@@ -103,11 +102,11 @@ It is allowed to register an event listeners in some different ways.</p>
 <div class="section" id="invokable-listener">
 <h3><a class="toc-backref" href="#id6">Invokable Listener</a><a class="headerlink" href="#invokable-listener" title="Permalink to this headline">¶</a></h3>
 <p>The invokable listener is a class that its object can be called like a function.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">MyInvokableListener</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">__invoke</span><span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">Event</span> <span class="nv">$event</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">// do something...</span>
     <span class="p">}</span>
@@ -124,7 +123,7 @@ It is allowed to register an event listeners in some different ways.</p>
 <div class="section" id="listener-aggregate">
 <h3><a class="toc-backref" href="#id7">Listener Aggregate</a><a class="headerlink" href="#listener-aggregate" title="Permalink to this headline">¶</a></h3>
 <p>The listener aggregate is a class that registers other listeners in a batch.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoEventLib\Event</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoEventLib\Listener\AbstractListener</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">MyListenerAggregate</span> <span class="k">extends</span> <span class="nx">AbstractListener</span>
@@ -161,17 +160,13 @@ It is allowed to register an event listeners in some different ways.</p>
 </pre></div>
 </div>
 <p>Registering listener aggregates via application config.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Listener</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Listener</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">Listener</span><span class="p">(</span><span class="nx">MyListenerAggregate</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">Listener</span><span class="p">(</span><span class="nx">MyListenerAggregate</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyListenerAggregateFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -186,17 +181,13 @@ the core configuration and they can modify application configuration.</p>
 <p class="last">Only core services are available to core listeners before application is fully bootstrapped.</p>
 </div>
 <p>Registering core listener aggregate via application config.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\CoreListener</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\CoreListener</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="c1">// invokable</span>
     <span class="k">new</span> <span class="nx">CoreListener</span><span class="p">(</span><span class="nx">MyListenerAggregate</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
     <span class="c1">// factory</span>
     <span class="k">new</span> <span class="nx">CoreListener</span><span class="p">(</span><span class="nx">MyListenerAggregate</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">MyListenerAggregateFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-
 <span class="p">]);</span>
 </pre></div>
 </div>
@@ -218,10 +209,10 @@ the core configuration and they can modify application configuration.</p>
             <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../requirements.html">Introduction</a>
+            <a href="http://demo.webino.org">Examples</a>
         </li>
         <li>
-            <a href="../examples.html">Examples [TODO]</a>
+            <a href="../requirements.html">Requirements [TODO]</a>
         </li>
         <li>
             <a href="../installation.html">Installation [TODO]</a>
@@ -249,10 +240,10 @@ the core configuration and they can modify application configuration.</p>
             <a href="#">Event System</a>
         </li>
         <li>
-            <a href="application-context.html">Application Context</a>
+            <a href="application-context.html">Application Context [TODO]</a>
         </li>
         <li>
-            <a href="application-modules.html">Application Modules</a>
+            <a href="application-modules.html">Application Modules [TODO]</a>
         </li>
         <li>
             <a href="skeleton-application.html">Skeleton Application [TODO]</a>
@@ -307,7 +298,7 @@ the core configuration and they can modify application configuration.</p>
             <a href="../guide/database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="../guide/mailer.html">Mailer</a>
+            <a href="../guide/mailer.html">Mailer [TODO]</a>
         </li>
         <li>
             <a href="../guide/templates.html">Templates [TODO]</a>

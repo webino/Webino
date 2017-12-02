@@ -1,29 +1,28 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Webino Skeleton Application &mdash; Webino 0.1.0alpha documentation</title>
-    
+    <title>Webino Skeleton Application &#8212; Webino 0.1.0alpha documentation</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1.0alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Command Line Interface" href="command-line-interface.html" />
     <link rel="prev" title="Application Modules" href="application-modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -31,7 +30,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
   </head>
-  <body role="document">
+  <body>
   <div class="related top">
   <nav id="rellinks">
     <ul>
@@ -69,7 +68,7 @@
 </div>
 <p>The application is basically a configuration and an execution code. The configuration is cached, if enabled so,
 and could be modified until application is fully bootstrapped.</p>
-<p>For standard applications it&#8217;s best to use the Webino™ Skeleton Application.</p>
+<p>For standard applications it’s best to use the Webino™ Skeleton Application.</p>
 <p><div class="vspace"></div></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -78,7 +77,7 @@ and could be modified until application is fully bootstrapped.</p>
 <div class="section" id="application-index-file">
 <h2><a class="toc-backref" href="#id1">Application Index File</a><a class="headerlink" href="#application-index-file" title="Permalink to this headline">¶</a></h2>
 <p>The application object is created, bootstrapped and dispatched in the index file.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// index.php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// index.php</span>
 
 <span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
 
@@ -90,13 +89,12 @@ and could be modified until application is fully bootstrapped.</p>
 <div class="section" id="application-configuration">
 <h2><a class="toc-backref" href="#id2">Application Configuration</a><a class="headerlink" href="#application-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Application is configured in the OOP style, so instead of writing an array we are using config features.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// config/application.php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span> <span class="c1">// config/application.php</span>
 
-<span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature</span> <span class="k">as</span> <span class="nx">AppFeature</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoConfigLib\Feature</span> <span class="k">as</span> <span class="nx">ConfigFeature</span><span class="p">;</span>
 
-<span class="k">return</span> <span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+<span class="k">return</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="k">new</span> <span class="nx">ConfigFeature\Log</span><span class="p">,</span>
     <span class="k">new</span> <span class="nx">ConfigFeature\FirePhpLog</span><span class="p">,</span>
     <span class="k">new</span> <span class="nx">ConfigFeature\ConfigCacheEnabled</span><span class="p">,</span>
@@ -173,7 +171,7 @@ and could be modified until application is fully bootstrapped.</p>
 <h2><a class="toc-backref" href="#id4">Dispatch Lock [<strong>TODO</strong>]</a><a class="headerlink" href="#dispatch-lock-todo" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to lock / unlock the application from a server dispatch. That means after locking application dispatch
 it will wait to unlock for continue to finish the request.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">DispatchLock</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">DispatchLock</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">();</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">DispatchLock</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unlock</span><span class="p">();</span>
 </pre></div>
@@ -196,10 +194,10 @@ it will wait to unlock for continue to finish the request.</p>
             <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../requirements.html">Introduction</a>
+            <a href="http://demo.webino.org">Examples</a>
         </li>
         <li>
-            <a href="../examples.html">Examples [TODO]</a>
+            <a href="../requirements.html">Requirements [TODO]</a>
         </li>
         <li>
             <a href="../installation.html">Installation [TODO]</a>
@@ -227,10 +225,10 @@ it will wait to unlock for continue to finish the request.</p>
             <a href="events.html">Event System</a>
         </li>
         <li>
-            <a href="application-context.html">Application Context</a>
+            <a href="application-context.html">Application Context [TODO]</a>
         </li>
         <li>
-            <a href="application-modules.html">Application Modules</a>
+            <a href="application-modules.html">Application Modules [TODO]</a>
         </li>
         <li>
             <a href="#">Skeleton Application [TODO]</a>
@@ -285,7 +283,7 @@ it will wait to unlock for continue to finish the request.</p>
             <a href="../guide/database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="../guide/mailer.html">Mailer</a>
+            <a href="../guide/mailer.html">Mailer [TODO]</a>
         </li>
         <li>
             <a href="../guide/templates.html">Templates [TODO]</a>

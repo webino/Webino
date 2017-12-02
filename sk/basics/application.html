@@ -1,30 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sk">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Application Architecture &mdash; Webino 0.1.0alpha dokumentácia</title>
-    
+    <title>Application Architecture &#8212; Dokumentácia Webino 0.1.0alpha</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1.0alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
-    <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Hľadať" href="../search.html" />
     <link rel="next" title="Configuration Architecture" href="configuration.html" />
     <link rel="prev" title="Basic Usage" href="basic-usage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,7 +31,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
   </head>
-  <body role="document">
+  <body>
   <div class="related top">
   <nav id="rellinks">
     <ul>
@@ -48,7 +47,7 @@
   </nav>
   <nav id="breadcrumbs">
     <ul>
-      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+      <li><a href="../index.html">Dokumentácia Webino 0.1.0alpha</a></li> 
     </ul>
   </nav>
   </div>  
@@ -60,14 +59,14 @@
             
   <div class="section" id="application-architecture">
 <h1>Application Architecture<a class="headerlink" href="#application-architecture" title="Trvalý odkaz na tento nadpis">¶</a></h1>
-<div class="contents local topic" id="contents">
+<div class="contents local topic" id="obsah">
 <ul class="simple">
 <li><a class="reference internal" href="#core-lifecycle" id="id1">Core Lifecycle</a></li>
 <li><a class="reference internal" href="#core-events" id="id2">Core Events</a></li>
 <li><a class="reference internal" href="#object-class-diagram" id="id3">Object Class Diagram</a></li>
 </ul>
 </div>
-<p>The Webino™ application architecture is based around the Zend Frameowrk 2 but simplified and enhanced.
+<p>The Webino™ application architecture is based around the Zend Framework but simplified and enhanced.
 It also brings some other useful open-source packages to make a web application devstack.</p>
 <div class="section" id="core-lifecycle">
 <h2><a class="toc-backref" href="#id1">Core Lifecycle</a><a class="headerlink" href="#core-lifecycle" title="Trvalý odkaz na tento nadpis">¶</a></h2>
@@ -80,13 +79,13 @@ after the configure event, right before second pass bootstrap occurs. So only co
 configure event.</p>
 <img alt="../_images/WebinoAppLib.Flowchart_h400.png" class="centered" src="../_images/WebinoAppLib.Flowchart_h400.png" />
 <p><strong>Explanation:</strong></p>
-<p><strong>1)</strong> Creating new application object, loading a configuration and a debugger.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Application\AbstractBaseApplication $appCore **/</span>
+<p><strong>1)</strong> Creating new application object, loading configuration and debugger.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/** @var \WebinoAppLib\Application\AbstractBaseApplication $appCore **/</span>
 <span class="nv">$appCore</span> <span class="o">=</span> <span class="nx">Webino</span><span class="o">::</span><span class="na">application</span><span class="p">(</span><span class="nv">$config</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$debugger</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>There are two optional arguments, for a config and a debugger objects.<ul>
+<li>There are two optional arguments, for config and debugger objects.<ul>
 <li>If those arguments are not provided, the application factory tries to require them from
 files <code class="docutils literal"><span class="pre">config/application.php</span></code> and <code class="docutils literal"><span class="pre">config/debugger.php</span></code> in your include path,
 if that fails too, the factory creates default configuration and null debugger objects.</li>
@@ -95,7 +94,7 @@ if that fails too, the factory creates default configuration and null debugger o
 <li>Finally an application is created via service manager and registered into services too.</li>
 </ul>
 <p><strong>2)</strong> Initializing an application, all the services will be ready.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Application\AbstractConfiguredApplication $app **/</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/** @var \WebinoAppLib\Application\AbstractConfiguredApplication $app **/</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nv">$appCore</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -111,7 +110,7 @@ before application is dispatched.</li>
 </li>
 </ul>
 <p><strong>3)</strong> Handling the client request and sending a response.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">();</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -157,10 +156,10 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
             <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../requirements.html">Introduction</a>
+            <a href="http://demo.webino.org">Examples</a>
         </li>
         <li>
-            <a href="../examples.html">Examples [TODO]</a>
+            <a href="../requirements.html">Requirements [TODO]</a>
         </li>
         <li>
             <a href="../installation.html">Installation [TODO]</a>
@@ -188,10 +187,10 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
             <a href="events.html">Event System</a>
         </li>
         <li>
-            <a href="application-context.html">Application Context</a>
+            <a href="application-context.html">Application Context [TODO]</a>
         </li>
         <li>
-            <a href="application-modules.html">Application Modules</a>
+            <a href="application-modules.html">Application Modules [TODO]</a>
         </li>
         <li>
             <a href="skeleton-application.html">Skeleton Application [TODO]</a>
@@ -246,7 +245,7 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
             <a href="../guide/database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="../guide/mailer.html">Mailer</a>
+            <a href="../guide/mailer.html">Mailer [TODO]</a>
         </li>
         <li>
             <a href="../guide/templates.html">Templates [TODO]</a>
@@ -322,7 +321,7 @@ the <code class="docutils literal"><span class="pre">dispatch()</span></code> on
   </nav>
   <nav id="breadcrumbs">
     <ul>
-      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+      <li><a href="../index.html">Dokumentácia Webino 0.1.0alpha</a></li> 
     </ul>
   </nav>
   </div>

@@ -1,30 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sk">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Application Caching &mdash; Webino 0.1.0alpha dokumentácia</title>
-    
+    <title>Application Caching &#8212; Dokumentácia Webino 0.1.0alpha</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1.0alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
-    <link rel="top" title="Webino 0.1.0alpha dokumentácia" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Hľadať" href="../search.html" />
     <link rel="next" title="Application Filesystem" href="filesystem.html" />
     <link rel="prev" title="Application Logging" href="logging.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,7 +31,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
   </head>
-  <body role="document">
+  <body>
   <div class="related top">
   <nav id="rellinks">
     <ul>
@@ -48,7 +47,7 @@
   </nav>
   <nav id="breadcrumbs">
     <ul>
-      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+      <li><a href="../index.html">Dokumentácia Webino 0.1.0alpha</a></li> 
     </ul>
   </nav>
   </div>  
@@ -60,7 +59,7 @@
             
   <div class="sub-monospace section" id="application-caching">
 <h1>Application Caching<a class="headerlink" href="#application-caching" title="Trvalý odkaz na tento nadpis">¶</a></h1>
-<div class="contents local topic" id="contents">
+<div class="contents local topic" id="obsah">
 <ul class="simple">
 <li><a class="reference internal" href="#caching-methods" id="id3">Caching Methods</a></li>
 <li><a class="reference internal" href="#cache-config" id="id4">Cache Config</a></li>
@@ -78,7 +77,7 @@
 <div class="section" id="app-getcaching">
 <h3><a class="toc-backref" href="#id5">$app-&gt;getCaching()</a><a class="headerlink" href="#app-getcaching" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Accessing cache service.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \Zend\Cache\Storage\StorageInterface $cache */</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/** @var \Zend\Cache\Storage\StorageInterface $cache */</span>
 <span class="nv">$cache</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -86,14 +85,14 @@
 <div class="section" id="app-getcache">
 <h3><a class="toc-backref" href="#id6">$app-&gt;getCache()</a><a class="headerlink" href="#app-getcache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Getting cached value.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$myValue</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">(</span><span class="s1">&#39;myCacheKey&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$myValue</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCache</span><span class="p">(</span><span class="s1">&#39;myCacheKey&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="app-setcache">
 <h3><a class="toc-backref" href="#id7">$app-&gt;setCache()</a><a class="headerlink" href="#app-setcache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p><em>Setting value to cache.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setCache</span><span class="p">(</span><span class="s1">&#39;myCacheKey&#39;</span><span class="p">,</span> <span class="nv">$myValue</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setCache</span><span class="p">(</span><span class="s1">&#39;myCacheKey&#39;</span><span class="p">,</span> <span class="nv">$myValue</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -110,10 +109,9 @@
 <div class="section" id="configcacheenabled">
 <h3><a class="toc-backref" href="#id8">ConfigCacheEnabled</a><a class="headerlink" href="#configcacheenabled" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p>Toggling application config caching.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\ConfigCacheEnabled</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="c1">// enable</span>
     <span class="k">new</span> <span class="nx">ConfigCacheEnabled</span><span class="p">,</span>
     <span class="c1">// disable</span>
@@ -123,16 +121,15 @@
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">Viď aj</p>
-<p class="last"><a class="reference internal" href="#api-caching-caching-methods"><span>Caching Methods</span></a></p>
+<p class="last"><a class="reference internal" href="#api-caching-caching-methods"><span class="std std-ref">Caching Methods</span></a></p>
 </div>
 </div>
 <div class="section" id="filesystemcache">
 <h3><a class="toc-backref" href="#id9">FilesystemCache</a><a class="headerlink" href="#filesystemcache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p>Configuring filesystem cache.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\FilesystemCache</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\FilesystemCache</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
@@ -141,10 +138,9 @@
 <div class="section" id="memorycache">
 <h3><a class="toc-backref" href="#id10">MemoryCache</a><a class="headerlink" href="#memorycache" title="Trvalý odkaz na tento nadpis">¶</a></h3>
 <p>Configuring in memory cache.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryCache</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\MemoryCache</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="k">new</span> <span class="nx">MemoryCache</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
@@ -168,10 +164,10 @@
             <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../requirements.html">Introduction</a>
+            <a href="http://demo.webino.org">Examples</a>
         </li>
         <li>
-            <a href="../examples.html">Examples [TODO]</a>
+            <a href="../requirements.html">Requirements [TODO]</a>
         </li>
         <li>
             <a href="../installation.html">Installation [TODO]</a>
@@ -199,10 +195,10 @@
             <a href="../basics/events.html">Event System</a>
         </li>
         <li>
-            <a href="../basics/application-context.html">Application Context</a>
+            <a href="../basics/application-context.html">Application Context [TODO]</a>
         </li>
         <li>
-            <a href="../basics/application-modules.html">Application Modules</a>
+            <a href="../basics/application-modules.html">Application Modules [TODO]</a>
         </li>
         <li>
             <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
@@ -257,7 +253,7 @@
             <a href="database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="mailer.html">Mailer</a>
+            <a href="mailer.html">Mailer [TODO]</a>
         </li>
         <li>
             <a href="templates.html">Templates [TODO]</a>
@@ -333,7 +329,7 @@
   </nav>
   <nav id="breadcrumbs">
     <ul>
-      <li><a href="../index.html">Webino 0.1.0alpha dokumentácia</a></li> 
+      <li><a href="../index.html">Dokumentácia Webino 0.1.0alpha</a></li> 
     </ul>
   </nav>
   </div>

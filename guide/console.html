@@ -1,36 +1,35 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Application Console &mdash; Webino 0.1.0alpha documentation</title>
-    
+    <title>Application Console &#8212; Webino 0.1.0alpha documentation</title>
     <link rel="stylesheet" href="../_static/better.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1.0alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Webino 0.1.0alpha documentation" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Application Mailer" href="mailer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../_static/common.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext" type="text/css" />
   </head>
-  <body role="document">
+  <body>
   <div class="related top">
   <nav id="rellinks">
     <ul>
@@ -56,12 +55,12 @@
 <span id="guide-console"></span><h1>Application Console<a class="headerlink" href="#application-console" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#console-commands" id="id20">Console Commands</a></li>
-<li><a class="reference internal" href="#console-config" id="id21">Console Config</a></li>
-<li><a class="reference internal" href="#console-interface" id="id22">Console Interface</a></li>
-<li><a class="reference internal" href="#commands-schedule" id="id23">Commands Schedule</a></li>
-<li><a class="reference internal" href="#advanced-styling" id="id24">Advanced Styling</a></li>
-<li><a class="reference internal" href="#console-cookbook" id="id25">Console Cookbook</a></li>
+<li><a class="reference internal" href="#console-commands" id="id13">Console Commands</a></li>
+<li><a class="reference internal" href="#console-config" id="id14">Console Config</a></li>
+<li><a class="reference internal" href="#console-interface" id="id15">Console Interface</a></li>
+<li><a class="reference internal" href="#commands-schedule" id="id16">Commands Schedule</a></li>
+<li><a class="reference internal" href="#advanced-styling" id="id17">Advanced Styling</a></li>
+<li><a class="reference internal" href="#console-cookbook" id="id18">Console Cookbook</a></li>
 </ul>
 </div>
 <p>This section provides an introduction into console service. Console tools are ideal for use in cron jobs,
@@ -70,16 +69,18 @@ or command line based utilities that don’t need to be accessible from a web br
 <li>Powered by <a class="reference external" href="http://climate.thephpleague.com/">CLImate</a></li>
 </ul>
 <div class="section" id="console-commands">
-<h2><a class="toc-backref" href="#id20">Console Commands</a><a class="headerlink" href="#console-commands" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Console Commands</a><a class="headerlink" href="#console-commands" title="Permalink to this headline">¶</a></h2>
 <p>Console command is a class defining a route and an event handler.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Console\AbstractConsoleCommand</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Console\AbstractConsoleCommand</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Route\ConsoleRoute</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">MyConsoleCommand</span> <span class="k">extends</span> <span class="nx">AbstractConsoleCommand</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">(</span><span class="nx">Console</span> <span class="nv">$console</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">(</span><span class="nx">ConsoleRoute</span> <span class="nv">$route</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nv">$console</span>
-            <span class="o">-&gt;</span><span class="na">setRoute</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
+        <span class="nv">$route</span>
+            <span class="o">-&gt;</span><span class="na">setPath</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">&#39;My command title&#39;</span><span class="p">)</span>
             <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;My command description.&#39;</span><span class="p">);</span>
     <span class="p">}</span>
@@ -99,9 +100,7 @@ or command line based utilities that don’t need to be accessible from a web br
 </pre></div>
 </div>
 <p>Adding custom console command into application configuration.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
-
-<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
     <span class="k">new</span> <span class="nx">MyConsoleCommand</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
@@ -114,19 +113,18 @@ or command line based utilities that don’t need to be accessible from a web br
 <div class="section" id="console-bind">
 <h3>Console Bind<a class="headerlink" href="#console-bind" title="Permalink to this headline">¶</a></h3>
 <p>It is also possible to configure console command routes particularly.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Config</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Route\Console</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoConfigLib\Feature\Route\ConsoleRoute</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">Config</span><span class="p">([</span>
-    <span class="p">(</span><span class="k">new</span> <span class="nx">Console</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">))</span>
-        <span class="o">-&gt;</span><span class="na">setRoute</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
+    <span class="p">(</span><span class="k">new</span> <span class="nx">ConsoleRoute</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">setPath</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
         <span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">&#39;My command title&#39;</span><span class="p">)</span>
         <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;My command description.&#39;</span><span class="p">),</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
 <p>You can attach code to any console command execution.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindConsole</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// obtaining console service</span>
@@ -140,7 +138,7 @@ or command line based utilities that don’t need to be accessible from a web br
 </pre></div>
 </div>
 <p>Performing action on a default console command execution.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Console\ConsoleDefault</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Console\ConsoleDefault</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindConsole</span><span class="p">(</span><span class="nx">ConsoleDefault</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
@@ -150,14 +148,14 @@ or command line based utilities that don’t need to be accessible from a web br
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-console-bind-console"><span>$app-&gt;bindConsole()</span></a> ●
+<p class="last"><a class="reference internal" href="#api-console-bind-console"><span class="std std-ref">$app-&gt;bindConsole()</span></a> ●
 <a class="reference external" href="http://demo.webino.org/console-bind">Console Bind Example</a></p>
 </div>
 </div>
 <div class="section" id="command-parameters">
 <h3>Command Parameters<a class="headerlink" href="#command-parameters" title="Permalink to this headline">¶</a></h3>
 <p>Obtaining command parameters.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\ConsoleEvent $event */</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/** @var \WebinoAppLib\Event\ConsoleEvent $event */</span>
 <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;myCommandArgument&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -165,15 +163,15 @@ or command line based utilities that don’t need to be accessible from a web br
 <h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
 <p>Arguments are expected to appear on the command line exactly the way they are spelled in the route.</p>
 <p>Providing required argument alternatives.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="s1">&#39;my-command (requiredArgumentA|requiredArgumentB)&#39;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="s1">&#39;my-command (requiredArgumentA|requiredArgumentB)&#39;</span>
 </pre></div>
 </div>
 <p>Required and optional argument values.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="s1">&#39;my-command &lt;requiredArgumentValue&gt; [&lt;optionalArgumentValue&gt;]&#39;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="s1">&#39;my-command &lt;requiredArgumentValue&gt; [&lt;optionalArgumentValue&gt;]&#39;</span>
 </pre></div>
 </div>
 <p>Providing optional argument alternatives.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="s1">&#39;my-command [optionalArgumentA|optionalArgumentB]&#39;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="s1">&#39;my-command [optionalArgumentA|optionalArgumentB]&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -182,15 +180,15 @@ or command line based utilities that don’t need to be accessible from a web br
 <p>You can define any number of optional and required options. The order of options is ignored. They can be defined
 in any order and the user can provide them in any other order.</p>
 <p>Providing required option alternatives.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="s1">&#39;my-command (--requiredOptionA|--requiredOptionB)&#39;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="s1">&#39;my-command (--requiredOptionA|--requiredOptionB)&#39;</span>
 </pre></div>
 </div>
 <p>Optional option and its short alternative.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="s1">&#39;my-command [--optionalOption|-o]&#39;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="s1">&#39;my-command [--optionalOption|-o]&#39;</span>
 </pre></div>
 </div>
 <p>Options can digest text-based values.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="s1">&#39;my-command --requiredOptionValue= [--optionalOptionValue=]&#39;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="s1">&#39;my-command --requiredOptionValue= [--optionalOptionValue=]&#39;</span>
 </pre></div>
 </div>
 <p><div class="vspace"></div></p>
@@ -203,14 +201,14 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="console-config">
-<h2><a class="toc-backref" href="#id21">Console Config</a><a class="headerlink" href="#console-config" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Console Config</a><a class="headerlink" href="#console-config" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="console">
 <span id="config-console"></span><h3>Console<a class="headerlink" href="#console" title="Permalink to this headline">¶</a></h3>
 <p>Configuring console command routes.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Application\CoreConfig</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">WebinoAppLib\Feature\Route\Console</span><span class="p">;</span>
 
-<span class="k">new</span> <span class="nx">CoreConfig</span><span class="p">([</span>
+<span class="nx">Webino</span><span class="o">::</span><span class="na">config</span><span class="p">([</span>
 
     <span class="p">(</span><span class="k">new</span> <span class="nx">Console</span><span class="p">(</span><span class="s1">&#39;my-basic-command&#39;</span><span class="p">))</span>
         <span class="o">-&gt;</span><span class="na">setRoute</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">)</span>
@@ -234,7 +232,7 @@ in any order and the user can provide them in any other order.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#api-console-bind-console"><span>$app-&gt;bindConsole()</span></a> ●
+<p class="last"><a class="reference internal" href="#api-console-bind-console"><span class="std std-ref">$app-&gt;bindConsole()</span></a> ●
 <a class="reference external" href="http://demo.webino.org/console-bind">Console Bind Example</a> ●
 <a class="reference external" href="http://demo.webino.org/console-command">Console Command Example</a> ●
 <a class="reference external" href="http://demo.webino.org/modules-console-command">Module Console Command Example</a></p>
@@ -242,98 +240,99 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="console-interface">
-<span id="api-console"></span><h2><a class="toc-backref" href="#id22">Console Interface</a><a class="headerlink" href="#console-interface" title="Permalink to this headline">¶</a></h2>
-<div class="contents local topic" id="id6">
+<span id="api-console"></span><h2><a class="toc-backref" href="#id15">Console Interface</a><a class="headerlink" href="#console-interface" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id1">
 <ul class="simple">
-<li><a class="reference internal" href="#app-bindconsole" id="id26">$app-&gt;bindConsole()</a></li>
-<li><a class="reference internal" href="#console-event" id="id27">Console Event</a><ul>
-<li><a class="reference internal" href="#event-getcli" id="id28">$event-&gt;getCli()</a></li>
-<li><a class="reference internal" href="#event-getparam" id="id29">$event-&gt;getParam()</a></li>
+<li><a class="reference internal" href="#app-bindconsole" id="id19">$app-&gt;bindConsole()</a></li>
+<li><a class="reference internal" href="#console-event" id="id20">Console Event</a><ul>
+<li><a class="reference internal" href="#event-getcli" id="id21">$event-&gt;getCli()</a></li>
+<li><a class="reference internal" href="#event-getparam" id="id22">$event-&gt;getParam()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cli-out" id="id30">$cli-&gt;out()</a></li>
-<li><a class="reference internal" href="#cli-inline" id="id31">$cli-&gt;inline()</a></li>
-<li><a class="reference internal" href="#cli-columns" id="id32">$cli-&gt;columns()</a></li>
-<li><a class="reference internal" href="#cli-table" id="id33">$cli-&gt;table()</a></li>
-<li><a class="reference internal" href="#cli-json" id="id34">$cli-&gt;json()</a></li>
-<li><a class="reference internal" href="#cli-br" id="id35">$cli-&gt;br()</a></li>
-<li><a class="reference internal" href="#cli-tab" id="id36">$cli-&gt;tab()</a></li>
-<li><a class="reference internal" href="#cli-draw" id="id37">$cli-&gt;draw()</a></li>
-<li><a class="reference internal" href="#cli-border" id="id38">$cli-&gt;border()</a></li>
-<li><a class="reference internal" href="#cli-dump" id="id39">$cli-&gt;dump()</a></li>
-<li><a class="reference internal" href="#cli-flank" id="id40">$cli-&gt;flank()</a></li>
-<li><a class="reference internal" href="#cli-progress" id="id41">$cli-&gt;progress()</a></li>
-<li><a class="reference internal" href="#cli-padding" id="id42">$cli-&gt;padding()</a></li>
-<li><a class="reference internal" href="#cli-animation" id="id43">$cli-&gt;animation()</a></li>
-<li><a class="reference internal" href="#cli-addart" id="id44">$cli-&gt;addArt()</a></li>
-<li><a class="reference internal" href="#cli-clear" id="id45">$cli-&gt;clear()</a></li>
-<li><a class="reference internal" href="#colors" id="id46">Colors</a><ul>
-<li><a class="reference internal" href="#cli-black" id="id47">$cli-&gt;black()</a></li>
-<li><a class="reference internal" href="#cli-red" id="id48">$cli-&gt;red()</a></li>
-<li><a class="reference internal" href="#cli-green" id="id49">$cli-&gt;green()</a></li>
-<li><a class="reference internal" href="#cli-yellow" id="id50">$cli-&gt;yellow()</a></li>
-<li><a class="reference internal" href="#cli-blue" id="id51">$cli-&gt;blue()</a></li>
-<li><a class="reference internal" href="#cli-magenta" id="id52">$cli-&gt;magenta()</a></li>
-<li><a class="reference internal" href="#cli-cyan" id="id53">$cli-&gt;cyan()</a></li>
-<li><a class="reference internal" href="#cli-lightgray" id="id54">$cli-&gt;lightGray()</a></li>
-<li><a class="reference internal" href="#cli-darkgray" id="id55">$cli-&gt;darkGray()</a></li>
-<li><a class="reference internal" href="#cli-lightred" id="id56">$cli-&gt;lightRed()</a></li>
-<li><a class="reference internal" href="#cli-lightgreen" id="id57">$cli-&gt;lightGreen()</a></li>
-<li><a class="reference internal" href="#cli-lightyellow" id="id58">$cli-&gt;lightYellow()</a></li>
-<li><a class="reference internal" href="#cli-lightblue" id="id59">$cli-&gt;lightBlue()</a></li>
-<li><a class="reference internal" href="#cli-lightmagenta" id="id60">$cli-&gt;lightMagenta()</a></li>
-<li><a class="reference internal" href="#cli-lightcyan" id="id61">$cli-&gt;lightCyan()</a></li>
-<li><a class="reference internal" href="#cli-white" id="id62">$cli-&gt;white()</a></li>
+<li><a class="reference internal" href="#cli-out" id="id23">$cli-&gt;out()</a></li>
+<li><a class="reference internal" href="#cli-inline" id="id24">$cli-&gt;inline()</a></li>
+<li><a class="reference internal" href="#cli-columns" id="id25">$cli-&gt;columns()</a></li>
+<li><a class="reference internal" href="#cli-table" id="id26">$cli-&gt;table()</a></li>
+<li><a class="reference internal" href="#cli-json" id="id27">$cli-&gt;json()</a></li>
+<li><a class="reference internal" href="#cli-sp" id="id28">$cli-&gt;sp()</a></li>
+<li><a class="reference internal" href="#cli-br" id="id29">$cli-&gt;br()</a></li>
+<li><a class="reference internal" href="#cli-tab" id="id30">$cli-&gt;tab()</a></li>
+<li><a class="reference internal" href="#cli-draw" id="id31">$cli-&gt;draw()</a></li>
+<li><a class="reference internal" href="#cli-border" id="id32">$cli-&gt;border()</a></li>
+<li><a class="reference internal" href="#cli-dump" id="id33">$cli-&gt;dump()</a></li>
+<li><a class="reference internal" href="#cli-flank" id="id34">$cli-&gt;flank()</a></li>
+<li><a class="reference internal" href="#cli-progress" id="id35">$cli-&gt;progress()</a></li>
+<li><a class="reference internal" href="#cli-padding" id="id36">$cli-&gt;padding()</a></li>
+<li><a class="reference internal" href="#cli-animation" id="id37">$cli-&gt;animation()</a></li>
+<li><a class="reference internal" href="#cli-addart" id="id38">$cli-&gt;addArt()</a></li>
+<li><a class="reference internal" href="#cli-clear" id="id39">$cli-&gt;clear()</a></li>
+<li><a class="reference internal" href="#colors" id="id40">Colors</a><ul>
+<li><a class="reference internal" href="#cli-black" id="id41">$cli-&gt;black()</a></li>
+<li><a class="reference internal" href="#cli-red" id="id42">$cli-&gt;red()</a></li>
+<li><a class="reference internal" href="#cli-green" id="id43">$cli-&gt;green()</a></li>
+<li><a class="reference internal" href="#cli-yellow" id="id44">$cli-&gt;yellow()</a></li>
+<li><a class="reference internal" href="#cli-blue" id="id45">$cli-&gt;blue()</a></li>
+<li><a class="reference internal" href="#cli-magenta" id="id46">$cli-&gt;magenta()</a></li>
+<li><a class="reference internal" href="#cli-cyan" id="id47">$cli-&gt;cyan()</a></li>
+<li><a class="reference internal" href="#cli-lightgray" id="id48">$cli-&gt;lightGray()</a></li>
+<li><a class="reference internal" href="#cli-darkgray" id="id49">$cli-&gt;darkGray()</a></li>
+<li><a class="reference internal" href="#cli-lightred" id="id50">$cli-&gt;lightRed()</a></li>
+<li><a class="reference internal" href="#cli-lightgreen" id="id51">$cli-&gt;lightGreen()</a></li>
+<li><a class="reference internal" href="#cli-lightyellow" id="id52">$cli-&gt;lightYellow()</a></li>
+<li><a class="reference internal" href="#cli-lightblue" id="id53">$cli-&gt;lightBlue()</a></li>
+<li><a class="reference internal" href="#cli-lightmagenta" id="id54">$cli-&gt;lightMagenta()</a></li>
+<li><a class="reference internal" href="#cli-lightcyan" id="id55">$cli-&gt;lightCyan()</a></li>
+<li><a class="reference internal" href="#cli-white" id="id56">$cli-&gt;white()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#background-colors" id="id63">Background Colors</a><ul>
-<li><a class="reference internal" href="#cli-backgroundblack" id="id64">$cli-&gt;backgroundBlack()</a></li>
-<li><a class="reference internal" href="#cli-backgroundred" id="id65">$cli-&gt;backgroundRed()</a></li>
-<li><a class="reference internal" href="#cli-backgroundgreen" id="id66">$cli-&gt;backgroundGreen()</a></li>
-<li><a class="reference internal" href="#cli-backgroundyellow" id="id67">$cli-&gt;backgroundYellow()</a></li>
-<li><a class="reference internal" href="#cli-backgroundblue" id="id68">$cli-&gt;backgroundBlue()</a></li>
-<li><a class="reference internal" href="#cli-backgroundmagenta" id="id69">$cli-&gt;backgroundMagenta()</a></li>
-<li><a class="reference internal" href="#cli-backgroundcyan" id="id70">$cli-&gt;backgroundCyan()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightgray" id="id71">$cli-&gt;backgroundLightGray()</a></li>
-<li><a class="reference internal" href="#cli-backgrounddarkgray" id="id72">$cli-&gt;backgroundDarkGray()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightred" id="id73">$cli-&gt;backgroundLightRed()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightgreen" id="id74">$cli-&gt;backgroundLightGreen()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightyellow" id="id75">$cli-&gt;backgroundLightYellow()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightblue" id="id76">$cli-&gt;backgroundLightBlue()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightmagenta" id="id77">$cli-&gt;backgroundLightMagenta()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightcyan" id="id78">$cli-&gt;backgroundLightCyan()</a></li>
-<li><a class="reference internal" href="#cli-backgroundwhite" id="id79">$cli-&gt;backgroundWhite()</a></li>
+<li><a class="reference internal" href="#background-colors" id="id57">Background Colors</a><ul>
+<li><a class="reference internal" href="#cli-blackbg" id="id58">$cli-&gt;blackBg()</a></li>
+<li><a class="reference internal" href="#cli-redbg" id="id59">$cli-&gt;redBg()</a></li>
+<li><a class="reference internal" href="#cli-greenbg" id="id60">$cli-&gt;greenBg()</a></li>
+<li><a class="reference internal" href="#cli-yellowbg" id="id61">$cli-&gt;yellowBg()</a></li>
+<li><a class="reference internal" href="#cli-bluebg" id="id62">$cli-&gt;blueBg()</a></li>
+<li><a class="reference internal" href="#cli-magentabg" id="id63">$cli-&gt;magentaBg()</a></li>
+<li><a class="reference internal" href="#cli-cyanbg" id="id64">$cli-&gt;cyanBg()</a></li>
+<li><a class="reference internal" href="#cli-graybg" id="id65">$cli-&gt;grayBg()</a></li>
+<li><a class="reference internal" href="#cli-darkgraybg" id="id66">$cli-&gt;darkGrayBg()</a></li>
+<li><a class="reference internal" href="#cli-lightredbg" id="id67">$cli-&gt;lightRedBg()</a></li>
+<li><a class="reference internal" href="#cli-lightgreenbg" id="id68">$cli-&gt;lightGreenBg()</a></li>
+<li><a class="reference internal" href="#cli-lightyellowbg" id="id69">$cli-&gt;lightYellowBg()</a></li>
+<li><a class="reference internal" href="#id5" id="id70">$cli-&gt;blueBg()</a></li>
+<li><a class="reference internal" href="#id6" id="id71">$cli-&gt;magentaBg()</a></li>
+<li><a class="reference internal" href="#id7" id="id72">$cli-&gt;cyanBg()</a></li>
+<li><a class="reference internal" href="#cli-whitebg" id="id73">$cli-&gt;whiteBg()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#text-style" id="id80">Text Style</a><ul>
-<li><a class="reference internal" href="#cli-bold" id="id81">$cli-&gt;bold()</a></li>
-<li><a class="reference internal" href="#cli-dim" id="id82">$cli-&gt;dim()</a></li>
-<li><a class="reference internal" href="#cli-underline" id="id83">$cli-&gt;underline()</a></li>
-<li><a class="reference internal" href="#cli-invert" id="id84">$cli-&gt;invert()</a></li>
+<li><a class="reference internal" href="#text-style" id="id74">Text Style</a><ul>
+<li><a class="reference internal" href="#cli-bold" id="id75">$cli-&gt;bold()</a></li>
+<li><a class="reference internal" href="#cli-dim" id="id76">$cli-&gt;dim()</a></li>
+<li><a class="reference internal" href="#cli-underline" id="id77">$cli-&gt;underline()</a></li>
+<li><a class="reference internal" href="#cli-invert" id="id78">$cli-&gt;invert()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#style-commands" id="id85">Style Commands</a><ul>
-<li><a class="reference internal" href="#cli-info" id="id86">$cli-&gt;info()</a></li>
-<li><a class="reference internal" href="#cli-comment" id="id87">$cli-&gt;comment()</a></li>
-<li><a class="reference internal" href="#cli-whisper" id="id88">$cli-&gt;whisper()</a></li>
-<li><a class="reference internal" href="#cli-shout" id="id89">$cli-&gt;shout()</a></li>
-<li><a class="reference internal" href="#cli-error" id="id90">$cli-&gt;error()</a></li>
+<li><a class="reference internal" href="#style-commands" id="id79">Style Commands</a><ul>
+<li><a class="reference internal" href="#cli-info" id="id80">$cli-&gt;info()</a></li>
+<li><a class="reference internal" href="#cli-comment" id="id81">$cli-&gt;comment()</a></li>
+<li><a class="reference internal" href="#cli-whisper" id="id82">$cli-&gt;whisper()</a></li>
+<li><a class="reference internal" href="#cli-shout" id="id83">$cli-&gt;shout()</a></li>
+<li><a class="reference internal" href="#cli-error" id="id84">$cli-&gt;error()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#user-input" id="id91">User Input</a><ul>
-<li><a class="reference internal" href="#cli-input" id="id92">$cli-&gt;input()</a></li>
-<li><a class="reference internal" href="#cli-confirm" id="id93">$cli-&gt;confirm()</a></li>
-<li><a class="reference internal" href="#cli-password" id="id94">$cli-&gt;password()</a></li>
-<li><a class="reference internal" href="#cli-checkboxes" id="id95">$cli-&gt;checkboxes()</a></li>
-<li><a class="reference internal" href="#cli-radio" id="id96">$cli-&gt;radio()</a></li>
+<li><a class="reference internal" href="#user-input" id="id85">User Input</a><ul>
+<li><a class="reference internal" href="#cli-input" id="id86">$cli-&gt;input()</a></li>
+<li><a class="reference internal" href="#cli-confirm" id="id87">$cli-&gt;confirm()</a></li>
+<li><a class="reference internal" href="#cli-password" id="id88">$cli-&gt;password()</a></li>
+<li><a class="reference internal" href="#cli-checkboxes" id="id89">$cli-&gt;checkboxes()</a></li>
+<li><a class="reference internal" href="#cli-radio" id="id90">$cli-&gt;radio()</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="app-bindconsole">
-<span id="api-console-bind-console"></span><h3><a class="toc-backref" href="#id26">$app-&gt;bindConsole()</a><a class="headerlink" href="#app-bindconsole" title="Permalink to this headline">¶</a></h3>
+<span id="api-console-bind-console"></span><h3><a class="toc-backref" href="#id19">$app-&gt;bindConsole()</a><a class="headerlink" href="#app-bindconsole" title="Permalink to this headline">¶</a></h3>
 <p>Binding to console commands.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">bindConsole</span><span class="p">(</span><span class="s1">&#39;my-command&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// obtaining console service</span>
@@ -348,22 +347,22 @@ in any order and the user can provide them in any other order.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#config-console"><span>Config Console</span></a> ●
+<p class="last"><a class="reference internal" href="#config-console"><span class="std std-ref">Config Console</span></a> ●
 <a class="reference external" href="http://demo.webino.org/console-bind">Console Bind Example</a></p>
 </div>
 </div>
 <div class="section" id="console-event">
-<h3><a class="toc-backref" href="#id27">Console Event</a><a class="headerlink" href="#console-event" title="Permalink to this headline">¶</a></h3>
-<div class="contents local topic" id="id8">
+<h3><a class="toc-backref" href="#id20">Console Event</a><a class="headerlink" href="#console-event" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id2">
 <ul class="simple">
-<li><a class="reference internal" href="#event-getcli" id="id97">$event-&gt;getCli()</a></li>
-<li><a class="reference internal" href="#event-getparam" id="id98">$event-&gt;getParam()</a></li>
+<li><a class="reference internal" href="#event-getcli" id="id91">$event-&gt;getCli()</a></li>
+<li><a class="reference internal" href="#event-getparam" id="id92">$event-&gt;getParam()</a></li>
 </ul>
 </div>
 <div class="section" id="event-getcli">
-<h4><a class="toc-backref" href="#id97">$event-&gt;getCli()</a><a class="headerlink" href="#event-getcli" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id91">$event-&gt;getCli()</a><a class="headerlink" href="#event-getcli" title="Permalink to this headline">¶</a></h4>
 <p>Obtaining the console service from the console event object.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">WebinoAppLib\Event\ConsoleEvent</span><span class="p">;</span>
 
 <span class="nv">$consoleEventHandler</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ConsoleEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$cli</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getCli</span><span class="p">();</span>
@@ -376,7 +375,7 @@ in any order and the user can provide them in any other order.</p>
 <a class="reference external" href="http://demo.webino.org/console">Console Command Example</a></p>
 </div>
 <p>Fluent interface:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// Method chaining</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// Method chaining</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">(</span><span class="s1">&#39;Red text!&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">(</span><span class="s1">&#39;Green text!&#39;</span><span class="p">);</span>
 
 <span class="c1">// If you prefer, you can also simply chain</span>
@@ -386,32 +385,36 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="event-getparam">
-<h4><a class="toc-backref" href="#id98">$event-&gt;getParam()</a><a class="headerlink" href="#event-getparam" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id92">$event-&gt;getParam()</a><a class="headerlink" href="#event-getparam" title="Permalink to this headline">¶</a></h4>
 <p><em>Accessing command arguments/options.</em></p>
-<div class="highlight-php"><div class="highlight"><pre><span class="sd">/** @var \WebinoAppLib\Event\ConsoleEvent $event */</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/** @var \WebinoAppLib\Event\ConsoleEvent $event */</span>
 <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;myCommandArgument&#39;</span><span class="p">);</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-command">Console Command Example</a></p>
 </div>
 </div>
 </div>
 <div class="section" id="cli-out">
-<h3><a class="toc-backref" href="#id30">$cli-&gt;out()</a><a class="headerlink" href="#cli-out" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id23">$cli-&gt;out()</a><a class="headerlink" href="#cli-out" title="Permalink to this headline">¶</a></h3>
 <p>Printing text to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Console text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Console text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-inline">
-<h3><a class="toc-backref" href="#id31">$cli-&gt;inline()</a><a class="headerlink" href="#cli-inline" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id24">$cli-&gt;inline()</a><a class="headerlink" href="#cli-inline" title="Permalink to this headline">¶</a></h3>
 <p>Printing text inline to the terminal, without ending line break.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">(</span><span class="s1">&#39;Inline console text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">(</span><span class="s1">&#39;Inline console text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-columns">
-<h3><a class="toc-backref" href="#id32">$cli-&gt;columns()</a><a class="headerlink" href="#cli-columns" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id25">$cli-&gt;columns()</a><a class="headerlink" href="#cli-columns" title="Permalink to this headline">¶</a></h3>
 <p>List out an array of data so that it is easily readable.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;12 Monkeys&#39;</span><span class="p">,</span>
     <span class="s1">&#39;12 Years a Slave&#39;</span><span class="p">,</span>
     <span class="s1">&#39;A River Runs Through It&#39;</span><span class="p">,</span>
@@ -445,7 +448,7 @@ in any order and the user can provide them in any other order.</p>
 </pre></div>
 </div>
 <p>Specify the number of columns by passing in a second parameter.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -453,7 +456,7 @@ in any order and the user can provide them in any other order.</p>
 <p class="last">Console service will try to figure out how the content best fits in your terminal by default.</p>
 </div>
 <p>Specify the columns via an array of arrays.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span><span class="s1">&#39;Gary&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="s1">&#39;Terry&#39;</span><span class="p">],</span>
     <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
     <span class="p">[</span><span class="mf">6.6</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">],</span>
@@ -469,9 +472,9 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="cli-table">
-<h3><a class="toc-backref" href="#id33">$cli-&gt;table()</a><a class="headerlink" href="#cli-table" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id26">$cli-&gt;table()</a><a class="headerlink" href="#cli-table" title="Permalink to this headline">¶</a></h3>
 <p>Make table out of an array of data so that it is easily readable.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span>
       <span class="s1">&#39;Walter White&#39;</span><span class="p">,</span>
       <span class="s1">&#39;Father&#39;</span><span class="p">,</span>
@@ -493,7 +496,7 @@ in any order and the user can provide them in any other order.</p>
 </pre></div>
 </div>
 <p>If you pass in an array of associative arrays or objects, the keys will automatically become the header of the table.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span>
         <span class="s1">&#39;name&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Walter White&#39;</span><span class="p">,</span>
         <span class="s1">&#39;role&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;Father&#39;</span><span class="p">,</span>
@@ -521,20 +524,37 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="cli-json">
-<h3><a class="toc-backref" href="#id34">$cli-&gt;json()</a><a class="headerlink" href="#cli-json" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id27">$cli-&gt;json()</a><a class="headerlink" href="#cli-json" title="Permalink to this headline">¶</a></h3>
 <p>Printing pretty-printed JSON to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Gary&#39;</span><span class="p">,</span>
     <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="mi">52</span><span class="p">,</span>
     <span class="s1">&#39;job&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Engineer&#39;</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-json">Console JSON Example</a></p>
+</div>
+</div>
+<div class="section" id="cli-sp">
+<h3><a class="toc-backref" href="#id28">$cli-&gt;sp()</a><a class="headerlink" href="#cli-sp" title="Permalink to this headline">¶</a></h3>
+<p>Printing spaces to the terminal.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">sp</span><span class="p">();</span>
+
+<span class="c1">// many at once</span>
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">sp</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// method chaining</span>
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">sp</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;I have moved right a space.&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="cli-br">
-<h3><a class="toc-backref" href="#id35">$cli-&gt;br()</a><a class="headerlink" href="#cli-br" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id29">$cli-&gt;br()</a><a class="headerlink" href="#cli-br" title="Permalink to this headline">¶</a></h3>
 <p>Printing line breaks to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">br</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">br</span><span class="p">();</span>
 
 <span class="c1">// many at once</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">br</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
@@ -545,9 +565,9 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="cli-tab">
-<h3><a class="toc-backref" href="#id36">$cli-&gt;tab()</a><a class="headerlink" href="#cli-tab" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id30">$cli-&gt;tab()</a><a class="headerlink" href="#cli-tab" title="Permalink to this headline">¶</a></h3>
 <p>Printing tabulators to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">tab</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">tab</span><span class="p">();</span>
 
 <span class="c1">// many at once</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">tab</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
@@ -558,16 +578,26 @@ in any order and the user can provide them in any other order.</p>
 </div>
 </div>
 <div class="section" id="cli-draw">
-<h3><a class="toc-backref" href="#id37">$cli-&gt;draw()</a><a class="headerlink" href="#cli-draw" title="Permalink to this headline">¶</a></h3>
+<span id="api-console-draw"></span><h3><a class="toc-backref" href="#id31">$cli-&gt;draw()</a><a class="headerlink" href="#cli-draw" title="Permalink to this headline">¶</a></h3>
 <p>Drawing some ASCII art.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">draw</span><span class="p">(</span><span class="s1">&#39;bender&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">draw</span><span class="p">(</span><span class="s1">&#39;bender&#39;</span><span class="p">);</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can add custom ASCII art using the <code class="docutils literal"><span class="pre">addArt</span></code> method.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-console-add-art"><span class="std std-ref">$cli-&gt;addArt()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/console-draw">Console Draw Example</a> ●
+<a class="reference external" href="http://demo.webino.org/console-draw">Console Add Art Example</a></p>
 </div>
 </div>
 <div class="section" id="cli-border">
-<h3><a class="toc-backref" href="#id38">$cli-&gt;border()</a><a class="headerlink" href="#cli-border" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id32">$cli-&gt;border()</a><a class="headerlink" href="#cli-border" title="Permalink to this headline">¶</a></h3>
 <p>Inserting borders to break up output. Outputs a dashed border by default.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">border</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">border</span><span class="p">();</span>
 
 <span class="c1">// character(s) to be repeated</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">border</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">);</span>
@@ -576,22 +606,30 @@ in any order and the user can provide them in any other order.</p>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">border</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-border">Console Border Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-dump">
-<h3><a class="toc-backref" href="#id39">$cli-&gt;dump()</a><a class="headerlink" href="#cli-dump" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id33">$cli-&gt;dump()</a><a class="headerlink" href="#cli-dump" title="Permalink to this headline">¶</a></h3>
 <p>Dumping variables out to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">([</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">([</span>
     <span class="s1">&#39;This&#39;</span><span class="p">,</span>
     <span class="s1">&#39;That&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Other Thing&#39;</span><span class="p">,</span>
 <span class="p">]);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-dump">Console Dump Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-flank">
-<h3><a class="toc-backref" href="#id40">$cli-&gt;flank()</a><a class="headerlink" href="#cli-flank" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id34">$cli-&gt;flank()</a><a class="headerlink" href="#cli-flank" title="Permalink to this headline">¶</a></h3>
 <p>Bringing a little more attention to text.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">flank</span><span class="p">(</span><span class="s1">&#39;Look at me. Now.&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">flank</span><span class="p">(</span><span class="s1">&#39;Look at me. Now.&#39;</span><span class="p">);</span>
 
 <span class="c1">// specifying the flanking characters</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">flank</span><span class="p">(</span><span class="s1">&#39;Look at me. Now.&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">);</span>
@@ -600,11 +638,15 @@ in any order and the user can provide them in any other order.</p>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">flank</span><span class="p">(</span><span class="s1">&#39;Look at me. Now.&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-flank">Console Flank Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-progress">
-<h3><a class="toc-backref" href="#id41">$cli-&gt;progress()</a><a class="headerlink" href="#cli-progress" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id35">$cli-&gt;progress()</a><a class="headerlink" href="#cli-progress" title="Permalink to this headline">¶</a></h3>
 <p>Adding progress bars to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$progress</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">progress</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$progress</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">progress</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">total</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 <span class="c1">// or shorthand it and pass the total</span>
 <span class="c1">// right into the progress method</span>
 <span class="nv">$progress</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">progress</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
@@ -618,7 +660,7 @@ in any order and the user can provide them in any other order.</p>
 </pre></div>
 </div>
 <p>You can also manually advance the bar.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$progress</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">progress</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$progress</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">progress</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 
 <span class="c1">// do something..</span>
 
@@ -634,7 +676,7 @@ in any order and the user can provide them in any other order.</p>
 </pre></div>
 </div>
 <p>Pass a label into the <code class="docutils literal"><span class="pre">current</span></code> method if you’d like a more descriptive indicator of where you are in the process.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$items</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$items</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;php&#39;</span><span class="p">,</span>
     <span class="s1">&#39;javascript&#39;</span><span class="p">,</span>
     <span class="s1">&#39;python&#39;</span><span class="p">,</span>
@@ -652,11 +694,15 @@ in any order and the user can provide them in any other order.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-progress">Console Progress Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-padding">
-<h3><a class="toc-backref" href="#id42">$cli-&gt;padding()</a><a class="headerlink" href="#cli-padding" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id36">$cli-&gt;padding()</a><a class="headerlink" href="#cli-padding" title="Permalink to this headline">¶</a></h3>
 <p>Padding out a string to a specified length, allowing for neatly organized data.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$padding</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">padding</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$padding</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">padding</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
 <span class="c1">// or specify the padding character(s)</span>
 <span class="nv">$padding</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">padding</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">);</span>
 
@@ -665,12 +711,16 @@ in any order and the user can provide them in any other order.</p>
 <span class="nv">$padding</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;Bacon&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">(</span><span class="s1">&#39;2.99€&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://demo.webino.org/console-padding">Console Padding Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-animation">
-<h3><a class="toc-backref" href="#id43">$cli-&gt;animation()</a><a class="headerlink" href="#cli-animation" title="Permalink to this headline">¶</a></h3>
+<span id="api-console-animation"></span><h3><a class="toc-backref" href="#id37">$cli-&gt;animation()</a><a class="headerlink" href="#cli-animation" title="Permalink to this headline">¶</a></h3>
 <p>Taking ASCII art and running basic animations on it in the terminal. Valid directions are <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">top</span></code>, <code class="docutils literal"><span class="pre">right</span></code>
 and <code class="docutils literal"><span class="pre">bottom</span></code>.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// movement</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// movement</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">animation</span><span class="p">(</span><span class="s1">&#39;bender&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">enterFrom</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">animation</span><span class="p">(</span><span class="s1">&#39;bender&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">exitTo</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
 
@@ -680,7 +730,7 @@ and <code class="docutils literal"><span class="pre">bottom</span></code>.</p>
 </div>
 <p>Altering the speed of the animation. The parameter should be an integer representing the percentage of the default
 speed.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// animate twice as fast</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// animate twice as fast</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">animation</span><span class="p">(</span><span class="s1">&#39;bender&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">speed</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">scroll</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -688,8 +738,17 @@ speed.</p>
 <p class="first admonition-title">Note</p>
 <p class="last"><code class="docutils literal"><span class="pre">50</span></code> would make it slower by half, whereas <code class="docutils literal"><span class="pre">200</span></code> would make it run at twice the speed.</p>
 </div>
-<p>You can create a directory of text files that represent each keyframe in an animation and just run it manually.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">addArt</span><span class="p">(</span><span class="s1">&#39;my/folder/custom-animation&#39;</span><span class="p">);</span>
+<p>You can create a directory of text files that represent each keyframe in an animation</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>my/
+  folder/
+    animation/
+      custom-animation-01.txt
+      custom-animation-02.txt
+      custom-animation-03.txt
+</pre></div>
+</div>
+<p>and just run it manually.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">addArt</span><span class="p">(</span><span class="s1">&#39;my/folder/custom-animation&#39;</span><span class="p">);</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">animation</span><span class="p">(</span><span class="s1">&#39;custom-animation&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -697,11 +756,18 @@ speed.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">You can add custom ASCII art using the <code class="docutils literal"><span class="pre">addArt</span></code> method.</p>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-console-draw"><span class="std std-ref">$cli-&gt;draw()</span></a> ●
+<a class="reference internal" href="#api-console-add-art"><span class="std std-ref">$cli-&gt;animation()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/console-animation">Console Animation Example</a> ●
+<a class="reference external" href="http://demo.webino.org/console-animation-custom">Custom Console Animation Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-addart">
-<h3><a class="toc-backref" href="#id44">$cli-&gt;addArt()</a><a class="headerlink" href="#cli-addart" title="Permalink to this headline">¶</a></h3>
+<span id="api-console-add-art"></span><h3><a class="toc-backref" href="#id38">$cli-&gt;addArt()</a><a class="headerlink" href="#cli-addart" title="Permalink to this headline">¶</a></h3>
 <p>Adding your own art by setting the directory in which it is located.</p>
-<div class="highlight-bash"><div class="highlight"><pre>my/
+<div class="highlight-bash"><div class="highlight"><pre><span></span>my/
   folder/
     art/
       dog.txt
@@ -710,17 +776,17 @@ speed.</p>
 </pre></div>
 </div>
 <p>Let the console service know where it is via the full path.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">addArt</span><span class="p">(</span><span class="s1">&#39;my/folder/art&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">addArt</span><span class="p">(</span><span class="s1">&#39;my/folder/art&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Now you can use anything in that directory.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">draw</span><span class="p">(</span><span class="s1">&#39;dog&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">draw</span><span class="p">(</span><span class="s1">&#39;dog&#39;</span><span class="p">);</span>
 <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">draw</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">boldDraw</span><span class="p">(</span><span class="s1">&#39;mug&#39;</span><span class="p">);</span>
+<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bold</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">draw</span><span class="p">(</span><span class="s1">&#39;mug&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>You can style your art using tags:</p>
-<div class="highlight-txt"><div class="highlight"><pre>&lt;blue&gt;     ( )&lt;/blue&gt;
+<div class="highlight-none"><div class="highlight"><pre><span></span>&lt;blue&gt;     ( )&lt;/blue&gt;
 &lt;blue&gt;      H&lt;/blue&gt;
 &lt;blue&gt;      H&lt;/blue&gt;
 &lt;blue&gt;     _H_&lt;/blue&gt;
@@ -739,34 +805,41 @@ speed.</p>
 &lt;blue&gt;     &quot;&quot;&quot;&lt;/blue&gt;
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#api-console-draw"><span class="std std-ref">$cli-&gt;draw()</span></a> ●
+<a class="reference internal" href="#api-console-animation"><span class="std std-ref">$cli-&gt;animation()</span></a> ●
+<a class="reference external" href="http://demo.webino.org/console-add-art">Console Add Art Example</a> ●
+<a class="reference external" href="http://demo.webino.org/console-draw">Console Draw Example</a></p>
+</div>
 </div>
 <div class="section" id="cli-clear">
-<h3><a class="toc-backref" href="#id45">$cli-&gt;clear()</a><a class="headerlink" href="#cli-clear" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id39">$cli-&gt;clear()</a><a class="headerlink" href="#cli-clear" title="Permalink to this headline">¶</a></h3>
 <p>Clearing the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="colors">
-<h3><a class="toc-backref" href="#id46">Colors</a><a class="headerlink" href="#colors" title="Permalink to this headline">¶</a></h3>
-<div class="contents local topic" id="id10">
+<h3><a class="toc-backref" href="#id40">Colors</a><a class="headerlink" href="#colors" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id3">
 <ul class="simple">
-<li><a class="reference internal" href="#cli-black" id="id99">$cli-&gt;black()</a></li>
-<li><a class="reference internal" href="#cli-red" id="id100">$cli-&gt;red()</a></li>
-<li><a class="reference internal" href="#cli-green" id="id101">$cli-&gt;green()</a></li>
-<li><a class="reference internal" href="#cli-yellow" id="id102">$cli-&gt;yellow()</a></li>
-<li><a class="reference internal" href="#cli-blue" id="id103">$cli-&gt;blue()</a></li>
-<li><a class="reference internal" href="#cli-magenta" id="id104">$cli-&gt;magenta()</a></li>
-<li><a class="reference internal" href="#cli-cyan" id="id105">$cli-&gt;cyan()</a></li>
-<li><a class="reference internal" href="#cli-lightgray" id="id106">$cli-&gt;lightGray()</a></li>
-<li><a class="reference internal" href="#cli-darkgray" id="id107">$cli-&gt;darkGray()</a></li>
-<li><a class="reference internal" href="#cli-lightred" id="id108">$cli-&gt;lightRed()</a></li>
-<li><a class="reference internal" href="#cli-lightgreen" id="id109">$cli-&gt;lightGreen()</a></li>
-<li><a class="reference internal" href="#cli-lightyellow" id="id110">$cli-&gt;lightYellow()</a></li>
-<li><a class="reference internal" href="#cli-lightblue" id="id111">$cli-&gt;lightBlue()</a></li>
-<li><a class="reference internal" href="#cli-lightmagenta" id="id112">$cli-&gt;lightMagenta()</a></li>
-<li><a class="reference internal" href="#cli-lightcyan" id="id113">$cli-&gt;lightCyan()</a></li>
-<li><a class="reference internal" href="#cli-white" id="id114">$cli-&gt;white()</a></li>
+<li><a class="reference internal" href="#cli-black" id="id93">$cli-&gt;black()</a></li>
+<li><a class="reference internal" href="#cli-red" id="id94">$cli-&gt;red()</a></li>
+<li><a class="reference internal" href="#cli-green" id="id95">$cli-&gt;green()</a></li>
+<li><a class="reference internal" href="#cli-yellow" id="id96">$cli-&gt;yellow()</a></li>
+<li><a class="reference internal" href="#cli-blue" id="id97">$cli-&gt;blue()</a></li>
+<li><a class="reference internal" href="#cli-magenta" id="id98">$cli-&gt;magenta()</a></li>
+<li><a class="reference internal" href="#cli-cyan" id="id99">$cli-&gt;cyan()</a></li>
+<li><a class="reference internal" href="#cli-lightgray" id="id100">$cli-&gt;lightGray()</a></li>
+<li><a class="reference internal" href="#cli-darkgray" id="id101">$cli-&gt;darkGray()</a></li>
+<li><a class="reference internal" href="#cli-lightred" id="id102">$cli-&gt;lightRed()</a></li>
+<li><a class="reference internal" href="#cli-lightgreen" id="id103">$cli-&gt;lightGreen()</a></li>
+<li><a class="reference internal" href="#cli-lightyellow" id="id104">$cli-&gt;lightYellow()</a></li>
+<li><a class="reference internal" href="#cli-lightblue" id="id105">$cli-&gt;lightBlue()</a></li>
+<li><a class="reference internal" href="#cli-lightmagenta" id="id106">$cli-&gt;lightMagenta()</a></li>
+<li><a class="reference internal" href="#cli-lightcyan" id="id107">$cli-&gt;lightCyan()</a></li>
+<li><a class="reference internal" href="#cli-white" id="id108">$cli-&gt;white()</a></li>
 </ul>
 </div>
 <div class="admonition seealso">
@@ -775,138 +848,138 @@ speed.</p>
 </div>
 <p><div class="vspace"></div></p>
 <div class="section" id="cli-black">
-<h4><a class="toc-backref" href="#id99">$cli-&gt;black()</a><a class="headerlink" href="#cli-black" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id93">$cli-&gt;black()</a><a class="headerlink" href="#cli-black" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in black color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">black</span><span class="p">(</span><span class="s1">&#39;Black text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">black</span><span class="p">(</span><span class="s1">&#39;Black text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-red">
-<h4><a class="toc-backref" href="#id100">$cli-&gt;red()</a><a class="headerlink" href="#cli-red" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id94">$cli-&gt;red()</a><a class="headerlink" href="#cli-red" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in red color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">(</span><span class="s1">&#39;Red text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">red</span><span class="p">(</span><span class="s1">&#39;Red text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-green">
-<h4><a class="toc-backref" href="#id101">$cli-&gt;green()</a><a class="headerlink" href="#cli-green" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id95">$cli-&gt;green()</a><a class="headerlink" href="#cli-green" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in green color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">(</span><span class="s1">&#39;Green text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">(</span><span class="s1">&#39;Green text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-yellow">
-<h4><a class="toc-backref" href="#id102">$cli-&gt;yellow()</a><a class="headerlink" href="#cli-yellow" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id96">$cli-&gt;yellow()</a><a class="headerlink" href="#cli-yellow" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in yellow color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">yellow</span><span class="p">(</span><span class="s1">&#39;Yellow text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">yellow</span><span class="p">(</span><span class="s1">&#39;Yellow text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-blue">
-<h4><a class="toc-backref" href="#id103">$cli-&gt;blue()</a><a class="headerlink" href="#cli-blue" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id97">$cli-&gt;blue()</a><a class="headerlink" href="#cli-blue" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in blue color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Blue text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Blue text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-magenta">
-<h4><a class="toc-backref" href="#id104">$cli-&gt;magenta()</a><a class="headerlink" href="#cli-magenta" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id98">$cli-&gt;magenta()</a><a class="headerlink" href="#cli-magenta" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in magenta color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">magenta</span><span class="p">(</span><span class="s1">&#39;Magenta text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">magenta</span><span class="p">(</span><span class="s1">&#39;Magenta text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-cyan">
-<h4><a class="toc-backref" href="#id105">$cli-&gt;cyan()</a><a class="headerlink" href="#cli-cyan" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id99">$cli-&gt;cyan()</a><a class="headerlink" href="#cli-cyan" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in cyan color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">cyan</span><span class="p">(</span><span class="s1">&#39;Cyan text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">cyan</span><span class="p">(</span><span class="s1">&#39;Cyan text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightgray">
-<h4><a class="toc-backref" href="#id106">$cli-&gt;lightGray()</a><a class="headerlink" href="#cli-lightgray" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id100">$cli-&gt;lightGray()</a><a class="headerlink" href="#cli-lightgray" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light gray color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGray</span><span class="p">(</span><span class="s1">&#39;Light gray text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGray</span><span class="p">(</span><span class="s1">&#39;Light gray text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-darkgray">
-<h4><a class="toc-backref" href="#id107">$cli-&gt;darkGray()</a><a class="headerlink" href="#cli-darkgray" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id101">$cli-&gt;darkGray()</a><a class="headerlink" href="#cli-darkgray" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in dark gray color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">darkGray</span><span class="p">(</span><span class="s1">&#39;Dark gray text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">darkGray</span><span class="p">(</span><span class="s1">&#39;Dark gray text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightred">
-<h4><a class="toc-backref" href="#id108">$cli-&gt;lightRed()</a><a class="headerlink" href="#cli-lightred" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id102">$cli-&gt;lightRed()</a><a class="headerlink" href="#cli-lightred" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light red color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightRed</span><span class="p">(</span><span class="s1">&#39;Light red text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightRed</span><span class="p">(</span><span class="s1">&#39;Light red text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightgreen">
-<h4><a class="toc-backref" href="#id109">$cli-&gt;lightGreen()</a><a class="headerlink" href="#cli-lightgreen" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id103">$cli-&gt;lightGreen()</a><a class="headerlink" href="#cli-lightgreen" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light green color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGreen</span><span class="p">(</span><span class="s1">&#39;Light green text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGreen</span><span class="p">(</span><span class="s1">&#39;Light green text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightyellow">
-<h4><a class="toc-backref" href="#id110">$cli-&gt;lightYellow()</a><a class="headerlink" href="#cli-lightyellow" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id104">$cli-&gt;lightYellow()</a><a class="headerlink" href="#cli-lightyellow" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light yellow color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightYellow</span><span class="p">(</span><span class="s1">&#39;Light yellow text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightYellow</span><span class="p">(</span><span class="s1">&#39;Light yellow text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightblue">
-<h4><a class="toc-backref" href="#id111">$cli-&gt;lightBlue()</a><a class="headerlink" href="#cli-lightblue" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id105">$cli-&gt;lightBlue()</a><a class="headerlink" href="#cli-lightblue" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light blue color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightBlue</span><span class="p">(</span><span class="s1">&#39;Light blue text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightBlue</span><span class="p">(</span><span class="s1">&#39;Light blue text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightmagenta">
-<h4><a class="toc-backref" href="#id112">$cli-&gt;lightMagenta()</a><a class="headerlink" href="#cli-lightmagenta" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id106">$cli-&gt;lightMagenta()</a><a class="headerlink" href="#cli-lightmagenta" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light magenta color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightMagenta</span><span class="p">(</span><span class="s1">&#39;Light magenta text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightMagenta</span><span class="p">(</span><span class="s1">&#39;Light magenta text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-lightcyan">
-<h4><a class="toc-backref" href="#id113">$cli-&gt;lightCyan()</a><a class="headerlink" href="#cli-lightcyan" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id107">$cli-&gt;lightCyan()</a><a class="headerlink" href="#cli-lightcyan" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in light cyan color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightCyan</span><span class="p">(</span><span class="s1">&#39;Light cyan text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightCyan</span><span class="p">(</span><span class="s1">&#39;Light cyan text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-white">
-<h4><a class="toc-backref" href="#id114">$cli-&gt;white()</a><a class="headerlink" href="#cli-white" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id108">$cli-&gt;white()</a><a class="headerlink" href="#cli-white" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in white color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">white</span><span class="p">(</span><span class="s1">&#39;White text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">white</span><span class="p">(</span><span class="s1">&#39;White text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="background-colors">
-<h3><a class="toc-backref" href="#id63">Background Colors</a><a class="headerlink" href="#background-colors" title="Permalink to this headline">¶</a></h3>
-<div class="contents local topic" id="id11">
+<h3><a class="toc-backref" href="#id57">Background Colors</a><a class="headerlink" href="#background-colors" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id4">
 <ul class="simple">
-<li><a class="reference internal" href="#cli-backgroundblack" id="id115">$cli-&gt;backgroundBlack()</a></li>
-<li><a class="reference internal" href="#cli-backgroundred" id="id116">$cli-&gt;backgroundRed()</a></li>
-<li><a class="reference internal" href="#cli-backgroundgreen" id="id117">$cli-&gt;backgroundGreen()</a></li>
-<li><a class="reference internal" href="#cli-backgroundyellow" id="id118">$cli-&gt;backgroundYellow()</a></li>
-<li><a class="reference internal" href="#cli-backgroundblue" id="id119">$cli-&gt;backgroundBlue()</a></li>
-<li><a class="reference internal" href="#cli-backgroundmagenta" id="id120">$cli-&gt;backgroundMagenta()</a></li>
-<li><a class="reference internal" href="#cli-backgroundcyan" id="id121">$cli-&gt;backgroundCyan()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightgray" id="id122">$cli-&gt;backgroundLightGray()</a></li>
-<li><a class="reference internal" href="#cli-backgrounddarkgray" id="id123">$cli-&gt;backgroundDarkGray()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightred" id="id124">$cli-&gt;backgroundLightRed()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightgreen" id="id125">$cli-&gt;backgroundLightGreen()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightyellow" id="id126">$cli-&gt;backgroundLightYellow()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightblue" id="id127">$cli-&gt;backgroundLightBlue()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightmagenta" id="id128">$cli-&gt;backgroundLightMagenta()</a></li>
-<li><a class="reference internal" href="#cli-backgroundlightcyan" id="id129">$cli-&gt;backgroundLightCyan()</a></li>
-<li><a class="reference internal" href="#cli-backgroundwhite" id="id130">$cli-&gt;backgroundWhite()</a></li>
+<li><a class="reference internal" href="#cli-blackbg" id="id109">$cli-&gt;blackBg()</a></li>
+<li><a class="reference internal" href="#cli-redbg" id="id110">$cli-&gt;redBg()</a></li>
+<li><a class="reference internal" href="#cli-greenbg" id="id111">$cli-&gt;greenBg()</a></li>
+<li><a class="reference internal" href="#cli-yellowbg" id="id112">$cli-&gt;yellowBg()</a></li>
+<li><a class="reference internal" href="#cli-bluebg" id="id113">$cli-&gt;blueBg()</a></li>
+<li><a class="reference internal" href="#cli-magentabg" id="id114">$cli-&gt;magentaBg()</a></li>
+<li><a class="reference internal" href="#cli-cyanbg" id="id115">$cli-&gt;cyanBg()</a></li>
+<li><a class="reference internal" href="#cli-graybg" id="id116">$cli-&gt;grayBg()</a></li>
+<li><a class="reference internal" href="#cli-darkgraybg" id="id117">$cli-&gt;darkGrayBg()</a></li>
+<li><a class="reference internal" href="#cli-lightredbg" id="id118">$cli-&gt;lightRedBg()</a></li>
+<li><a class="reference internal" href="#cli-lightgreenbg" id="id119">$cli-&gt;lightGreenBg()</a></li>
+<li><a class="reference internal" href="#cli-lightyellowbg" id="id120">$cli-&gt;lightYellowBg()</a></li>
+<li><a class="reference internal" href="#id5" id="id121">$cli-&gt;blueBg()</a></li>
+<li><a class="reference internal" href="#id6" id="id122">$cli-&gt;magentaBg()</a></li>
+<li><a class="reference internal" href="#id7" id="id123">$cli-&gt;cyanBg()</a></li>
+<li><a class="reference internal" href="#cli-whitebg" id="id124">$cli-&gt;whiteBg()</a></li>
 </ul>
 </div>
 <div class="admonition seealso">
@@ -914,127 +987,127 @@ speed.</p>
 <p class="last"><a class="reference external" href="http://demo.webino.org/console-formatting">Console Formatting Example</a></p>
 </div>
 <p><div class="vspace"></div></p>
-<div class="section" id="cli-backgroundblack">
-<h4><a class="toc-backref" href="#id115">$cli-&gt;backgroundBlack()</a><a class="headerlink" href="#cli-backgroundblack" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-blackbg">
+<h4><a class="toc-backref" href="#id109">$cli-&gt;blackBg()</a><a class="headerlink" href="#cli-blackbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on black background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundBlack</span><span class="p">(</span><span class="s1">&#39;Text on black background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blackBg</span><span class="p">(</span><span class="s1">&#39;Text on black background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundred">
-<h4><a class="toc-backref" href="#id116">$cli-&gt;backgroundRed()</a><a class="headerlink" href="#cli-backgroundred" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-redbg">
+<h4><a class="toc-backref" href="#id110">$cli-&gt;redBg()</a><a class="headerlink" href="#cli-redbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on red background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundRed</span><span class="p">(</span><span class="s1">&#39;Text on red background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">redBg</span><span class="p">(</span><span class="s1">&#39;Text on red background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundgreen">
-<h4><a class="toc-backref" href="#id117">$cli-&gt;backgroundGreen()</a><a class="headerlink" href="#cli-backgroundgreen" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-greenbg">
+<h4><a class="toc-backref" href="#id111">$cli-&gt;greenBg()</a><a class="headerlink" href="#cli-greenbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on green background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundGreen</span><span class="p">(</span><span class="s1">&#39;Text on green background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">greenBg</span><span class="p">(</span><span class="s1">&#39;Text on green background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundyellow">
-<h4><a class="toc-backref" href="#id118">$cli-&gt;backgroundYellow()</a><a class="headerlink" href="#cli-backgroundyellow" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-yellowbg">
+<h4><a class="toc-backref" href="#id112">$cli-&gt;yellowBg()</a><a class="headerlink" href="#cli-yellowbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on yellow background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundYellow</span><span class="p">(</span><span class="s1">&#39;Text on yellow background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">yellowBg</span><span class="p">(</span><span class="s1">&#39;Text on yellow background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundblue">
-<h4><a class="toc-backref" href="#id119">$cli-&gt;backgroundBlue()</a><a class="headerlink" href="#cli-backgroundblue" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-bluebg">
+<h4><a class="toc-backref" href="#id113">$cli-&gt;blueBg()</a><a class="headerlink" href="#cli-bluebg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on blue background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundBlue</span><span class="p">(</span><span class="s1">&#39;Text on blue background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blueBg</span><span class="p">(</span><span class="s1">&#39;Text on blue background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundmagenta">
-<h4><a class="toc-backref" href="#id120">$cli-&gt;backgroundMagenta()</a><a class="headerlink" href="#cli-backgroundmagenta" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-magentabg">
+<h4><a class="toc-backref" href="#id114">$cli-&gt;magentaBg()</a><a class="headerlink" href="#cli-magentabg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on magenta background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundMagenta</span><span class="p">(</span><span class="s1">&#39;Text on magenta background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">magentaBg</span><span class="p">(</span><span class="s1">&#39;Text on magenta background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundcyan">
-<h4><a class="toc-backref" href="#id121">$cli-&gt;backgroundCyan()</a><a class="headerlink" href="#cli-backgroundcyan" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-cyanbg">
+<h4><a class="toc-backref" href="#id115">$cli-&gt;cyanBg()</a><a class="headerlink" href="#cli-cyanbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on cyan background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundCyan</span><span class="p">(</span><span class="s1">&#39;Text on cyan background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">cyanBg</span><span class="p">(</span><span class="s1">&#39;Text on cyan background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightgray">
-<h4><a class="toc-backref" href="#id122">$cli-&gt;backgroundLightGray()</a><a class="headerlink" href="#cli-backgroundlightgray" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-graybg">
+<h4><a class="toc-backref" href="#id116">$cli-&gt;grayBg()</a><a class="headerlink" href="#cli-graybg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light gray background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightGray</span><span class="p">(</span><span class="s1">&#39;Text on light gray background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">grayBg</span><span class="p">(</span><span class="s1">&#39;Text on light gray background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgrounddarkgray">
-<h4><a class="toc-backref" href="#id123">$cli-&gt;backgroundDarkGray()</a><a class="headerlink" href="#cli-backgrounddarkgray" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-darkgraybg">
+<h4><a class="toc-backref" href="#id117">$cli-&gt;darkGrayBg()</a><a class="headerlink" href="#cli-darkgraybg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on dark gray background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundDarkGray</span><span class="p">(</span><span class="s1">&#39;Text on dark gray background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">darkGrayBg</span><span class="p">(</span><span class="s1">&#39;Text on dark gray background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightred">
-<h4><a class="toc-backref" href="#id124">$cli-&gt;backgroundLightRed()</a><a class="headerlink" href="#cli-backgroundlightred" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-lightredbg">
+<h4><a class="toc-backref" href="#id118">$cli-&gt;lightRedBg()</a><a class="headerlink" href="#cli-lightredbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light red background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightRed</span><span class="p">(</span><span class="s1">&#39;Text on light red background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightRedBg</span><span class="p">(</span><span class="s1">&#39;Text on light red background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightgreen">
-<h4><a class="toc-backref" href="#id125">$cli-&gt;backgroundLightGreen()</a><a class="headerlink" href="#cli-backgroundlightgreen" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-lightgreenbg">
+<h4><a class="toc-backref" href="#id119">$cli-&gt;lightGreenBg()</a><a class="headerlink" href="#cli-lightgreenbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light green background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightGreen</span><span class="p">(</span><span class="s1">&#39;Text on light green background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightGreenBg</span><span class="p">(</span><span class="s1">&#39;Text on light green background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightyellow">
-<h4><a class="toc-backref" href="#id126">$cli-&gt;backgroundLightYellow()</a><a class="headerlink" href="#cli-backgroundlightyellow" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-lightyellowbg">
+<h4><a class="toc-backref" href="#id120">$cli-&gt;lightYellowBg()</a><a class="headerlink" href="#cli-lightyellowbg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light yellow background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightYellow</span><span class="p">(</span><span class="s1">&#39;Text on light yellow background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lightYellowBg</span><span class="p">(</span><span class="s1">&#39;Text on light yellow background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightblue">
-<h4><a class="toc-backref" href="#id127">$cli-&gt;backgroundLightBlue()</a><a class="headerlink" href="#cli-backgroundlightblue" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id5">
+<h4><a class="toc-backref" href="#id121">$cli-&gt;blueBg()</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light blue background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightBlue</span><span class="p">(</span><span class="s1">&#39;Text on light blue background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blueBg</span><span class="p">(</span><span class="s1">&#39;Text on light blue background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightmagenta">
-<h4><a class="toc-backref" href="#id128">$cli-&gt;backgroundLightMagenta()</a><a class="headerlink" href="#cli-backgroundlightmagenta" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id6">
+<h4><a class="toc-backref" href="#id122">$cli-&gt;magentaBg()</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light magenta background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightMagenta</span><span class="p">(</span><span class="s1">&#39;Text on light magenta background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">magentaBg</span><span class="p">(</span><span class="s1">&#39;Text on light magenta background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundlightcyan">
-<h4><a class="toc-backref" href="#id129">$cli-&gt;backgroundLightCyan()</a><a class="headerlink" href="#cli-backgroundlightcyan" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id7">
+<h4><a class="toc-backref" href="#id123">$cli-&gt;cyanBg()</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on light cyan background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLightCyan</span><span class="p">(</span><span class="s1">&#39;Text on light cyan background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">cyanBg</span><span class="p">(</span><span class="s1">&#39;Text on light cyan background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cli-backgroundwhite">
-<h4><a class="toc-backref" href="#id130">$cli-&gt;backgroundWhite()</a><a class="headerlink" href="#cli-backgroundwhite" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="cli-whitebg">
+<h4><a class="toc-backref" href="#id124">$cli-&gt;whiteBg()</a><a class="headerlink" href="#cli-whitebg" title="Permalink to this headline">¶</a></h4>
 <p>Printing text on white background color to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundWhite</span><span class="p">(</span><span class="s1">&#39;Text on white background!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">whiteBg</span><span class="p">(</span><span class="s1">&#39;Text on white background!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="text-style">
-<h3><a class="toc-backref" href="#id80">Text Style</a><a class="headerlink" href="#text-style" title="Permalink to this headline">¶</a></h3>
-<div class="contents local topic" id="id13">
+<h3><a class="toc-backref" href="#id74">Text Style</a><a class="headerlink" href="#text-style" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id8">
 <ul class="simple">
-<li><a class="reference internal" href="#cli-bold" id="id131">$cli-&gt;bold()</a></li>
-<li><a class="reference internal" href="#cli-dim" id="id132">$cli-&gt;dim()</a></li>
-<li><a class="reference internal" href="#cli-underline" id="id133">$cli-&gt;underline()</a></li>
-<li><a class="reference internal" href="#cli-invert" id="id134">$cli-&gt;invert()</a></li>
+<li><a class="reference internal" href="#cli-bold" id="id125">$cli-&gt;bold()</a></li>
+<li><a class="reference internal" href="#cli-dim" id="id126">$cli-&gt;dim()</a></li>
+<li><a class="reference internal" href="#cli-underline" id="id127">$cli-&gt;underline()</a></li>
+<li><a class="reference internal" href="#cli-invert" id="id128">$cli-&gt;invert()</a></li>
 </ul>
 </div>
 <div class="admonition seealso">
@@ -1043,43 +1116,43 @@ speed.</p>
 </div>
 <p><div class="vspace"></div></p>
 <div class="section" id="cli-bold">
-<h4><a class="toc-backref" href="#id131">$cli-&gt;bold()</a><a class="headerlink" href="#cli-bold" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id125">$cli-&gt;bold()</a><a class="headerlink" href="#cli-bold" title="Permalink to this headline">¶</a></h4>
 <p>Printing bold text to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">bold</span><span class="p">(</span><span class="s1">&#39;Bold text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">bold</span><span class="p">(</span><span class="s1">&#39;Bold text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-dim">
-<h4><a class="toc-backref" href="#id132">$cli-&gt;dim()</a><a class="headerlink" href="#cli-dim" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id126">$cli-&gt;dim()</a><a class="headerlink" href="#cli-dim" title="Permalink to this headline">¶</a></h4>
 <p>Printing dim text to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">dim</span><span class="p">(</span><span class="s1">&#39;Dim text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">dim</span><span class="p">(</span><span class="s1">&#39;Dim text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-underline">
-<h4><a class="toc-backref" href="#id133">$cli-&gt;underline()</a><a class="headerlink" href="#cli-underline" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id127">$cli-&gt;underline()</a><a class="headerlink" href="#cli-underline" title="Permalink to this headline">¶</a></h4>
 <p>Printing underlined text to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">underline</span><span class="p">(</span><span class="s1">&#39;Underlined text!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">underline</span><span class="p">(</span><span class="s1">&#39;Underlined text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-invert">
-<h4><a class="toc-backref" href="#id134">$cli-&gt;invert()</a><a class="headerlink" href="#cli-invert" title="Permalink to this headline">¶</a></h4>
-<p>Printing inverted text to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">invert</span><span class="p">(</span><span class="s1">&#39;Inverted text!&#39;</span><span class="p">);</span>
+<h4><a class="toc-backref" href="#id128">$cli-&gt;invert()</a><a class="headerlink" href="#cli-invert" title="Permalink to this headline">¶</a></h4>
+<p>Printing inverted colors text to the terminal.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">invert</span><span class="p">(</span><span class="s1">&#39;Inverted colors text!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="style-commands">
-<h3><a class="toc-backref" href="#id85">Style Commands</a><a class="headerlink" href="#style-commands" title="Permalink to this headline">¶</a></h3>
-<div class="contents local topic" id="id15">
+<h3><a class="toc-backref" href="#id79">Style Commands</a><a class="headerlink" href="#style-commands" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id9">
 <ul class="simple">
-<li><a class="reference internal" href="#cli-info" id="id135">$cli-&gt;info()</a></li>
-<li><a class="reference internal" href="#cli-comment" id="id136">$cli-&gt;comment()</a></li>
-<li><a class="reference internal" href="#cli-whisper" id="id137">$cli-&gt;whisper()</a></li>
-<li><a class="reference internal" href="#cli-shout" id="id138">$cli-&gt;shout()</a></li>
-<li><a class="reference internal" href="#cli-error" id="id139">$cli-&gt;error()</a></li>
+<li><a class="reference internal" href="#cli-info" id="id129">$cli-&gt;info()</a></li>
+<li><a class="reference internal" href="#cli-comment" id="id130">$cli-&gt;comment()</a></li>
+<li><a class="reference internal" href="#cli-whisper" id="id131">$cli-&gt;whisper()</a></li>
+<li><a class="reference internal" href="#cli-shout" id="id132">$cli-&gt;shout()</a></li>
+<li><a class="reference internal" href="#cli-error" id="id133">$cli-&gt;error()</a></li>
 </ul>
 </div>
 <div class="admonition seealso">
@@ -1088,56 +1161,56 @@ speed.</p>
 </div>
 <p><div class="vspace"></div></p>
 <div class="section" id="cli-info">
-<h4><a class="toc-backref" href="#id135">$cli-&gt;info()</a><a class="headerlink" href="#cli-info" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id129">$cli-&gt;info()</a><a class="headerlink" href="#cli-info" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in an info style to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Info text style!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Info text style!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-comment">
-<h4><a class="toc-backref" href="#id136">$cli-&gt;comment()</a><a class="headerlink" href="#cli-comment" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id130">$cli-&gt;comment()</a><a class="headerlink" href="#cli-comment" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in a comment style to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">comment</span><span class="p">(</span><span class="s1">&#39;Comment text style!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">comment</span><span class="p">(</span><span class="s1">&#39;Comment text style!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-whisper">
-<h4><a class="toc-backref" href="#id137">$cli-&gt;whisper()</a><a class="headerlink" href="#cli-whisper" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id131">$cli-&gt;whisper()</a><a class="headerlink" href="#cli-whisper" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in a whisper style to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">whisper</span><span class="p">(</span><span class="s1">&#39;Whisper text style!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">whisper</span><span class="p">(</span><span class="s1">&#39;Whisper text style!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-shout">
-<h4><a class="toc-backref" href="#id138">$cli-&gt;shout()</a><a class="headerlink" href="#cli-shout" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id132">$cli-&gt;shout()</a><a class="headerlink" href="#cli-shout" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in a shout style to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">shout</span><span class="p">(</span><span class="s1">&#39;Shout text style!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">shout</span><span class="p">(</span><span class="s1">&#39;Shout text style!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="cli-error">
-<h4><a class="toc-backref" href="#id139">$cli-&gt;error()</a><a class="headerlink" href="#cli-error" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id133">$cli-&gt;error()</a><a class="headerlink" href="#cli-error" title="Permalink to this headline">¶</a></h4>
 <p>Printing text in an error style to the terminal.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Error text style!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Error text style!&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="user-input">
-<h3><a class="toc-backref" href="#id91">User Input</a><a class="headerlink" href="#user-input" title="Permalink to this headline">¶</a></h3>
-<div class="contents local topic" id="id17">
+<h3><a class="toc-backref" href="#id85">User Input</a><a class="headerlink" href="#user-input" title="Permalink to this headline">¶</a></h3>
+<div class="contents local topic" id="id10">
 <ul class="simple">
-<li><a class="reference internal" href="#cli-input" id="id140">$cli-&gt;input()</a></li>
-<li><a class="reference internal" href="#cli-confirm" id="id141">$cli-&gt;confirm()</a></li>
-<li><a class="reference internal" href="#cli-password" id="id142">$cli-&gt;password()</a></li>
-<li><a class="reference internal" href="#cli-checkboxes" id="id143">$cli-&gt;checkboxes()</a></li>
-<li><a class="reference internal" href="#cli-radio" id="id144">$cli-&gt;radio()</a></li>
+<li><a class="reference internal" href="#cli-input" id="id134">$cli-&gt;input()</a></li>
+<li><a class="reference internal" href="#cli-confirm" id="id135">$cli-&gt;confirm()</a></li>
+<li><a class="reference internal" href="#cli-password" id="id136">$cli-&gt;password()</a></li>
+<li><a class="reference internal" href="#cli-checkboxes" id="id137">$cli-&gt;checkboxes()</a></li>
+<li><a class="reference internal" href="#cli-radio" id="id138">$cli-&gt;radio()</a></li>
 </ul>
 </div>
 <div class="section" id="cli-input">
-<h4><a class="toc-backref" href="#id140">$cli-&gt;input()</a><a class="headerlink" href="#cli-input" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id134">$cli-&gt;input()</a><a class="headerlink" href="#cli-input" title="Permalink to this headline">¶</a></h4>
 <p>Getting text from a user.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="c1">// basic input</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="c1">// basic input</span>
 <span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 
@@ -1156,7 +1229,7 @@ speed.</p>
 <a class="reference external" href="http://demo.webino.org/console-input-multi-line">Console Input Multi-Line Example</a></p>
 </div>
 <p>Specifying certain answers from the user you only want to accept (case insensitive).</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">([</span><span class="s1">&#39;Fine&#39;</span><span class="p">,</span> <span class="s1">&#39;Ok&#39;</span><span class="p">]);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">([</span><span class="s1">&#39;Fine&#39;</span><span class="p">,</span> <span class="s1">&#39;Ok&#39;</span><span class="p">]);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 
 <span class="c1">// or showing expecting answers</span>
@@ -1169,7 +1242,7 @@ speed.</p>
 <p class="last">User will be re-prompted until responds with an acceptable answer.</p>
 </div>
 <p>Expecting answers exactly as they are specified (case sensitive).</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">([</span><span class="s1">&#39;Fine&#39;</span><span class="p">,</span> <span class="s1">&#39;Ok&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">strict</span><span class="p">();</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">([</span><span class="s1">&#39;Fine&#39;</span><span class="p">,</span> <span class="s1">&#39;Ok&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">strict</span><span class="p">();</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -1178,7 +1251,7 @@ speed.</p>
 <p class="last">Answering <code class="docutils literal"><span class="pre">fine</span></code> or <code class="docutils literal"><span class="pre">ok</span></code> will cause a re-prompt.</p>
 </div>
 <p>Passing a closure into the <code class="docutils literal"><span class="pre">accept</span></code> method.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">);</span>
 
 <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">accept</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;Fine&#39;</span> <span class="o">===</span> <span class="nv">$result</span><span class="p">);</span>
@@ -1193,7 +1266,7 @@ speed.</p>
 <a class="reference external" href="http://demo.webino.org/console-input-accept-closure">Console Input Accept Closure Example</a></p>
 </div>
 <p>Specifying a default response for when the user simply presses <code class="docutils literal"><span class="pre">enter</span></code> without typing anything in.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">defaultTo</span><span class="p">(</span><span class="s1">&#39;Great!&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$input</span>  <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;How you doin?&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">defaultTo</span><span class="p">(</span><span class="s1">&#39;Great!&#39;</span><span class="p">);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -1203,9 +1276,9 @@ speed.</p>
 </div>
 </div>
 <div class="section" id="cli-confirm">
-<h4><a class="toc-backref" href="#id141">$cli-&gt;confirm()</a><a class="headerlink" href="#cli-confirm" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id135">$cli-&gt;confirm()</a><a class="headerlink" href="#cli-confirm" title="Permalink to this headline">¶</a></h4>
 <p>Prompting the user for <code class="docutils literal"><span class="pre">y</span></code> or <code class="docutils literal"><span class="pre">n</span></code> (strict).</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">confirm</span><span class="p">(</span><span class="s1">&#39;Continue?&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">confirm</span><span class="p">(</span><span class="s1">&#39;Continue?&#39;</span><span class="p">);</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$input</span><span class="o">-&gt;</span><span class="na">confirmed</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// do something...</span>
@@ -1218,9 +1291,9 @@ speed.</p>
 </div>
 </div>
 <div class="section" id="cli-password">
-<h4><a class="toc-backref" href="#id142">$cli-&gt;password()</a><a class="headerlink" href="#cli-password" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id136">$cli-&gt;password()</a><a class="headerlink" href="#cli-password" title="Permalink to this headline">¶</a></h4>
 <p>Hiding text the user is typing.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">(</span><span class="s1">&#39;Please enter password:&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$input</span> <span class="o">=</span> <span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">(</span><span class="s1">&#39;Please enter password:&#39;</span><span class="p">);</span>
 <span class="nv">$pwd</span>   <span class="o">=</span> <span class="nv">$input</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -1230,9 +1303,9 @@ speed.</p>
 </div>
 </div>
 <div class="section" id="cli-checkboxes">
-<h4><a class="toc-backref" href="#id143">$cli-&gt;checkboxes()</a><a class="headerlink" href="#cli-checkboxes" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id137">$cli-&gt;checkboxes()</a><a class="headerlink" href="#cli-checkboxes" title="Permalink to this headline">¶</a></h4>
 <p>Presenting the user with a set of interactive options. The user can select multiple of them.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixtape&#39;</span><span class="p">,</span> <span class="s1">&#39;Teddy Bear&#39;</span><span class="p">,</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;Puppies&#39;</span><span class="p">];</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixtape&#39;</span><span class="p">,</span> <span class="s1">&#39;Teddy Bear&#39;</span><span class="p">,</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;Puppies&#39;</span><span class="p">];</span>
 <span class="c1">// or as associative array</span>
 <span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;option1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span>
@@ -1254,9 +1327,9 @@ provide an associative array as the options, an array of the selected keys will 
 </div>
 </div>
 <div class="section" id="cli-radio">
-<h4><a class="toc-backref" href="#id144">$cli-&gt;radio()</a><a class="headerlink" href="#cli-radio" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id138">$cli-&gt;radio()</a><a class="headerlink" href="#cli-radio" title="Permalink to this headline">¶</a></h4>
 <p>Presenting the user with a set of interactive options. The user can only select one of them.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixtape&#39;</span><span class="p">,</span> <span class="s1">&#39;Teddy Bear&#39;</span><span class="p">,</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;Puppies&#39;</span><span class="p">];</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixtape&#39;</span><span class="p">,</span> <span class="s1">&#39;Teddy Bear&#39;</span><span class="p">,</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;Puppies&#39;</span><span class="p">];</span>
 <span class="c1">// or as associative array</span>
 <span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;option1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ice Cream&#39;</span><span class="p">,</span>
@@ -1279,85 +1352,53 @@ provide an associative array as the options, an array of the selected keys will 
 </div>
 </div>
 <div class="section" id="commands-schedule">
-<h2><a class="toc-backref" href="#id23">Commands Schedule</a><a class="headerlink" href="#commands-schedule" title="Permalink to this headline">¶</a></h2>
-<p>TODO...</p>
+<h2><a class="toc-backref" href="#id16">Commands Schedule</a><a class="headerlink" href="#commands-schedule" title="Permalink to this headline">¶</a></h2>
+<p>TODO…</p>
 </div>
 <div class="section" id="advanced-styling">
-<h2><a class="toc-backref" href="#id24">Advanced Styling</a><a class="headerlink" href="#advanced-styling" title="Permalink to this headline">¶</a></h2>
-<div class="contents local topic" id="id18">
+<h2><a class="toc-backref" href="#id17">Advanced Styling</a><a class="headerlink" href="#advanced-styling" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id11">
 <ul class="simple">
-<li><a class="reference internal" href="#combinations" id="id145">Combinations</a></li>
-<li><a class="reference internal" href="#tags" id="id146">Tags</a></li>
-<li><a class="reference internal" href="#custom-styles" id="id147">Custom Styles</a></li>
+<li><a class="reference internal" href="#combinations" id="id139">Combinations</a></li>
+<li><a class="reference internal" href="#tags" id="id140">Tags</a></li>
 </ul>
 </div>
 <div class="section" id="combinations">
-<h3><a class="toc-backref" href="#id145">Combinations</a><a class="headerlink" href="#combinations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id139">Combinations</a><a class="headerlink" href="#combinations" title="Permalink to this headline">¶</a></h3>
 <p>Chaining any of the style to get what you want.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundBlue</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bold</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Fusce eget faucibus eros.&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Combining styles into one method.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundBlueGreenBold</span><span class="p">(</span><span class="s1">&#39;Fusce eget faucibus eros.&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blueBg</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">green</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bold</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Fusce eget faucibus eros.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>You can apply more than one format to an output, but only one foreground and one background color.</p>
 </div>
 <div class="section" id="tags">
-<h3><a class="toc-backref" href="#id146">Tags</a><a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h3>
-<p>Applying a color/background color/format to just part of an output.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Please &lt;light_red&gt;remember&lt;/light_red&gt; to &lt;bold&gt;&lt;yellow&gt;restart&lt;/yellow&gt;&lt;/bold&gt; the server.&#39;</span><span class="p">);</span>
+<h3><a class="toc-backref" href="#id140">Tags</a><a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h3>
+<p>Applying a foreground/background color and format with tags, to just part of an output.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Please &lt;light_red&gt;remember&lt;/light_red&gt; to &lt;bold&gt;&lt;yellow&gt;restart&lt;/yellow&gt;&lt;/bold&gt; the server.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>You can use any of the color or formatting keywords (snake cased) as tags.</p>
 <p>Prepend the color with <code class="docutils literal"><span class="pre">background_</span></code> to use a background color tag.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Please &lt;background_light_red&gt;remember&lt;/background_light_red&gt; to restart the server.&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="custom-styles">
-<h3><a class="toc-backref" href="#id147">Custom Styles</a><a class="headerlink" href="#custom-styles" title="Permalink to this headline">¶</a></h3>
-<p>Adding your own custom colors.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">style</span><span class="o">-&gt;</span><span class="na">addColor</span><span class="p">(</span><span class="s1">&#39;lilac&#39;</span><span class="p">,</span> <span class="mi">38</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Once you’ve added the color, you can use it like any of the other colors.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">lilac</span><span class="p">(</span><span class="s1">&#39;What a pretty color.&#39;</span><span class="p">);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">backgroundLilac</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;This background is a pretty color.&#39;</span><span class="p">);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Just this &lt;lilac&gt;word&lt;/lilac&gt; is a pretty color.&#39;</span><span class="p">);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;Just this &lt;background_lilac&gt;word&lt;/background_lilac&gt; is a pretty color.&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Adding your own commands using either a string or an array of styles, just make sure that the style is defined already.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">style</span><span class="o">-&gt;</span><span class="na">addCommand</span><span class="p">(</span><span class="s1">&#39;rage&#39;</span><span class="p">,</span> <span class="s1">&#39;cyan&#39;</span><span class="p">);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">rage</span><span class="p">(</span><span class="s1">&#39;SOMETHING IS MESSED UP.&#39;</span><span class="p">);</span>
-
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">style</span><span class="o">-&gt;</span><span class="na">addCommand</span><span class="p">(</span><span class="s1">&#39;holler&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">]);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">holler</span><span class="p">(</span><span class="s1">&#39;Yo, what up.&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>It is possible to override any existing command.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">style</span><span class="o">-&gt;</span><span class="na">addCommand</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;light_blue&#39;</span><span class="p">);</span>
-<span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Whelp. That did not turn out so well.&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="nv">$cli</span><span class="o">-&gt;</span><span class="na">blue</span><span class="p">(</span><span class="s1">&#39;Please &lt;background_light_red&gt;remember&lt;/background_light_red&gt; to restart the server.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="console-cookbook">
-<h2><a class="toc-backref" href="#id25">Console Cookbook</a><a class="headerlink" href="#console-cookbook" title="Permalink to this headline">¶</a></h2>
-<div class="contents local topic" id="id19">
+<h2><a class="toc-backref" href="#id18">Console Cookbook</a><a class="headerlink" href="#console-cookbook" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id12">
 <ul class="simple">
-<li><a class="reference internal" href="#configuring-console" id="id148">Configuring Console</a></li>
-<li><a class="reference internal" href="#creating-console-commands" id="id149">Creating Console Commands</a></li>
+<li><a class="reference internal" href="#configuring-console" id="id141">Configuring Console</a></li>
+<li><a class="reference internal" href="#creating-console-commands" id="id142">Creating Console Commands</a></li>
 </ul>
 </div>
 <div class="section" id="configuring-console">
-<h3><a class="toc-backref" href="#id148">Configuring Console</a><a class="headerlink" href="#configuring-console" title="Permalink to this headline">¶</a></h3>
-<p>TODO...</p>
+<h3><a class="toc-backref" href="#id141">Configuring Console</a><a class="headerlink" href="#configuring-console" title="Permalink to this headline">¶</a></h3>
+<p>TODO…</p>
 </div>
 <div class="section" id="creating-console-commands">
-<h3><a class="toc-backref" href="#id149">Creating Console Commands</a><a class="headerlink" href="#creating-console-commands" title="Permalink to this headline">¶</a></h3>
-<p>TODO...</p>
+<h3><a class="toc-backref" href="#id142">Creating Console Commands</a><a class="headerlink" href="#creating-console-commands" title="Permalink to this headline">¶</a></h3>
+<p>TODO…</p>
 </div>
 </div>
 </div>
@@ -1377,10 +1418,10 @@ provide an associative array as the options, an array of the selected keys will 
             <a href="../index.html">Introduction</a>
         </li>
         <li>
-            <a href="../requirements.html">Introduction</a>
+            <a href="http://demo.webino.org">Examples</a>
         </li>
         <li>
-            <a href="../examples.html">Examples [TODO]</a>
+            <a href="../requirements.html">Requirements [TODO]</a>
         </li>
         <li>
             <a href="../installation.html">Installation [TODO]</a>
@@ -1408,10 +1449,10 @@ provide an associative array as the options, an array of the selected keys will 
             <a href="../basics/events.html">Event System</a>
         </li>
         <li>
-            <a href="../basics/application-context.html">Application Context</a>
+            <a href="../basics/application-context.html">Application Context [TODO]</a>
         </li>
         <li>
-            <a href="../basics/application-modules.html">Application Modules</a>
+            <a href="../basics/application-modules.html">Application Modules [TODO]</a>
         </li>
         <li>
             <a href="../basics/skeleton-application.html">Skeleton Application [TODO]</a>
@@ -1466,7 +1507,7 @@ provide an associative array as the options, an array of the selected keys will 
             <a href="database.html">Database [TODO]</a>
         </li>
         <li>
-            <a href="mailer.html">Mailer</a>
+            <a href="mailer.html">Mailer [TODO]</a>
         </li>
         <li>
             <a href="templates.html">Templates [TODO]</a>
