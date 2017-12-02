@@ -66,7 +66,7 @@ class ConsoleRoute extends BaseRoute
      * @param array $description
      * @return $this
      */
-    public function setArgumentsDescription($description)
+    public function setArgumentsDescription(array $description)
     {
         $this->setDefaults(['argumentsDescription' => $description]);
         return $this;
@@ -76,7 +76,7 @@ class ConsoleRoute extends BaseRoute
      * @param array $description
      * @return $this
      */
-    public function setOptionsDescription($description)
+    public function setOptionsDescription(array $description)
     {
         $this->setDefaults(['optionsDescription' => $description]);
         return $this;

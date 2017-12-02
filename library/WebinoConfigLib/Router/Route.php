@@ -22,6 +22,16 @@ class Route extends AbstractRoute implements RouteConstructorInterface
      */
     public function init()
     {
-        $this->hasPath() and $this->setRouteOption($this->getPath());
+//        $this->hasPath() and $this->setRouteOption($this->getPath());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPath($path)
+    {
+        parent::setPath($path);
+        $path and $this->setRouteOption($path);
+        return $this;
     }
 }

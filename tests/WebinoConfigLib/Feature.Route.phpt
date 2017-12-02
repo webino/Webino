@@ -8,25 +8,25 @@ require __DIR__ . '/../bootstrap.php';
 
 $route[0] = (new Route)
     ->setType(Route::SEGMENT)
-    ->setRoute('/')
+    ->setPath('/')
     ->setMayTerminate()
     ->setDefaults(['exampleKey' => 'exampleValue'])
     ->setChild([
         (new Route('child-one'))
-            ->setRoute('/child-one'),
+            ->setPath('/child-one'),
 
         (new Route)
-            ->setRoute('/child-two'),
+            ->setPath('/child-two'),
 
         (new Route)
-            ->setRoute('/child-three'),
+            ->setPath('/child-three'),
     ])
     ->chain([
         (new Route)
-            ->setRoute('/part-one'),
+            ->setPath('/part-one'),
 
         (new Route)
-            ->setRoute('/part-two'),
+            ->setPath('/part-two'),
     ]);
 
 

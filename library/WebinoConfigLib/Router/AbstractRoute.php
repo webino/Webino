@@ -16,8 +16,7 @@ use WebinoConfigLib\Exception\InvalidArgumentException;
 /**
  * Class AbstractRoute
  */
-abstract class AbstractRoute extends AbstractConfig implements
-    RouteInterface
+abstract class AbstractRoute extends AbstractConfig implements RouteInterface
 {
     /**
      * @var string
@@ -76,7 +75,6 @@ abstract class AbstractRoute extends AbstractConfig implements
     public function setPath($path)
     {
         $this->path = (string) $path;
-        $path and $this->setRouteOption($path);
         return $this;
     }
 

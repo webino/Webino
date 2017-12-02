@@ -41,6 +41,18 @@ trait RouteConstructorTrait
     }
 
     /**
+     * @param string $path
+     * @return $this
+     */
+    abstract protected function setPath($path);
+
+    /**
+     * @param string|null $spec
+     * @return $this
+     */
+    abstract protected function setSpec($spec = null);
+
+    /**
      * @param string $type Route type.
      * @return $this
      */
@@ -52,56 +64,4 @@ trait RouteConstructorTrait
      * @return void
      */
     abstract protected function init();
-
-    /**
-     * @return bool
-     */
-    protected function hasRoute()
-    {
-        return !empty($this->route);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param string|null $path
-     * @return $this
-     */
-    public function setPath($path = null)
-    {
-        $this->path = (string) $path;
-        return $this;
-    }
-    
-    /**
-     * @return bool
-     */
-    protected function hasSpec()
-    {
-        return !empty($this->spec);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getSpec()
-    {
-        return $this->spec;
-    }
-
-    /**
-     * @param string|null $spec
-     * @return $this
-     */
-    protected function setSpec($spec = null)
-    {
-        $this->spec = (string) $spec;
-        return $this;
-    }
 }

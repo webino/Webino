@@ -27,4 +27,30 @@ class RegexRoute extends AbstractRoute implements Regex\RouteConstructorInterfac
         $this->hasPath() and $this->getData()->options['regex'] = $this->getPath();
         $this->hasSpec() and $this->getData()->options['spec']  = $this->getSpec();
     }
+
+    /**
+     * @return bool
+     */
+    protected function hasSpec()
+    {
+        return !empty($this->spec);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSpec()
+    {
+        return $this->spec;
+    }
+
+    /**
+     * @param string|null $spec
+     * @return $this
+     */
+    protected function setSpec($spec = null)
+    {
+        $this->spec = (string) $spec;
+        return $this;
+    }
 }

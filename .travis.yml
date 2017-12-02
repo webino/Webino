@@ -32,7 +32,6 @@ after_success:
 
 matrix:
   allow_failures:
-    - php: 7.1
     - php: hhvm
   exclude:
     - php: 7.1
@@ -54,4 +53,4 @@ env:
     - TESTER_PHP_BIN=hhvm TESTER_ARGS=""
   global:
     - GH_REF=github.com/webino/Webino
-    - secure: Jzh/BiLKUvPNvubiQtMyjuCoofu+I3n5DeeXTMlkG7rcd8Kq3T3izdt25PFX8nJ+eJZev1HsiXWlPludGWyYXniQ+k7EqI8BxlyZdervt1ElofsuKskvo1/4yYw9ZetNDLWV8fWNKDuNvoEuiJXI5Xq2np8nlarsYLiNAJVKv9M=
+    - secure: UOB4OJzFP4Qg1JWsmMEUEwKLn4eY6TqZbvYWAlXj85Q02pnvlzOHlyk2KyJQ4gVtw1b+atovuLYP1z3GhFAtdZCkv8wmHk0Sn8Htzia48InbJCU5AzbVUl44+R5o08NngFNKqGcGsuefU1GvljiuOdZJZ42oFmswK3V9TzbASlw=

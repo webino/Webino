@@ -7,7 +7,7 @@ require __DIR__ . '/../bootstrap.php';
 
 
 $route[0] = (new Route\ConsoleRoute)
-    ->setRoute('example command');
+    ->setPath('example command');
 
 
 Assert::equal([

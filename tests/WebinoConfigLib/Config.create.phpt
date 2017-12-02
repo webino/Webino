@@ -23,17 +23,17 @@ $config = new Config([
     /**
      * Route config feature example
      */
-    (new Route)->setRoute('/'),
+    (new Route)->setPath('/'),
 
     /**
      * Named route example
      */
-    (new Route('home'))->setRoute('/home'),
+    (new Route('home'))->setPath('/home'),
 
     /**
      * Override named route example
      */
-    (new Route('home'))->setRoute('/home2'),
+    (new Route('home'))->setPath('/home2'),
 
     /**
      * Override named route example 2
