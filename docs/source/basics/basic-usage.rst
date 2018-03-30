@@ -24,7 +24,6 @@ The application object is configured, created, bootstrapped and dispatched in th
 
     <?php // index.php
 
-    use WebinoAppLib\Application\CoreConfig;
     use WebinoAppLib\Feature as AppFeature;
     use WebinoConfigLib\Feature as ConfigFeature;
 

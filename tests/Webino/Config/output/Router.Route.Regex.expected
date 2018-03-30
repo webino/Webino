@@ -1,0 +1,4 @@
+array(
+	'type' => 'regex',
+	'options' => array('regex' => '<example>/.*', 'spec' => '%example%'),
+)

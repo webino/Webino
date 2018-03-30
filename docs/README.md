@@ -1,6 +1,6 @@
 # Webino™ - Documentation 
 
-- [English](http://docs.webino.org/) [VIP]
+- [English](http://docs.webino.org/) [WIP]
 
 - [Slovensky](http://docs.webino.org/sk/) [TODO]
 

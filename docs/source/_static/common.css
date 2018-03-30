@@ -43,16 +43,22 @@ a {
     transition: color .25s ease-out, background-color .25s ease-out;
 }
 
-a:visited {
+menu a:visited {
     color: #2f99d9 !important;
 }
 
-a:hover,
-a:active,
-a[href="#"] {
+menu a:hover,
+menu a:active,
+menu a[href="#"] {
     text-decoration: none;
     color: #fff !important;
     background: #2f99d9;
+}
+
+a[href^="http"] {
+    padding-right: 12px;
+    background: url("link-out.svg") no-repeat 100% 5px;
+    background-size: 10px;
 }
 
 a.headerlink {

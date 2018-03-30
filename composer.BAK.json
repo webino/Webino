@@ -1,0 +1,76 @@
+{
+  "name": "webino/webino",
+  "description": "Webino™ - The Web Application Platform",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "webino",
+    "platform",
+    "zf2"
+  ],
+  "homepage": "https://github.com/webino/webino",
+  "authors": [
+    {
+      "name": "Webino, s. r. o.",
+      "email": "info@webino.sk",
+      "homepage": "http://webino.sk",
+      "role": "Developer"
+    },
+    {
+      "name": "Peter Bacinsky",
+      "email": "peter@bacinsky.sk",
+      "homepage": "http://bacinsky.sk",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.1",
+    "ext-intl": "*",
+    "ext-mbstring": "*",
+    "zendframework/zend-config": "3.*",
+    "zendframework/zend-cache": "3.*",
+    "zendframework/zend-eventmanager": "3.*",
+    "zendframework/zend-mail": "3.*",
+    "zendframework/zend-log": "3.*",
+    "zendframework/zend-mvc": "3.*",
+    "zendframework/zend-http": "3.*",
+    "zendframework/zend-dom": "3.*",
+    "zendframework/zend-console": "3.*",
+    "zendframework/zend-version": "3.*",
+    "zendframework/zend-servicemanager": "3.*",
+    "ezyang/htmlpurifier": "4.*",
+    "league/flysystem": "1.*",
+    "league/flysystem-memory": "1.*",
+    "bushbaby/flysystem": "1.*",
+    "tracy/tracy": "2.*",
+    "psr/log": "1.0.*",
+    "firephp/firephp-core": "0.*",
+    "ccampbell/chromephp": "4.*",
+    "league/climate": "3.*",
+    "psy/psysh": "0.*"
+  },
+  "require-dev": {
+    "nette/tester": "1.*",
+    "mikey179/vfsStream": "1.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "WebinoExceptionLib\\": "library/",
+      "WebinoConfigLib\\": "library/",
+      "WebinoEventLib\\": "library/",
+      "WebinoFilesystemLib\\": "library/",
+      "WebinoExamplesLib\\": "library/",
+      "WebinoMailLib\\": "library/",
+      "WebinoLogLib\\": "library/",
+      "WebinoDomLib\\": "library/",
+      "WebinoDevLib\\": "library/",
+      "WebinoViewLib\\": "library/",
+      "WebinoHtmlLib\\": "library/",
+      "WebinoBaseLib\\": "library/",
+      "WebinoAppLib\\": "library/",
+      "Webino\\": "library/"
+    },
+    "files": ["library/Webino.php", "inc/functions.php"]
+  }
+}

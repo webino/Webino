@@ -14,11 +14,11 @@
 Why Use Webino?
 ===============
 
+- configurable and modular
+
 - event-driven architecture
 
 - easy to learn, develop and deploy [TODO]
-
-- configurable and modular
 
 - well tested clean code [TODO]
 

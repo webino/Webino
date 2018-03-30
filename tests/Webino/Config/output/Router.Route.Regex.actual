@@ -1,0 +1,4 @@
+array(
+	'options' => array('route' => '<example>/.*', 'spec' => '%example%'),
+	'type' => 'regex',
+)
