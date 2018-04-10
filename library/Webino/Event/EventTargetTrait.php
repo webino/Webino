@@ -23,18 +23,13 @@ trait EventTargetTrait
     /**
      * Set event handler
      *
-     * @param string|EventInterface $event Event name or object
+     * @param string|EventInterface|EventHandlerInterface $event Event name, object or event handler
      * @param callable $handler Event handler
      * @param int $priority Event handler order priority
      * @return void
      */
     public function on($event, callable $handler = null, int $priority = 1) : void
     {
-        if ($event instanceof EventHandlerInterface) {
-            $event->attachEventEmitter($this->getEventEmitter());
-            return;
-        }
-
         $this->getEventEmitter()->on($event, $handler, $priority);
     }
 
@@ -47,11 +42,6 @@ trait EventTargetTrait
      */
     public function off($handler = null, $event = null) : void
     {
-        if ($handler instanceof EventHandlerInterface) {
-            $handler->detachEventEmitter($this->getEventEmitter());
-            return;
-        }
-
         $this->getEventEmitter()->off($handler, $event);
     }
 

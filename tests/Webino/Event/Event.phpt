@@ -20,8 +20,10 @@ $event = 'test.event';
 
 $emitCount = 0;
 $callback = function (EventInterface $event) use (&$emitCount) {
+    unset($event);
     $emitCount++;
 };
+
 
 $emitter->on($event, $callback);
 

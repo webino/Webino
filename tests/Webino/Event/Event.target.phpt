@@ -18,13 +18,11 @@ use Webino\Event\EventTargetTrait;
 require __DIR__ . '/../../bootstrap.php';
 
 
-/** @noinspection PhpUndefinedClassInspection */
 class TestEvent extends Event
 {
 
 }
 
-/** @noinspection PhpUndefinedClassInspection */
 class TestEventTarget implements EventTargetInterface
 {
     use EventEmitterAwareTrait;
@@ -43,7 +41,6 @@ class TestEventTarget implements EventTargetInterface
     }
 }
 
-/** @noinspection PhpUndefinedClassInspection */
 class TestEventHandler extends AbstractEventHandler
 {
     /**
@@ -63,7 +60,6 @@ class TestEventHandler extends AbstractEventHandler
     }
 
     public function onEvent(
-        /** @noinspection PhpUnusedParameterInspection */
         Event $event,
         string $argOne,
         string $argTwo
@@ -73,7 +69,6 @@ class TestEventHandler extends AbstractEventHandler
     }
 
     public function onTestEvent(
-        /** @noinspection PhpUnusedParameterInspection */
         TestEvent $event,
         string $argOne,
         string $argTwo
@@ -88,7 +83,6 @@ $target = new TestEventTarget;
 
 $invoked = 0;
 $callbackA = function (
-    /** @noinspection PhpUnusedParameterInspection */
     Event $event,
     string $argOne,
     string $argTwo
@@ -97,7 +91,6 @@ $callbackA = function (
 };
 
 $callbackB = function (
-    /** @noinspection PhpUnusedParameterInspection */
     TestEvent $event,
     string $argOne,
     string $argTwo

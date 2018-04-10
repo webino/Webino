@@ -9,29 +9,32 @@
  */
 
 use Tester\Assert;
-use Webino\Event\EventInterface;
 use Webino\Event\EventEmitter;
+use Webino\Event\EventInterface;
 
 require __DIR__ . '/../../bootstrap.php';
 
 
-$events = new EventEmitter;
-$event = 'event';
-$params = ['paramOne', 'paramTwo'];
+$emitter = new EventEmitter;
+$event = 'test.event';
 
 $emitCount = 0;
-$callback = function (
-    EventInterface $event,
-    string $argOne,
-    string $argTwo
-) use (&$emitCount) {
+$callbackA = function (EventInterface $event) use (&$emitCount) {
+    $emitCount++;
+};
+$callbackB = function (EventInterface $event) use (&$emitCount) {
     $emitCount++;
 };
 
 
-$events->on($event, $callback);
+$emitter->on($event, $callbackA);
+$emitter->on($event, $callbackB);
 
-$events->emit($event, $params);
+$emitter->emit($event);
+
+$emitter->off();
+
+$emitter->emit($event);
 
 
-Assert::equal(1, $emitCount);
+Assert::equal(2, $emitCount);

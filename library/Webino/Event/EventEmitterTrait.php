@@ -50,7 +50,8 @@ trait EventEmitterTrait
      * @param array $params Event parameters
      * @param callable|null $until Invoke handlers until callback return value evaluate to true
      * @return array Handlers invocation results array
-     * @throws Exception\RuntimeException Event missing name
+     * @throws Exception\InvalidArgumentException Invalid event
+     * @throws Exception\RuntimeException Missing event name
      */
     public function emit($event, array $params = [], callable $until = null) : array
     {
@@ -58,7 +59,8 @@ trait EventEmitterTrait
         $name = $event->getName();
 
         if (empty($name)) {
-            throw new Exception\RuntimeException('Event is missing a name; cannot emit!');
+            throw (new Exception\RuntimeException('Cannot emit event %s missing a name'))
+                ->format($event);
         }
 
         // get handlers by priority in reverse order
@@ -94,13 +96,19 @@ trait EventEmitterTrait
     /**
      * Set event handler
      *
-     * @param string|EventInterface $event Event name or object
-     * @param callable $handler Event handler
+     * @param string|EventInterface|EventHandlerInterface $event Event name, object or event handler
+     * @param callable|null $handler Event handler
      * @param int $priority Handler invocation priority
      * @return void
+     * @throws Exception\InvalidArgumentException Invalid event
      */
-    public function on($event, callable $handler, $priority = 1) : void
+    public function on($event, callable $handler = null, $priority = 1) : void
     {
+        if ($event instanceof EventHandlerInterface && $this instanceof EventEmitterInterface) {
+            $event->attachEventEmitter($this);
+            return;
+        }
+
         $event = $this->normalizeEvent($event);
         $name = $event->getName();
         $this->events[$name][(int) $priority][0][] = $handler;
@@ -109,12 +117,18 @@ trait EventEmitterTrait
     /**
      * Remove event handler
      *
-     * @param callable $handler Event handler
+     * @param callable|EventHandlerInterface|null $handler Event handler
      * @param string|EventInterface|null $event Event name or object
      * @return void
+     * @throws Exception\InvalidArgumentException Invalid event
      */
-    public function off(callable $handler = null, $event = null) : void
+    public function off($handler = null, $event = null) : void
     {
+        if ($handler instanceof EventHandlerInterface && $this instanceof EventEmitterInterface) {
+            $handler->detachEventEmitter($this);
+            return;
+        }
+
         if (!$event) {
             // remove listeners from all events
             foreach (array_keys($this->events) as $name) {
@@ -132,7 +146,7 @@ trait EventEmitterTrait
 
         foreach ($this->events[$name] as $priority => $handlers) {
             foreach ($handlers[0] as $index => $subHandler) {
-                if ($subHandler !== $handler) {
+                if ($handler && $subHandler !== $handler) {
                     continue;
                 }
 
@@ -183,14 +197,11 @@ trait EventEmitterTrait
      * Return event as object, if any
      *
      * @param string|EventInterface $event Event name or object
-     * @return EventInterface|null
+     * @return EventInterface Event object
+     * @throws Exception\InvalidArgumentException Invalid event
      */
     protected function normalizeEvent($event) : ?EventInterface
     {
-        if (!$event) {
-            return null;
-        }
-
         if (is_string($event)) {
             $eventClone = clone $this->eventPrototype;
             $eventClone->setName($event);

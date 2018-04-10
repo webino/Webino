@@ -16,14 +16,12 @@ use Webino\Event\EventEmitter;
 require __DIR__ . '/../../bootstrap.php';
 
 
-/** @noinspection PhpUndefinedClassInspection */
 class TestEvent extends Event
 {
 
 }
 
 
-/** @noinspection PhpUndefinedClassInspection */
 class TestEventHandler extends AbstractEventHandler
 {
     /**
@@ -38,7 +36,6 @@ class TestEventHandler extends AbstractEventHandler
     }
 
     public function onEvent(
-        /** @noinspection PhpUnusedParameterInspection */
         Event $event,
         string $paramOne,
         string $paramTwo
@@ -47,7 +44,6 @@ class TestEventHandler extends AbstractEventHandler
     }
 
     public function onTestEvent(
-        /** @noinspection PhpUnusedParameterInspection */
         TestEvent $event,
         string $paramOne,
         string $paramTwo
@@ -62,12 +58,13 @@ $handler = new TestEventHandler;
 $event = new TestEvent;
 $args = ['argOne', 'argTwo'];
 
-$handler->attachEventEmitter($emitter);
+
+$emitter->on($handler);
 
 $emitter->emit('event', $args);
 $emitter->emit($event, $args);
 
-$handler->detachEventEmitter($emitter);
+$emitter->off($handler);
 
 $emitter->emit('event', $args);
 $emitter->emit($event, $args);

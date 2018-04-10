@@ -23,6 +23,7 @@ $callback = function (Event $event) use (&$emitCount) {
     $emitCount++;
 };
 
+
 $emitter->on($event, $callback);
 
 $emitter->emit($event);

@@ -17,10 +17,37 @@ require __DIR__ . '/../../bootstrap.php';
 
 $emitter = new EventEmitter;
 $event = new stdClass;
+$handler = function () {};
 
 
-Assert::exception(function () use ($emitter, $event) {
+Assert::exception(
+    function () use ($emitter, $handler) {
+        $emitter->on($handler);
+    },
+    InvalidArgumentException::class,
+    'Expected event as `string|EventInterface|null` but got `Closure`'
+);
 
-    $emitter->on($event, function () {});
+Assert::exception(
+    function () use ($emitter, $event, $handler) {
+        $emitter->on($event, $handler);
+    },
+    InvalidArgumentException::class,
+    'Expected event as `string|EventInterface|null` but got `stdClass`'
+);
 
-}, InvalidArgumentException::class);
+Assert::exception(
+    function () use ($emitter, $event, $handler) {
+        $emitter->off($handler, $event);
+    },
+    InvalidArgumentException::class,
+    'Expected event as `string|EventInterface|null` but got `stdClass`'
+);
+
+Assert::exception(
+    function () use ($emitter, $event) {
+        $emitter->emit($event);
+    },
+    InvalidArgumentException::class,
+    'Expected event as `string|EventInterface|null` but got `stdClass`'
+);
