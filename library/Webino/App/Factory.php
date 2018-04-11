@@ -3,7 +3,7 @@
  * Webino™ (http://webino.sk)
  *
  * @link        https://github.com/webino for the canonical source repository
- * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @copyright   Copyright (c) 2015-2018 Webino, s.r.o. (http://webino.sk)
  * @author      Peter Bačinský <peter@bacinsky.sk>
  * @license     BSD-3-Clause
  */
@@ -38,22 +38,29 @@ final class Factory
      * @param DebuggerInterface $debugger
      * @return Application\AbstractBaseApplication
      */
-    public function create($config = null, DebuggerInterface $debugger = null)
+    public function create()
     {
-        $_debugger = $this->createDebugger($debugger);
-        $_config   = $this->createConfig($config);
-
-        $services = $this->createServices($_config);
-        $services->setService(Application::DEBUGGER, $_debugger);
-
-        $app = $services->get(Application::SERVICE);
-        if (!($app instanceof AbstractBaseApplication)) {
-            throw (new DomainException('Expected application type %s but got %s'))
-                ->format(AbstractBaseApplication::class, get_class($app));
-        }
+        // TODO
+//        $app =
 
         return $app;
     }
+//    public function create($config = null, DebuggerInterface $debugger = null)
+//    {
+//        $_debugger = $this->createDebugger($debugger);
+//        $_config   = $this->createConfig($config);
+//
+//        $services = $this->createServices($_config);
+//        $services->setService(Application::DEBUGGER, $_debugger);
+//
+//        $app = $services->get(Application::SERVICE);
+//        if (!($app instanceof AbstractBaseApplication)) {
+//            throw (new DomainException('Expected application type %s but got %s'))
+//                ->format(AbstractBaseApplication::class, get_class($app));
+//        }
+//
+//        return $app;
+//    }
 
     /**
      * @param DebuggerInterface $debugger

@@ -25,10 +25,11 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": ">=7.1",
+    "php": "7.*",
     "ext-intl": "*",
     "ext-mbstring": "*",
 
+    "psr/container": "1.*",
     "psr/log": "1.*",
 
     "tracy/tracy": "2.*",
@@ -40,9 +41,7 @@
     "league/flysystem-memory": "1.*",
 
     "firephp/firephp-core": "0.*",
-    "ccampbell/chromephp": "4.*",
-
-    "zendframework/zend-eventmanager": "3.*"
+    "ccampbell/chromephp": "4.*"
   },
   "require-dev": {
     "nette/tester": "1.*",

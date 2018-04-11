@@ -3,17 +3,17 @@
  * Webino™ (http://webino.sk)
  *
  * @link        https://github.com/webino for the canonical source repository
- * @copyright   Copyright (c) 2015-2017 Webino, s.r.o. (http://webino.sk)
+ * @copyright   Copyright (c) 2015-2018 Webino, s.r.o. (http://webino.sk)
  * @author      Peter Bačinský <peter@bacinsky.sk>
  * @license     BSD-3-Clause
  */
 
 use Webino\Version;
-use WebinoAppLib\Application\CoreConfig;
-use WebinoAppLib\Factory;
-use WebinoAppLib\Options\DebuggerOptions;
-use WebinoAppLib\Service\Debugger;
-use WebinoAppLib\Service\DebuggerInterface;
+use Webino\App\Application\CoreConfig;
+use Webino\App\Factory;
+use Webino\App\Options\DebuggerOptions;
+use Webino\App\Service\Debugger;
+use Webino\App\Service\DebuggerInterface;
 
 /**
  * Class Webino

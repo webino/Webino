@@ -4,18 +4,14 @@ use Tester\Assert;
 use Webino\App\Application;
 use Webino\App\Application\ConfiguredApplication;
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../../bootstrap.php';
 
 
-$testCustomSetting = ['testCustomSetting' => 'testCustomSettingValue'];
+$settings = ['testSettings' => 'testSettingsValue'];
+$config = Webino::config($settings);
+$core = Webino::application($config);
 
-$config = Webino::config([
-    $testCustomSetting,
-]);
-
-$appCore = Webino::application($config);
-
-$app = $appCore->bootstrap();
+$app = $core->bootstrap();
 
 $app->dispatch();
 
@@ -24,4 +20,4 @@ Assert::type(Application::class, $appCore);
 
 Assert::type(ConfiguredApplication::class, $app);
 
-Assert::same(current($testCustomSetting), $app->getConfig(key($testCustomSetting)));
+Assert::same(current($settings), $app->getConfig(key($testCustomSetting)));

@@ -1,0 +1,4 @@
+TestServiceFactory::__set_state(/* #284f */ array(
+	'service' => TestService::__set_state(/* #fce1 */ array()),
+	'callback' => NULL,
+))

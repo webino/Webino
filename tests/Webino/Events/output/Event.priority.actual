@@ -1,0 +1,3 @@
+Webino\Events\EventResponses::__set_state(/* #5160 */ array(
+	'responses' => array('D', 'C', 'B', 'A'),
+))
