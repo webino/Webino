@@ -30,7 +30,7 @@ class TestServiceFactory extends AbstractFactory
         $this->service = $service;
     }
 
-    public function create(ServiceContainerInterface $services)
+    public function createService(ServiceContainerInterface $services)
     {
         return $this->service;
     }

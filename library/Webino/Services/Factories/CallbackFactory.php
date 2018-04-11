@@ -15,7 +15,7 @@ use Webino\Services\ServiceContainerInterface;
 /**
  * Class CallbackFactory
  */
-class CallbackFactory implements FactoryInterface
+class CallbackFactory extends AbstractFactory
 {
     /**
      * Callable factory
@@ -38,7 +38,7 @@ class CallbackFactory implements FactoryInterface
      * @param ServiceContainerInterface $services Services container
      * @return mixed
      */
-    public function create(ServiceContainerInterface $services)
+    public function createService(ServiceContainerInterface $services)
     {
         $callback = $this->callback;
         return $callback($services);

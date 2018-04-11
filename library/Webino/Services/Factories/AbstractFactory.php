@@ -30,5 +30,5 @@ abstract class AbstractFactory implements FactoryInterface
      * @param ServiceContainerInterface $services Services container
      * @return mixed
      */
-    abstract public function create(ServiceContainerInterface $services);
+    abstract public function createService(ServiceContainerInterface $services);
 }

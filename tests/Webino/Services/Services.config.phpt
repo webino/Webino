@@ -9,7 +9,6 @@
  */
 
 use Tester\Assert;
-use Webino\Services\Exceptions\ContainerException;
 use Webino\Services\Factories\AbstractFactory;
 use Webino\Services\ServiceContainer;
 use Webino\Services\ServiceContainerInterface;
@@ -24,7 +23,7 @@ class TestService
 
 class TestServiceFactory extends AbstractFactory
 {
-    public function create(ServiceContainerInterface $services)
+    public function createService(ServiceContainerInterface $services)
     {
         return new TestService;
     }

@@ -23,5 +23,5 @@ interface FactoryInterface
      * @param ServiceContainerInterface $services Services container
      * @return mixed
      */
-    public function create(ServiceContainerInterface $services);
+    public function createService(ServiceContainerInterface $services);
 }

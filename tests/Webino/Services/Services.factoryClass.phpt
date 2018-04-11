@@ -23,7 +23,7 @@ class TestService
 
 class TestServiceFactory extends AbstractFactory
 {
-    public function create(ServiceContainerInterface $services)
+    public function createService(ServiceContainerInterface $services)
     {
         return new TestService;
     }

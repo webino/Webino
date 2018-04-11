@@ -113,7 +113,7 @@ trait ServiceContainerTrait
                 $entry = $isSame ? new $entry : $this->get($entry);
 
                 if ($entry instanceof Factories\FactoryInterface) {
-                    return $entry->create($this);
+                    return $entry->createService($this);
                 }
 
                 return $entry;
@@ -121,11 +121,11 @@ trait ServiceContainerTrait
 
             // callback factory
             if (is_callable($entry)) {
-                return (new Factories\CallbackFactory($entry))->create($this);
+                return (new Factories\CallbackFactory($entry))->createService($this);
             }
 
             if ($entry instanceof Factories\FactoryInterface) {
-                return $entry->create($this);
+                return $entry->createService($this);
             }
         }
 
