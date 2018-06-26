@@ -1,0 +1,2 @@
+#!/bin/bash
+vendor/bin/tester -c tests/tester/php.ini -d auto_prepend_file=$PWD/tests/tester/bootstrap.php library/*/tests/tester/*$@*

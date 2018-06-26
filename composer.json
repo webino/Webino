@@ -18,19 +18,19 @@
     "autoload": {
         "psr-4": {
             "Webino\\": [
-                "WebinoApp/src",
-                "WebinoHttp/src",
-                "WebinoConsole/src",
-                "WebinoResponder/src",
-                "WebinoException/src",
-                "WebinoEventEmitter/src",
-                "WebinoServiceContainer/src"
+                "library/WebinoApp/src",
+                "library/WebinoHttp/src",
+                "library/WebinoConsole/src",
+                "library/WebinoResponder/src",
+                "library/WebinoException/src",
+                "library/WebinoEventEmitter/src",
+                "library/WebinoServiceContainer/src"
             ]
         }
     },
     "scripts": {
-        "test": "vendor/bin/tester -c tests/tester/php.ini tests/tester",
-        "check": "phpcs",
-        "fix": "phpcbf"
+        "test": "bin/tester",
+        "check": "phpcs --extensions=php,phpt",
+        "fix": "phpcbf --extensions=php,phpt"
     }
 }

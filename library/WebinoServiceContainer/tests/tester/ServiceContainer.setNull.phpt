@@ -3,22 +3,18 @@
 use Tester\Assert;
 use Webino\ServiceContainer;
 
-require '../bootstrap.php';
-
-
 class TestService
 {
-    public function __invoke(\stdClass $obj)
-    {
 
-    }
 }
 
 
 $services = new ServiceContainer;
 
+$services->set(TestService::class, null);
+
 
 $testService = $services->get(TestService::class);
 
 
-Assert::type(TestService::class, $testService);
+Assert::null($testService);

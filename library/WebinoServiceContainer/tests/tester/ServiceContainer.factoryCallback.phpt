@@ -3,24 +3,19 @@
 use Tester\Assert;
 use Webino\ServiceContainer;
 
-require '../bootstrap.php';
-
-
 class TestService
 {
-    public static function create(ServiceContainer $services)
-    {
-        return new static($services->get(\stdClass::class));
-    }
-
     public function __construct(\stdClass $obj)
     {
-
     }
 }
 
 
 $services = new ServiceContainer;
+
+$services->set(TestService::class, function (ServiceContainer $services) {
+    return new TestService($services->get(\stdClass::class));
+});
 
 
 $testService = $services->get(TestService::class);

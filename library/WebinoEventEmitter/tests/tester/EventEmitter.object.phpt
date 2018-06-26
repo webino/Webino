@@ -4,9 +4,6 @@ use Tester\Assert;
 use Webino\Event;
 use Webino\EventEmitter;
 
-require '../bootstrap.php';
-
-
 $eventEmitter = new EventEmitter;
 $event = new Event('test');
 
