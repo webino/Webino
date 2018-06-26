@@ -10,8 +10,6 @@
 
 namespace Webino;
 
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 use Webino\Exception\ServiceContainerException;
 use Webino\Exception\ServiceNotFoundException;
 
@@ -36,10 +34,8 @@ trait ServiceContainerTrait
     public function configure(array $config) : void
     {
         foreach ($config as $key => $value) {
-
             if (is_numeric($key) && is_string($value)) {
                 $this->set($value, $value);
-
             } elseif (is_string($key)) {
                 $this->set($key, $value);
             }
@@ -64,8 +60,8 @@ trait ServiceContainerTrait
      * Returns entry of the container by its identifier
      *
      * @param string $id Identifier of the entry to look for
-     * @throws NotFoundExceptionInterface No entry was found for identifier
-     * @throws ContainerExceptionInterface Error while retrieving the entry
+     * @throws ServiceNotFoundException No entry was found for identifier
+     * @throws ServiceContainerException Error while retrieving the entry
      * @return mixed Entry
      */
     public function get($id)
@@ -109,7 +105,6 @@ trait ServiceContainerTrait
     private function resolveEntry($entry)
     {
         if ($this instanceof ServiceContainerInterface) {
-
             // object or factory class
             if (is_string($entry) && class_exists($entry)) {
                 // resolve entry instance or factory

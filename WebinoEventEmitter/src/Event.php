@@ -24,7 +24,6 @@ class Event extends \ArrayObject implements EventInterface
         // init event from string or object
         if (is_string($event)) {
             $this->setName($event);
-
         } elseif ($event instanceof EventInterface) {
             $this->setTarget($event->getTarget());
             $this->exchangeArray($event->getArrayCopy());

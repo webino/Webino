@@ -12,22 +12,25 @@
         "psr/container": "^1.0"
     },
     "require-dev": {
-        "nette/tester": "1.*"
+        "nette/tester": "1.*",
+        "squizlabs/php_codesniffer": "3.*"
     },
     "autoload": {
         "psr-4": {
             "Webino\\": [
-                "Webino/src",
                 "WebinoApp/src",
                 "WebinoHttp/src",
                 "WebinoConsole/src",
                 "WebinoResponder/src",
+                "WebinoException/src",
                 "WebinoEventEmitter/src",
                 "WebinoServiceContainer/src"
             ]
         }
     },
     "scripts": {
-        "test": "vendor/bin/tester -c tests/tester/php.ini tests/tester"
+        "test": "vendor/bin/tester -c tests/tester/php.ini tests/tester",
+        "check": "phpcs",
+        "fix": "phpcbf"
     }
 }

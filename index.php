@@ -14,13 +14,12 @@ $app->on(Event\BootstrapEvent::class, function () {
 });
 
 $app->on(Event\ResponseEvent::class, function () {
-
 });
 
 $app->on(Event\HttpResponseEvent::class, function () {
 //    throw new \RuntimeException('TODO2');
 //    throw new \Webino\Exception\ServiceUnavailableStatusException('Requested page not found');
-    throw new \Webino\Exception\NotFoundStatusException('Requested page not found');
+//    throw new \Webino\Exception\NotFoundStatusException('Requested page not found');
 //    throw new \Webino\Exception\ForbiddenStatusException('Requested page not found');
 //    throw new \Webino\Exception\InternalServerErrorStatusException('Requested page not found');
 //    return 'Http';

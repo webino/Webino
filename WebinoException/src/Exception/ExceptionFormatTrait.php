@@ -33,7 +33,6 @@ trait ExceptionFormatTrait
         foreach ($params as $param) {
             if (is_string($param)) {
                 $args[] = '`' . $param . '`';
-
             } elseif (is_object($param)) {
                 $args[] = '`' . get_class($param) . '`';
             } else {
