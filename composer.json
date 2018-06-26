@@ -1,0 +1,33 @@
+{
+    "name": "webino/webino",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Peter Bacinsky",
+            "email": "peter@bacinsky.sk"
+        }
+    ],
+    "require": {
+        "psr/container": "^1.0"
+    },
+    "require-dev": {
+        "nette/tester": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webino\\": [
+                "Webino/src",
+                "WebinoApp/src",
+                "WebinoHttp/src",
+                "WebinoConsole/src",
+                "WebinoResponder/src",
+                "WebinoEventEmitter/src",
+                "WebinoServiceContainer/src"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/tester -c tests/tester/php.ini tests/tester"
+    }
+}
