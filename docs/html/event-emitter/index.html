@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Learn Webino — Webino 0.1.0alpha documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../better.css" type="text/css">
+    <link rel="stylesheet" href="../pygments.css" type="text/css">
+    <link rel="stylesheet" href="../common.css" type="text/css">
+
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="#">
+    <link rel="next" title="Installation" href="installation.html">
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="../underscore.js"></script>
+    <script type="text/javascript" src="../doctools.js"></script>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext"
+          type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&amp;subset=latin,latin-ext"
+          type="text/css">
+</head>
+<body>
+<div class="related top">
+    <nav id="rellinks">
+        <ul>
+            <li>
+                <a href="installation.html" title="Next document">Installation</a>
+                →
+            </li>
+        </ul>
+    </nav>
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="#">Webino 0.1.0alpha documentation</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+                <h1>Webino Event Emitter</h1>
+
+<p>Event Emitter allows you to bind handlers to emitted events. Events decouple various aspects of your application,
+since a single event can have multiple handlers that do not depend on each other.</p>
+
+<div class="contents local topic">
+<ul class="simple">
+<li><a id="register-event-handler~" href="#register-event-handler">Register Event Handler</a></li>
+<li><a id="unregister-event-handlers~" href="#unregister-event-handlers">Unregister Event Handlers</a></li>
+<li><a id="emit-until~" href="#emit-until">Emit until</a></li>
+</ul>
+</div>
+
+<div class="admonition note incomplete-document">
+<strong>Incomplete Document</strong><br>
+<small>Missing following topics:</small><br>
+<ul>
+<li>Event Handler Class</li>
+<li>Event Handler Priority</li>
+<li>Custom Event Emitter</li>
+<li>Custom Events</li>
+<li>Event Interface</li>
+<li>More Examples</li>
+</ul>
+</div>
+
+<h2 id="register-event-handler"><a href="#register-event-handler~">Register Event Handler</a></h2>
+
+<p>To handle an event emit you have to register a handler to named event with the <code>on()</code> method. Then emit an event
+with the <code>emit()</code> method.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\EventEmitter<span class="sy0">;</span><br />
+<br />
+<span class="re0">$emitter</span> <span class="sy0">=</span> <span class="kw2">new</span> EventEmitter<span class="sy0">;</span><br />
+<br />
+<span class="co1">// registering closure event handler</span><br />
+<span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">on</span><span class="br0">&#40;</span><span class="st_h">'example'</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="kw1">return</span> <span class="st_h">'Hello'</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// emitting custom event</span><br />
+<span class="re0">$event</span> <span class="sy0">=</span> <span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">emit</span><span class="br0">&#40;</span><span class="st_h">'example'</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co4">/** @var \Webino\EventResults $results */</span><br />
+<span class="re0">$results</span> <span class="sy0">=</span> <span class="re0">$event</span><span class="sy0">-&gt;</span><span class="me1">getResults</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h2 id="unregister-event-handlers"><a href="#unregister-event-handlers~">Unregister Event Handlers</a></h2>
+
+<p>Use the <code>off()</code> method to unregister event handlers.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\EventEmitter<span class="sy0">;</span><br />
+<br />
+<span class="re0">$emitter</span> <span class="sy0">=</span> <span class="kw2">new</span> EventEmitter<span class="sy0">;</span><br />
+<br />
+<span class="re0">$handler</span> <span class="sy0">=</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="kw1">return</span> <span class="st_h">'Hello'</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><span class="sy0">;</span><br />
+<br />
+<span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">on</span><span class="br0">&#40;</span><span class="st_h">'example'</span><span class="sy0">,</span> <span class="re0">$handler</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// remove handler for all events</span><br />
+<span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">off</span><span class="br0">&#40;</span><span class="re0">$handler</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// remove all handlers for an event</span><br />
+<span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">off</span><span class="br0">&#40;</span><span class="kw4">null</span><span class="sy0">,</span> <span class="st_h">'example'</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// remove all handlers for all events</span><br />
+<span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">off</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h2 id="emit-until"><a href="#emit-until~">Emit until</a></h2>
+
+<p>You can provide to the <code>emit()</code> a second argument to test each result. Returning <code>false</code> will stop an event propagation.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\EventEmitter<span class="sy0">;</span><br />
+<br />
+<span class="re0">$emitter</span> <span class="sy0">=</span> <span class="kw2">new</span> EventEmitter<span class="sy0">;</span><br />
+<br />
+<span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">on</span><span class="br0">&#40;</span><span class="st_h">'example'</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="kw1">return</span> <span class="st_h">'Special'</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="re0">$event</span> <span class="sy0">=</span> <span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">emit</span><span class="br0">&#40;</span><span class="st_h">'example'</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="re0">$result</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co1">// when result meets required condition</span><br />
+&nbsp; &nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span><span class="st_h">'Special'</span> <span class="sy0">===</span> <span class="re0">$result</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">// stop propagation</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw4">false</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+&nbsp; &nbsp; <span class="co1">// or continue</span><br />
+&nbsp; &nbsp; <span class="kw1">return</span> <span class="kw4">true</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar" role="navigation" aria-label="main navigation">
+        <div class="sidebarwrapper">
+            <p class="logo">
+                <a href="../">
+                    <img class="logo" src="../webino.png" alt="Logo">
+                </a>
+            </p>
+            <menu>
+                            </menu>
+        </div>
+    </div>
+    <div class="clearer"></div>
+</div>
+<div class="related bottom">
+    <nav id="rellinks">
+        <ul>
+            <li>
+                <a href="installation.html" title="Next document">Installation</a>
+                →
+            </li>
+        </ul>
+    </nav>
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="#">Webino 0.1.0alpha documentation</a></li>
+        </ul>
+    </nav>
+</div>
+<footer id="pagefooter">© 2018, Webino, s. r. o. All rights reserved.</footer>
+</body>
+</html>

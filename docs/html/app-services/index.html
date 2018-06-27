@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Learn Webino — Webino 0.1.0alpha documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../better.css" type="text/css">
+    <link rel="stylesheet" href="../pygments.css" type="text/css">
+    <link rel="stylesheet" href="../common.css" type="text/css">
+
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="#">
+    <link rel="next" title="Installation" href="installation.html">
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="../underscore.js"></script>
+    <script type="text/javascript" src="../doctools.js"></script>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext"
+          type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&amp;subset=latin,latin-ext"
+          type="text/css">
+</head>
+<body>
+<div class="related top">
+    <nav id="rellinks">
+        <ul>
+            <li>
+                <a href="installation.html" title="Next document">Installation</a>
+                →
+            </li>
+        </ul>
+    </nav>
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="#">Webino 0.1.0alpha documentation</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+                <h1>Webino Application Services</h1>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\App<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Custom service method<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @return void<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Application object creation</span><br />
+<span class="re0">$app</span> <span class="sy0">=</span> App<span class="sy0">::</span><span class="me2">create</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Using custom service</span><br />
+<span class="co4">/** @var MyService $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="re0">$myService</span><span class="sy0">-&gt;</span><span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar" role="navigation" aria-label="main navigation">
+        <div class="sidebarwrapper">
+            <p class="logo">
+                <a href="../">
+                    <img class="logo" src="../webino.png" alt="Logo">
+                </a>
+            </p>
+            <menu>
+                            </menu>
+        </div>
+    </div>
+    <div class="clearer"></div>
+</div>
+<div class="related bottom">
+    <nav id="rellinks">
+        <ul>
+            <li>
+                <a href="installation.html" title="Next document">Installation</a>
+                →
+            </li>
+        </ul>
+    </nav>
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="#">Webino 0.1.0alpha documentation</a></li>
+        </ul>
+    </nav>
+</div>
+<footer id="pagefooter">© 2018, Webino, s. r. o. All rights reserved.</footer>
+</body>
+</html>
