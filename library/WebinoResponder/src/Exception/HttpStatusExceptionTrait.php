@@ -17,12 +17,12 @@ trait HttpStatusExceptionTrait
     /**
      * @return HttpStatusInterface
      */
-    abstract protected function createHttpStatus() : HttpStatusInterface;
+    abstract protected function createHttpStatus(): HttpStatusInterface;
 
     /**
      * @return HttpStatusInterface
      */
-    public function getHttpStatus() : HttpStatusInterface
+    public function getHttpStatus(): HttpStatusInterface
     {
         if (!$this->status) {
             $this->status = $this->createHttpStatus();

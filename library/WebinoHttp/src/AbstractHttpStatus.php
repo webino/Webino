@@ -10,22 +10,22 @@ abstract class AbstractHttpStatus implements HttpStatusInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function getCode() : int;
+    abstract public function getCode(): int;
 
     /**
      * {@inheritdoc}
      */
-    abstract public function getPhrase() : string;
+    abstract public function getPhrase(): string;
 
     /**
      * {@inheritdoc}
      */
-    abstract public function getVersion() : string;
+    abstract public function getVersion(): string;
 
     /**
      * {@inheritdoc}
      */
-    public function send() : void
+    public function send(): void
     {
         http_response_code($this->getCode());
     }

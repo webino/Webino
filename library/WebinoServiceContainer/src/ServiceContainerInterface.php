@@ -24,5 +24,5 @@ interface ServiceContainerInterface extends ContainerInterface
      * @param mixed $entry Container entry
      * @return void
      */
-    public function set(string $id, $entry) : void;
+    public function set(string $id, $entry): void;
 }

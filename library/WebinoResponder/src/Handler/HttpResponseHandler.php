@@ -20,7 +20,7 @@ class HttpResponseHandler extends ResponseHandler
      * @param App $app
      * @return HttpResponseHandler
      */
-    public static function create(App $app) : HttpResponseHandler
+    public static function create(App $app): HttpResponseHandler
     {
         return new static;
     }

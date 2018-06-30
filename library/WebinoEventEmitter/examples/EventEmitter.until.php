@@ -1,6 +1,6 @@
 <?php
 
-//example
+//:
 use Webino\EventEmitter;
 
 $emitter = new EventEmitter;
@@ -18,4 +18,4 @@ $event = $emitter->emit('example', function ($result) {
     // or continue
     return true;
 });
-///example
+//!

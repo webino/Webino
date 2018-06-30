@@ -14,7 +14,7 @@ class NoContent extends AbstractHttpStatus
     /**
      * {@inheritdoc}
      */
-    public function getCode() : int
+    public function getCode(): int
     {
         return 204;
     }
@@ -22,7 +22,7 @@ class NoContent extends AbstractHttpStatus
     /**
      * {@inheritdoc}
      */
-    public function getPhrase() : string
+    public function getPhrase(): string
     {
         return 'No Content';
     }

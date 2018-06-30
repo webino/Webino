@@ -31,7 +31,7 @@ trait ServiceContainerTrait
      * @param array $config Service container config
      * @return void
      */
-    public function configure(array $config) : void
+    public function configure(array $config): void
     {
         foreach ($config as $key => $value) {
             if (is_numeric($key) && is_string($value)) {
@@ -93,7 +93,7 @@ trait ServiceContainerTrait
      * @param mixed $entry Container entry
      * @return void
      */
-    public function set(string $id, $entry = null) : void
+    public function set(string $id, $entry = null): void
     {
         $this->entries[(string) $id] = func_num_args() > 1 ? $entry : $id;
     }
@@ -111,7 +111,7 @@ trait ServiceContainerTrait
                 $isSame = empty($this->entries[$entry]) || $entry === $this->entries[$entry];
                 $entry = $isSame ? $this->createEntry($entry) : $this->get($entry);
 
-                if ($entry instanceof Factory\FactoryInterface) {
+                if ($entry instanceof ServiceFactoryInterface) {
                     return $entry->create($this);
                 }
 
@@ -123,7 +123,7 @@ trait ServiceContainerTrait
                 return (new Factory\CallbackFactory($entry))->create($this);
             }
 
-            if ($entry instanceof Factory\FactoryInterface) {
+            if ($entry instanceof ServiceFactoryInterface) {
                 return $entry->create($this);
             }
         }
@@ -138,7 +138,7 @@ trait ServiceContainerTrait
     protected function createEntry($entry)
     {
         if (method_exists($entry, 'create')
-            && empty(class_implements($entry)[Factory\FactoryInterface::class])
+            && empty(class_implements($entry)[ServiceFactoryInterface::class])
         ) {
             return call_user_func("$entry::create", $this);
         }

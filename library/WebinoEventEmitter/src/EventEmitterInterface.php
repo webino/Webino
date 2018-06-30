@@ -24,7 +24,7 @@ interface EventEmitterInterface
      * @param string|EventInterface|null $event Event name or object
      * @return void
      */
-    public function off($callback = null, $event = null) : void;
+    public function off($callback = null, $event = null): void;
 
     /**
      * Invoke handlers
@@ -33,5 +33,5 @@ interface EventEmitterInterface
      * @param callable|null $until Invoke handlers until callback return value evaluate to true
      * @return EventInterface Event object
      */
-    public function emit($event, callable $until = null) : EventInterface;
+    public function emit($event, callable $until = null): EventInterface;
 }

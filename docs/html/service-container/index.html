@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Learn Webino — Webino 0.1.0alpha documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../better.css" type="text/css">
+    <link rel="stylesheet" href="../pygments.css" type="text/css">
+    <link rel="stylesheet" href="../common.css" type="text/css">
+
+    <link rel="top" title="Webino 0.1.0alpha documentation" href="#">
+    <link rel="next" title="Installation" href="installation.html">
+
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="../underscore.js"></script>
+    <script type="text/javascript" src="../doctools.js"></script>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext"
+          type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700&amp;subset=latin,latin-ext"
+          type="text/css">
+</head>
+<body>
+<div class="related top">
+    <nav id="rellinks">
+        <ul>
+            <li>
+                <a href="installation.html" title="Next document">Installation</a>
+                →
+            </li>
+        </ul>
+    </nav>
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="#">Webino 0.1.0alpha documentation</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+                <h1>Service Container</h1>
+
+<p>The service container is the way to centralize construction of useful objects. These objects, named services,
+may provide functionality like filesystem, database access, mail delivery, caching and so on.</p>
+
+<div class="contents local topic">
+<ul class="simple">
+<li><a id="new-service-container~" href="#new-service-container">New Service Container</a></li>
+<li><a id="getting-a-service~" href="#getting-a-service">Getting a Service</a></li>
+<li><a id="setting-a-service~" href="#setting-a-service">Setting a Service</a></li>
+<li><a id="service-dependencies~" href="#service-dependencies">Service Dependencies</a></li>
+<li><a id="custom-service-container~" href="#custom-service-container">Custom Service Container</a></li>
+</ul>
+</div>
+
+<div class="admonition note incomplete-document">
+Service container implements the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md">PSR-11</a> interface.
+</div>
+
+<h2 id="new-service-container"><a href="#new-service-container~">New Service Container</a></h2>
+
+<p>It is required to instantiate the <code>Webino\ServiceContainer</code> class to use a service container object.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\ServiceContainer<span class="sy0">;</span><br />
+<br />
+<span class="co1">// Creating a service container</span><br />
+<span class="co4">/** @var \Webino\ServiceContainerInterface $services */</span><br />
+<span class="re0">$services</span> <span class="sy0">=</span> <span class="kw2">new</span> ServiceContainer<span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h2 id="getting-a-service"><a href="#getting-a-service~">Getting a Service</a></h2>
+
+<p>Use the <code>get()</code> method to access required service object.</p>
+
+<pre><code class="php"><span class="co1">// Getting custom service</span><br />
+<span class="co4">/** @var MyService $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<div class="admonition note incomplete-document">
+
+It is possible to get any class from the service container without setting it by default.
+
+</div>
+
+<h2 id="setting-a-service"><a href="#setting-a-service~">Setting a Service</a></h2>
+
+<p>To explicitly configure or override a service use the <code>set()</code> method.</p>
+
+<h3>Service Class</h3>
+
+<p>It is possible to override the service implementation by the extended one.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\ServiceContainer<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class stdClassBetter<br />
+&nbsp;*<br />
+&nbsp;* Example class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> stdClassBetter <span class="kw2">extends</span> \stdClass<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example method<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @return void<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">foo</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">:</span> void<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Creating a service container</span><br />
+<span class="co4">/** @var \Psr\Container\ContainerInterface $services */</span><br />
+<span class="re0">$services</span> <span class="sy0">=</span> <span class="kw2">new</span> ServiceContainer<span class="sy0">;</span><br />
+<br />
+<span class="co1">// Setting custom service</span><br />
+<span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> \stdClassBetter<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Getting custom service</span><br />
+<span class="co4">/** @var \stdClassBetter $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="re0">$myService</span><span class="sy0">-&gt;</span><span class="kw4">foo</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<div class="admonition note incomplete-document">
+
+It is not required to register the service class, if it exists, the service container will try to instantiate it.
+
+</div>
+
+<h3>Service Interface</h3>
+
+<p>When using interface as a dependency it is required to set an object class to the service container.</p>
+
+<pre><code class="php"><span class="co4">/**<br />
+&nbsp;* Interface MyServiceInterface<br />
+&nbsp;*<br />
+&nbsp;* Example service interface<br />
+&nbsp;*/</span><br />
+<span class="kw2">interface</span> MyServiceInterface<br />
+<span class="br0">&#123;</span><br />
+<br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService <span class="kw2">implements</span> MyServiceInterface<br />
+<span class="br0">&#123;</span><br />
+<br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Setting custom service</span><br />
+<span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>MyServiceInterface<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> MyService<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Getting custom service</span><br />
+<span class="co4">/** @var MyServiceInterface $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>MyServiceInterface<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<div class="admonition note incomplete-document">
+
+Using interface to register services is a convenient way to support multiple implementations.
+
+</div>
+
+<h3>Service Object</h3>
+
+<p>It is possible to set an object instance as a service.</p>
+
+<pre><code class="php"><span class="co1">// Setting custom service</span><br />
+<span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> <span class="kw2">new</span> MyService<span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h2 id="service-dependencies"><a href="#service-dependencies~">Service Dependencies</a></h2>
+
+<p>It is very often that a service depends on other services, so these dependencies needs to be injected via class
+constructor. For example assume a custom service with some dependencies.</p>
+
+<pre><code class="php"><span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example constructor<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param \stdClass|\object $obj Some dependency<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+&nbsp;</code></pre>
+
+<div class="admonition note incomplete-document">
+
+Documentation comment typehint <code>\object</code> is added to bypass IDE static type checking warnings.
+
+</div>
+
+<h3>Static Factory Method</h3>
+
+<p>The easiest way to construct an object with dependencies is to add the static <code>create()</code> method to a class.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\ServiceContainerInterface<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example service factory<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param ServiceContainerInterface $services<br />
+&nbsp; &nbsp; &nbsp;* @return MyService<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">static</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> <span class="kw2">static</span><span class="br0">&#40;</span><span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example constructor<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param \stdClass|\object $obj Some dependency<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+&nbsp;</code></pre>
+
+<h3>Factory object class</h3>
+
+<p>Another way to create new service with dependencies is via factory class implementing the 
+<code>Webino\ServiceFactoryInterface</code>.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\ServiceFactoryInterface<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyServiceServiceFactory<br />
+&nbsp;*<br />
+&nbsp;* Example service factory class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyServiceServiceFactory <span class="kw2">implements</span> ServiceFactoryInterface<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example service factory<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param ServiceContainerInterface $services<br />
+&nbsp; &nbsp; &nbsp;* @return MyService<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> MyService<span class="br0">&#40;</span><span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Configuring service factory object class</span><br />
+<span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> MyServiceServiceFactory<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h3>Closure factory</h3>
+
+<p>It is also possible to create a service via anonymous function.</p>
+
+<pre><code class="php"><span class="co1">// Configuring service closure factory</span><br />
+<span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> MyService<span class="br0">&#40;</span><span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h2 id="custom-service-container"><a href="#custom-service-container~">Custom Service Container</a></h2>
+
+<p>TODO...</p>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar" role="navigation" aria-label="main navigation">
+        <div class="sidebarwrapper">
+            <p class="logo">
+                <a href="../">
+                    <img class="logo" src="../webino.png" alt="Logo">
+                </a>
+            </p>
+            <menu>
+                <ul>
+<h2>The Basics</h2>
+<li>
+<a href="../app-create">Application</a>
+</li>
+<li>
+<a href="../app-services">Services</a>
+</li>
+<h2>User Guide</h2>
+<li>
+<a href="../event-emitter">Event Emitter</a>
+</li>
+<li>
+<a href="../service-container">Service Container</a>
+</li>
+</ul>            </menu>
+        </div>
+    </div>
+    <div class="clearer"></div>
+</div>
+<div class="related bottom">
+    <nav id="rellinks">
+        <ul>
+            <li>
+                <a href="installation.html" title="Next document">Installation</a>
+                →
+            </li>
+        </ul>
+    </nav>
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="#">Webino 0.1.0alpha documentation</a></li>
+        </ul>
+    </nav>
+</div>
+<footer id="pagefooter">© 2018, Webino, s. r. o. All rights reserved.</footer>
+</body>
+</html>

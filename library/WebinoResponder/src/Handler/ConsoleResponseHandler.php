@@ -18,7 +18,7 @@ class ConsoleResponseHandler extends ResponseHandler
      * @param App $app
      * @return ConsoleResponseHandler
      */
-    public static function create(App $app) : ConsoleResponseHandler
+    public static function create(App $app): ConsoleResponseHandler
     {
         return new static;
     }

@@ -21,5 +21,5 @@ interface EventResultsInterface
      * @param mixed $response Event response value
      * @return void
      */
-    public function add($response) : void;
+    public function add($response): void;
 }

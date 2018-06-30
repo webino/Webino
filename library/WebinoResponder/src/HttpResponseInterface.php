@@ -14,7 +14,7 @@ interface HttpResponseInterface
      *
      * @return ContentType
      */
-    public function getContentType() : ContentType;
+    public function getContentType(): ContentType;
 
     /**
      * Set response content type

@@ -43,7 +43,29 @@
     <div class="documentwrapper">
         <div class="bodywrapper">
             <div class="body" role="main">
-                <h1>Webino Application Services</h1>
+                <h1>Application Services</h1>
+
+<p>Services are the foundation of the application architecture. A service is basically an object that provides some 
+reusable functionality, like sending mails, storing data, rendering, etc. Services are the way that third-party 
+libraries are plugged into the application also.</p>
+
+<div class="contents local topic">
+<ul class="simple">
+<li><a id="custom-application-service~" href="#custom-application-service">Custom Application Service</a></li>
+<li><a id="service-dependencies~" href="#service-dependencies">Service Dependencies</a></li>
+</ul>
+</div>
+
+<h2 id="custom-application-service"><a href="#custom-application-service~">Custom Application Service</a></h2>
+
+<p>Application implements the standard container interface <code>Psr\Container\ContainerInterface</code> so method <code>get()</code> is
+used to retrieve object of required type.</p>
+
+<div class="admonition note incomplete-document">
+
+It is not required to register the service class, if it exists, the service container will try to instantiate it.
+
+</div>
 
 <pre><code class="php"><span class="kw2">use</span> Webino\App<span class="sy0">;</span><br />
 <br />
@@ -59,14 +81,188 @@
 &nbsp; &nbsp; &nbsp;*<br />
 &nbsp; &nbsp; &nbsp;* @return void<br />
 &nbsp; &nbsp; &nbsp;*/</span><br />
-&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">:</span> void<br />
 &nbsp; &nbsp; <span class="br0">&#123;</span><br />
 <br />
 &nbsp; &nbsp; <span class="br0">&#125;</span><br />
 <span class="br0">&#125;</span><br />
 <br />
 <span class="co1">// Application object creation</span><br />
+<span class="co4">/** @var \Psr\Container\ContainerInterface $app */</span><br />
 <span class="re0">$app</span> <span class="sy0">=</span> App<span class="sy0">::</span><span class="me2">create</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Using custom service</span><br />
+<span class="co4">/** @var MyService $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="re0">$myService</span><span class="sy0">-&gt;</span><span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<p>To explicitly configure or override a service use the <code>set()</code> method.</p>
+
+<div class="admonition note incomplete-document">
+
+Using interface to register services is a convenient way to support multiple implementations.
+
+</div>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\App<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Interface MyServiceInterface<br />
+&nbsp;*<br />
+&nbsp;* Example service interface<br />
+&nbsp;*/</span><br />
+<span class="kw2">interface</span> MyServiceInterface<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService <span class="kw2">implements</span> MyServiceInterface<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Custom service method<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @return void<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">:</span> void<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Application object creation</span><br />
+<span class="co4">/** @var \Webino\ServiceContainerInterface $app */</span><br />
+<span class="re0">$app</span> <span class="sy0">=</span> App<span class="sy0">::</span><span class="me2">create</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Setting custom service</span><br />
+<span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>MyServiceInterface<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> MyService<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Using custom service</span><br />
+<span class="co4">/** @var MyServiceInterface $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>MyServiceInterface<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="re0">$myService</span><span class="sy0">-&gt;</span><span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<h2 id="service-dependencies"><a href="#service-dependencies~">Service Dependencies</a></h2>
+
+<p>It is very often that a service depends on other services, so these dependencies needs to be injected via class
+constructor. The easiest way to construct an object is to add the static <code>create()</code> method to a class.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\App<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example service factory<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param App $app<br />
+&nbsp; &nbsp; &nbsp;* @return MyService<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">static</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>App <span class="re0">$app</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> <span class="kw2">static</span><span class="br0">&#40;</span><span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example constructor<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param \stdClass|\object $obj Some dependency<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Custom service method<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @return void<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">:</span> void<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Application object creation</span><br />
+<span class="co4">/** @var \Webino\ServiceContainerInterface $app */</span><br />
+<span class="re0">$app</span> <span class="sy0">=</span> App<span class="sy0">::</span><span class="kw4">create</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Using custom service</span><br />
+<span class="co4">/** @var MyService $myService */</span><br />
+<span class="re0">$myService</span> <span class="sy0">=</span> <span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="re0">$myService</span><span class="sy0">-&gt;</span><span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp;</code></pre>
+
+<p>Another way to create new service is via factory class implementing the <code>Webino\ServiceFactoryInterface</code>.</p>
+
+<pre><code class="php"><span class="kw2">use</span> Webino\App<span class="sy0">;</span><br />
+<span class="kw2">use</span> Webino\ServiceFactoryInterface<span class="sy0">;</span><br />
+<span class="kw2">use</span> Webino\ServiceContainerInterface<span class="sy0">;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyServiceServiceFactory<br />
+&nbsp;*<br />
+&nbsp;* Example service factory class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyServiceServiceFactory <span class="kw2">implements</span> ServiceFactoryInterface<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example service factory<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param ServiceContainerInterface $services<br />
+&nbsp; &nbsp; &nbsp;* @return MyService<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> MyService<span class="br0">&#40;</span><span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co4">/**<br />
+&nbsp;* Class MyService<br />
+&nbsp;*<br />
+&nbsp;* Example service class<br />
+&nbsp;*/</span><br />
+<span class="kw2">class</span> MyService<br />
+<span class="br0">&#123;</span><br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Example constructor<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @param \stdClass|\object $obj Some dependency<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<br />
+&nbsp; &nbsp; <span class="co4">/**<br />
+&nbsp; &nbsp; &nbsp;* Custom service method<br />
+&nbsp; &nbsp; &nbsp;*<br />
+&nbsp; &nbsp; &nbsp;* @return void<br />
+&nbsp; &nbsp; &nbsp;*/</span><br />
+&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">myServiceMethod</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">:</span> void<br />
+&nbsp; &nbsp; <span class="br0">&#123;</span><br />
+<br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">// Application object creation</span><br />
+<span class="co4">/** @var ServiceContainerInterface $app */</span><br />
+<span class="re0">$app</span> <span class="sy0">=</span> App<span class="sy0">::</span><span class="kw4">create</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Configuring service factory</span><br />
+<span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">set</span><span class="br0">&#40;</span>MyService<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> MyServiceServiceFactory<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
 <br />
 <span class="co1">// Using custom service</span><br />
 <span class="co4">/** @var MyService $myService */</span><br />
@@ -84,7 +280,22 @@
                 </a>
             </p>
             <menu>
-                            </menu>
+                <ul>
+<h2>The Basics</h2>
+<li>
+<a href="../app-create">Application</a>
+</li>
+<li>
+<a href="../app-services">Services</a>
+</li>
+<h2>User Guide</h2>
+<li>
+<a href="../event-emitter">Event Emitter</a>
+</li>
+<li>
+<a href="../service-container">Service Container</a>
+</li>
+</ul>            </menu>
         </div>
     </div>
     <div class="clearer"></div>

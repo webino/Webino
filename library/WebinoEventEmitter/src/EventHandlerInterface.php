@@ -13,7 +13,7 @@ interface EventHandlerInterface
      * @param EventEmitterInterface $emitter Event emitter
      * @return void
      */
-    public function attachEventEmitter(EventEmitterInterface $emitter) : void;
+    public function attachEventEmitter(EventEmitterInterface $emitter): void;
 
     /**
      * Detach event emitter from handler
@@ -21,5 +21,5 @@ interface EventHandlerInterface
      * @param EventEmitterInterface $emitter Event emitter
      * @return void
      */
-    public function detachEventEmitter(EventEmitterInterface $emitter) : void;
+    public function detachEventEmitter(EventEmitterInterface $emitter): void;
 }

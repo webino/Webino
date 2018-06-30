@@ -12,7 +12,7 @@ Tester\Environment::setup();
  * @param callable $callback
  * @return void
  */
-function examplesTest(string $dir, callable $callback) : void
+function examplesTest(string $dir, callable $callback): void
 {
     // setup examples test
     $pattern = $dir . '/../../examples/*.php';

@@ -12,7 +12,7 @@ class ContentType extends AbstractHttpHeader
     /**
      * {@inheritDoc}
      */
-    public function getName() : string
+    public function getName(): string
     {
         return 'Content-type';
     }

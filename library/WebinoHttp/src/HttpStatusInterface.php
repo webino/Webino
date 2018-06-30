@@ -12,26 +12,26 @@ interface HttpStatusInterface
      *
      * @return int
      */
-    public function getCode() : int;
+    public function getCode(): int;
 
     /**
      * Return status phrase
      *
      * @return string
      */
-    public function getPhrase() : string;
+    public function getPhrase(): string;
 
     /**
      * Return status version
      *
      * @return string
      */
-    public function getVersion() : string;
+    public function getVersion(): string;
 
     /**
      * Send a response code header
      *
      * @return void
      */
-    public function send() : void;
+    public function send(): void;
 }

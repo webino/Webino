@@ -1,6 +1,6 @@
 <?php
 
-//example
+//:
 use Webino\EventEmitter;
 
 $emitter = new EventEmitter;
@@ -19,4 +19,4 @@ $emitter->off(null, 'example');
 
 // remove all handlers for all events
 $emitter->off();
-///example
+//!

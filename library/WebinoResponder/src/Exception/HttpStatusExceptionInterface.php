@@ -12,5 +12,5 @@ interface HttpStatusExceptionInterface
     /**
      * @return HttpStatusInterface
      */
-    public function getHttpStatus() : HttpStatusInterface;
+    public function getHttpStatus(): HttpStatusInterface;
 }

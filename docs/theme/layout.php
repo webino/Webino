@@ -10,7 +10,6 @@ isset($content) or $content = '';
  */
 isset($menu) or $menu = '';
 
-
 /**
  * Base URL
  */

@@ -45,7 +45,7 @@ trait EventTrait
      *
      * @return string Event name
      */
-    public function getName() : string
+    public function getName(): string
     {
         if (!$this->name) {
             $this->name = get_class($this);
@@ -59,7 +59,7 @@ trait EventTrait
      * @param string $name Event name
      * @return void
      */
-    public function setName(string $name) : void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -69,7 +69,7 @@ trait EventTrait
      *
      * @return EventEmitterInterface Event target object
      */
-    public function getTarget() : EventEmitterInterface
+    public function getTarget(): EventEmitterInterface
     {
         return $this->target;
     }
@@ -80,7 +80,7 @@ trait EventTrait
      * @param EventEmitterInterface $target Event target object
      * @return void
      */
-    public function setTarget(EventEmitterInterface $target) : void
+    public function setTarget(EventEmitterInterface $target): void
     {
         $this->target = $target;
     }
@@ -107,7 +107,7 @@ trait EventTrait
      * @param mixed $result Event result value
      * @return void
      */
-    public function setResult($result) : void
+    public function setResult($result): void
     {
         $this->getResults()->add($result);
     }
@@ -117,7 +117,7 @@ trait EventTrait
      *
      * @return EventResults Event results
      */
-    public function getResults() : EventResults
+    public function getResults(): EventResults
     {
         return $this->results ?: $this->results = new EventResults;
     }
@@ -130,7 +130,7 @@ trait EventTrait
      * @param EventResults|array $results Results array
      * @return void
      */
-    public function setResults($results) : void
+    public function setResults($results): void
     {
         $this->results = $results instanceof EventResults ? $results : new EventResults($results);
     }
@@ -141,7 +141,7 @@ trait EventTrait
      * @param bool $stop Set true to stop propagation
      * @return void
      */
-    public function stopPropagation(bool $stop = true) : void
+    public function stopPropagation(bool $stop = true): void
     {
         $this->stopPropagation = $stop;
     }
@@ -151,7 +151,7 @@ trait EventTrait
      *
      * @return bool True when propagation is stopped
      */
-    public function isPropagationStopped() : bool
+    public function isPropagationStopped(): bool
     {
         return $this->stopPropagation;
     }

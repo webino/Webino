@@ -6,7 +6,42 @@ use Michelf\MarkdownExtra;
 require __DIR__ . '/../vendor/autoload.php';
 
 
+/* ------------------------------------------------ SETTINGS ----------------------------------------------- */
+
+define('GETTING_STARTED', 'Getting Started');
+define('BASICS', 'The Basics');
+define('USER_GUIDE', 'User Guide');
+define('DELIVERY', 'Delivery');
+define('DEVELOPMENT', 'Development');
+
+define('LINKS', [
+    'PSR-11' => 'https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md',
+]);
+
+define('CONTENT_FILTERS', [
+    'parse_links',
+]);
+
+define('ALLOWED_ASSETS', 'css,js,png,jpg,gif,svg');
+
 /* ----------------------------------------------- FUNCTIONS ----------------------------------------------- */
+
+/**
+ * Navigation menu item
+ *
+ * Markdown macro
+ *
+ * @param string $section
+ * @param string $label
+ * @return void
+ */
+function menu(string $section, string $label): void
+{
+    global $navigation, $contentFile;
+
+    $href = pathinfo($contentFile, PATHINFO_FILENAME);
+    $navigation[$section][$href] = $label;
+}
 
 /**
  * Docs TODO
@@ -16,7 +51,7 @@ require __DIR__ . '/../vendor/autoload.php';
  * @param string ...$todo
  * @return string
  */
-function todo(...$todo)
+function todo(...$todo): string
 {
     $out = [];
 
@@ -36,16 +71,37 @@ function todo(...$todo)
 }
 
 /**
+ * Document note
+ *
+ * Markdown macro
+ *
+ * @param array $text
+ * @return string
+ */
+function note(...$text): string
+{
+    $text = join(PHP_EOL, $text);
+    $text = preg_replace('~`([^`]+)`~', '<code>\\1</code>', $text);
+
+    $out = [];
+
+    $out[] = '<div class="admonition note incomplete-document">';
+    $out[] = $text;
+    $out[] = '</div>';
+
+    return join(PHP_EOL, $out);
+}
+
+/**
  * Table Of Contents
  *
  * Markdown Macro
  *
- * @param string $file __FILE__
  * @return string
  */
-function toc($file)
+function toc()
 {
-    global $contentFilters;
+    global $contentFilters, $contentFile;
 
     $toc = [];
     $links = [];
@@ -59,7 +115,7 @@ function toc($file)
         }
     };
 
-    $lines = file($file);
+    $lines = file($contentFile);
     foreach ($lines as $line) {
         if (0 === strpos($line, '## ')) {
             $label = trim(substr($line, 3));
@@ -102,17 +158,30 @@ function example_php($name)
     $source = [];
     $capture = false;
     foreach (file($path) as $line) {
-        if ('///example' === trim($line)) {
+        if ('//!' === trim($line)) {
             $capture = false;
         }
         if ($capture) {
             $source[] = $line;
         }
-        if ('//example' === trim($line)) {
+        if ('//:' === trim($line)) {
             $capture = true;
         }
     }
     return '```php' . PHP_EOL . trim(join(null, array_filter($source))) . PHP_EOL . '```';
+}
+
+/**
+ * Replaces common labels to links
+ *
+ * @param string $text
+ */
+function parse_links(string &$text): void
+{
+    foreach (LINKS as $label => $href) {
+        $link = '<a href="' . $href . '">' . $label . '</a>';
+        $text = str_replace($label, $link, $text);
+    }
 }
 
 /**
@@ -124,10 +193,11 @@ function example_php($name)
  * @param string $out
  * @return string
  */
-function content_filter(string $out) : string
+function content_filter(string $out): string
 {
     global $contentFilters;
 
+    $contentFilters = array_merge($contentFilters, CONTENT_FILTERS);
     if (empty($contentFilters)) {
         return $out;
     }
@@ -145,6 +215,8 @@ function content_filter(string $out) : string
 
 
 /* ------------------------------------------------- SETUP ------------------------------------------------- */
+ini_set('short_open_tag', 'On');
+
 
 $destRoot = __DIR__ . '/../docs/html/';
 $themeRoot = __DIR__ . '/../docs/theme/';
@@ -152,8 +224,12 @@ $layoutPath = $themeRoot . 'layout.phtml';
 
 $parser = new MarkdownExtra;
 
+// global content file path
+$contentFile = null;
 // global array for content_filter
 $contentFilters = [];
+// global array for navigation
+$navigation = [];
 
 // cleanup
 shell_exec("rm -r $destRoot*");
@@ -167,9 +243,11 @@ $hl->set_header_type(GESHI_HEADER_NONE);
 $parser->code_block_content_func = function ($code, $language) use ($hl) {
     $hl->set_language($language);
 
-    // enhanced highlighting
+    // fixed highlighting
     switch ($language) {
         case 'php':
+            $hl->add_keyword(2, 'static');
+            $hl->add_keyword(4, '__construct');
             $matches = [];
             preg_match_all('~function \K([^\(]+)~', $code, $matches);
             foreach ($matches as $match) {
@@ -185,30 +263,54 @@ $parser->code_block_content_func = function ($code, $language) use ($hl) {
 
 /* -------------------------------------------- MARKDOWN PARSING ------------------------------------------- */
 
+$contents = [];
 $pattern = __DIR__ . '/../library/*/docs/*.md';
 foreach (glob($pattern) as $path) {
-    echo 'Processing: ' . realpath($path) . PHP_EOL;
+    $contentFile = realpath($path);
+    echo 'Processing: ' . $contentFile . PHP_EOL;
 
-    $name = pathinfo($path, PATHINFO_FILENAME);
-    $cwd = dirname($path);
+    $name = pathinfo($contentFile, PATHINFO_FILENAME);
+    $cwd = dirname($contentFile);
 
     // process content
 
     try {
         ob_start();
-        require $path;
+        require $contentFile;
         $source = ob_get_contents();
         ob_end_clean();
     } catch (\Throwable $exc) {
         echo $exc . PHP_EOL;
     }
 
-    $content = content_filter($parser->transform($source));
+    $contents[$name] = content_filter($parser->transform($source));
+}
 
-    // resolve baseUrl
-    $baseUrl = '../';
+// TODO
+// TODO
+// TODO
 
-    // process layout
+// resolve baseUrl
+$baseUrl = '../';
+
+// menu nav
+$menu = [];
+$menu[] = '<ul>';
+
+foreach ($navigation as $title => $section) {
+    $menu[] = "<h2>$title</h2>";
+    foreach ($section as $href => $item) {
+        $menu[] = '<li>';
+        $menu[] = '<a href="' . $baseUrl . $href . '">' . $item . '</a>';
+        $menu[] = '</li>';
+    }
+}
+
+$menu[] = '</ul>';
+$menu = join(PHP_EOL, $menu);
+
+// process layout
+foreach ($contents as $name => $content) {
 
     try {
         ob_start();
@@ -228,7 +330,7 @@ foreach (glob($pattern) as $path) {
 
 /* -------------------------------------------- ASSETS COPYING --------------------------------------------- */
 
-$pattern = $themeRoot . '*.{css,js,png,jpg,gif}';
+$pattern = $themeRoot . '*.{' . ALLOWED_ASSETS . '}';
 foreach (glob($pattern, GLOB_BRACE) as $path) {
     copy($path, $destRoot . basename($path));
 }

@@ -10,7 +10,7 @@ trait ErrorEventTrait
     /**
      * @return \Throwable
      */
-    public function getException() : \Throwable
+    public function getException(): \Throwable
     {
         return $this['exception'];
     }

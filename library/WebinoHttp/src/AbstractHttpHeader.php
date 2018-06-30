@@ -17,7 +17,7 @@ abstract class AbstractHttpHeader implements HttpHeaderInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function getName() : string;
+    abstract public function getName(): string;
 
     /**
      * @param string $value
@@ -30,7 +30,7 @@ abstract class AbstractHttpHeader implements HttpHeaderInterface
     /**
      * {@inheritdoc}
      */
-    public function getValue() : string
+    public function getValue(): string
     {
         return $this->value;
     }

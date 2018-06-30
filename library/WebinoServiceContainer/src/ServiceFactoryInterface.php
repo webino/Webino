@@ -8,27 +8,20 @@
  * @license     BSD-3-Clause
  */
 
-namespace Webino\Factory;
+namespace Webino;
 
 use Webino\ServiceContainerInterface;
 
 /**
- * Class AbstractFactory
+ * Interface FactoryInterface
  */
-abstract class AbstractFactory implements FactoryInterface
+interface ServiceFactoryInterface
 {
-    /**
-     * Callable factory
-     *
-     * @var callable
-     */
-    protected $callback;
-
     /**
      * Create new service
      *
      * @param ServiceContainerInterface $services Services container
      * @return mixed
      */
-    abstract public function create(ServiceContainerInterface $services);
+    public function create(ServiceContainerInterface $services);
 }

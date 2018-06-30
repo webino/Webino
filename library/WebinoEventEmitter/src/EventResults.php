@@ -37,7 +37,7 @@ class EventResults implements
      * @param mixed $response Event response value
      * @return void
      */
-    public function add($response) : void
+    public function add($response): void
     {
         array_unshift($this->results, $response);
     }
@@ -47,7 +47,7 @@ class EventResults implements
      *
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return $this->results;
     }
@@ -55,7 +55,7 @@ class EventResults implements
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return join(null, $this->results);
     }

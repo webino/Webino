@@ -1,6 +1,6 @@
 <?php
 
-//example
+//:
 use Webino\App;
 
 /**
@@ -15,17 +15,18 @@ class MyService
      *
      * @return void
      */
-    public function myServiceMethod()
+    public function myServiceMethod(): void
     {
 
     }
 }
 
 // Application object creation
+/** @var \Psr\Container\ContainerInterface $app */
 $app = App::create();
 
 // Using custom service
 /** @var MyService $myService */
 $myService = $app->get(MyService::class);
 $myService->myServiceMethod();
-///example
+//!

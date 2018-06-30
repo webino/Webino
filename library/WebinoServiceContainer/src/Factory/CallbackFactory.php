@@ -15,7 +15,7 @@ use Webino\ServiceContainerInterface;
 /**
  * Class CallbackFactory
  */
-class CallbackFactory extends AbstractFactory
+class CallbackFactory extends AbstractServiceFactory
 {
     /**
      * Callable factory

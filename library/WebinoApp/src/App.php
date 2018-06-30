@@ -14,7 +14,7 @@ class App extends AbstractApp
      *
      * @return AppInterface
      */
-    public static function create() : AppInterface
+    public static function create(): AppInterface
     {
         $app = new static;
         $app->on(ResponseHandler::class);

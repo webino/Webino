@@ -45,7 +45,7 @@ interface EventInterface extends \ArrayAccess
      *
      * @return string Event name
      */
-    public function getName() : string;
+    public function getName(): string;
 
     /**
      * Set the event name
@@ -53,14 +53,14 @@ interface EventInterface extends \ArrayAccess
      * @param string $name Event name
      * @return void
      */
-    public function setName(string $name) : void;
+    public function setName(string $name): void;
 
     /**
      * Get target object from which event was emitted
      *
      * @return EventEmitterInterface Event target object
      */
-    public function getTarget() : EventEmitterInterface;
+    public function getTarget(): EventEmitterInterface;
 
     /**
      * Set the event target object
@@ -68,7 +68,7 @@ interface EventInterface extends \ArrayAccess
      * @param EventEmitterInterface|\object $target Event target object
      * @return void
      */
-    public function setTarget(EventEmitterInterface $target) : void;
+    public function setTarget(EventEmitterInterface $target): void;
 
     /**
      * Get event value by name
@@ -86,7 +86,7 @@ interface EventInterface extends \ArrayAccess
      *
      * @return EventResults Event results
      */
-    public function getResults() : EventResults;
+    public function getResults(): EventResults;
 
     /**
      * Set event results
@@ -96,7 +96,7 @@ interface EventInterface extends \ArrayAccess
      * @param EventResults|array $results Results array
      * @return void
      */
-    public function setResults($results) : void;
+    public function setResults($results): void;
 
     /**
      * Set event result value
@@ -106,7 +106,7 @@ interface EventInterface extends \ArrayAccess
      * @param mixed $result Event result value
      * @return void
      */
-    public function setResult($result) : void;
+    public function setResult($result): void;
 
     /**
      * Indicate whether or not to stop propagating this event
@@ -114,12 +114,12 @@ interface EventInterface extends \ArrayAccess
      * @param bool $stop Set true to stop propagation
      * @return void
      */
-    public function stopPropagation(bool $stop = true) : void;
+    public function stopPropagation(bool $stop = true): void;
 
     /**
      * Has this event indicated event propagation should stop?
      *
      * @return bool True when propagation is stopped
      */
-    public function isPropagationStopped() : bool;
+    public function isPropagationStopped(): bool;
 }

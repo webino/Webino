@@ -27,7 +27,7 @@ class HttpResponseEvent extends ResponseEvent
      *
      * @return HttpStatusInterface
      */
-    public function getStatus() : HttpStatusInterface
+    public function getStatus(): HttpStatusInterface
     {
         if (!$this->status) {
             $this->setStatus(new HttpStatus\Ok);

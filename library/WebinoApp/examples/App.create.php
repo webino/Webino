@@ -1,6 +1,6 @@
 <?php
 
-//example
+//:
 use Webino\App;
 use Webino\Event\HttpResponseEvent;
 
@@ -17,4 +17,4 @@ $app->on(HttpResponseEvent::class, function () {
 
 // Request responding
 $app->dispatch();
-///example
+//!

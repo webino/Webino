@@ -11,17 +11,25 @@
 namespace Webino\Factory;
 
 use Webino\ServiceContainerInterface;
+use Webino\ServiceFactoryInterface;
 
 /**
- * Interface FactoryInterface
+ * Class AbstractFactory
  */
-interface FactoryInterface
+abstract class AbstractServiceFactory implements ServiceFactoryInterface
 {
+    /**
+     * Callable factory
+     *
+     * @var callable
+     */
+    protected $callback;
+
     /**
      * Create new service
      *
      * @param ServiceContainerInterface $services Services container
      * @return mixed
      */
-    public function create(ServiceContainerInterface $services);
+    abstract public function create(ServiceContainerInterface $services);
 }

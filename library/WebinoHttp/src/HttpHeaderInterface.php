@@ -12,14 +12,14 @@ interface HttpHeaderInterface
      *
      * @return string
      */
-    public function getName() : string;
+    public function getName(): string;
 
     /**
      * Return header value
      *
      * @return string
      */
-    public function getValue() : string;
+    public function getValue(): string;
 
     /**
      * Send a HTTP header

@@ -18,7 +18,7 @@ class HttpResponse extends AbstractHttpMessage implements
     /**
      * {@inheritdoc}
      */
-    public function getContentType() : ContentType
+    public function getContentType(): ContentType
     {
         if (!$this->contentType) {
             $this->setContentType('text/plain');

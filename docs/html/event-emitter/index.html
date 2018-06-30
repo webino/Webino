@@ -43,7 +43,7 @@
     <div class="documentwrapper">
         <div class="bodywrapper">
             <div class="body" role="main">
-                <h1>Webino Event Emitter</h1>
+                <h1>Event Emitter</h1>
 
 <p>Event Emitter allows you to bind handlers to emitted events. Events decouple various aspects of your application,
 since a single event can have multiple handlers that do not depend on each other.</p>
@@ -51,8 +51,8 @@ since a single event can have multiple handlers that do not depend on each other
 <div class="contents local topic">
 <ul class="simple">
 <li><a id="register-event-handler~" href="#register-event-handler">Register Event Handler</a></li>
-<li><a id="unregister-event-handlers~" href="#unregister-event-handlers">Unregister Event Handlers</a></li>
-<li><a id="emit-until~" href="#emit-until">Emit until</a></li>
+<li><a id="unregister-event-handler~" href="#unregister-event-handler">Unregister Event Handler</a></li>
+<li><a id="emit-until~" href="#emit-until">Emit Until</a></li>
 </ul>
 </div>
 
@@ -90,7 +90,7 @@ with the <code>emit()</code> method.</p>
 <span class="re0">$results</span> <span class="sy0">=</span> <span class="re0">$event</span><span class="sy0">-&gt;</span><span class="me1">getResults</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
 &nbsp;</code></pre>
 
-<h2 id="unregister-event-handlers"><a href="#unregister-event-handlers~">Unregister Event Handlers</a></h2>
+<h2 id="unregister-event-handler"><a href="#unregister-event-handler~">Unregister Event Handler</a></h2>
 
 <p>Use the <code>off()</code> method to unregister event handlers.</p>
 
@@ -114,7 +114,7 @@ with the <code>emit()</code> method.</p>
 <span class="re0">$emitter</span><span class="sy0">-&gt;</span><span class="me1">off</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
 &nbsp;</code></pre>
 
-<h2 id="emit-until"><a href="#emit-until~">Emit until</a></h2>
+<h2 id="emit-until"><a href="#emit-until~">Emit Until</a></h2>
 
 <p>You can provide to the <code>emit()</code> a second argument to test each result. Returning <code>false</code> will stop an event propagation.</p>
 
@@ -147,7 +147,22 @@ with the <code>emit()</code> method.</p>
                 </a>
             </p>
             <menu>
-                            </menu>
+                <ul>
+<h2>The Basics</h2>
+<li>
+<a href="../app-create">Application</a>
+</li>
+<li>
+<a href="../app-services">Services</a>
+</li>
+<h2>User Guide</h2>
+<li>
+<a href="../event-emitter">Event Emitter</a>
+</li>
+<li>
+<a href="../service-container">Service Container</a>
+</li>
+</ul>            </menu>
         </div>
     </div>
     <div class="clearer"></div>

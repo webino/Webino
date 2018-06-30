@@ -43,7 +43,7 @@ trait EventEmitterTrait
      * @return EventInterface Event object
      * @throws Exception\InvalidEventException Invalid event
      */
-    public function emit($event, callable $until = null) : EventInterface
+    public function emit($event, callable $until = null): EventInterface
     {
         $event = $this->normalizeEvent($event);
         $name = $event->getName();
@@ -104,7 +104,7 @@ trait EventEmitterTrait
      * @param string|EventInterface|null $event Event name or object
      * @return void
      */
-    public function off($callback = null, $event = null) : void
+    public function off($callback = null, $event = null): void
     {
         if ($callback instanceof EventHandlerInterface && $this instanceof EventEmitterInterface) {
             $callback->detachEventEmitter($this);
@@ -148,7 +148,7 @@ trait EventEmitterTrait
      * @param string|null $name Event name
      * @return array Sorted listeners
      */
-    protected function getHandlers(string $name = null) : array
+    protected function getHandlers(string $name = null): array
     {
         if (isset($this->events[$name])) {
             $handlers = $this->events[$name];
@@ -173,7 +173,7 @@ trait EventEmitterTrait
      * @return EventInterface Event object
      * @throws Exception\InvalidArgumentException Invalid event
      */
-    protected function normalizeEvent($event) : EventInterface
+    protected function normalizeEvent($event): EventInterface
     {
         if (is_string($event)) {
             $eventClone = clone $this->getEventPrototype();
@@ -192,7 +192,7 @@ trait EventEmitterTrait
     /**
      * @return Event
      */
-    protected function getEventPrototype() : Event
+    protected function getEventPrototype(): Event
     {
         if (!$this->eventPrototype) {
             $this->eventPrototype = new Event(null, $this);

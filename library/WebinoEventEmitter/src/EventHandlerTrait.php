@@ -28,7 +28,7 @@ trait EventHandlerTrait
     /**
      * Initialize events
      */
-    abstract protected function initEvents() : void;
+    abstract protected function initEvents(): void;
 
     /**
      * Handle an event
@@ -38,7 +38,7 @@ trait EventHandlerTrait
      * @param int $priority
      * @return void
      */
-    protected function on($event, $callback, $priority = 1) : void
+    protected function on($event, $callback, $priority = 1): void
     {
         $handler = is_string($callback) ? [$this, $callback] : $callback;
         $this->emitter->on($event, $handler, $priority);
@@ -51,7 +51,7 @@ trait EventHandlerTrait
      * @param EventEmitterInterface $emitter Event emitter
      * @return void
      */
-    public function attachEventEmitter(EventEmitterInterface $emitter) : void
+    public function attachEventEmitter(EventEmitterInterface $emitter): void
     {
         $this->emitter = $emitter;
         $this->initEvents();
@@ -63,7 +63,7 @@ trait EventHandlerTrait
      * @param EventEmitterInterface $emitter Event emitter
      * @return void
      */
-    public function detachEventEmitter(EventEmitterInterface $emitter) : void
+    public function detachEventEmitter(EventEmitterInterface $emitter): void
     {
         foreach ($this->handlers as $index => $handler) {
             $emitter->off($handler);
