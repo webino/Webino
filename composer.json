@@ -1,5 +1,6 @@
 {
     "name": "webino/webino",
+    "description": "Experimental Webino Boilerplate for Web Applications.",
     "type": "library",
     "license": "BSD-3-Clause",
     "authors": [
@@ -9,24 +10,79 @@
         }
     ],
     "require": {
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-fileinfo": "*",
         "psr/container": "^1.0"
     },
     "require-dev": {
         "nette/tester": "1.*",
         "michelf/php-markdown": "1.*",
         "geshi/geshi": "1.*",
-        "squizlabs/php_codesniffer": "3.*"
+        "squizlabs/php_codesniffer": "3.*",
+        "league/flysystem-sftp": "1.*"
     },
     "autoload": {
+        "classmap": [
+            "system/views",
+            "system/forms",
+            "system/routes",
+            "system/services",
+            "system/source"
+        ],
         "psr-4": {
             "Webino\\": [
-                "library/WebinoApp/src",
-                "library/WebinoHttp/src",
-                "library/WebinoConsole/src",
-                "library/WebinoResponder/src",
-                "library/WebinoException/src",
-                "library/WebinoEventEmitter/src",
-                "library/WebinoServiceContainer/src"
+                "library/webino/webino-app/src/private",
+                "library/webino/webino-app/src/public",
+                "library/webino/webino-app/src/public/Event",
+
+                "library/webino/webino-console/src/public",
+
+                "library/webino/webino-event-emitter/src/public",
+                "library/webino/webino-event-emitter/src/public/Event",
+                "library/webino/webino-event-emitter/src/public/Exception",
+
+                "library/webino/webino-exception/src/public",
+
+                "library/webino/webino-form/src/public",
+                "library/webino/webino-form/src/public/Event",
+                "library/webino/webino-form/src/public/FormFields",
+
+                "library/webino/webino-filesystem/src/classes",
+                "library/webino/webino-filesystem/src/public",
+
+                "library/webino/webino-html/src/public",
+                "library/webino/webino-html/src/public/Event",
+
+                "library/webino/webino-http/src/private",
+                "library/webino/webino-http/src/public",
+                "library/webino/webino-http/src/public/Event",
+                "library/webino/webino-http/src/public/Exception",
+
+                "library/webino/webino-input/src/classes",
+                "library/webino/webino-input/src/public",
+
+                "library/webino/webino-instance-container/src/private",
+                "library/webino/webino-instance-container/src/public",
+                "library/webino/webino-instance-container/src/public/Event",
+
+                "library/webino/webino-responder/src/public",
+                "library/webino/webino-responder/src/public/Event",
+                "library/webino/webino-responder/src/public/Exception",
+                "library/webino/webino-responder/src/public/Message",
+                "library/webino/webino-responder/src/public/Response",
+
+                "library/webino/webino-router/src/public",
+                "library/webino/webino-router/src/public/Event",
+
+                "library/webino/webino-system/src/classes",
+                "library/webino/webino-system/src/public",
+                "library/webino/webino-system/src/system/routes",
+
+                "library/webino/webino-view/src/private",
+                "library/webino/webino-view/src/classes",
+                "library/webino/webino-view/src/public",
+                "library/webino/webino-view/src/public/Event"
             ]
         }
     },
