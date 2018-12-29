@@ -6,7 +6,7 @@ namespace Webino\Filesystem;
  * Class SystemNode
  * @package webino-system
  */
-class SystemNode extends AbstractNode
+final class SystemNode extends AbstractNode
 {
     /**
      * @param string $path
@@ -14,6 +14,6 @@ class SystemNode extends AbstractNode
      */
     function __construct(string $path, ...$parameter)
     {
-        parent::__construct("../system/{$path}", ...$parameter);
+        parent::__construct("root://system/{$path}", ...$parameter);
     }
 }

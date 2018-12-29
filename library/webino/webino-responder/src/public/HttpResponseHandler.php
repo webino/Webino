@@ -6,8 +6,13 @@ namespace Webino;
  * Class HttpResponseHandler
  * @package webino-responder
  */
-class HttpResponseHandler extends ResponseHandler
+class HttpResponseHandler extends AbstractEventHandler
 {
+    /**
+     * Response handler priority
+     */
+    const PRIORITY = HttpResponseEvent::FINISH - 999;
+
     /**
      * @var InstanceContainerInterface
      */
@@ -25,7 +30,7 @@ class HttpResponseHandler extends ResponseHandler
     /**
      * @param InstanceContainerInterface $instances
      */
-    public function __construct(InstanceContainerInterface $instances)
+    function __construct(InstanceContainerInterface $instances)
     {
         $this->instances = $instances;
     }
@@ -35,49 +40,49 @@ class HttpResponseHandler extends ResponseHandler
      */
     protected function initEvents(): void
     {
-        $this->on(ResponseEvent::class, $this, ResponseEvent::FINISH - 999);
-        $this->on(ResponseErrorEvent::class, 'onError', ResponseErrorEvent::FINISH - 999);
-        $this->on(HttpResponseEvent::class, 'onResponse', HttpResponseEvent::FINISH - 999);
-        $this->on(HttpErrorEvent::class, 'onResponse', HttpErrorEvent::FINISH - 999);
+        $this->on(ResponseEvent::class, $this, $this::PRIORITY + 1);
+        $this->on(ResponseErrorEvent::class, 'onError', $this::PRIORITY + 1);
+        $this->on(HttpResponseEvent::class, 'onResponse', $this::PRIORITY + 1);
+        $this->on(HttpResponseEvent::class, 'sendResponse', $this::PRIORITY - Event::OFFSET);
+        $this->on(HttpErrorEvent::class, 'onResponse', $this::PRIORITY + 1);
     }
 
     /**
-     * @param Event $event
+     * @param ResponseEvent $event
      * @throws \Throwable
      */
-    function __invoke(Event $event)
+    function __invoke(ResponseEvent $event)
     {
         $httpEvent = new HttpResponseEvent;
         $this->setupHttpEvent($httpEvent);
 
         try {
             $event->getTarget()->emit($httpEvent, function ($result) use ($httpEvent) {
-                if (empty($result)) {
-                    return;
-                }
-                if (is_string($result)) {
-                    $result = new TextResponse($result);
-                }
-                if ($result instanceof HttpResponseInterface) {
-                    $httpEvent->getHeaders()->set($result->getContentType());
-                    $httpEvent->setResponse($result);
-                }
+                empty($result) or $httpEvent->setResponse($result);
             });
         } catch (\Throwable $exc) {
-            // TODO logger
-            die($exc);
+            $event->getApp()->error($exc);
             throw $exc;
         }
     }
 
     /**
-     * @param Event $event
+     * @param ResponseEvent $event
+     * @throws \Throwable
      */
-    function onError(Event $event)
+    function onError(ResponseEvent $event)
     {
         $httpErrorEvent = new HttpErrorEvent($event);
         $this->setupHttpEvent($httpErrorEvent);
-        $event->getTarget()->emit($httpErrorEvent);
+
+        try {
+            $event->getTarget()->emit($httpErrorEvent, function ($result) use ($httpErrorEvent) {
+                empty($result) or $httpErrorEvent->setResponse($result);
+            });
+        } catch (\Throwable $exc) {
+            $event->getApp()->error($exc);
+            throw $exc;
+        }
     }
 
     /**
@@ -86,11 +91,29 @@ class HttpResponseHandler extends ResponseHandler
     function onResponse(HttpResponseEvent $event)
     {
         $response = $event->getResponse();
-        $response or $event->setStatus(new HttpStatus\NoContent);
+        if ($response) {
+            if (is_string($response)) {
+                $response = new TextResponse($response);
+            }
+            if ($response instanceof HttpResponseInterface) {
+                $event->getHeaders()->set($response->getContentType());
+                $event->setResponse($response);
+            }
+        } else {
+            $event->setStatus(new HttpStatus\NoContent);
+        }
 
         $event->getStatus()->send();
         $event->getHeaders()->send();
-        echo $response;
+        $event->setResponse((string) $response);
+    }
+
+    /**
+     * @param HttpResponseEvent $event
+     */
+    function sendResponse(HttpResponseEvent $event)
+    {
+        echo $event->getResponse();
     }
 
     /**

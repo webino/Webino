@@ -20,8 +20,10 @@ class LinkView
         $route = $htmlNode['route'];
 
         if ($route) {
-            $router = $app->get(HttpRouter::class);
-            $url = $router->url($route);
+            $router = $app->get(Router::class);
+            $params = [];
+            parse_str($htmlNode['params'], $params);
+            $url = $router->url($route, $params);
         }
 
         $htmlNode->replaceWithHtml('<a/>');

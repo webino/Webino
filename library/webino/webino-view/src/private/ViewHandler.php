@@ -27,7 +27,7 @@ class ViewHandler extends AbstractViewHandler
     protected function eachNode(HtmlNode $node, InstanceContainerInterface $container): void
     {
         $nodeName = $node->getName();
-        $class = (new Filter\DashCaseToCamelCase)->filter(substr($nodeName, 5));
+        $class = (new FilterDashCaseToCamelCase)->filter(substr($nodeName, 5));
         $view = $container->get("\Webino\\{$class}View");
         $this->addViewItem($class, new ViewHandlerItem($view, $node));
     }

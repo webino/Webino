@@ -35,11 +35,11 @@ trait EventHandlerTrait
      * Handle an event
      *
      * @param string|EventInterface $event Event name or object
-     * @param string|callable $callback Event handler
+     * @param string|callable|null $callback Event handler
      * @param int $priority
      * @return void
      */
-    protected function on($event, $callback, $priority = 1): void
+    protected function on($event, $callback = null, $priority = 1): void
     {
         $handler = is_string($callback) ? [$this, $callback] : $callback;
         $this->emitter->on($event, $handler, $priority);

@@ -9,7 +9,7 @@ namespace Webino;
 trait HttpContextTrait
 {
     /**
-     * @var \iterable
+     * @var iterable
      */
     private $params;
 

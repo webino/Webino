@@ -11,5 +11,5 @@ class ContactRoute extends DefaultRoute
 
     const VIEW = [
         ContentView::FILE => 'html://content/contact',
-    ] + parent::VIEW;
+    ];
 }

@@ -34,7 +34,7 @@ class HttpRequestUri implements HttpRequestUriInterface
     /**
      * @param HttpServerInterface $httpServer
      */
-    public function __construct(HttpServerInterface $httpServer)
+    function __construct(HttpServerInterface $httpServer)
     {
         $this->httpServer = $httpServer;
     }
@@ -42,7 +42,7 @@ class HttpRequestUri implements HttpRequestUriInterface
     /**
      * @return string
      */
-    public function __toString(): string
+    function __toString(): string
     {
         $this->uri or $this->uri = $this->createUri();
         return $this->uri;

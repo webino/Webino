@@ -1,0 +1,76 @@
+#!/usr/bin/env php
+<?php
+
+$srcDir = $GLOBALS['argv'][1];
+$toFile = $GLOBALS['argv'][2];
+
+$phar = new Phar($toFile, 0, basename($toFile));
+$phar->compressFiles(Phar::GZ);
+$phar->setSignatureAlgorithm(Phar::SHA1);
+
+//$files    = [];
+//$pointer  = strlen($srcDir) + 1;
+//$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($srcDir, RecursiveIteratorIterator::CHILD_FIRST));
+
+// setup cache dir
+//$cacheDir = sys_get_temp_dir() . '/webino-phar/' . md5(__FILE__);
+//file_exists($cacheDir) or mkdir($cacheDir, 0755, true);
+
+/** @var \SplFileInfo $file */
+//foreach ($iterator as $file) {
+//    $fileName = $file->getFilename();
+//    if (in_array($fileName, ['.', '..', 'README.md'])) {
+//        continue;
+//    }
+//
+//    // TODO dry-run
+//    echo $fileName . PHP_EOL;
+//    continue;
+//
+//    $filePath  = $file->getPath() . '/' . $fileName;
+//    $fileName  = substr($filePath, $pointer);
+//    $fileIndex = $fileName;
+//    $fileName  = $srcDir . '/' . $fileName;
+//    $dirName   = dirname($fileName);
+//
+//    file_exists($dirName)
+//        or mkdir($dirName, 0755, true);
+//
+//    // obfuscate
+//    $isPhp  = strpos($fileName, '.php');
+//    $isJson = strpos($fileName, '.json');
+//
+//    if ($isPhp || $isJson) {
+//        $cacheKey  = md5_file($fileName);
+//        $cacheFile = $cacheDir . '/' . $cacheKey;
+//
+//        if (!is_file($cacheFile)) {
+//            // do obfuscate
+//            switch (true) {
+//                case $isPhp:
+//                    $code = php_strip_whitespace($fileName);
+//                    file_put_contents($cacheFile, $code);
+//                    break;
+//                case $isJson:
+//                    file_put_contents($cacheFile, json_encode(json_decode(file_get_contents($fileName))));
+//                    break;
+//            }
+//
+//        }
+//
+//        // use cached file
+//        $fileName = $cacheFile;
+//    }
+//
+//    // add file to phar
+//    $files[$fileIndex] = $fileName;
+//}
+
+$phar->startBuffering();
+$phar->buildFromDirectory($srcDir);
+//$phar->buildFromIterator($iterator);
+$phar->stopBuffering();
+$phar->setStub(php_strip_whitespace(__DIR__ . '/../misc/stub.php'));
+
+//echo count($files) . ' files added to ' . $toFile;
+echo 'DONE';

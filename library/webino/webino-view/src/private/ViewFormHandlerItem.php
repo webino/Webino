@@ -16,7 +16,7 @@ class ViewFormHandlerItem extends ViewHandlerItem
     /**
      * @return Form|null
      */
-    public function getForm(): ?Form
+    function getForm(): ?Form
     {
         return $this->form;
     }
@@ -24,7 +24,7 @@ class ViewFormHandlerItem extends ViewHandlerItem
     /**
      * @param Form|null $form
      */
-    public function setForm(?Form $form): void
+    function setForm(?Form $form): void
     {
         $this->form = $form;
     }

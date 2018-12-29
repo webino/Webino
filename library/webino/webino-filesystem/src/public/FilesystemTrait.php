@@ -2,6 +2,8 @@
 
 namespace Webino;
 
+use Webino\Filesystem\LocalNode;
+
 /**
  * Trait FilesystemTrait
  * @package webino-filesystem
@@ -33,6 +35,38 @@ trait FilesystemTrait
         return $this->filesystem;
     }
 
+    private function getFilesystemItem(string $path, string $type)
+    {
+        $fsPath = new FilesystemPath($path);
+
+        $filesystem = $this->getFilesystem();
+        $scheme = $fsPath->getScheme($filesystem->getDefaultFileScheme());
+        $isAbsoluteClass = ('\\' == $scheme[0]);
+
+        if ($isAbsoluteClass) {
+            $class = $scheme;
+        } else {
+            $aliases = $filesystem->getFileSchemeAliases();
+            $name = $aliases[$scheme] ?? $scheme;
+            $class = sprintf('\Webino\\Filesystem\\%s%s', ucfirst($name), $type);
+        }
+
+        // TODO catch exceptions
+
+        if (!class_exists($class)) {
+            $class = sprintf('\Webino\\Filesystem\\%s%s', 'Local', $type);
+            return $this->create($class, $path, clone $this);
+        }
+
+        try {
+            return $this->create($class, $fsPath->getPathName(), clone $this);
+        } catch (\Throwable $exc) {
+            // TODO exception
+//            var_dump(class_exists(LocalNode::class));
+            die('Cant get filesystem node for path ' . $path);
+        }
+    }
+
     /**
      * Returns required node object for path
      *
@@ -41,22 +75,7 @@ trait FilesystemTrait
      */
     function getNode(string $path): FilesystemNodeInterface
     {
-        $path = new FilesystemPath($path);
-
-        $filesystem = $this->getFilesystem();
-        $scheme = $path->getScheme($filesystem->getDefaultFileScheme());
-        $isAbsoluteClass = ('\\' == $scheme[0]);
-
-        if ($isAbsoluteClass) {
-            $class = $scheme;
-        } else {
-            $aliases = $filesystem->getFileSchemeAliases();
-            $name = $aliases[$scheme] ?? $scheme;
-            $class = sprintf('\Webino\\Filesystem\\%sNode', ucfirst($name));
-        }
-
-        // TODO catch exceptions
-        return $this->create($class, $path->getPathName(), clone $this);
+        return $this->getFilesystemItem($path, 'Node');
     }
 
     /**
@@ -67,22 +86,7 @@ trait FilesystemTrait
      */
     function getFile(string $filePath): FilesystemFileInterface
     {
-        $path = new FilesystemPath($filePath);
-
-        $filesystem = $this->getFilesystem();
-        $scheme = $path->getScheme($filesystem->getDefaultFileScheme());
-        $isAbsoluteClass = ('\\' == $scheme[0]);
-
-        if ($isAbsoluteClass) {
-            $class = $scheme;
-        } else {
-            $aliases = $filesystem->getFileSchemeAliases();
-            $name = $aliases[$scheme] ?? $scheme;
-            $class = sprintf('\Webino\\Filesystem\\%sFile', ucfirst($name));
-        }
-
-        // TODO catch exceptions
-        return $this->create($class, $path->getPathName(), clone $this);
+        return $this->getFilesystemItem($filePath, 'File');
     }
 
     /**
@@ -93,20 +97,6 @@ trait FilesystemTrait
      */
     function getFileList(string $dirPath): FilesystemFileListInterface
     {
-        $path = new FilesystemPath($dirPath);
-
-        $filesystem = $this->getFilesystem();
-        $scheme = $path->getScheme($filesystem->getDefaultFileScheme());
-        $isAbsoluteClass = ('\\' == $scheme[0]);
-
-        if ($isAbsoluteClass) {
-            $class = $scheme;
-        } else {
-            $aliases = $filesystem->getFileSchemeAliases();
-            $name = $aliases[$scheme] ?? $scheme;
-            $class = sprintf('\Webino\\Filesystem\\%sFileList', ucfirst($name));
-        }
-
-        return $this->create($class, $path->getPathName(), clone $this);
+        return $this->getFilesystemItem($dirPath, 'FileList');
     }
 }

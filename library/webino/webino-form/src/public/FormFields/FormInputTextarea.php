@@ -14,22 +14,26 @@ class FormInputTextarea extends AbstractFormField
      */
     function renderHtmlNode(HtmlNodeInterface $htmlNode): HtmlNodeInterface
     {
-        // TODO style
+        $style = $this->getStyle();
+
+        // group
         $groupNode = $htmlNode->addNode('div');
-        $groupNode['class'] = 'form-group';
-        $htmlNode = $groupNode;
+        $style->renderInputGroupHtmlNode($groupNode);
 
-        // TODO label
-        $labelNode = $htmlNode->addNode('label');
-        $labelNode['class'] = 'w-100';
-        $htmlNode = $labelNode;
+        // label
+        $labelNode = $this->getLabel()->renderHtmlNode($groupNode);
 
-        $newNode = $htmlNode->addNode('textarea');
+        // input
+        $newNode = $labelNode->addNode('textarea');
         $newNode->setText($this->getData());
         $newNode['name'] = $this->getName();
+        $style->renderInputHtmlNode($newNode);
 
-        // TODO style
-        $newNode['class'] = 'form-control';
+        // TODO error
+        $newNode['class'].= ' is-invalid';
+        $errorNode = $labelNode->addNode('div');
+        $errorNode['class'] = 'invalid-feedback';
+        $errorNode->setText('Value is required!');
 
         return $newNode;
     }

@@ -8,7 +8,7 @@ namespace Webino;
  */
 class E404Route extends DefaultRoute
 {
-    const PATH = HttpRouter::E404;
+    const PATH = 'E404';
 
     const VIEW = [
         ContentView::FILE => 'html://content/E404',

@@ -21,6 +21,32 @@ trait FormValueInputTrait
     private $validators;
 
     /**
+     * @param FormInputLabel $label
+     */
+    abstract function setLabel(FormInputLabel $label): void;
+
+    /**
+     * Set input options
+     *
+     * @param iterable $options
+     */
+    protected function setOptions(iterable $options): void
+    {
+        foreach ($options as $option) {
+            if (is_object($option)) {
+                switch (true) {
+                    case $option instanceof FormInputLabel:
+                        $this->setLabel($option);
+                        break;
+                    case $option instanceof ValidatorInterface:
+                        $this->getValidators()->add($option);
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
      * @return Validators
      */
     function getValidators(): Validators
@@ -57,31 +83,6 @@ trait FormValueInputTrait
     function isValid(): bool
     {
         $data = $this->getData();
-
         return $this->getValidators()->validate($data);
-    }
-
-    /**
-     * @param bool $require
-     * @return $this
-     */
-    function require(bool $require = true)
-    {
-        if ($require) {
-            $this->getValidators()->add(new Validator\Required);
-        } else {
-            $this->getValidators()->drop(Validator\Required::class);
-        }
-        return $this;
-    }
-
-    /**
-     * @param int $min
-     * @param int $max
-     *
-     */
-    function requireLength(int $min, int $max)
-    {
-        // TODO
     }
 }

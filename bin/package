@@ -1,0 +1,140 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Class PackageRegexIterator
+ */
+class PackageRegexIterator implements \IteratorAggregate
+{
+    /**
+     * @var string
+     */
+    private $rootDir;
+
+    /**
+     * @var string
+     */
+    private $regex;
+
+    /**
+     * @var \RecursiveDirectoryIterator
+     */
+    private $iterator;
+
+    /**
+     * @param string $rootDir
+     * @param array $regex
+     */
+    public function __construct(string $rootDir, array $regex)
+    {
+        $this->rootDir = $rootDir;
+        $this->regex = $regex;
+        $this->iterator = new RecursiveDirectoryIterator($this->rootDir);
+    }
+
+    /**
+     * @return \Traversable
+     */
+    public function getIterator(): \Traversable
+    {
+        $pathStart = strlen($this->rootDir) + 1;
+        return new RecursiveCallbackFilterIterator($this->iterator, function (\SplFileInfo $file) use ($pathStart) {
+            $path = substr($file->getRealPath(), $pathStart);
+            /** @noinspection PhpUndefinedFieldInspection */
+            $file->relPath = $path;
+            return (bool) $file->isDir() || (preg_match($this->regex[0], $path) && !preg_match($this->regex[1], $path));
+        });
+    }
+}
+
+$settings = json_decode(file_get_contents(__DIR__ . '/../composer.json'), true);
+if (empty($settings)) {
+    trigger_error('Invalid composer.json?', E_USER_ERROR);
+}
+
+//----------------------------//
+// Build files matching regex //
+//----------------------------//
+$include = $settings['extra']['webino-package']['include'];
+$exclude = $settings['extra']['webino-package']['exclude'];
+$exclude = $settings['extra']['webino-package']['exclude'];
+
+// exclude require dev TODO optional
+$devPackages = array_keys($settings['require-dev']);
+$lockSettings = json_decode(file_get_contents(__DIR__ . '/../composer.lock'), true);
+$requireDev = [];
+
+foreach ($lockSettings['packages-dev'] as $packageInfo) {
+    $requireDev[$packageInfo['name']] = $packageInfo['name'];
+}
+
+$excludeRequireDev = '^vendor/' . join('\\/.+$|^vendor/', $requireDev) . '\\/.+$';
+$exclude[] = $excludeRequireDev;
+
+// finalize regex
+$regex = [
+    '~(' . join('|', $include) . ')~i',
+    '~(' . join('|', $exclude) . ')~i',
+];
+
+//----------------//
+// Setup temp dir //
+//----------------//
+$cacheDir = sys_get_temp_dir() . '/webino-pckg-' . md5(__FILE__);
+file_exists($cacheDir) or mkdir($cacheDir, 0755, true);
+$engineCacheDir = "$cacheDir/engine";
+file_exists($engineCacheDir) or mkdir($engineCacheDir, 0755, true);
+
+//------------------------//
+// Copy files to temp dir //
+//------------------------//
+$root = realpath(__DIR__ . '/../');
+$files = new RecursiveIteratorIterator(new PackageRegexIterator($root, $regex));
+
+echo "\nCopying files:\n";
+$c = 0;
+$f = 0;
+$e = 0;
+$s = 0;
+/** @var \SplFileInfo $file */
+foreach ($files as $file) {
+    if (!$file->isFile()) {
+        continue;
+    }
+    if (empty($file->relPath)) {
+        continue;
+    }
+
+    $path = $file->getRealPath();
+    $dest = "$engineCacheDir/$file->relPath";
+
+    // check file change
+    if (file_exists($dest) && filemtime($path) <= filemtime($dest)) {
+        $s+= filesize($path);
+        $e++;
+        continue;
+    }
+
+    // make dest dir
+    $destDir = dirname($dest);
+    file_exists($destDir) or mkdir($destDir, 0755, true);
+
+    $result = copy($path, $dest);
+    echo sprintf('[%s] %s', $result ? 'Y' : 'N', $file->relPath) . PHP_EOL;
+
+    if ($result) {
+        $s+= filesize($path);
+        $c++;
+    } else {
+        $f++;
+    }
+}
+
+//---------//
+// Summary //
+//---------//
+echo "\nSummary:";
+echo "\n$c files total.";
+echo "\n$f files failed.";
+echo "\n$e files in cache.";
+echo "\n" . round($s / 1024 / 1024, 2) . " MB total. \n";

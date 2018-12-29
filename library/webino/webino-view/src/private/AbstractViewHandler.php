@@ -71,7 +71,7 @@ abstract class AbstractViewHandler extends AbstractEventHandler
             $this->layout($event);
 
         } catch (\Throwable $exc) {
-            throw new InternalServerErrorStatusException($exc->getMessage());
+            throw new InternalServerErrorStatusException($exc->getMessage(), 0, $exc);
         }
 
         return null;
@@ -114,7 +114,7 @@ abstract class AbstractViewHandler extends AbstractEventHandler
             }
 
         } catch (\Throwable $exc) {
-            throw new InternalServerErrorStatusException($exc->getMessage());
+            throw new InternalServerErrorStatusException('View dispatch failed', 0, $exc);
         }
 
         return null;
@@ -131,7 +131,7 @@ abstract class AbstractViewHandler extends AbstractEventHandler
         try {
             $this->view($event);
         } catch (\Throwable $exc) {
-            throw new InternalServerErrorStatusException($exc->getMessage());
+            throw new InternalServerErrorStatusException('View response failed', 0, $exc);
         }
         return null;
     }

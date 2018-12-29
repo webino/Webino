@@ -8,5 +8,5 @@ namespace Webino\Filesystem;
  */
 class LocalNode extends AbstractFilesystemNode
 {
-
+    use LocalNodeTrait;
 }

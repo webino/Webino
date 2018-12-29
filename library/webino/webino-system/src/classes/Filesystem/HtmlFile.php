@@ -6,7 +6,7 @@ namespace Webino\Filesystem;
  * Class HtmlFile
  * @package webino-system
  */
-class HtmlFile extends AbstractFile
+final class HtmlFile extends AbstractFile
 {
     /**
      * @param string $path

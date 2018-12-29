@@ -16,13 +16,20 @@ interface FilesystemNodeInterface
     function getPath(): string;
 
     /**
+     * Return filesystem node real path
+     *
+     * @return string
+     */
+    function getRealPath(): string;
+
+    /**
      * Returns path name
      *
      * e.g.: foo/bar/(baz).txt
      *
      * @return string
      */
-    function getName();
+    function getName(): string;
 
     /**
      * Returns path extension
@@ -31,7 +38,7 @@ interface FilesystemNodeInterface
      *
      * @return string
      */
-    function getExtension();
+    function getExtension(): string;
 
     /**
      * Returns path base name
@@ -40,7 +47,14 @@ interface FilesystemNodeInterface
      *
      * @return string
      */
-    function getBaseName();
+    function getBaseName(): string;
+
+    /**
+     * Returns true when filesystem node exists
+     *
+     * @return bool
+     */
+    function exists(): bool;
 
     /**
      * Return filesystem node as file

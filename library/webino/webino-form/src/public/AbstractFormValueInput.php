@@ -8,7 +8,19 @@ namespace Webino;
  */
 abstract class AbstractFormValueInput extends AbstractFormInput implements FormFieldInterface, HtmlPartInterface
 {
+    use FormFieldTrait;
     use FormValueInputTrait;
+    use FormWithStyleTrait;
+
+    /**
+     * @param string $name
+     * @param iterable $options
+     */
+    function __construct(string $name, iterable $options = [])
+    {
+        parent::__construct($name);
+        $this->setOptions($options);
+    }
 
     /**
      * @param HtmlNodeInterface $htmlNode
@@ -16,20 +28,25 @@ abstract class AbstractFormValueInput extends AbstractFormInput implements FormF
      */
     function renderHtmlNode(HtmlNodeInterface $htmlNode): HtmlNodeInterface
     {
-        // TODO style
+        $style = $this->getStyle();
+
+        // group
         $groupNode = $htmlNode->addNode('div');
-        $groupNode['class'] = 'form-group';
-        $htmlNode = $groupNode;
+        $style->renderInputGroupHtmlNode($groupNode);
 
-        // TODO label
-        $labelNode = $htmlNode->addNode('label');
-        $labelNode['class'] = 'w-100';
-        $htmlNode = $labelNode;
+        // label
+        $labelNode = $this->getLabel()->renderHtmlNode($groupNode);
 
-        // TODO style
-        $newNode = parent::renderHtmlNode($htmlNode);
+        // input
+        $newNode = parent::renderHtmlNode($labelNode);
         $newNode['value'] = $this->getData();
-        $newNode['class'] = 'form-control';
+        $style->renderInputHtmlNode($newNode);
+
+        // TODO error
+        $newNode['class'].= ' is-invalid';
+        $errorNode = $labelNode->addNode('div');
+        $errorNode['class'] = 'invalid-feedback';
+        $errorNode->setText('Value is required!');
 
         return $newNode;
     }

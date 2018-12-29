@@ -9,16 +9,11 @@ namespace Webino;
 class RouteConfigEvent extends AppEvent
 {
     /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
      * @return RouterInterface
      */
     function getRouter(): RouterInterface
     {
-        return $this->router;
+        return $this['router'];
     }
 
     /**
@@ -26,6 +21,22 @@ class RouteConfigEvent extends AppEvent
      */
     function setRouter(RouterInterface $router): void
     {
-        $this->router = $router;
+        $this['router'] = $router;
+    }
+
+    /**
+     * @return RouteInterface
+     */
+    function getRoute(): RouteInterface
+    {
+        return $this['route'];
+    }
+
+    /**
+     * @param RouteInterface $route
+     */
+    function setRoute(RouteInterface $route): void
+    {
+        $this['route'] = $route;
     }
 }

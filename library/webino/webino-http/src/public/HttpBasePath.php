@@ -39,7 +39,7 @@ class HttpBasePath implements HttpBasePathInterface
      * @param HttpServerInterface $httpServer
      * @param HttpRequestUriInterface $requestUri
      */
-    public function __construct(HttpServerInterface $httpServer, HttpRequestUriInterface $requestUri)
+    function __construct(HttpServerInterface $httpServer, HttpRequestUriInterface $requestUri)
     {
         $this->httpServer = $httpServer;
         $this->requestUri = $requestUri;
@@ -80,7 +80,7 @@ class HttpBasePath implements HttpBasePathInterface
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $basePath = '/';
+            $basePath = '';
             $basename = basename($filename);
             if ($basename) {
                 $path = ($phpSelf ? trim($phpSelf, '/') : '');
@@ -103,7 +103,7 @@ class HttpBasePath implements HttpBasePathInterface
         }
 
         // Directory portion of base path matches.
-        $baseDir = str_replace('\\', '/', dirname($basePath));
+        $baseDir = '/' . str_replace('\\', '/', dirname($basePath));
         if (0 === strpos($requestUri, $baseDir)) {
             return $baseDir;
         }

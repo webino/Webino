@@ -2,8 +2,6 @@
 
 namespace Webino;
 
-use Webino\Validator\AbstractValidator;
-
 /**
  * Class Validators
  * @package webino-input
@@ -18,10 +16,10 @@ class Validators
     /**
      * Add validator to collection
      *
-     * @param AbstractValidator $validator
+     * @param ValidatorInterface $validator
      * @return $this
      */
-    function add(AbstractValidator $validator)
+    function add(ValidatorInterface $validator)
     {
         $this->collection[get_class($validator)][] = $validator;
         return $this;
@@ -31,9 +29,9 @@ class Validators
      * Drop validator from collection
      *
      * @param string $validatorClass
-     * @param AbstractValidator|null $validator
+     * @param ValidatorInterface $validator
      */
-    function drop(string $validatorClass, AbstractValidator $validator = null): void
+    function drop(string $validatorClass, ValidatorInterface $validator = null): void
     {
         if ($validator && !empty($this->collection[$validatorClass])) {
             foreach ($this->collection[$validatorClass] as $n => $subValidator) {

@@ -18,7 +18,7 @@ class SystemModule extends AbstractEventHandler
             $app = $event->getApp();
 
             // routes
-            $routerConfig = $app->get(HttpRouterConfig::class);
+            $routerConfig = $app->get(RouterConfig::class);
             $routerConfig->configRouteClasses(__DIR__ . '/../system/routes');
         });
     }

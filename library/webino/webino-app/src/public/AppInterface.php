@@ -2,11 +2,14 @@
 
 namespace Webino;
 
+use Psr\Log\LoggerInterface;
+
 /**
  * Interface AppInterface
  * @package webino-app
  */
 interface AppInterface extends
+    LoggerInterface,
     EventEmitterInterface,
     InstanceContainerInterface,
     FilesystemInterface

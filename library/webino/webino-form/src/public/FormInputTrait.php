@@ -13,7 +13,7 @@ trait FormInputTrait
      *
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @param string $name

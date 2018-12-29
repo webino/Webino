@@ -16,15 +16,15 @@ class DefaultModule extends AbstractEventHandler
         $this->on(BootstrapEvent::class, function (BootstrapEvent $event) {
             $app = $event->getApp();
 
-            /** @var HttpRouter $router */
-            $router = $app->get(HttpRouter::class);
-            // TODO configurable
-            $router->setUrlFormat($router::URL_FORMAT_REWRITE);
-
             // routes
-            /** @var HttpRouterConfig $routerConfig */
-            $routerConfig = $app->get(HttpRouterConfig::class);
+            /** @var RouterConfig $routerConfig */
+            $routerConfig = $app->get(RouterConfig::class);
             $routerConfig->configRouteClasses('system://routes');
+
+            // translations
+            /** @var TranslationConfig $translationConfig */
+            $translationConfig = $app->get(TranslationConfig::class);
+            $translationConfig->configTranslation('system://translation');
         });
     }
 }

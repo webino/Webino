@@ -8,30 +8,45 @@ namespace Webino;
 class ContactForm
 {
     /**
-     * @return Form
+     * Create contact form
      */
-    function createForm(): Form
+    function createForm()
     {
-        return new PostForm([
+        yield PostForm => [
+            FormStyleBootstrap,
 
-            (new FormInputText('name'))
-                ->require(),
+            'name' => [
+                FormInputText,
+                FormInputLabel => 't[name]',
+                FilterStringTrim,
+                ValidateRequired,
+            ],
 
-            (new FormInputEmail('email'))
-                ->require(),
+            'email' => [
+                FormInputEmail,
+                FormInputLabel => 't[email]',
+                FilterStringTrim,
+                ValidateRequired,
+            ],
 
-            (new FormInputTextarea('text'))
-                ->require(),
+            'text' => [
+                FormInputTextarea,
+                FormInputLabel => 't[text]',
+                FilterStringTrim,
+                ValidateRequired,
+            ],
 
-            new FormButtonSubmit('contact_form'),
-        ]);
+            'contact_form' => [
+                FormButtonSubmit => 't[submit]',
+            ],
+        ];
     }
 
     function dispatch(FormDispatchEvent $event)
     {
         $form = $event->getForm();
 
-        $form->setData(['name' => 'Ferko']);
+        //$form->setData(['name' => 'Ferko']);
     }
 
     /**

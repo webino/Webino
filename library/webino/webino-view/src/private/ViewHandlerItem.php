@@ -27,7 +27,7 @@ class ViewHandlerItem
      * @param object $view
      * @param HtmlNodeInterface $node
      */
-    public function __construct($view, HtmlNodeInterface $node)
+    function __construct($view, HtmlNodeInterface $node)
     {
         $this->view = $view;
         $this->node = $node;
@@ -36,7 +36,7 @@ class ViewHandlerItem
     /**
      * @return object
      */
-    public function getView()
+    function getView()
     {
         return $this->view;
     }
@@ -44,7 +44,7 @@ class ViewHandlerItem
     /**
      * @return HtmlNodeInterface
      */
-    public function getNode(): HtmlNodeInterface
+    function getNode(): HtmlNodeInterface
     {
         return $this->node;
     }
@@ -52,7 +52,7 @@ class ViewHandlerItem
     /**
      * @return HttpDispatchEvent|null
      */
-    public function getDispatchEvent(): ?HttpDispatchEvent
+    function getDispatchEvent(): ?HttpDispatchEvent
     {
         return $this->dispatchEvent;
     }
@@ -60,7 +60,7 @@ class ViewHandlerItem
     /**
      * @param HttpDispatchEvent|null $dispatchEvent
      */
-    public function setDispatchEvent(?HttpDispatchEvent $dispatchEvent): void
+    function setDispatchEvent(?HttpDispatchEvent $dispatchEvent): void
     {
         $this->dispatchEvent = $dispatchEvent;
     }

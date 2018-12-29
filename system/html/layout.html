@@ -6,28 +6,29 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <view-bootstrap-css/>
+    <view-css file="style"/>
     <title>Môj web</title>
 </head>
 <body>
 <div class="container">
-<header class="jumbotron text-center">
-    <h1>Úvodná stránka</h1>
-    <nav>
-        <ul class="nav justify-content-center">
-            <li class="nav-item"><view-link route="default" text="Úvod"/></li>
-            <li class="nav-item"><view-link route="blog" text="Blog"/></li>
-            <li class="nav-item"><view-link route="contact" text="Kontakt"/></li>
-        </ul>
-    </nav>
-</header>
-<main>
-    <hr>
-    <view-content/>
-</main>
-<footer>
-    <hr>
-    &copy; <view-copyright-year/> Webino.sk
-</footer>
+    <header class="jumbotron text-center">
+        <h1>Úvodná stránka</h1>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><view-link route="default" text="Úvod"/></li>
+                <li class="nav-item"><view-link route="blog" text="Blog"/></li>
+                <li class="nav-item"><view-link route="contact" text="Kontakt"/></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <hr>
+        <view-content/>
+    </main>
+    <footer>
+        <hr>
+        &copy; <view-copyright-year/> Webino.sk
+    </footer>
 </div>
 </body>
 </html>

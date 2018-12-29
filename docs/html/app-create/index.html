@@ -51,22 +51,11 @@
 
 <p>The application object is configured, created, bootstrapped and dispatched in the index file.</p>
 
-<pre><code class="php"><span class="kw2">use</span> Webino\App<span class="sy0">;</span><br />
-<span class="kw2">use</span> Webino\Event\HttpResponseEvent<span class="sy0">;</span><br />
-<br />
-<span class="co1">// Application object creation</span><br />
-<span class="re0">$app</span> <span class="sy0">=</span> App<span class="sy0">::</span><span class="me2">create</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
-<br />
-<span class="co1">// Application initialization</span><br />
-<span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">bootstrap</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
-<br />
-<span class="co1">// Handling HTTP response</span><br />
-<span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">on</span><span class="br0">&#40;</span>HttpResponseEvent<span class="sy0">::</span><span class="kw2">class</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
-&nbsp; &nbsp; <span class="kw1">return</span> <span class="st_h">'Hello'</span><span class="sy0">;</span><br />
-<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
-<br />
-<span class="co1">// Request responding</span><br />
-<span class="re0">$app</span><span class="sy0">-&gt;</span><span class="me1">dispatch</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<p>Warning: file(/home/linux/Webino/www/experimental/webino/library/webino/webino-app/docs/../examples/App.create.php): failed to open stream: No such file or directory in /home/linux/Webino/www/experimental/webino/bin/docs on line 158</p>
+
+<p>Warning: Invalid argument supplied for foreach() in /home/linux/Webino/www/experimental/webino/bin/docs on line 158</p>
+
+<pre><code class="php"><br />
 &nbsp;</code></pre>
             </div>
         </div>
@@ -78,8 +67,12 @@
                     <img class="logo" src="../webino.png" alt="Logo">
                 </a>
             </p>
-            <menu>
+            <nav>
                 <ul>
+<h2>Quick Start</h2>
+<li>
+<a href="../quick-start">Introduction</a>
+</li>
 <h2>The Basics</h2>
 <li>
 <a href="../app-create">Application</a>
@@ -94,7 +87,7 @@
 <li>
 <a href="../service-container">Service Container</a>
 </li>
-</ul>            </menu>
+</ul>            </nav>
         </div>
     </div>
     <div class="clearer"></div>

@@ -30,7 +30,7 @@ abstract class AbstractHttpRequest implements \IteratorAggregate, \ArrayAccess, 
      * @param HttpBasePathInterface $basePath
      * @param HttpRequestUriInterface $requestUri
      */
-    public function __construct(
+    function __construct(
         HttpServerInterface $server,
         HttpBasePathInterface $basePath,
         HttpRequestUriInterface $requestUri
@@ -52,7 +52,7 @@ abstract class AbstractHttpRequest implements \IteratorAggregate, \ArrayAccess, 
      *
      * @return HttpServerInterface
      */
-    public function getServer(): HttpServerInterface
+    function getServer(): HttpServerInterface
     {
         return $this->server;
     }
@@ -80,8 +80,8 @@ abstract class AbstractHttpRequest implements \IteratorAggregate, \ArrayAccess, 
     /**
      * @return iterable
      */
-    public function getIterator(): iterable
+    function getIterator(): iterable
     {
-        return $this;
+        return new \ArrayIterator($this->getParams());
     }
 }

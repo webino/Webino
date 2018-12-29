@@ -6,13 +6,12 @@ namespace Webino;
  * Class ConsoleResponseHandler
  * @package webino-responder
  */
-class ConsoleResponseHandler extends ResponseHandler
+class ConsoleResponseHandler extends AbstractEventHandler
 {
     /**
-     * @param CreateServiceEvent $event
      * @return ConsoleResponseHandler
      */
-    static function create(CreateServiceEvent $event): ConsoleResponseHandler
+    static function create(): ConsoleResponseHandler
     {
         return new static;
     }
@@ -29,17 +28,17 @@ class ConsoleResponseHandler extends ResponseHandler
     }
 
     /**
-     * @param Event $event
+     * @param ResponseEvent $event
      */
-    function __invoke(Event $event)
+    function __invoke(ResponseEvent $event)
     {
         $event->getTarget()->emit(new ConsoleResponseEvent);
     }
 
     /**
-     * @param Event $event
+     * @param ResponseEvent $event
      */
-    function onError(Event $event)
+    function onError(ResponseEvent $event)
     {
         $consoleEvent = new ConsoleErrorEvent($event);
         $consoleEvent->setExitCode(1);

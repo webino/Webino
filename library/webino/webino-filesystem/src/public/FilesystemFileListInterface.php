@@ -9,6 +9,20 @@ namespace Webino;
 interface FilesystemFileListInterface
 {
     /**
+     * Return filesystem node real path
+     *
+     * @return string
+     */
+    function getRealPath(): string;
+
+    /**
+     * Returns true when filesystem file list exists
+     *
+     * @return bool
+     */
+    function exists(): bool;
+
+    /**
      * Iterate only regular expression pattern matches
      *
      * @param string $regex Regular expression (with delimiters)

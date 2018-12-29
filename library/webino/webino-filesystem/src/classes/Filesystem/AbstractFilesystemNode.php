@@ -33,6 +33,20 @@ abstract class AbstractFilesystemNode implements FilesystemNodeInterface
     }
 
     /**
+     * Returns true when filesystem node exists
+     *
+     * @return bool
+     */
+    abstract function exists(): bool;
+
+    /**
+     * Return filesystem node real path
+     *
+     * @return string
+     */
+    abstract function getRealPath(): string;
+
+    /**
      * Returns file path
      *
      * @return string
@@ -59,7 +73,7 @@ abstract class AbstractFilesystemNode implements FilesystemNodeInterface
      *
      * @return string
      */
-    function getName()
+    function getName(): string
     {
         return pathinfo($this->getPath(), PATHINFO_FILENAME);
     }
@@ -71,7 +85,7 @@ abstract class AbstractFilesystemNode implements FilesystemNodeInterface
      *
      * @return string
      */
-    function getExtension()
+    function getExtension(): string
     {
         return pathinfo($this->getPath(), PATHINFO_EXTENSION);
     }
@@ -83,10 +97,11 @@ abstract class AbstractFilesystemNode implements FilesystemNodeInterface
      *
      * @return string
      */
-    function getBaseName()
+    function getBaseName(): string
     {
         return pathinfo($this->getPath(), PATHINFO_BASENAME);
     }
+
 
     /**
      * Return filesystem node as file

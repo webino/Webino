@@ -6,8 +6,11 @@ namespace Webino;
  * Class Form
  * @package webino-form
  */
-class Form implements \IteratorAggregate, HtmlPartInterface
+class Form implements \IteratorAggregate, HtmlPartInterface, EventEmitterInterface
 {
+    use EventEmitterTrait;
+    use FormWithStyleTrait;
+
     /**
      * GET forms by default
      */
@@ -19,11 +22,30 @@ class Form implements \IteratorAggregate, HtmlPartInterface
     private $inputs;
 
     /**
-     * @param iterable $inputs
+     * @param iterable $options
      */
-    function __construct(iterable $inputs)
+    function __construct(iterable $options)
     {
-        $this->inputs = $inputs;
+        foreach ($options as $option) {
+            switch (true) {
+                case $option instanceof FormStyleInterface:
+                    $this->setStyle($option);
+                    break;
+                case $option instanceof FormInputInterface:
+                    $this->addInput($option);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Add form input
+     *
+     * @param FormInputInterface $input
+     */
+    function addInput(FormInputInterface $input): void
+    {
+        $this->inputs[] = $input;
     }
 
     /**
@@ -125,11 +147,31 @@ class Form implements \IteratorAggregate, HtmlPartInterface
         foreach ($this->inputs as $input) {
             switch (true) {
                 case $input instanceof HtmlPartInterface:
+
+                    if ($this->style) {
+                        // input style
+                        method_exists($input, 'setStyle')
+                           and $input->setStyle($this->style);
+
+                        // label style
+                        if (method_exists($input, 'getLabel')) {
+                            $label = $input->getLabel();
+
+                            method_exists($label, 'setStyle')
+                                and $label->setStyle($this->style);
+                        }
+                    }
+
+                    // input render
                     $input->renderHtmlNode($htmlNode);
                     break;
             }
         }
 
+        // TODO errors
+        $htmlNode['class'] = 'is-invalid';
+
+        $this->getStyle()->renderFormHtmlNode($htmlNode);
         return $htmlNode;
     }
 }

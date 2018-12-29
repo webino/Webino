@@ -6,6 +6,9 @@
 .idea
 .project
 .settings
+build
+log
+cache
 vendor
 composer.phar
 nbproject

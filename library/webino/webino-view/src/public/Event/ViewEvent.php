@@ -9,4 +9,5 @@ namespace Webino;
 class ViewEvent extends AppEvent implements HtmlViewEventInterface
 {
     use HtmlViewEventTrait;
+    use HttpRequestEventTrait;
 }

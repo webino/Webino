@@ -6,14 +6,12 @@ namespace Webino\Filesystem;
  * Class SystemFileList
  * @package webino-system
  */
-class SystemFileList extends AbstractFileList
+final class SystemFileList extends AbstractFileList
 {
+    use AbstractFilesystemTrait;
+
     /**
-     * @param string $path
-     * @param mixed ...$parameter
+     * Target filesystem scheme
      */
-    function __construct(string $path, ...$parameter)
-    {
-        parent::__construct("system://{$path}", ...$parameter);
-    }
+    const SCHEME = 'system';
 }

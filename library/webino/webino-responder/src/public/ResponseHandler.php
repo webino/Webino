@@ -3,17 +3,16 @@
 namespace Webino;
 
 /**
- * Interface ResponseHandler
+ * Class ResponseHandler
  * @package webino-responder
  */
-class ResponseHandler extends AbstractEventHandler implements
-    ResponseHandlerInterface
+class ResponseHandler extends AbstractEventHandler
 {
     /**
      * @param CreateServiceEvent $event
-     * @return ResponseHandlerInterface
+     * @return ResponseHandler
      */
-    static function create(CreateServiceEvent $event)
+    static function create(CreateServiceEvent $event): ResponseHandler
     {
         $app = $event->getApp();
         /** @var IsConsole $isConsole */
@@ -33,17 +32,17 @@ class ResponseHandler extends AbstractEventHandler implements
     }
 
     /**
-     * @param Event $event
+     * @param AppEvent $event
      */
-    function __invoke(Event $event)
+    function __invoke(AppEvent $event)
     {
         $event->getTarget()->emit(new ResponseEvent($event));
     }
 
     /**
-     * @param Event $event
+     * @param AppEvent $event
      */
-    function onError(Event $event)
+    function onError(AppEvent $event)
     {
         $event->getTarget()->emit(new ResponseErrorEvent($event));
     }

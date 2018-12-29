@@ -8,7 +8,7 @@ namespace Webino;
  */
 class DefaultRoute
 {
-    const PATH = HttpRouter::ROOT;
+    const PATH = Router::ROOT;
 
     const VIEW = [
         LayoutView::FILE => LayoutView::FILE_DEFAULT,

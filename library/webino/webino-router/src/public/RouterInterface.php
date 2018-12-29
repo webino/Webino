@@ -9,10 +9,28 @@ namespace Webino;
 interface RouterInterface
 {
     /**
-     * Route path to class
+     * Add route
      *
-     * @param string $routePath
-     * @param string $routeClass
+     * @param RouteInterface $route
      */
-    function route(string $routePath, string $routeClass): void;
+    function addRoute(RouteInterface $route): void;
+
+    /**
+     * Returns route hypertext reference
+     *
+     * @param string $route
+     * @param array $params
+     * @return string|null
+     */
+    function url(string $route, $params = []): ?string;
+
+    /**
+     * Dispatch matched route
+     *
+     * @param HttpResponseEvent $event
+     * @param callable|null $callback
+     * @throws NotFoundStatusException
+     * @return mixed
+     */
+    function dispatch(HttpResponseEvent $event, callable $callback = null);
 }

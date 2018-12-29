@@ -11,11 +11,19 @@
     ],
     "require": {
         "ext-dom": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
         "ext-libxml": "*",
         "ext-fileinfo": "*",
-        "psr/container": "^1.0"
+        "ext-mbstring": "*",
+        "psr/log": "1.*",
+        "psr/container": "1.*",
+        "monolog/monolog": "1.*",
+        "symfony/routing": "4.*",
+        "tracy/tracy": "2.*"
     },
     "require-dev": {
+        "phpstan/phpstan": "0.*",
         "nette/tester": "1.*",
         "michelf/php-markdown": "1.*",
         "geshi/geshi": "1.*",
@@ -30,6 +38,11 @@
             "system/services",
             "system/source"
         ],
+        "files": [
+            "library/webino/webino-dev/src/functions.php",
+            "library/webino/webino-form/src/constants.php",
+            "library/webino/webino-input/src/constants.php"
+        ],
         "psr-4": {
             "Webino\\": [
                 "library/webino/webino-app/src/private",
@@ -37,6 +50,8 @@
                 "library/webino/webino-app/src/public/Event",
 
                 "library/webino/webino-console/src/public",
+
+                "library/webino/webino-dev/src/public",
 
                 "library/webino/webino-event-emitter/src/public",
                 "library/webino/webino-event-emitter/src/public/Event",
@@ -47,6 +62,7 @@
                 "library/webino/webino-form/src/public",
                 "library/webino/webino-form/src/public/Event",
                 "library/webino/webino-form/src/public/FormFields",
+                "library/webino/webino-form/src/public/FormStyles",
 
                 "library/webino/webino-filesystem/src/classes",
                 "library/webino/webino-filesystem/src/public",
@@ -59,8 +75,9 @@
                 "library/webino/webino-http/src/public/Event",
                 "library/webino/webino-http/src/public/Exception",
 
-                "library/webino/webino-input/src/classes",
                 "library/webino/webino-input/src/public",
+                "library/webino/webino-input/src/public/Filters",
+                "library/webino/webino-input/src/public/Validators",
 
                 "library/webino/webino-instance-container/src/private",
                 "library/webino/webino-instance-container/src/public",
@@ -78,6 +95,10 @@
                 "library/webino/webino-system/src/classes",
                 "library/webino/webino-system/src/public",
                 "library/webino/webino-system/src/system/routes",
+                "library/webino/webino-system/src/system/views",
+
+                "library/webino/webino-translation/src/private",
+                "library/webino/webino-translation/src/public",
 
                 "library/webino/webino-view/src/private",
                 "library/webino/webino-view/src/classes",
@@ -87,9 +108,60 @@
         }
     },
     "scripts": {
-        "docs": "bin/mkdocs",
-        "test": "bin/tester",
-        "check": "phpcs --extensions=php,phpt",
-        "fix": "phpcbf --extensions=php,phpt"
+        "install-dev": "composer install -n --no-suggest --prefer-dist --no-plugins --no-scripts",
+        "install-pub": "composer install -n --no-suggest --prefer-dist --no-dev --no-plugins --no-scripts",
+        "update-dev": "composer update -n --no-suggest --prefer-dist --no-plugins --no-scripts",
+        "update-pub": "composer update -n --no-suggest --prefer-dist --no-dev --no-plugins --no-scripts",
+
+        "server": "bin/server",
+        "docs": "bin/docs",
+        "analyse": "bin/analyse",
+        "test": "bin/test",
+        "check": "bin/check",
+        "fix": "bin/fix"
+    },
+    "extra": {
+        "webino-package": {
+            "include": [
+                "^(vendor|library|system)\\/.+\\.php$",
+                "^(vendor|library|system)\\/.+\\.[p]?html$",
+                "^(vendor|library|system)\\/.+\\.xml$",
+                "^(vendor|library|system)\\/.+\\.tpl.dist$",
+                "^(vendor|library|system)\\/.+\\.css$",
+                "^(vendor|library|system)\\/.+\\.js$",
+                "^(vendor|library|system)\\/.+\\.ini$",
+                "^(vendor|library|system)\\/.+\\.json$",
+                "^(vendor|library|system)\\/.+\\.ttf$",
+                "^(vendor|library|system)\\/.+\\.pem$",
+                "^(vendor|library|system)\\/.+\\.ser$",
+                "^(vendor|library|system)\\/.+\\/data\\/.+$"
+            ],
+            "exclude": [
+                "^.+\\/bin\\/.+$",
+                "^.+\\/doc[s]?\\/.+$",
+                "^.+\\/demo[s]?\\/.+$",
+                "^.+\\/test[s]?\\/.+$",
+                "^.+\\/tool[s]?\\/.+$",
+                "^.+\\/example[s]?\\/.+$",
+                "^((?!src\\/).)+public\\/.+$",
+                "^.+\\/www\\/.+$",
+                "^((?!psr\\/).)+log[s]?\\/.+$",
+                "^.+\\/[\\_]?cache?\\/.+$",
+                "^.+\\/mcith\\/.+$",
+                "^.+\\/nbproject\\/.+$",
+                "^.+\\/autoload_register.php$",
+                "^.+\\/autoload_function.php$",
+                "^.+\\/Gruntfile.js$",
+                "^.+\\/build.xml$",
+                "^.+\\/phpdoc.xml$",
+                "^.+\\/phpunit.xml$",
+                "^.+\\/package.xml$",
+                "^.+\\/composer.json$",
+                "^.+\\/package.json$",
+                "^.+\\/[a-f0-9]{14}\\.*.js$",
+                "^.+\\/.+.gz$",
+                "^.+\\/\\..+$"
+            ]
+        }
     }
 }

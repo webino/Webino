@@ -24,4 +24,18 @@ abstract class AbstractFilesystemFile extends AbstractFilesystemNode implements 
      * @return string
      */
     abstract function getContents(): string;
+
+    /**
+     * Sets file contents
+     *
+     * @param string $fileContents
+     */
+    abstract function setContents(string $fileContents): void;
+
+    /**
+     * Returns file integrity hash
+     *
+     * @return string
+     */
+    abstract function getIntegrity(): string;
 }

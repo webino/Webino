@@ -110,7 +110,7 @@ It is possible to get any class from the service container without setting it by
 &nbsp; &nbsp; &nbsp;*<br />
 &nbsp; &nbsp; &nbsp;* @return void<br />
 &nbsp; &nbsp; &nbsp;*/</span><br />
-&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">foo</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">:</span> void<br />
+&nbsp; &nbsp; <span class="kw2">function</span> <span class="kw4">foo</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">:</span> void<br />
 &nbsp; &nbsp; <span class="br0">&#123;</span><br />
 <br />
 &nbsp; &nbsp; <span class="br0">&#125;</span><br />
@@ -198,7 +198,7 @@ constructor. For example assume a custom service with some dependencies.</p>
 &nbsp; &nbsp; &nbsp;*<br />
 &nbsp; &nbsp; &nbsp;* @param \stdClass|\object $obj Some dependency<br />
 &nbsp; &nbsp; &nbsp;*/</span><br />
-&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
 &nbsp; &nbsp; <span class="br0">&#123;</span><br />
 <br />
 &nbsp; &nbsp; <span class="br0">&#125;</span><br />
@@ -230,7 +230,7 @@ Documentation comment typehint <code>\object</code> is added to bypass IDE stati
 &nbsp; &nbsp; &nbsp;* @param ServiceContainerInterface $services<br />
 &nbsp; &nbsp; &nbsp;* @return MyService<br />
 &nbsp; &nbsp; &nbsp;*/</span><br />
-&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">static</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
+&nbsp; &nbsp; <span class="kw2">static</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
 &nbsp; &nbsp; <span class="br0">&#123;</span><br />
 &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> <span class="kw2">static</span><span class="br0">&#40;</span><span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
 &nbsp; &nbsp; <span class="br0">&#125;</span><br />
@@ -240,7 +240,7 @@ Documentation comment typehint <code>\object</code> is added to bypass IDE stati
 &nbsp; &nbsp; &nbsp;*<br />
 &nbsp; &nbsp; &nbsp;* @param \stdClass|\object $obj Some dependency<br />
 &nbsp; &nbsp; &nbsp;*/</span><br />
-&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
+&nbsp; &nbsp; <span class="kw2">function</span> <span class="kw4">__construct</span><span class="br0">&#40;</span>\stdClass <span class="re0">$obj</span><span class="br0">&#41;</span><br />
 &nbsp; &nbsp; <span class="br0">&#123;</span><br />
 <br />
 &nbsp; &nbsp; <span class="br0">&#125;</span><br />
@@ -267,7 +267,7 @@ Documentation comment typehint <code>\object</code> is added to bypass IDE stati
 &nbsp; &nbsp; &nbsp;* @param ServiceContainerInterface $services<br />
 &nbsp; &nbsp; &nbsp;* @return MyService<br />
 &nbsp; &nbsp; &nbsp;*/</span><br />
-&nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
+&nbsp; &nbsp; <span class="kw2">function</span> <span class="kw4">create</span><span class="br0">&#40;</span>ServiceContainerInterface <span class="re0">$services</span><span class="br0">&#41;</span><span class="sy0">:</span> MyService<br />
 &nbsp; &nbsp; <span class="br0">&#123;</span><br />
 &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">new</span> MyService<span class="br0">&#40;</span><span class="re0">$services</span><span class="sy0">-&gt;</span><span class="me1">get</span><span class="br0">&#40;</span>\stdClass<span class="sy0">::</span><span class="kw2">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
 &nbsp; &nbsp; <span class="br0">&#125;</span><br />
@@ -300,8 +300,12 @@ Documentation comment typehint <code>\object</code> is added to bypass IDE stati
                     <img class="logo" src="../webino.png" alt="Logo">
                 </a>
             </p>
-            <menu>
+            <nav>
                 <ul>
+<h2>Quick Start</h2>
+<li>
+<a href="../quick-start">Introduction</a>
+</li>
 <h2>The Basics</h2>
 <li>
 <a href="../app-create">Application</a>
@@ -316,7 +320,7 @@ Documentation comment typehint <code>\object</code> is added to bypass IDE stati
 <li>
 <a href="../service-container">Service Container</a>
 </li>
-</ul>            </menu>
+</ul>            </nav>
         </div>
     </div>
     <div class="clearer"></div>

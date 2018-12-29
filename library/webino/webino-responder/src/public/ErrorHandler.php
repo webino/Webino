@@ -24,6 +24,8 @@ class ErrorHandler extends AbstractEventHandler
     function onHttpError(HttpErrorEvent $event)
     {
         // TODO custom template
+        // TODO use debugger in dev env only
+        throw $event->getException();
         return sprintf('E %d <br> %s', $event->getStatus()->getCode(), $event->getException());
     }
 

@@ -83,6 +83,13 @@ interface EventInterface extends \ArrayAccess
     function getValue(string $name, $default = null);
 
     /**
+     * Set event values
+     *
+     * @param iterable $values
+     */
+    function setValues(iterable $values): void;
+
+    /**
      * Return event results
      *
      * @return EventResults Event results

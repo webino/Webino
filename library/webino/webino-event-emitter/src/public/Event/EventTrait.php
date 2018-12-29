@@ -27,11 +27,6 @@ trait EventTrait
     protected $target;
 
     /**
-     * @var array The event parameters
-     */
-    protected $params = [];
-
-    /**
      * @var EventResults
      */
     protected $results;
@@ -98,6 +93,18 @@ trait EventTrait
     function getValue(string $name, $default = null)
     {
         return isset($this[$name]) ? $this[$name] : $default;
+    }
+
+    /**
+     * Set event values
+     *
+     * @param iterable $values
+     */
+    function setValues(iterable $values): void
+    {
+        foreach ($values as $index => $value) {
+            $this[$index] = $value;
+        }
     }
 
     /**

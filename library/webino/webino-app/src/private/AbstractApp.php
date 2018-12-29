@@ -8,6 +8,7 @@ namespace Webino;
  */
 abstract class AbstractApp extends \ArrayObject implements AppInterface
 {
+    use LoggerTrait;
     use AppEventEmitterTrait;
     use InstanceContainerTrait;
     use FilesystemTrait;

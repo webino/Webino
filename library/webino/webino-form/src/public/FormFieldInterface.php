@@ -6,7 +6,7 @@ namespace Webino;
  * Interface FormFieldInterface
  * @package webino-form
  */
-interface FormFieldInterface
+interface FormFieldInterface extends FormInputInterface
 {
     /**
      * Return form input name

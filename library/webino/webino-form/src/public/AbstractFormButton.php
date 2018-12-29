@@ -6,24 +6,42 @@ namespace Webino;
  * Class AbstractFormButton
  * @package webino-form
  */
-abstract class AbstractFormButton extends AbstractFormInput implements HtmlPartInterface
+abstract class AbstractFormButton extends AbstractFormInput implements FormButtonInterface, HtmlPartInterface
 {
+    use FormWithStyleTrait;
+
+    /**
+     * @var string
+     */
+    protected $label;
+
+    /**
+     * @param string $name
+     * @param string $label
+     */
+    function __construct(string $name, string $label)
+    {
+        parent::__construct($name);
+        $this->label = $label;
+    }
+
     /**
      * @param HtmlNodeInterface $htmlNode
      * @return HtmlNodeInterface
      */
     function renderHtmlNode(HtmlNodeInterface $htmlNode): HtmlNodeInterface
     {
-        // TODO style
-        $groupNode = $htmlNode->addNode('div');
-        $groupNode['class'] = 'form-group';
-        $htmlNode = $groupNode;
+        $style = $this->getStyle();
 
+        // group
+        $groupNode = $htmlNode->addNode('div');
+        $style->renderInputGroupHtmlNode($groupNode);
+
+        // input
         $newNode = parent::renderHtmlNode($htmlNode);
         $newNode['type'] = 'submit';
-
-        // TODO style
-        $newNode['class'] = 'btn btn-primary';
+        $newNode['value'] = $this->label;
+        $style->renderInputHtmlNode($newNode);
 
         return $newNode;
     }

@@ -26,16 +26,22 @@ abstract class AbstractCssLink
     /**
      * @param ViewEvent $event
      */
-    function view(ViewEvent $event)
+    function view(ViewEvent $event): void
     {
         $node = $event->getNode();
-        list($href, $integrity) = ((array) $this->getLink($event));
+        $link = (array) $this->getLink($event);
+
+        if (empty($link[0])) {
+            // TODO throw exception
+        }
 
         $node->rename('link');
         $node['rel'] = 'stylesheet';
         $node['type'] = 'text/css';
         $node['crossorigin'] = $this::CROSS_ORIGIN;
-        $node['integrity'] = $integrity;
-        $node['href'] = $href;
+        $node['href'] = $link[0];
+
+        empty($link[1])
+            or $node['integrity'] = $link[1];
     }
 }

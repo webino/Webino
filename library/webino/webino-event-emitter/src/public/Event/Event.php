@@ -19,6 +19,8 @@ class Event extends \ArrayObject implements EventInterface
      */
     function __construct($event = null, $target = null, array $values = [])
     {
+        parent::__construct();
+
         // event class as default event name
         $event or $event = get_class($this);
 

@@ -1,0 +1,354 @@
+#!/usr/bin/env php
+<?php
+
+use Michelf\MarkdownExtra;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+
+/* ------------------------------------------------ SETTINGS ----------------------------------------------- */
+
+define('QUICK_START', 'Quick Start');
+define('BASICS', 'The Basics');
+define('USER_GUIDE', 'User Guide');
+define('DELIVERY', 'Delivery');
+define('DEVELOPMENT', 'Development');
+
+define('LINKS', require __DIR__ . '/../docs/links.php');
+
+define('CONTENT_FILTERS', [
+    'parse_links',
+]);
+
+define('ALLOWED_ASSETS', 'css,js,png,jpg,gif,svg');
+
+/* ----------------------------------------------- FUNCTIONS ----------------------------------------------- */
+
+/**
+ * Navigation menu item
+ *
+ * Markdown macro
+ *
+ * @param string $section
+ * @param string $label
+ * @return void
+ */
+function menu(string $section, string $label): void
+{
+    global $navigation, $contentFile;
+
+    $href = pathinfo($contentFile, PATHINFO_FILENAME);
+    $navigation[$section][$href] = $label;
+}
+
+/**
+ * Docs TODO
+ *
+ * Markdown macro
+ *
+ * @param string ...$todo
+ * @return string
+ */
+function todo(...$todo): string
+{
+    $out = [];
+
+    $out[] = '<div class="admonition note incomplete-document">';
+    $out[] = '<strong>Incomplete Document</strong><br>';
+    $out[] = '<small>Missing following topics:</small><br>';
+    $out[] = '<ul>';
+
+    foreach ($todo as $item) {
+        $out[] = "<li>$item</li>";
+    }
+
+    $out[] = '</ul>';
+    $out[] = '</div>';
+
+    return join(PHP_EOL, $out);
+}
+
+/**
+ * Document note
+ *
+ * Markdown macro
+ *
+ * @param array $text
+ * @return string
+ */
+function note(...$text): string
+{
+    $text = join(PHP_EOL, $text);
+    $text = preg_replace('~`([^`]+)`~', '<code>\\1</code>', $text);
+
+    $out = [];
+
+    $out[] = '<div class="admonition note incomplete-document">';
+    $out[] = $text;
+    $out[] = '</div>';
+
+    return join(PHP_EOL, $out);
+}
+
+/**
+ * Table Of Contents
+ *
+ * Markdown Macro
+ *
+ * @return string
+ */
+function toc()
+{
+    global $contentFilters, $contentFile;
+
+    $toc = [];
+    $links = [];
+
+    $contentFilters[] = function (&$line) use (&$toc) {
+        if (0 === strpos($line, '<h2')) {
+            $id = key($toc);
+            $label = current($toc);
+            next($toc);
+            $line = '<h2 id="' . $id . '"><a href="#' . $id . '~">' . $label . '</a></h2>';
+        }
+    };
+
+    $lines = file($contentFile);
+    foreach ($lines as $line) {
+        if (0 === strpos($line, '## ')) {
+            $label = trim(substr($line, 3));
+            $href = strtolower(strtr($label, [' ' => '-']));
+            $toc[$href] = $label;
+            $links[] = [
+                'href' => $href,
+                'label' => $label,
+            ];
+        }
+    }
+
+    $out = [];
+
+    $out[] = '<div class="contents local topic">';
+    $out[] = '<ul class="simple">';
+    foreach ($links as $link) {
+        $out[] = "<li><a id=\"$link[href]~\" href=\"#$link[href]\">$link[label]</a></li>";
+    }
+    $out[] = '</ul>';
+    $out[] = '</div>';
+
+
+    return join(PHP_EOL, $out);
+}
+
+/**
+ * Show PHP example
+ *
+ * Markdown macro
+ *
+ * @param string $name
+ * @return string
+ */
+function example_php($name)
+{
+    global $cwd;
+
+    $path = $cwd . '/../examples/' . $name . '.php';
+    $source = [];
+    $capture = false;
+    foreach (file($path) as $line) {
+        if ('//!' === trim($line)) {
+            $capture = false;
+        }
+        if ($capture) {
+            $source[] = $line;
+        }
+        if ('//:' === trim($line)) {
+            $capture = true;
+        }
+    }
+    return '```php' . PHP_EOL . trim(join(null, array_filter($source))) . PHP_EOL . '```';
+}
+
+/**
+ * Replaces common labels to links
+ *
+ * @param string $text
+ */
+function parse_links(string &$text): void
+{
+    foreach (LINKS as $label => $href) {
+        $link = '<a href="' . $href . '">' . $label . '</a>';
+        $text = str_replace($label, $link, $text);
+    }
+}
+
+/**
+ * Content filter
+ *
+ * This function allows to register a callback to the $contentFilters global variable
+ * which is called on the result of the transformed markdown file.
+ *
+ * @param string $out
+ * @return string
+ */
+function content_filter(string $out): string
+{
+    global $contentFilters;
+
+    $contentFilters = array_merge($contentFilters, CONTENT_FILTERS);
+    if (empty($contentFilters)) {
+        return $out;
+    }
+
+    $lines = explode(PHP_EOL, $out);
+    foreach ($lines as &$line) {
+        foreach ($contentFilters as $contentFilter) {
+            $contentFilter($line);
+        }
+    }
+
+    $contentFilters = [];
+    return join(PHP_EOL, $lines);
+}
+
+
+/* ------------------------------------------------- SETUP ------------------------------------------------- */
+ini_set('short_open_tag', 'On');
+
+
+$destRoot = __DIR__ . '/../docs/html/';
+$themeRoot = __DIR__ . '/../docs/theme/';
+$layoutPath = $themeRoot . 'layout.phtml';
+
+$parser = new MarkdownExtra;
+
+// global content file path
+$contentFile = null;
+// global array for content_filter
+$contentFilters = [];
+// global array for navigation
+$navigation = [];
+
+// cleanup
+shell_exec("rm -r $destRoot*");
+
+/* ------------------------------------------ SYNTAX HIGHLIGHTING ------------------------------------------ */
+
+$hl = new GeSHi;
+$hl->enable_classes(true);
+$hl->set_header_type(GESHI_HEADER_NONE);
+
+$parser->code_block_content_func = function ($code, $language) use ($hl) {
+    $hl->set_language($language);
+
+    // fixed highlighting
+    switch ($language) {
+        case 'php':
+            $hl->add_keyword(2, 'static');
+            $hl->add_keyword(4, '__construct');
+            $matches = [];
+            preg_match_all('~function \K([^\(]+)~', $code, $matches);
+            foreach ($matches as $match) {
+                empty($match[0]) or $hl->add_keyword(4, $match[0]);
+            }
+            break;
+    }
+
+    $hl->set_source($code);
+    return $hl->parse_code();
+};
+
+
+/* -------------------------------------------- MARKDOWN PARSING ------------------------------------------- */
+
+$contents = [];
+$pattern = __DIR__ . '/../library/*/*/docs/*.md';
+$files = glob($pattern);
+$files = array_merge($files, glob(__DIR__ . '/../docs/default/*.md'));
+$files[] = __DIR__ . '/../docs/index.md';
+
+foreach ($files as $path) {
+    $contentFile = realpath($path);
+    echo 'Processing: ' . $contentFile . PHP_EOL;
+
+    $name = pathinfo($contentFile, PATHINFO_FILENAME);
+    $cwd = dirname($contentFile);
+
+    // process content
+
+    try {
+        ob_start();
+        require $contentFile;
+        $source = ob_get_contents();
+        ob_end_clean();
+    } catch (\Throwable $exc) {
+        echo $exc . PHP_EOL;
+    }
+
+    $contents[$name] = content_filter($parser->transform($source));
+}
+
+// set index content
+$contents[''] = $contents['index'];
+unset($contents['index']);
+
+
+/**
+ * @return string
+ */
+function nav(): string
+{
+    global $baseUrl;
+    global $navigation;
+
+    // menu nav
+    $menu = [];
+    $menu[] = '<ul>';
+
+    $nav[QUICK_START] = $navigation[QUICK_START] ?? null;
+    $nav[BASICS] = $navigation[BASICS] ?? null;
+    $nav[USER_GUIDE] = $navigation[USER_GUIDE] ?? null;
+    $nav[DEVELOPMENT] = $nav[DEVELOPMENT] ?? null;
+    $nav[DELIVERY] = $nav[DELIVERY] ?? null;
+
+    foreach (array_filter($nav) as $title => $section) {
+        $menu[] = "<h2>$title</h2>";
+        foreach ($section as $href => $item) {
+            $menu[] = '<li>';
+            $menu[] = '<a href="' . $baseUrl . $href . '">' . $item . '</a>';
+            $menu[] = '</li>';
+        }
+    }
+
+    $menu[] = '</ul>';
+    return join(PHP_EOL, $menu);
+}
+
+// process layout
+foreach ($contents as $name => $content) {
+
+    // resolve baseUrl
+    $baseUrl = $name ? '../' : './';
+
+    try {
+        ob_start();
+        require $layoutPath;
+        $html = ob_get_contents();
+        ob_end_clean();
+    } catch (\Throwable $exc) {
+        echo $exc . PHP_EOL;
+    }
+
+    $dest = $destRoot . $name . '/index.html';
+    $destDir = dirname($dest);
+    is_dir($destDir) or mkdir($destDir, 0775, true);
+    file_put_contents($dest, $html);
+}
+
+
+/* -------------------------------------------- ASSETS COPYING --------------------------------------------- */
+
+$pattern = $themeRoot . '*.{' . ALLOWED_ASSETS . '}';
+foreach (glob($pattern, GLOB_BRACE) as $path) {
+    copy($path, $destRoot . basename($path));
+}

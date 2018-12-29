@@ -57,8 +57,8 @@ menu a[href="#"] {
 }
 
 a[href^="http"] {
-    padding-right: 16px;
-    background: url("link-out.svg") no-repeat 93% 5px;
+    padding-right: 18px;
+    background: url("link-out.svg") no-repeat 97% 5px;
     background-size: 10px;
 }
 
@@ -356,8 +356,8 @@ code>br:last-child {
     color: #fdc56c;
 }
 
-.bash pre {
-    color: #fff;
+.bash {
+    color: #eee;
     background: #300a24;
 }
 

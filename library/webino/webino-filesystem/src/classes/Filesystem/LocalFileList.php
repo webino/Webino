@@ -8,6 +8,8 @@ namespace Webino\Filesystem;
  */
 class LocalFileList extends AbstractFilesystemFileList implements \IteratorAggregate
 {
+    use LocalNodeTrait;
+
     /**
      * @return \Iterator
      */

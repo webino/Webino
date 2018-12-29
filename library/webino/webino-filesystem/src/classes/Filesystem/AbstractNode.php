@@ -17,4 +17,24 @@ abstract class AbstractNode extends AbstractFilesystemNode
     {
         return $this->getFilesystem()->getNode(parent::getPath())->getPath();
     }
+
+    /**
+     * Return filesystem node real path
+     *
+     * @return string
+     */
+    function getRealPath(): string
+    {
+        return $this->getFilesystem()->getNode(parent::getPath())->getRealPath();
+    }
+
+    /**
+     * Returns true when filesystem node exists
+     *
+     * @return bool
+     */
+    function exists(): bool
+    {
+        return $this->getFilesystem()->getNode(parent::getPath())->exists();
+    }
 }
